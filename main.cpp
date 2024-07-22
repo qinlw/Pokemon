@@ -20,7 +20,7 @@ SceneManager* scene_manager;
 HWND hwnd;
 
 int main() {
-	srand(time(NULL));
+	srand(time(NULL)); 
 
 	const int FPS = 60;
 
