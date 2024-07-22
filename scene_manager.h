@@ -43,7 +43,8 @@ public:
 		case SceneManager::SceneType::Pokemon: {
 			if (current_scene == menu_scene) {
 				RECT rect;
-				if (GetWindowRect(hwnd, &rect)) _main(rect.left, rect.top);
+				if (GetWindowRect(hwnd, &rect)) 
+					_main(rect.left, rect.top);
 			}
 			current_scene = pokemon_scene;
 			break;

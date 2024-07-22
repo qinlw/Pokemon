@@ -77,8 +77,8 @@ int _main(int x, int y) {
 
 	ExMessage msg;
 
-	HWND _hwnd = initgraph(1280, 720, EX_SHOWCONSOLE);
-	SetWindowPos(_hwnd, HWND_TOP, x, y, 0, 0, SWP_NOSIZE);
+	hwnd = initgraph(1280, 720, EX_SHOWCONSOLE);
+	SetWindowPos(hwnd, HWND_TOP, x, y, 0, 0, SWP_NOSIZE);
 
 	load_res();
 
