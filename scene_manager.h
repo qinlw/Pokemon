@@ -3,11 +3,15 @@
 #include "scene.h"
 
 
+extern int _main(int x, int y);
+
 extern Scene* menu_scene;
 extern Scene* knapsack_scene;
 extern Scene* set_scene;
 extern Scene* pokemon_scene;
 extern Scene* game_scene;
+
+extern HWND hwnd;
 
 class SceneManager {
 public:
@@ -36,9 +40,14 @@ public:
 		case SceneManager::SceneType::Set:
 			current_scene = set_scene;
 			break;
-		case SceneManager::SceneType::Pokemon:
+		case SceneManager::SceneType::Pokemon: {
+			if (current_scene == menu_scene) {
+				RECT rect;
+				if (GetWindowRect(hwnd, &rect)) _main(rect.left, rect.top);
+			}
 			current_scene = pokemon_scene;
 			break;
+		}
 		case SceneManager::SceneType::Game:
 			current_scene = game_scene;
 			break;

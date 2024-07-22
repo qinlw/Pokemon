@@ -118,12 +118,14 @@ public:
 					break;
 				}
 				else if (msg.x >= restart_btn_pos.x && msg.x <= restart_btn_pos.x + img_restart_button.getwidth() && is_restart_btn) {
+					is_esc_btn = false;
 					is_restart_btn = false;
 					button_bulge_animatioin(5, 300, restart_btn_pos, &img_restart_button);
 					scene_manager->switch_scene(SceneManager::SceneType::Pokemon);
 					break;
 				}
 				else if (msg.x >= return_menu_btn_pos.x && msg.x <= return_menu_btn_pos.x + img_restart_button.getwidth() && is_return_menu_btn) {
+					is_esc_btn = false;
 					is_return_menu_btn = false;
 					button_bulge_animatioin(5, 300, return_menu_btn_pos, &img_return_menu_button);
 					scene_manager->switch_scene(SceneManager::SceneType::Menu);
