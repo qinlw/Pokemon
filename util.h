@@ -76,3 +76,9 @@ inline void rotate_atlas(int time, IMAGE* img, Atlas& dst) {
 		//	int a = 0;
 	}
 }
+
+inline bool is_regen(POINT pos_1, POINT pos_2, IMAGE& img_1, IMAGE img_2) {
+	if ((pos_1.x >= pos_2.x - img_1.getwidth() && pos_1.x <= pos_2.x + img_2.getwidth()) || pos_1.x >= getwidth() - img_1.getwidth() || pos_1.x <= 0)
+		return true;
+	return false;
+}

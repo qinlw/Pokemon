@@ -124,14 +124,11 @@ public:
 			}
 			break;
 		}
-		// Êó±êÓÒ¼üµ¯Æð	
-		case WM_RBUTTONUP:		
-			break;
 		}
 	}
 
 	void on_exit() {
-		
+
 	}
 
 private:

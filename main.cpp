@@ -6,6 +6,7 @@
 #include "scene_set.h"
 #include "scene_pokemon.h"
 #include "scene_game.h"
+#include "time.h"
 
 
 Scene* menu_scene = nullptr;
@@ -17,6 +18,7 @@ Scene* game_scene = nullptr;
 SceneManager* scene_manager;
 
 int main() {
+	srand(time(NULL));
 
 	const int FPS = 60;
 
@@ -34,7 +36,7 @@ int main() {
 
 	scene_manager = new SceneManager();
 
-	scene_manager->scene_set(menu_scene);
+	scene_manager->scene_set(pokemon_scene);
 
 	BeginBatchDraw();
 

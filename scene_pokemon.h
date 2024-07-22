@@ -74,7 +74,12 @@ public:
 		animation_selector_bulbasaur_right.on_updata(delta);
 
 		if (animation_pokeball.get_idx_frame() == atlas_pokeball.get_size() - 1) {
-			if (is_enter_game) scene_manager->switch_scene(SceneManager::SceneType::Game);
+			if (is_enter_game) {
+				is_enter_game = false;
+				is_enter_start = false;
+				animation_pokeball.reset();
+				scene_manager->switch_scene(SceneManager::SceneType::Game);
+			}
 			else {
 				animation_pokeball.on_updata(delta);
 				is_enter_game = true;
@@ -171,32 +176,122 @@ public:
 			case VK_RETURN:
 				is_enter_start = true;
 				break;
+			// 测试代码
+			case 0x42:
+				scene_manager->switch_scene(SceneManager::SceneType::Game);
+				break;
 			}
 			break;
 		// 鼠标左键按下
 		case WM_LBUTTONDOWN: {
+			// 返回按钮
 			if (msg.x >= return_btn_pos.x && msg.x <= return_btn_pos.x + img_return_button.getwidth() &&
 				msg.y >= return_btn_pos.y && msg.y <= return_btn_pos.y + img_return_button.getheight()) {
 				is_return_btn = true;
 				button_sink_animatioin(5, 50, return_btn_pos, &img_return_button);
+				break;
+			}
+
+			//setcolor(YELLOW);
+			//cleardevice();
+			//fillrectangle(btn_1P_left_pos.x, btn_1P_left_pos.y, btn_1P_left_pos.x + img_1P_selector_btn_idle_left.getwidth(), btn_1P_left_pos.y + img_1P_selector_btn_idle_left.getheight());
+			//line(btn_1P_left_pos.x, btn_1P_left_pos.y + img_1P_selector_btn_idle_left.getheight() / 2 , 1280, btn_1P_left_pos.y + img_1P_selector_btn_idle_left.getheight() / 2);
+			//FlushBatchDraw();
+
+			// 切换宝可梦按钮
+			if (msg.y >= btn_1P_left_pos.y && msg.y <= btn_1P_left_pos.y + img_1P_selector_btn_idle_left.getheight()) {
+				if (msg.x >= btn_1P_left_pos.x && msg.x <= btn_1P_left_pos.x + img_1P_selector_btn_idle_left.getwidth()) {
+					int centreL = btn_1P_left_pos.y + img_1P_selector_btn_idle_left.getheight() / 2;
+					int yL = abs(msg.y - centreL);
+					int innerL = abs(msg.x - btn_1P_left_pos.x);
+					if (yL <= innerL) is_1P_left_btn = true;
+					break;
+				}
+				else if (msg.x >= btn_1P_right_pos.x && msg.x <= btn_1P_right_pos.x + img_1P_selector_btn_idle_right.getwidth()) {
+					int centreL = btn_1P_right_pos.y + img_1P_selector_btn_idle_right.getheight() / 2;
+					int yL = abs(msg.y - centreL);
+					int innerL = abs(img_1P_selector_btn_idle_right.getheight() / 2 - msg.x + btn_1P_right_pos.x);
+					if (yL <= innerL) is_1P_right_btn = true;
+					break;
+				}
+				else if (msg.x >= btn_2P_left_pos.x && msg.x <= btn_2P_left_pos.x + img_2P_selector_btn_idle_left.getwidth()) {
+					int centreL = btn_2P_left_pos.y + img_2P_selector_btn_idle_left.getheight() / 2;
+					int yL = abs(msg.y - centreL);
+					int innerL = abs(msg.x - btn_2P_left_pos.x);
+					if (yL <= innerL) is_2P_left_btn = true;
+					break;
+				}
+				else if (msg.x >= btn_2P_right_pos.x && msg.x <= btn_2P_right_pos.x + img_2P_selector_btn_idle_right.getwidth()) {
+					int centreL = btn_2P_right_pos.y + img_2P_selector_btn_idle_right.getheight() / 2;
+					int yL = abs(msg.y - centreL);
+					int innerL = abs(img_2P_selector_btn_idle_right.getheight() / 2 - msg.x + btn_2P_right_pos.x);
+					if (yL <= innerL) is_2P_right_btn = true;
+					break;
+				}
 			}
 			break;
 		}
 		// 鼠标左键弹起
 		case WM_LBUTTONUP: {
 			// 返回按钮
-			if (msg.x >= return_btn_pos.x && msg.x <= return_btn_pos.x + img_return_button.getwidth() && 
-				msg.y >= return_btn_pos.y && msg.y <= return_btn_pos.y + img_return_button.getheight() && is_return_btn) {
-				is_return_btn = false;
-				button_bulge_animatioin(5, 300, return_btn_pos, &img_return_button);
-				scene_manager->switch_scene(SceneManager::SceneType::Menu);
-			}
-			else {
-				if (is_return_btn) {
+			if (is_return_btn) {
+				if (msg.x >= return_btn_pos.x && msg.x <= return_btn_pos.x + img_return_button.getwidth() &&
+					msg.y >= return_btn_pos.y && msg.y <= return_btn_pos.y + img_return_button.getheight()) {
 					is_return_btn = false;
 					button_bulge_animatioin(5, 300, return_btn_pos, &img_return_button);
+					scene_manager->switch_scene(SceneManager::SceneType::Menu);
+				}
+				else {
+					if (is_return_btn) {
+						is_return_btn = false;
+						button_bulge_animatioin(5, 300, return_btn_pos, &img_return_button);
+					}
 				}
 			}
+			// 切换宝可梦按钮
+			if (msg.y >= btn_1P_left_pos.y && msg.y <= btn_1P_left_pos.y + img_1P_selector_btn_idle_left.getheight()) {
+				if (msg.x >= btn_1P_left_pos.x && msg.x <= btn_1P_left_pos.x + img_1P_selector_btn_idle_left.getwidth() && is_1P_left_btn) {
+					is_1P_left_btn = false;
+					int centreL = btn_1P_left_pos.y + img_1P_selector_btn_idle_left.getheight() / 2;
+					int yL = abs(msg.y - centreL);
+					int innerL = abs(msg.x - btn_1P_left_pos.x);
+					if (yL <= innerL) player_1P = (PlayerType)(((int)PlayerType::Invalid + (int)player_1P - 1) % (int)PlayerType::Invalid);
+					break;
+				}
+				else if (msg.x >= btn_1P_right_pos.x && msg.x <= btn_1P_right_pos.x + img_1P_selector_btn_idle_right.getwidth() && is_1P_right_btn) {
+					is_1P_right_btn = false;
+					int centreL = btn_1P_right_pos.y + img_1P_selector_btn_idle_right.getheight() / 2;
+					int yL = abs(msg.y - centreL);
+					int innerL = abs(img_1P_selector_btn_idle_right.getheight() / 2 - msg.x + btn_1P_right_pos.x);
+					if (yL <= innerL) is_1P_right_btn = true;
+					if (yL <= innerL) player_1P = (PlayerType)(((int)player_1P + 1) % (int)PlayerType::Invalid);
+					break;
+				}
+				else if (msg.x >= btn_2P_left_pos.x && msg.x <= btn_2P_left_pos.x + img_2P_selector_btn_idle_left.getwidth() && is_2P_left_btn) {
+					is_2P_left_btn = false;
+					int centreL = btn_2P_left_pos.y + img_2P_selector_btn_idle_left.getheight() / 2;
+					int yL = abs(msg.y - centreL);
+					int innerL = abs(msg.x - btn_2P_left_pos.x);
+					if (yL <= innerL) player_2P = (PlayerType)(((int)PlayerType::Invalid + (int)player_2P - 1) % (int)PlayerType::Invalid);
+					break;
+				}
+				else if (msg.x >= btn_2P_right_pos.x && msg.x <= btn_2P_right_pos.x + img_2P_selector_btn_idle_right.getwidth() && is_2P_right_btn) {
+					is_2P_right_btn = false;
+					int centreL = btn_2P_right_pos.y + img_2P_selector_btn_idle_right.getheight() / 2;
+					int yL = abs(msg.y - centreL);
+					int innerL = abs(img_2P_selector_btn_idle_right.getheight() / 2 - msg.x + btn_2P_right_pos.x);
+					if (yL <= innerL) player_2P = (PlayerType)(((int)player_2P + 1) % (int)PlayerType::Invalid);
+					break;
+				}
+				else {
+					bool is_1P_left_btn = false;					
+					bool is_1P_right_btn = false;					
+					bool is_2P_left_btn = false;					
+					bool is_2P_right_btn = false;
+				}
+			}
+
+
 
 			// 精灵球
 			int xL = msg.x - pokeball_circle_center.x;
@@ -231,10 +326,10 @@ private:
 	POINT pokemon_2P_pos = { 0 };					// 玩家2P的位置
 	POINT player_1P_pos = { 0 };					// 1P图标的位置
 	POINT player_2P_pos = { 0 };					// 2P图标的位置
-	POINT btn_1P_left_pos = { 0 };					// 1P向左切换角色的按钮是否按下 
-	POINT btn_1P_right_pos = { 0 };					// 1P向右切换角色的按钮是否按下
-	POINT btn_2P_left_pos = { 0 };					// 2P向左切换角色的按钮是否按下 
-	POINT btn_2P_right_pos = { 0 };					// 2P向右切换角色的按钮是否按下
+	POINT btn_1P_left_pos = { 0 };					// 1P向左切换角色的按钮的位置
+	POINT btn_1P_right_pos = { 0 };					// 1P向右切换角色的按钮的位置
+	POINT btn_2P_left_pos = { 0 };					// 2P向左切换角色的按钮的位置 
+	POINT btn_2P_right_pos = { 0 };					// 2P向右切换角色的按钮的位置
 
 	PlayerType player_1P = PlayerType::Charmander;	// 玩家1的角色类型
 	PlayerType player_2P = PlayerType::Charmander;	// 玩家2的角色类型

@@ -16,6 +16,9 @@
     <Filter Include="头文件\scene">
       <UniqueIdentifier>{6a56a85d-b877-4ce7-b0cc-a92a43a6f7d7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\pokemon">
+      <UniqueIdentifier>{472f33a7-1f6a-4551-bd9c-c84a4d7fc045}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -47,9 +50,6 @@
     <ClInclude Include="animation_errored.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="pokemon.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="picture.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -64,6 +64,21 @@
     </ClInclude>
     <ClInclude Include="animation.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="pokemon.h">
+      <Filter>头文件\pokemon</Filter>
+    </ClInclude>
+    <ClInclude Include="pokemon_player.h">
+      <Filter>头文件\pokemon</Filter>
+    </ClInclude>
+    <ClInclude Include="pokeman_charmander.h">
+      <Filter>头文件\pokemon</Filter>
+    </ClInclude>
+    <ClInclude Include="pokemon_squirtle.h">
+      <Filter>头文件\pokemon</Filter>
+    </ClInclude>
+    <ClInclude Include="pokemon_bulbasaur.h">
+      <Filter>头文件\pokemon</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
