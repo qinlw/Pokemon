@@ -6,10 +6,10 @@
 class PokemonBulbasaur : public Pokemon {
 public:
 	PokemonBulbasaur() {
-		animation_pokemon_left.set_atlas(&atlas_bulbasaur_left);
-		animation_pokemon_left.set_interval(200);
-		animation_pokemon_right.set_atlas(&atlas_bulbasaur_right);
-		animation_pokemon_right.set_interval(200);
+		animation_pokemon_left.set_atlas(&atlas_bulbasaur_high_frame_left);
+		animation_pokemon_left.set_interval(20);
+		animation_pokemon_right.set_atlas(&atlas_bulbasaur_high_frame_right);
+		animation_pokemon_right.set_interval(20);
 	}
 
 	void on_updata(int delta) {

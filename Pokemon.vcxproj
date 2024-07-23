@@ -135,6 +135,7 @@
     <ClInclude Include="atlas.h" />
     <ClInclude Include="collision_line.h" />
     <ClInclude Include="picture.h" />
+    <ClInclude Include="pointf.h" />
     <ClInclude Include="pokeman_charmander.h" />
     <ClInclude Include="pokemon.h" />
     <ClInclude Include="pokemon_bulbasaur.h" />

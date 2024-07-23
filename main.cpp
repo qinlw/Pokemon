@@ -13,7 +13,7 @@
 #include "time.h"
 
 
-bool is_debug = false;
+bool is_debug = true;
 
 Scene* menu_scene = nullptr;
 Scene* knapsack_scene = nullptr;

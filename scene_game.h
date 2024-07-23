@@ -69,6 +69,9 @@ public:
 		pokemon_player_1->set_pokemon_pos(200, 50);
 		pokemon_player_2->set_pokemon_pos(975, 50);
 
+		// 宝可梦速度
+		pokemon_player_1->set_velocity(0, 0);
+
 		// 碰撞线条初始化信息
 		collision_thwartwise_line_list.resize(9);
 		collision_vertical_line_list.resize(16);
@@ -321,7 +324,8 @@ public:
 
 	}
 
-protected:
+
+private:
 	POINT sky_pos = { 0 };							// 天空位置
 	POINT sun_pos = { 0 };							// 太阳位置
 	POINT hills_pos = { 0 };						// 山脉位置
@@ -347,5 +351,6 @@ protected:
 	bool is_continue_game_btn = false;				// 是否按下了继续游戏按钮
 	bool is_restart_btn = false;					// 是否按下了重新开始按钮
 	bool is_return_menu_btn = false;				// 是否按下了返回主菜单按钮
+
 
 };

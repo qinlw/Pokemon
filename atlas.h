@@ -17,6 +17,20 @@ public:
 		}
 	}
 
+	void high_frame_load_from_file(int sheets, LPCTSTR path_template, int num) {
+		img_list.clear();
+		img_list.resize(num * sheets);
+
+		TCHAR path_file[256];
+		int idx = 0;
+		for (int i = 0; i < num; ++i) {
+			_stprintf_s(path_file, path_template, i + 1);
+			for (int j = 0; j < sheets; ++j) {
+				loadimage(&img_list[idx++], path_file);
+			}
+		}
+	}
+
 	void clear() {
 		img_list.clear();
 	}

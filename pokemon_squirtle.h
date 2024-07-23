@@ -6,10 +6,10 @@
 class PokemonSquirtle : public Pokemon {
 public:
 	PokemonSquirtle() {
-		animation_pokemon_left.set_atlas(&atlas_squirtle_left);
-		animation_pokemon_left.set_interval(200);
-		animation_pokemon_right.set_atlas(&atlas_squirtle_right);
-		animation_pokemon_right.set_interval(200);
+		animation_pokemon_left.set_atlas(&atlas_squirtle_high_frame_left);
+		animation_pokemon_left.set_interval(20);
+		animation_pokemon_right.set_atlas(&atlas_squirtle_high_frame_right);
+		animation_pokemon_right.set_interval(20);
 	}
 
 	void on_updata(int delta) {

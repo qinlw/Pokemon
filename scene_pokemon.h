@@ -327,7 +327,7 @@ public:
 
 		switch (player_type_2P) {
 		case ScenePokemon::PlayerType::Charmander:
-			pokemon_player_2 = new PokemonCharmander();
+			pokemon_player_2 = new PokemonCharmander(false);
 			break;
 		case ScenePokemon::PlayerType::Squirtle:
 			pokemon_player_2 = new PokemonSquirtle();

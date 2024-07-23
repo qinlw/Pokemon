@@ -83,5 +83,8 @@
     <ClInclude Include="collision_line.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="pointf.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

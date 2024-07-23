@@ -54,6 +54,12 @@ Atlas atlas_squirtle_left;							// 朝向向左的杰尼龟
 Atlas atlas_squirtle_right;							// 朝向向右的杰尼龟
 Atlas atlas_bulbasaur_left;							// 朝向向左的妙蛙种子
 Atlas atlas_bulbasaur_right;						// 朝向向右的妙蛙种子
+Atlas atlas_charmander_high_frame_left;				// 朝向向左的高帧小火龙
+Atlas atlas_charmander_high_frame_right;			// 朝向向右的高帧小火龙
+Atlas atlas_squirtle_high_frame_left;				// 朝向向左的高帧杰尼龟
+Atlas atlas_squirtle_high_frame_right;				// 朝向向右的高帧杰尼龟
+Atlas atlas_bulbasaur_high_frame_left;				// 朝向向左的高帧妙蛙种子
+Atlas atlas_bulbasaur_high_frame_right;				// 朝向向右的高帧妙蛙种子
 
 
 void load_res() {
@@ -108,4 +114,11 @@ void load_res() {
 	flip_atlas(atlas_squirtle_left, atlas_squirtle_right);
 	atlas_bulbasaur_left.load_from_file(_T("res/bulbasaur_%d.png"), 3);
 	flip_atlas(atlas_bulbasaur_left, atlas_bulbasaur_right);
+
+	atlas_charmander_high_frame_left.high_frame_load_from_file(10,_T("res/charmander_%d.png"), 2);
+	flip_atlas(atlas_charmander_high_frame_left, atlas_charmander_high_frame_right);
+	atlas_squirtle_high_frame_left.high_frame_load_from_file(10, _T("res/squirtle_%d.png"), 2);
+	flip_atlas(atlas_squirtle_high_frame_left, atlas_squirtle_high_frame_right);
+	atlas_bulbasaur_high_frame_left.high_frame_load_from_file(10, _T("res/bulbasaur_%d.png"), 2);
+	flip_atlas(atlas_bulbasaur_high_frame_left, atlas_bulbasaur_high_frame_right);
 }
