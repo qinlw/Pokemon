@@ -4,10 +4,16 @@
 #include "scene_menu.h"
 #include "scene_knapsack.h"
 #include "scene_set.h"
+#include "pokeman_charmander.h"
+#include "pokemon_squirtle.h"
+#include "pokemon_bulbasaur.h"
 #include "scene_pokemon.h"
 #include "scene_game.h"
+#include "collision_line.h"
 #include "time.h"
 
+
+bool is_debug = false;
 
 Scene* menu_scene = nullptr;
 Scene* knapsack_scene = nullptr;
@@ -16,6 +22,12 @@ Scene* pokemon_scene = nullptr;
 Scene* game_scene = nullptr;
 
 SceneManager* scene_manager;
+
+Pokemon* pokemon_player_1 = nullptr;
+Pokemon* pokemon_player_2 = nullptr;
+
+std::vector<CollisionLine> collision_thwartwise_line_list;
+std::vector<CollisionLine> collision_vertical_line_list;
 
 HWND hwnd;
 

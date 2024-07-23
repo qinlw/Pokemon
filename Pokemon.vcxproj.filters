@@ -80,5 +80,8 @@
     <ClInclude Include="pokemon_bulbasaur.h">
       <Filter>头文件\pokemon</Filter>
     </ClInclude>
+    <ClInclude Include="collision_line.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
