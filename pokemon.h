@@ -207,14 +207,15 @@ private:
 			if (!is_collision_x || !is_collision_y) continue;
 
 			if (is_facing_right) {
-				if (pokemon_pos.x > line.line_pos.pos_1.x - 97) 
+				if (pokemon_pos.x > line.line_pos.pos_1.x - 97)
 					pokemon_pos.x = line.line_pos.pos_2.x - 97;
 			}
 			else {
-				if (pokemon_pos.x < line.line_pos.pos_1.x - 30) 
+				if (pokemon_pos.x < line.line_pos.pos_1.x - 30)
 					pokemon_pos.x = line.line_pos.pos_1.x - 30;
 			}
 		}
+
 	}
 
 

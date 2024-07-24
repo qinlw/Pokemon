@@ -133,6 +133,7 @@
     <ClInclude Include="animation.h" />
     <ClInclude Include="animation_errored.h" />
     <ClInclude Include="atlas.h" />
+    <ClInclude Include="bullet.h" />
     <ClInclude Include="collision_line.h" />
     <ClInclude Include="picture.h" />
     <ClInclude Include="pointf.h" />

@@ -19,6 +19,9 @@
     <Filter Include="头文件\pokemon">
       <UniqueIdentifier>{472f33a7-1f6a-4551-bd9c-c84a4d7fc045}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\skill">
+      <UniqueIdentifier>{4c5cefa8-c157-44bf-aaca-98366ad8f4d8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -85,6 +88,9 @@
     </ClInclude>
     <ClInclude Include="pointf.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="bullet.h">
+      <Filter>头文件\skill</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

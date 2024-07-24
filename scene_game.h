@@ -93,10 +93,12 @@ public:
 		line_addition_1.line_pos.pos_1 = line_1.line_pos.pos_2;
 		line_addition_1.line_pos.pos_2 = line_2.line_pos.pos_2;
 		CollisionLine& line_3 = collision_vertical_line_list[2];
-		line_3.line_pos.pos_1 = { tree_centre_pos.x + 60, grassland_pos.y - img_tree_centre.getheight() + 22 };
+		//line_3.line_pos.pos_1 = { tree_centre_pos.x + 60, grassland_pos.y - img_tree_centre.getheight() + 22 };
+		line_3.line_pos.pos_1 = { tree_centre_pos.x + 60, line_2.line_pos.pos_1.y };
 		line_3.line_pos.pos_2 = { tree_centre_pos.x + 60, line_0.line_pos.pos_1.y };
 		CollisionLine& line_4 = collision_vertical_line_list[3];
-		line_4.line_pos.pos_1 = { tree_centre_pos.x + 93, grassland_pos.y - img_tree_centre.getheight() + 22 };
+		//line_4.line_pos.pos_1 = { tree_centre_pos.x + 93, grassland_pos.y - img_tree_centre.getheight() + 22 };
+		line_4.line_pos.pos_1 = { tree_centre_pos.x + 93, line_3.line_pos.pos_1.y };
 		line_4.line_pos.pos_2 = { tree_centre_pos.x + 93, line_0.line_pos.pos_1.y };
 
 		CollisionLine& line_5 = collision_thwartwise_line_list[3];
@@ -112,10 +114,12 @@ public:
 		line_addition_5.line_pos.pos_1 = line_5.line_pos.pos_2;
 		line_addition_5.line_pos.pos_2 = line_6.line_pos.pos_2;
 		CollisionLine& line_7 = collision_vertical_line_list[6];
-		line_7.line_pos.pos_1 = { tree_1_pos.x + 70, grassland_pos.y - img_tree_1.getheight() + 27 };
+		//line_7.line_pos.pos_1 = { tree_1_pos.x + 70, grassland_pos.y - img_tree_1.getheight() + 27 };
+		line_7.line_pos.pos_1 = { tree_1_pos.x + 70, line_6.line_pos.pos_1.y };
 		line_7.line_pos.pos_2 = { tree_1_pos.x + 70, line_0.line_pos.pos_1.y };
 		CollisionLine& line_8 = collision_vertical_line_list[7];
-		line_8.line_pos.pos_1 = { tree_1_pos.x + 113, grassland_pos.y - img_tree_1.getheight() + 27 };
+		//line_8.line_pos.pos_1 = { tree_1_pos.x + 113, grassland_pos.y - img_tree_1.getheight() + 27 };
+		line_8.line_pos.pos_1 = { tree_1_pos.x + 113, line_7.line_pos.pos_1.y };
 		line_8.line_pos.pos_2 = { tree_1_pos.x + 113, line_0.line_pos.pos_1.y };
 
 		CollisionLine& line_9 = collision_thwartwise_line_list[5];
@@ -131,10 +135,12 @@ public:
 		line_addition_9.line_pos.pos_1 = line_9.line_pos.pos_2;
 		line_addition_9.line_pos.pos_2 = line_10.line_pos.pos_2;
 		CollisionLine& line_11 = collision_vertical_line_list[10];
-		line_11.line_pos.pos_1 = { tree_2_pos.x + 60, grassland_pos.y - img_tree_2.getheight() + 33 };
+		//line_11.line_pos.pos_1 = { tree_2_pos.x + 60, grassland_pos.y - img_tree_2.getheight() + 33 };
+		line_11.line_pos.pos_1 = { tree_2_pos.x + 60, line_10.line_pos.pos_1.y };
 		line_11.line_pos.pos_2 = { tree_2_pos.x + 60, line_0.line_pos.pos_1.y };
 		CollisionLine& line_12 = collision_vertical_line_list[11];
-		line_12.line_pos.pos_1 = { tree_2_pos.x + 95, grassland_pos.y - img_tree_2.getheight() + 33 };
+		//line_12.line_pos.pos_1 = { tree_2_pos.x + 95, grassland_pos.y - img_tree_2.getheight() + 33 };
+		line_12.line_pos.pos_1 = { tree_2_pos.x + 95, line_11.line_pos.pos_1.y };
 		line_12.line_pos.pos_2 = { tree_2_pos.x + 95, line_0.line_pos.pos_1.y };
 
 		CollisionLine& line_13 = collision_thwartwise_line_list[7];
@@ -150,10 +156,12 @@ public:
 		line_addition_13.line_pos.pos_1 = line_13.line_pos.pos_2;
 		line_addition_13.line_pos.pos_2 = line_14.line_pos.pos_2;
 		CollisionLine& line_15 = collision_vertical_line_list[14];
-		line_15.line_pos.pos_1 = { tree_3_pos.x + 75, grassland_pos.y - img_tree_3.getheight() + 65 };
+		//line_15.line_pos.pos_1 = { tree_3_pos.x + 75, grassland_pos.y - img_tree_3.getheight() + 65 };
+		line_15.line_pos.pos_1 = { tree_3_pos.x + 75, line_14.line_pos.pos_1.y };
 		line_15.line_pos.pos_2 = { tree_3_pos.x + 75, line_0.line_pos.pos_1.y };
 		CollisionLine& line_16 = collision_vertical_line_list[15];
-		line_16.line_pos.pos_1 = { tree_3_pos.x + 123, grassland_pos.y - img_tree_3.getheight() + 65 };
+		//line_16.line_pos.pos_1 = { tree_3_pos.x + 123, grassland_pos.y - img_tree_3.getheight() + 65 };
+		line_16.line_pos.pos_1 = { tree_3_pos.x + 123, line_15.line_pos.pos_1.y };
 		line_16.line_pos.pos_2 = { tree_3_pos.x + 123, line_0.line_pos.pos_1.y };
 	}
 
