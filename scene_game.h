@@ -11,6 +11,7 @@ extern SceneManager* scene_manager;
 
 extern std::vector<CollisionLine> collision_thwartwise_line_list;
 extern std::vector<CollisionLine> collision_vertical_line_list;
+extern std::vector<Bullet*> bullet_list;
 
 class SceneGame : public Scene {
 public:
@@ -74,7 +75,7 @@ public:
 
 		// 碰撞线条初始化信息
 		collision_thwartwise_line_list.resize(9);
-		collision_vertical_line_list.resize(16);
+		collision_vertical_line_list.resize(18);
 
 		CollisionLine& line_0 = collision_thwartwise_line_list[0];
 		line_0.line_pos.pos_1 = { grassland_pos.x, grassland_pos.y + 20 };
@@ -93,7 +94,7 @@ public:
 		line_addition_1.line_pos.pos_1 = line_1.line_pos.pos_2;
 		line_addition_1.line_pos.pos_2 = line_2.line_pos.pos_2;
 		CollisionLine& line_3 = collision_vertical_line_list[2];
-		//line_3.line_pos.pos_1 = { tree_centre_pos.x + 60, grassland_pos.y - img_tree_centre.getheight() + 22 };
+		line_3.line_pos.pos_1 = { tree_centre_pos.x + 60, grassland_pos.y - img_tree_centre.getheight() + 22 };
 		line_3.line_pos.pos_1 = { tree_centre_pos.x + 60, line_2.line_pos.pos_1.y };
 		line_3.line_pos.pos_2 = { tree_centre_pos.x + 60, line_0.line_pos.pos_1.y };
 		CollisionLine& line_4 = collision_vertical_line_list[3];
@@ -163,12 +164,23 @@ public:
 		//line_16.line_pos.pos_1 = { tree_3_pos.x + 123, grassland_pos.y - img_tree_3.getheight() + 65 };
 		line_16.line_pos.pos_1 = { tree_3_pos.x + 123, line_15.line_pos.pos_1.y };
 		line_16.line_pos.pos_2 = { tree_3_pos.x + 123, line_0.line_pos.pos_1.y };
+
+		CollisionLine& line_17 = collision_vertical_line_list[16];
+		line_17.line_pos.pos_1 = { 0, 0 };
+		line_17.line_pos.pos_2 = { 0, getheight() };
+		CollisionLine& line_18 = collision_vertical_line_list[17];
+		line_18.line_pos.pos_1 = { getwidth(), 0 };
+		line_18.line_pos.pos_2 = { getwidth(), getheight() };
 	}
 
 	void on_updata(int delta) {
 		if (is_esc_btn) return;
 		pokemon_player_1->on_updata(delta);
 		pokemon_player_2->on_updata(delta);
+
+		for (auto bullet : bullet_list) {
+			bullet->on_updata(delta);
+		}
 	}
 
 	void on_draw() {
@@ -197,6 +209,10 @@ public:
 			for (auto line : collision_vertical_line_list) {
 				line.on_draw();
 			}
+		}
+
+		for (auto bullet : bullet_list) {
+			bullet->on_draw();
 		}
 
 		// 碰撞线条
@@ -234,19 +250,24 @@ public:
 			switch (msg.message) {
 			case WM_LBUTTONDOWN: {
 				if (msg.y >= restart_btn_pos.y && msg.y <= restart_btn_pos.y + img_restart_button.getheight()) {
+					// 继续游戏
 					if (msg.x >= continue_game_btn_pos.x && msg.x <= continue_game_btn_pos.x + img_continue_game_button.getwidth()) {
 						is_continue_game_btn = true;
 						button_sink_animatioin(5, 50, continue_game_btn_pos, &img_continue_game_button);
 						break;
 					}
+					// 重新开始
 					else if (msg.x >= restart_btn_pos.x && msg.x <= restart_btn_pos.x + img_restart_button.getwidth()) {
 						is_restart_btn = true;
 						button_sink_animatioin(5, 50, restart_btn_pos, &img_restart_button);
+						bullet_list.clear();
 						break;
 					}
+					// 返回菜单
 					else if (msg.x >= return_menu_btn_pos.x && msg.x <= return_menu_btn_pos.x + img_restart_button.getwidth()) {
 						is_return_menu_btn = true;
 						button_sink_animatioin(5, 50, return_menu_btn_pos, &img_return_button);
+						bullet_list.clear();
 						break;
 					}
 				}

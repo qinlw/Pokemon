@@ -3,12 +3,17 @@
 #include "picture.h"
 #include "pointf.h"
 #include "pokemon_player.h"
+#include "bullet.h"
 #include "animation.h"
 #include "collision_line.h"
+
+#include <iostream>
+#include <string>
 
 
 extern std::vector<CollisionLine> collision_thwartwise_line_list;
 extern std::vector<CollisionLine> collision_vertical_line_list;
+extern std::vector<Bullet*> bullet_list;
 
 class Pokemon {
 public:
@@ -16,12 +21,20 @@ public:
 		animation_current_pokemon = is_facing_right ? &animation_pokemon_right : &animation_pokemon_left;
 	}
 
+	virtual void skill_1() {}
+
+	virtual void skill_2() {}
+
+	virtual void skill_3() {}
+
+	virtual void skill_4() {}
+
 	virtual void on_updata(int delta) {
 		int direction = is_right_btn - is_left_btn;
 		if (direction) {
 			is_facing_right = direction > 0;
 			animation_current_pokemon = is_facing_right ? &animation_pokemon_right : &animation_pokemon_left;
-			float distance = direction * run_velocity * delta;
+			float distance = direction * move_speed * delta;
 			run_pos_change(distance);
 		}
 		else {
@@ -34,6 +47,22 @@ public:
 	}
 
 	virtual void on_draw() {
+		// 血条及能量条测试代码
+		setbkmode(TRANSPARENT);
+		TCHAR hp_s[20];
+		TCHAR mp_s[20];
+		_stprintf_s(hp_s, _T("hp: %d"), hp);
+		_stprintf_s(mp_s, _T("mp: %d"), mp);
+		if (player_id == PokemonPlayer::P1) {
+			outtextxy(10, 0, hp_s);
+			outtextxy(10, 15, mp_s);
+		} 
+		else {
+			outtextxy(getwidth() - 60, 0, hp_s);
+			outtextxy(getwidth() - 60, 15, mp_s);
+		}
+
+
 		animation_current_pokemon->on_draw(pokemon_pos.x, pokemon_pos.y);
 	}
 
@@ -54,6 +83,18 @@ public:
 					// 'W'
 				case 0x57:
 					jump();
+					break;
+				case 0x31:
+					skill_1();
+					break;
+				case 0x32:
+					skill_2();
+					break;
+				case 0x33:
+					skill_3();
+					break;
+				case 0x34:
+					skill_4();
 					break;
 				}
 				break;
@@ -133,8 +174,16 @@ public:
 	
 
 protected:
+	int hp = 100;														// 生命值
+	int mp = 100;														// 能量值
+	float base_speed = 0.01f;											// 基础速度			
+	float move_speed;													// 奔跑速度
+	int pokemon_ATK;													// 宝可梦的基础物攻
+	int pokemon_MATK;													// 宝可梦的基础特攻
+	int pokemon_DEF;													// 宝可梦的基础物防
+	int pokemon_MDEF;													// 宝可梦的基础特防
+
 	const float gravity = 1.6e-3f;										// 重力加速度
-	const float run_velocity = 0.5f;									// 奔跑速度
 	const float jump_velocity = -0.75f;									// 起跳速度
 
 protected:
@@ -188,7 +237,7 @@ private:
 		}
 		else if (pokemon_velocity.y <= 0) {
 			for (auto line : collision_thwartwise_line_list) {
-				const bool is_collision_x = pokemon_left_low_dot.x < line.line_pos.pos_2.x && pokemon_right_low_dot.x > line.line_pos.pos_1.x;
+				bool is_collision_x = pokemon_left_low_dot.x < line.line_pos.pos_2.x && pokemon_right_low_dot.x > line.line_pos.pos_1.x;
 				const bool is_collision_y = pokemon_left_top_dot.y < line.line_pos.pos_1.y && pokemon_left_low_dot.y > line.line_pos.pos_1.y;
 
 				if (is_collision_x && is_collision_y) {
@@ -208,7 +257,7 @@ private:
 
 			if (is_facing_right) {
 				if (pokemon_pos.x > line.line_pos.pos_1.x - 97)
-					pokemon_pos.x = line.line_pos.pos_2.x - 97;
+					pokemon_pos.x = line.line_pos.pos_1.x - 97;
 			}
 			else {
 				if (pokemon_pos.x < line.line_pos.pos_1.x - 30)
@@ -216,6 +265,16 @@ private:
 			}
 		}
 
+		// 子弹与宝可梦的碰撞
+		for (auto bullet : bullet_list) {
+			if (!bullet->get_is_valid() || bullet->get_target_player() != player_id) continue;
+			if (bullet->check_is_collision(pokemon_left_top_dot, pokemon_size)) {
+				bullet->on_collision();
+				bullet->set_is_valid(false);
+				int damage = 10;
+				hp -= damage;
+			}
+		}
 	}
 
 

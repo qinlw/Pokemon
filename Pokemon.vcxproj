@@ -134,6 +134,8 @@
     <ClInclude Include="animation_errored.h" />
     <ClInclude Include="atlas.h" />
     <ClInclude Include="bullet.h" />
+    <ClInclude Include="bullet_attribute.h" />
+    <ClInclude Include="charmander_fire.h" />
     <ClInclude Include="collision_line.h" />
     <ClInclude Include="picture.h" />
     <ClInclude Include="pointf.h" />

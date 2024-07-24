@@ -22,6 +22,15 @@
     <Filter Include="头文件\skill">
       <UniqueIdentifier>{4c5cefa8-c157-44bf-aaca-98366ad8f4d8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\skill\charmander">
+      <UniqueIdentifier>{725d47e3-9215-4c12-8c56-c7ba946cda48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\skill\squirtle">
+      <UniqueIdentifier>{960298a1-a07b-411c-93d5-0615202e0d99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\skill\bulbasaur">
+      <UniqueIdentifier>{90902c74-49ee-4f37-8158-0e7af41e44c0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -90,6 +99,12 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="bullet.h">
+      <Filter>头文件\skill</Filter>
+    </ClInclude>
+    <ClInclude Include="charmander_fire.h">
+      <Filter>头文件\skill\charmander</Filter>
+    </ClInclude>
+    <ClInclude Include="bullet_attribute.h">
       <Filter>头文件\skill</Filter>
     </ClInclude>
   </ItemGroup>

@@ -61,6 +61,10 @@ Atlas atlas_squirtle_high_frame_right;				// 朝向向右的高帧杰尼龟
 Atlas atlas_bulbasaur_high_frame_left;				// 朝向向左的高帧妙蛙种子
 Atlas atlas_bulbasaur_high_frame_right;				// 朝向向右的高帧妙蛙种子
 
+// 技能动画
+Atlas atlas_fireball;								// 火花发射出的动画
+Atlas atlas_fire;									// 火花命中后的动画 
+
 
 void load_res() {
 	// 主菜单场景资源加载
@@ -121,4 +125,8 @@ void load_res() {
 	flip_atlas(atlas_squirtle_high_frame_left, atlas_squirtle_high_frame_right);
 	atlas_bulbasaur_high_frame_left.high_frame_load_from_file(10, _T("res/bulbasaur_%d.png"), 2);
 	flip_atlas(atlas_bulbasaur_high_frame_left, atlas_bulbasaur_high_frame_right);
+
+	//技能动画资源加载
+	atlas_fireball.load_from_file(_T("res/fireball_%d.png"), 13);
+	atlas_fire.load_from_file(_T("res/fire_%d.png"), 9);
 }
