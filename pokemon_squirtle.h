@@ -20,6 +20,7 @@ public:
 		pokemon_size = { 128, 115 };
 
 		pokemon_attribute = PokemonAttribute::Water;
+		pokemon_type = PokemonType::Squirtle;
 	}
 
 	void skill_1() {

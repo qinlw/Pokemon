@@ -2,6 +2,7 @@
 
 #include "scene.h"
 #include "scene_manager.h"
+#include "pokemon_type.h"
 #include "pokeman_charmander.h"
 #include "pokemon_squirtle.h"
 #include "pokemon_bulbasaur.h"
@@ -101,24 +102,24 @@ public:
 		if (is_enter_start) animation_pokeball.on_draw(pokeball_pos.x, pokeball_pos.y, false);
 
 		switch (player_type_1P) {
-		case ScenePokemon::PlayerType::Charmander:
+		case PokemonType::Charmander:
 			animation_selector_charmander_right.on_draw(pokemon_1P_pos.x, pokemon_1P_pos.y);
 			break;
-		case ScenePokemon::PlayerType::Squirtle:
+		case PokemonType::Squirtle:
 			animation_selector_squirtle_right.on_draw(pokemon_1P_pos.x, pokemon_1P_pos.y);
 			break;
-		case ScenePokemon::PlayerType::Bulbasaur:
+		case PokemonType::Bulbasaur:
 			animation_selector_bulbasaur_right.on_draw(pokemon_1P_pos.x, pokemon_1P_pos.y);
 			break;
 		}
 		switch (player_type_2P) {
-		case ScenePokemon::PlayerType::Charmander:
+		case PokemonType::Charmander:
 			animation_selector_charmander_left.on_draw(pokemon_2P_pos.x, pokemon_2P_pos.y);
 			break;
-		case ScenePokemon::PlayerType::Squirtle:
+		case PokemonType::Squirtle:
 			animation_selector_squirtle_left.on_draw(pokemon_2P_pos.x, pokemon_2P_pos.y);
 			break;
-		case ScenePokemon::PlayerType::Bulbasaur:
+		case PokemonType::Bulbasaur:
 			animation_selector_bulbasaur_left.on_draw(pokemon_2P_pos.x, pokemon_2P_pos.y);
 			break;
 		}
@@ -161,22 +162,22 @@ public:
 			// 'A'
 			case 0x41:
 				is_1P_left_btn = false;
-				player_type_1P = (PlayerType)(((int)PlayerType::Invalid + (int)player_type_1P - 1) % (int)PlayerType::Invalid);
+				player_type_1P = (PokemonType)(((int)PokemonType::Invalid + (int)player_type_1P - 1) % (int)PokemonType::Invalid);
 				break;
 			// 'D'
 			case 0x44:
 				is_1P_right_btn = false;
-				player_type_1P = (PlayerType)(((int)player_type_1P + 1) % (int)PlayerType::Invalid);
+				player_type_1P = (PokemonType)(((int)player_type_1P + 1) % (int)PokemonType::Invalid);
 				break;
 			// '⬅'
 			case VK_LEFT:
 				is_2P_left_btn = false;
-				player_type_2P = (PlayerType)(((int)PlayerType::Invalid + (int)player_type_2P - 1) % (int)PlayerType::Invalid);
+				player_type_2P = (PokemonType)(((int)PokemonType::Invalid + (int)player_type_2P - 1) % (int)PokemonType::Invalid);
 				break;
 			// '➡'
 			case VK_RIGHT:
 				is_2P_right_btn = false;
-				player_type_2P = (PlayerType)(((int)player_type_2P + 1) % (int)PlayerType::Invalid);
+				player_type_2P = (PokemonType)(((int)player_type_2P + 1) % (int)PokemonType::Invalid);
 				break;
 			// 'enter'
 			case VK_RETURN:
@@ -261,7 +262,7 @@ public:
 					int centreL = btn_1P_left_pos.y + img_1P_selector_btn_idle_left.getheight() / 2;
 					int yL = abs(msg.y - centreL);
 					int innerL = abs(msg.x - btn_1P_left_pos.x);
-					if (yL <= innerL) player_type_1P = (PlayerType)(((int)PlayerType::Invalid + (int)player_type_1P - 1) % (int)PlayerType::Invalid);
+					if (yL <= innerL) player_type_1P = (PokemonType)(((int)PokemonType::Invalid + (int)player_type_1P - 1) % (int)PokemonType::Invalid);
 					break;
 				}
 				else if (msg.x >= btn_1P_right_pos.x && msg.x <= btn_1P_right_pos.x + img_1P_selector_btn_idle_right.getwidth() && is_1P_right_btn) {
@@ -270,7 +271,7 @@ public:
 					int yL = abs(msg.y - centreL);
 					int innerL = abs(img_1P_selector_btn_idle_right.getheight() / 2 - msg.x + btn_1P_right_pos.x);
 					if (yL <= innerL) is_1P_right_btn = true;
-					if (yL <= innerL) player_type_1P = (PlayerType)(((int)player_type_1P + 1) % (int)PlayerType::Invalid);
+					if (yL <= innerL) player_type_1P = (PokemonType)(((int)player_type_1P + 1) % (int)PokemonType::Invalid);
 					break;
 				}
 				else if (msg.x >= btn_2P_left_pos.x && msg.x <= btn_2P_left_pos.x + img_2P_selector_btn_idle_left.getwidth() && is_2P_left_btn) {
@@ -278,7 +279,7 @@ public:
 					int centreL = btn_2P_left_pos.y + img_2P_selector_btn_idle_left.getheight() / 2;
 					int yL = abs(msg.y - centreL);
 					int innerL = abs(msg.x - btn_2P_left_pos.x);
-					if (yL <= innerL) player_type_2P = (PlayerType)(((int)PlayerType::Invalid + (int)player_type_2P - 1) % (int)PlayerType::Invalid);
+					if (yL <= innerL) player_type_2P = (PokemonType)(((int)PokemonType::Invalid + (int)player_type_2P - 1) % (int)PokemonType::Invalid);
 					break;
 				}
 				else if (msg.x >= btn_2P_right_pos.x && msg.x <= btn_2P_right_pos.x + img_2P_selector_btn_idle_right.getwidth() && is_2P_right_btn) {
@@ -286,7 +287,7 @@ public:
 					int centreL = btn_2P_right_pos.y + img_2P_selector_btn_idle_right.getheight() / 2;
 					int yL = abs(msg.y - centreL);
 					int innerL = abs(img_2P_selector_btn_idle_right.getheight() / 2 - msg.x + btn_2P_right_pos.x);
-					if (yL <= innerL) player_type_2P = (PlayerType)(((int)player_type_2P + 1) % (int)PlayerType::Invalid);
+					if (yL <= innerL) player_type_2P = (PokemonType)(((int)player_type_2P + 1) % (int)PokemonType::Invalid);
 					break;
 				}
 				else {
@@ -313,26 +314,26 @@ public:
 
 	void on_exit() {
 		switch (player_type_1P) {
-		case ScenePokemon::PlayerType::Charmander:
+		case PokemonType::Charmander:
 			pokemon_player_1 = new PokemonCharmander();
 			break;
-		case ScenePokemon::PlayerType::Squirtle:
+		case PokemonType::Squirtle:
 			pokemon_player_1 = new PokemonSquirtle();
 			break;
-		case ScenePokemon::PlayerType::Bulbasaur:
+		case PokemonType::Bulbasaur:
 			pokemon_player_1 = new PokemonBulbasaur();
 			break;
 		}
 		pokemon_player_1->set_id(PokemonPlayer::P1);
 
 		switch (player_type_2P) {
-		case ScenePokemon::PlayerType::Charmander:
+		case PokemonType::Charmander:
 			pokemon_player_2 = new PokemonCharmander(false);
 			break;
-		case ScenePokemon::PlayerType::Squirtle:
+		case PokemonType::Squirtle:
 			pokemon_player_2 = new PokemonSquirtle(false);
 			break;
-		case ScenePokemon::PlayerType::Bulbasaur:
+		case PokemonType::Bulbasaur:
 			pokemon_player_2 = new PokemonBulbasaur(false);
 			break;
 		}
@@ -341,12 +342,7 @@ public:
 
 
 private:
-	enum class PlayerType {
-		Charmander = 0,
-		Squirtle,
-		Bulbasaur,
-		Invalid
-	};
+
 
 private:
 	POINT return_btn_pos = { 0 };					// 返回按钮的位置
@@ -361,8 +357,8 @@ private:
 	POINT btn_2P_left_pos = { 0 };					// 2P向左切换角色的按钮的位置 
 	POINT btn_2P_right_pos = { 0 };					// 2P向右切换角色的按钮的位置
 
-	PlayerType player_type_1P = PlayerType::Charmander;	// 玩家1的角色类型
-	PlayerType player_type_2P = PlayerType::Charmander;	// 玩家2的角色类型
+	PokemonType player_type_1P = PokemonType::Charmander;	// 玩家1的角色类型
+	PokemonType player_type_2P = PokemonType::Charmander;	// 玩家2的角色类型
 
 	Animation animation_pokeball;					// 旋转精灵球动画
 	Animation animation_selector_charmander_left;	// 小火龙朝向为左的角色选择动画

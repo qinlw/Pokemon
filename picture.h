@@ -47,6 +47,13 @@ IMAGE img_tree_3;									// 树三
 IMAGE img_continue_game_button;						// 继续游戏按钮
 IMAGE img_restart_button;							// 重新开始按钮
 IMAGE img_return_menu_button;						// 返回主菜单按钮
+IMAGE img_charmander_head_portrait_right;			// 朝向向右的小火龙头像
+IMAGE img_charmander_head_portrait_left;			// 朝向向左的小火龙头像
+IMAGE img_squirtle_head_portrait_right;				// 朝向向右的杰尼龟头像
+IMAGE img_squirtle_head_portrait_left;				// 朝向向左的杰尼龟头像
+IMAGE img_bulbasaur_head_portrait_right;			// 朝向向右的妙蛙种子头像
+IMAGE img_bulbasaur_head_portrait_left;				// 朝向向左的妙蛙种子头像
+
 
 Atlas atlas_charmander_left;						// 朝向向左的小火龙
 Atlas atlas_charmander_right;						// 朝向向右的小火龙
@@ -64,6 +71,15 @@ Atlas atlas_bulbasaur_high_frame_right;				// 朝向向右的高帧妙蛙种子
 // 技能动画
 Atlas atlas_fireball;								// 火花发射出的动画
 Atlas atlas_fire;									// 火花命中后的动画 
+
+// 胜利动画
+IMAGE img_winnner_bar;								// 胜利条背景
+IMAGE img_1P_charmander_win_text_bar;				// 1P小火龙胜利文本条动画
+IMAGE img_2P_charmander_win_text_bar;				// 2P小火龙胜利文本条动画
+IMAGE img_1P_squirtle_win_text_bar;					// 1P杰尼龟胜利文本条动画
+IMAGE img_2P_squirtle_win_text_bar;					// 2P杰尼龟胜利文本条动画
+IMAGE img_1P_bulbasaur_win_text_bar;				// 1P妙蛙种子胜利文本条动画
+IMAGE img_2P_bulbasaur_win_text_bar;				// 2P妙蛙种子胜利文本条动画
 
 
 void load_res() {
@@ -112,6 +128,14 @@ void load_res() {
 	loadimage(&img_restart_button, _T("res/restart_button.png"));
 	loadimage(&img_return_menu_button, _T("res/return_menu_button.png"));
 
+	loadimage(&img_charmander_head_portrait_right, _T("res/charmander_head_portrait_right.png"));
+	flip_image(&img_charmander_head_portrait_right, &img_charmander_head_portrait_left);
+	loadimage(&img_squirtle_head_portrait_right, _T("res/squirtle_head_portrait_right.png"));
+	flip_image(&img_squirtle_head_portrait_right, &img_squirtle_head_portrait_left);
+	loadimage(&img_bulbasaur_head_portrait_right, _T("res/bulbasaur_head_portrait_right.png"));
+	flip_image(&img_bulbasaur_head_portrait_right, &img_bulbasaur_head_portrait_left);
+
+
 	atlas_charmander_left.load_from_file(_T("res/charmander_%d.png"), 3);
 	flip_atlas(atlas_charmander_left, atlas_charmander_right);
 	atlas_squirtle_left.load_from_file(_T("res/squirtle_%d.png"), 3);
@@ -129,4 +153,13 @@ void load_res() {
 	//技能动画资源加载
 	atlas_fireball.load_from_file(_T("res/fireball_%d.png"), 13);
 	atlas_fire.load_from_file(_T("res/fire_%d.png"), 9);
+
+	//胜利动画
+	loadimage(&img_winnner_bar, _T("res/winner_bar.png"));
+	loadimage(&img_1P_charmander_win_text_bar, _T("res/1P_charmander_win_text_bar.png"));
+	loadimage(&img_2P_charmander_win_text_bar, _T("res/2P_charmander_win_text_bar.png"));
+	loadimage(&img_1P_squirtle_win_text_bar, _T("res/1P_squirtle_win_text_bar.png"));
+	loadimage(&img_2P_squirtle_win_text_bar, _T("res/2P_squirtle_win_text_bar.png"));
+	loadimage(&img_1P_bulbasaur_win_text_bar, _T("res/1P_bulbasaur_win_text_bar.png"));
+	loadimage(&img_2P_bulbasaur_win_text_bar, _T("res/2P_bulbasaur_win_text_bar.png"));
 }

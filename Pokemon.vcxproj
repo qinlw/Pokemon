@@ -145,6 +145,7 @@
     <ClInclude Include="pokemon_bulbasaur.h" />
     <ClInclude Include="pokemon_player.h" />
     <ClInclude Include="pokemon_squirtle.h" />
+    <ClInclude Include="pokemon_type.h" />
     <ClInclude Include="scene.h" />
     <ClInclude Include="scene_game.h" />
     <ClInclude Include="scene_knapsack.h" />

@@ -25,6 +25,7 @@ public:
 		pokemon_size = { 128, 115 };
 
 		pokemon_attribute = PokemonAttribute::Fire;
+		pokemon_type = PokemonType::Charmander;
 	}
 
 	void skill_1() {

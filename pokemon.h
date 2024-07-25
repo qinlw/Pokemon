@@ -51,7 +51,8 @@ public:
 
 		animation_current_pokemon->on_updata(delta);
 
-		timer_recover_mp.on_updata(delta);
+		if (hp > 0) timer_recover_mp.on_updata(delta);
+		if (hp < 0) hp = 0;
 
 		move_collision(delta);
 
@@ -65,32 +66,44 @@ public:
 	}
 
 	virtual void on_draw() {
-		// 血条及能量条测试代码
+		// 血条及能量条测试代码		
+		int status_bar_width = 400;
+		int status_bar_height = 40;
+		int status_bar_interval = 2;
+		POINT status_bar_1P_pos = { 85, 0 };
+		POINT status_bar_2P_pos = { getwidth() - status_bar_width - status_bar_1P_pos.x, 0 };
 		setbkmode(TRANSPARENT);
 		TCHAR hp_s[20];
 		TCHAR mp_s[20];
 		_stprintf_s(hp_s, _T("hp: %d"), hp);
 		_stprintf_s(mp_s, _T("mp: %d"), mp);
 		if (player_id == PokemonPlayer::P1) {
-			outtextxy(10, 45, hp_s);
-			outtextxy(10, 60, mp_s);
+			outtextxy(status_bar_1P_pos.x, 2 * status_bar_height + 5, hp_s);
+			outtextxy(status_bar_1P_pos.x, 2 * status_bar_height + 20, mp_s);
 		} 
 		else {
-			outtextxy(getwidth() - 60, 45, hp_s);
-			outtextxy(getwidth() - 60, 60, mp_s);
+			outtextxy(getwidth() - 60, 2 * status_bar_height + 5, hp_s);
+			outtextxy(getwidth() - 60, 2 * status_bar_height + 20, mp_s);
 		}
 
+		setcolor(RGB(111, 84, 13));
+		rectangle(status_bar_1P_pos.x, status_bar_1P_pos.y, status_bar_1P_pos.x + status_bar_width, status_bar_height);
+		rectangle(status_bar_1P_pos.x, status_bar_1P_pos.y + status_bar_height + status_bar_interval, 
+			status_bar_1P_pos.x + status_bar_width, status_bar_1P_pos.y + 2 * status_bar_height + status_bar_interval);
+		rectangle(status_bar_2P_pos.x, status_bar_2P_pos.y, status_bar_2P_pos.x + status_bar_width, status_bar_height);
+		rectangle(status_bar_2P_pos.x, status_bar_2P_pos.y + status_bar_height + status_bar_interval,
+			status_bar_2P_pos.x + status_bar_width, status_bar_2P_pos.y + 2 * status_bar_height + status_bar_interval);
 		if (player_id == PokemonPlayer::P1) {
 			setfillcolor(RGB(255, 0, 0));
-			fillrectangle(10, 0, 10 + hp, 20);
+			fillroundrect(status_bar_1P_pos.x, status_bar_1P_pos.y, status_bar_1P_pos.x + hp * 4, status_bar_height, 8, 8);
 			setfillcolor(RGB(0, 0, 255));
-			fillrectangle(10, 22, 10 + mp, 42);
-		} 
+			fillroundrect(status_bar_1P_pos.x, status_bar_1P_pos.y + status_bar_height, status_bar_1P_pos.x + mp * 4, 2 * status_bar_height, 8, 8);
+		}
 		else {
 			setfillcolor(RGB(255, 0, 0));
-			fillrectangle(getwidth() - 160, 0, getwidth() - 160 + hp, 20);
+			fillroundrect(status_bar_2P_pos.x, status_bar_2P_pos.y, status_bar_2P_pos.x + hp * 4, status_bar_height, 8, 8);
 			setfillcolor(RGB(0, 0, 255));
-			fillrectangle(getwidth() - 160, 20, getwidth() - 160 + mp, 40);
+			fillroundrect(status_bar_2P_pos.x, status_bar_2P_pos.y + status_bar_height, status_bar_2P_pos.x + mp * 4, 2 * status_bar_height, 8, 8);
 		}
 
 
@@ -98,6 +111,7 @@ public:
 	}
 
 	void on_input(const ExMessage& msg) {
+		if (hp <= 0) return;
 		switch (msg.message) {
 		case WM_KEYDOWN: {
 			switch (player_id) {
@@ -195,6 +209,10 @@ public:
 		}
 	}
 
+	int get_hp() {
+		return hp;
+	}
+
 	void set_velocity(float x, float y) {
 		pokemon_velocity.x = x;
 		pokemon_velocity.y = y;
@@ -207,6 +225,10 @@ public:
 
 	void set_id(PokemonPlayer id) {
 		player_id = id;
+	}
+
+	PokemonType get_pokemon_type() {
+		return pokemon_type;
 	}
 
 	void run_pos_change(float distance) {
@@ -252,6 +274,7 @@ protected:
 
 	PokemonPlayer player_id;											// 玩家id
 	PokemonAttribute pokemon_attribute;									// 宝可梦属性
+	PokemonType pokemon_type;											// 宝可梦种类
 
 	bool is_platform = false;											// 是否在平台上
 	bool is_facing_right = false;										// 当前是否朝向右边
@@ -266,6 +289,8 @@ private:
 		pokemon_pos.y += pokemon_velocity.y * (float)delta;
 		pokemon_velocity.y += gravity * (float)delta;
 		pokemon_pos.x += pokemon_velocity.x * delta;
+
+		if (hp <= 0) return;
 
 		// 屏幕周围
 		if (pokemon_pos.x < -30) pokemon_pos.x = -30;

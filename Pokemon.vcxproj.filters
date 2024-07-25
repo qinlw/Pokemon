@@ -104,5 +104,8 @@
     <ClInclude Include="pokemon_squirtle.h">
       <Filter>头文件\pokemon</Filter>
     </ClInclude>
+    <ClInclude Include="pokemon_type.h">
+      <Filter>头文件\pokemon</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

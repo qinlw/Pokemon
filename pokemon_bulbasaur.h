@@ -20,6 +20,7 @@ public:
 		pokemon_size = { 128, 115 };
 
 		pokemon_attribute = PokemonAttribute::Wood;
+		pokemon_type = PokemonType::Bulbasaur;
 	}
 
 	void skill_1() {

@@ -17,6 +17,19 @@ extern std::vector<Bullet*> bullet_list;
 class SceneGame : public Scene {
 public:
 	void on_enter() {
+		timer_winner_bar_slide_in.reset();
+		timer_winner_bar_slide_in.set_wait_time(500);
+		timer_winner_bar_slide_in.set_one_shot(true);
+		timer_winner_bar_slide_in.set_callback([&]() {
+			is_winner_bar_slide_out = true;
+			});
+
+		timer_winner_bar_slide_out.reset();
+		timer_winner_bar_slide_out.set_wait_time(100);
+		timer_winner_bar_slide_out.set_one_shot(true);
+		timer_winner_bar_slide_out.set_callback([&]() {
+			});
+
 		// 背景坐标
 		sky_pos.x = 0;
 		sky_pos.y = 0;
@@ -67,6 +80,16 @@ public:
 		return_menu_btn_pos.x = (getwidth() + restart_btn_pos.x + img_restart_button.getwidth() - img_return_menu_button.getwidth()) / 2 ;
 		return_menu_btn_pos.y = restart_btn_pos.y;
 
+		// 宝可梦头像位置
+		head_portrait_1P_pos = { 0, 0 };
+		head_portrait_2P_pos = { getwidth() - 82, 0 };
+
+		// 胜利条位置
+		winner_bar_pos.x = 0;
+		winner_bar_pos.y = (getheight() - img_winnner_bar.getheight()) / 2;
+		winner_text_bar_pos.x = - getwidth();
+		winner_text_bar_pos.y = winner_bar_pos.y;
+
 		// 宝可梦位置
 		pokemon_player_1->set_pokemon_pos(200, 50);
 		pokemon_player_2->set_pokemon_pos(975, 50);
@@ -79,8 +102,8 @@ public:
 		collision_vertical_line_list.resize(18);
 
 		CollisionLine& line_0 = collision_thwartwise_line_list[0];
-		line_0.line_pos.pos_1 = { grassland_pos.x, grassland_pos.y + 20 };
-		line_0.line_pos.pos_2 = { grassland_pos.x + img_grassland.getwidth(), grassland_pos.y + 20};
+		line_0.line_pos.pos_1 = { grassland_pos.x, grassland_pos.y + 30 };
+		line_0.line_pos.pos_2 = { grassland_pos.x + img_grassland.getwidth(), grassland_pos.y + 30};
 
 		CollisionLine& line_1 = collision_thwartwise_line_list[1];
 		line_1.line_pos.pos_1 = { tree_centre_pos.x + 10, tree_centre_pos.y + 20 };
@@ -175,7 +198,7 @@ public:
 	}
 
 	void on_updata(int delta) {
-		if (is_esc_btn) return;
+		if (is_esc_btn || game_over_is_pop_btn) return;
 		pokemon_player_1->on_updata(delta);
 		pokemon_player_2->on_updata(delta);
 
@@ -192,6 +215,28 @@ public:
 		for (auto bullet : bullet_list) {
 			bullet->on_updata(delta);
 		}
+
+		if (pokemon_player_1->get_hp() <= 0 || pokemon_player_2->get_hp() <= 0) {
+			is_game_over = true;
+		}
+
+		if (is_game_over) {
+			winner_text_bar_pos.x += winner_bar_speed;
+			
+			if (is_winner_bar_slide_out) {
+				timer_winner_bar_slide_out.on_updata(delta);
+				if (winner_text_bar_pos.x > getwidth()) {
+					winner_text_bar_pos.x = getwidth();
+					game_over_is_pop_btn = true;
+				}
+			}
+			else {
+				if (winner_text_bar_pos.x > 0) {
+					winner_text_bar_pos.x = 0;
+					timer_winner_bar_slide_in.on_updata(delta);
+				}
+			}
+		}
 	}
 
 	void on_draw() {
@@ -204,6 +249,31 @@ public:
 		putimage_alpha(tree_2_pos.x, tree_2_pos.y, &img_tree_2);
 		putimage_alpha(tree_3_pos.x, tree_3_pos.y, &img_tree_3);
 
+		switch (pokemon_player_1->get_pokemon_type()) {
+		case PokemonType::Charmander:
+			putimage_alpha(head_portrait_1P_pos.x, head_portrait_1P_pos.y, &img_charmander_head_portrait_right);
+			break;
+		case PokemonType::Squirtle:
+			putimage_alpha(head_portrait_1P_pos.x, head_portrait_1P_pos.y, &img_squirtle_head_portrait_right);
+			break;
+		case PokemonType::Bulbasaur:
+			putimage_alpha(head_portrait_1P_pos.x, head_portrait_1P_pos.y, &img_bulbasaur_head_portrait_right);
+			break;
+		}
+
+		switch (pokemon_player_2->get_pokemon_type()) {
+		case PokemonType::Charmander:
+			putimage_alpha(head_portrait_2P_pos.x, head_portrait_2P_pos.y, &img_charmander_head_portrait_left);
+			break;
+		case PokemonType::Squirtle:
+			putimage_alpha(head_portrait_2P_pos.x, head_portrait_2P_pos.y, &img_squirtle_head_portrait_left);
+			break;
+		case PokemonType::Bulbasaur:
+			putimage_alpha(head_portrait_2P_pos.x, head_portrait_2P_pos.y, &img_bulbasaur_head_portrait_left);
+			break;
+		}
+
+
 		if (is_esc_btn) {
 			putimage_alpha(continue_game_btn_pos.x, continue_game_btn_pos.y, &img_continue_game_button);
 			putimage_alpha(restart_btn_pos.x, restart_btn_pos.y, &img_restart_button);
@@ -212,6 +282,43 @@ public:
 
 		pokemon_player_1->on_draw();
 		pokemon_player_2->on_draw();
+
+		if (is_game_over && !game_over_is_pop_btn) {
+			putimage_alpha(winner_bar_pos.x, winner_bar_pos.y, &img_winnner_bar);
+			
+			if (pokemon_player_2->get_hp() <= 0) {
+				switch (pokemon_player_1->get_pokemon_type()) {
+				case PokemonType::Charmander:
+					putimage_alpha(winner_text_bar_pos.x, winner_text_bar_pos.y, &img_1P_charmander_win_text_bar);
+					break;
+				case PokemonType::Squirtle:
+					putimage_alpha(winner_text_bar_pos.x, winner_text_bar_pos.y, &img_1P_squirtle_win_text_bar);
+					break;
+				case PokemonType::Bulbasaur:
+					putimage_alpha(winner_text_bar_pos.x, winner_text_bar_pos.y, &img_1P_bulbasaur_win_text_bar);
+				}
+			}
+
+			else if (pokemon_player_1->get_hp() <= 0) {
+				switch (pokemon_player_2->get_pokemon_type()) {
+				case PokemonType::Charmander:
+					putimage_alpha(winner_text_bar_pos.x, winner_text_bar_pos.y, &img_2P_charmander_win_text_bar);
+					break;
+				case PokemonType::Squirtle:
+					putimage_alpha(winner_text_bar_pos.x, winner_text_bar_pos.y, &img_2P_squirtle_win_text_bar);
+					break;
+				case PokemonType::Bulbasaur:
+					putimage_alpha(winner_text_bar_pos.x, winner_text_bar_pos.y, &img_2P_bulbasaur_win_text_bar);
+				}
+			}
+
+		}
+
+		// 测试代码
+		//if (pokemon_player_1->get_hp() <= 0 || pokemon_player_2->get_hp() <= 0) {
+		//	MessageBox(GetHWnd(), _T("游戏结束"), _T("测试"), MB_OK);
+		//	scene_manager->switch_scene(SceneManager::SceneType::Menu);
+		//}
 
 		if (is_debug) {
 			for (auto line : collision_thwartwise_line_list) {
@@ -364,6 +471,9 @@ public:
 
 	}
 
+private:
+	const float winner_bar_speed = 20.0f;			// 状态条滑动速度
+
 
 private:
 	POINT sky_pos = { 0 };							// 天空位置
@@ -379,18 +489,21 @@ private:
 	POINT continue_game_btn_pos = { 0 };			// 继续游戏按钮的位置
 	POINT restart_btn_pos = { 0 };					// 重新开始按钮的位置
 	POINT return_menu_btn_pos = { 0 };				// 返回主菜单按钮的位置
+	POINT head_portrait_1P_pos = { 0 };				// 1P宝可梦的头像位置
+	POINT head_portrait_2P_pos = { 0 };				// 1P宝可梦的头像位置
+	POINT winner_bar_pos = { 0 };					// 胜利背景条的位置
+	POINT winner_text_bar_pos = { 0 };				// 胜利文本条的位置
 
-	Animation animation_charmander_left;			// 朝向向左的小火龙动画
-	Animation animation_charmander_right;			// 朝向向右的小火龙动画
-	Animation animation_squirtle_left;				// 朝向向左的杰尼龟动画
-	Animation animation_squirtle_right;				// 朝向向右的杰尼龟动画
-	Animation animation_bulbasaur_left;				// 朝向向左的妙蛙种子动画
-	Animation animation_bulbasaur_right;			// 朝向向右的妙蛙种子动画
+	Timer timer_winner_bar_slide_in;				// 胜利条滑入计时器
+	Timer timer_winner_bar_slide_out;				// 胜利条滑出计时器
 
 	bool is_esc_btn = false;						// 是否按下了esc按键
 	bool is_continue_game_btn = false;				// 是否按下了继续游戏按钮
 	bool is_restart_btn = false;					// 是否按下了重新开始按钮
 	bool is_return_menu_btn = false;				// 是否按下了返回主菜单按钮
+	bool is_game_over = false;						// 游戏是否结束
+	bool is_winner_bar_slide_out = false;			// 胜利条是否开始滑出
+	bool game_over_is_pop_btn = false;				// 游戏结束后是否弹出按钮
 
 
 };
