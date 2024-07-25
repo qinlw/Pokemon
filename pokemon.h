@@ -6,6 +6,7 @@
 #include "pokemon_attribute.h"
 #include "bullet.h"
 #include "animation.h"
+#include "timer.h"
 #include "collision_line.h"
 
 #include <iostream>
@@ -20,6 +21,12 @@ class Pokemon {
 public:
 	Pokemon(bool flag = true) : is_facing_right(flag) {
 		animation_current_pokemon = is_facing_right ? &animation_pokemon_right : &animation_pokemon_left;
+
+		timer_recover_mp.set_wait_time(1000);
+		timer_recover_mp.set_callback([&]() {
+			mp += 5;
+			if (mp > 100) mp = 100;
+			});
 	}
 
 	virtual void skill_1() {}
@@ -43,6 +50,8 @@ public:
 		}
 
 		animation_current_pokemon->on_updata(delta);
+
+		timer_recover_mp.on_updata(delta);
 
 		move_collision(delta);
 
@@ -238,6 +247,8 @@ protected:
 
 	Animation animation_pokemon_left;									// 朝向向左的宝可梦动画
 	Animation animation_pokemon_right;									// 朝向向右的宝可梦动画
+
+	Timer timer_recover_mp;												// 恢复蓝条的定时器
 
 	PokemonPlayer player_id;											// 玩家id
 	PokemonAttribute pokemon_attribute;									// 宝可梦属性
