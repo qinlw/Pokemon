@@ -326,7 +326,7 @@ private:
 				float physics_k = 1.538462f;	// 物理攻击系数
 				float magic_k = 3.692308f;		// 属性攻击系数
 				int is_restrain = check_is_restrain(current_bullet_attribute, pokemon_attribute);	// 属性是否克制
-				int attribute_k = is_restrain > 0 ? 1.5 : is_restrain < 0 ? 0.8 : 1;
+				float attribute_k = is_restrain > 0 ? 1.5 : is_restrain < 0 ? 0.8 : 1;
 				int damage = (bullet->get_ATK() * pokemon_base_ATK) / (pokemon_base_DEF * physics_k)
 					+ (bullet->get_MATK() * pokemon_base_MATK) / (pokemon_base_MDEF * magic_k) * attribute_k;
 				hp -= damage;
@@ -336,7 +336,7 @@ private:
 
 	// 克制返回1 被克制返回-1 无克制关系返回0
 	int check_is_restrain(BulletAttribute bullet_attribute, PokemonAttribute pokemon_attribute) {
-		if ((int)bullet_attribute == (int)pokemon_attribute) return 1;
+		if ((int)bullet_attribute == (int)pokemon_attribute) return 0;
 		if ((int)bullet_attribute == 0) {
 			if ((int)pokemon_attribute == 1) return -1;
 			else if ((int)pokemon_attribute == 2) return 1;

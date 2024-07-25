@@ -1,13 +1,14 @@
 #pragma once
 
+#include "pokemon.h"
 #include "bullet.h"
 
 
 extern std::vector<Bullet*> bullet_list;
 
-class CharmanderFire : public Bullet {
+class Fire : public Bullet, public Pokemon {
 public:
-	CharmanderFire() {
+	Fire() {
 		animation_fireball.set_atlas(&atlas_fireball);
 		animation_fireball.set_interval(100);
 		animation_fire.set_atlas(&atlas_fire);

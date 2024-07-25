@@ -330,10 +330,10 @@ public:
 			pokemon_player_2 = new PokemonCharmander(false);
 			break;
 		case ScenePokemon::PlayerType::Squirtle:
-			pokemon_player_2 = new PokemonSquirtle();
+			pokemon_player_2 = new PokemonSquirtle(false);
 			break;
 		case ScenePokemon::PlayerType::Bulbasaur:
-			pokemon_player_2 = new PokemonBulbasaur();
+			pokemon_player_2 = new PokemonBulbasaur(false);
 			break;
 		}
 		pokemon_player_2->set_id(PokemonPlayer::P2);

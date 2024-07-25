@@ -1,7 +1,7 @@
 #pragma once
 
 #include "pokemon.h"
-#include "charmander_fire.h"
+#include "fire.h"
 
 
 extern bool is_debug;
@@ -28,7 +28,7 @@ public:
 	}
 
 	void skill_1() {
-		std::cout << "skill_1" << std::endl;
+		std::cout << "charmander skill_1" << std::endl;
 	}
 
 	void skill_2() {
@@ -36,11 +36,11 @@ public:
 	}
 
 	void skill_3() {
-		std::cout << "skill_3" << std::endl;
+		std::cout << "charmander skill_3" << std::endl;
 	}
 
 	void skill_4() {
-		std::cout << "skill_4" << std::endl;
+		std::cout << "charmander skill_4" << std::endl;
 	}
 
 	void on_updata(int delta) {
@@ -63,11 +63,8 @@ public:
 
 
 private:
-	
-
-private:
 	void fire() {
-		Bullet* bullet = new CharmanderFire();
+		Bullet* bullet = new Fire();
 
 		const int fire_use_mp = bullet->get_use_mp();
 		if (fire_use_mp > mp) return;
