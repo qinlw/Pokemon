@@ -47,14 +47,12 @@ public:
 		move_collision(delta);
 
 		for (auto bullet : bullet_list) {
-			if (bullet->get_target_player() != player_id) break;
+			if (bullet->get_target_player() != player_id) continue;
 			if (bullet->get_bullet_is_follow_pokemon()) {
 				bullet->set_bullet_pos(pokemon_left_top_dot.x + (pokemon_collision_size.x - bullet->get_bullet_size().x) / 2,
 					pokemon_left_top_dot.y + (pokemon_collision_size.y - bullet->get_bullet_size().y) / 2);
 			}
-				
 		}
-
 	}
 
 	virtual void on_draw() {

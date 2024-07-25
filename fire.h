@@ -39,8 +39,6 @@ public:
 			bullet_pos.x += bullet_velocity.x * delta;
 			bullet_pos.y += bullet_velocity.y * delta;
 		}
-		else {
-		}
 
 		if (!is_harm) animation_fireball.on_updata(delta);
 		else animation_fire.on_updata(delta);
