@@ -107,5 +107,8 @@
     <ClInclude Include="bullet_attribute.h">
       <Filter>头文件\skill</Filter>
     </ClInclude>
+    <ClInclude Include="pokemon_attribute.h">
+      <Filter>头文件\pokemon</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

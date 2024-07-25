@@ -17,16 +17,18 @@ public:
 		animation_pokemon_right.set_interval(20);
 
 		move_speed = 75.0f * base_speed;
-		pokemon_ATK = 60;
-		pokemon_MATK = 80;
-		pokemon_DEF = 65;
-		pokemon_MDEF = 65;
+		pokemon_base_ATK = 60;
+		pokemon_base_MATK = 80;
+		pokemon_base_DEF = 65;
+		pokemon_base_MDEF = 65;
 
 		pokemon_size = { 128, 115 };
+
+		pokemon_attribute = PokemonAttribute::Fire;
 	}
 
 	void skill_1() {
-	
+		std::cout << "skill_1" << std::endl;
 	}
 
 	void skill_2() {
@@ -34,11 +36,11 @@ public:
 	}
 
 	void skill_3() {
-	
+		std::cout << "skill_3" << std::endl;
 	}
 
 	void skill_4() {
-	
+		std::cout << "skill_4" << std::endl;
 	}
 
 	void on_updata(int delta) {
@@ -69,6 +71,7 @@ private:
 
 		const int fire_use_mp = bullet->get_use_mp();
 		if (fire_use_mp > mp) return;
+		mp -= 20;
 
 		const POINT& origin_bullet_size = bullet->get_bullet_size();
 		const POINTF& origin_bullet_velocity = bullet->get_bullet_velocity();
@@ -85,11 +88,11 @@ private:
 
 		bullet->set_target_player(player_id == PokemonPlayer::P1 ? PokemonPlayer::P2 : PokemonPlayer::P1);
 
-		bullet->set_callback([&]() {
-			mp -= 20;
-			});
-
 		bullet_list.push_back(bullet);
+
+		bullet->set_callback([&]() {
+
+			});
 	}
 
 

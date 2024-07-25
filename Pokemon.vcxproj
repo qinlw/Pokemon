@@ -141,6 +141,7 @@
     <ClInclude Include="pointf.h" />
     <ClInclude Include="pokeman_charmander.h" />
     <ClInclude Include="pokemon.h" />
+    <ClInclude Include="pokemon_attribute.h" />
     <ClInclude Include="pokemon_bulbasaur.h" />
     <ClInclude Include="pokemon_player.h" />
     <ClInclude Include="pokemon_squirtle.h" />

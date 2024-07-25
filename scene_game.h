@@ -3,6 +3,7 @@
 #include "scene.h"
 #include "scene_manager.h"
 #include "collision_line.h"
+#include "pokemon.h"
 
 
 extern bool is_debug;
@@ -177,6 +178,16 @@ public:
 		if (is_esc_btn) return;
 		pokemon_player_1->on_updata(delta);
 		pokemon_player_2->on_updata(delta);
+
+		bullet_list.erase(std::remove_if(
+			bullet_list.begin(), bullet_list.end(), 
+			[](const Bullet* bullet) {
+				bool deletable = bullet->check_is_can_remove();
+				if (deletable) delete bullet;
+				return deletable;
+			}),
+			bullet_list.end()
+			);
 
 		for (auto bullet : bullet_list) {
 			bullet->on_updata(delta);

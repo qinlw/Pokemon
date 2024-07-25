@@ -1,7 +1,7 @@
 #pragma once
 
 
-enum class BulletAttribute {
+enum class PokemonAttribute {
 	Fire = 0,
 	Water,
 	Wood

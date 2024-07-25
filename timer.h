@@ -31,7 +31,7 @@ public:
 	}
 
 	void on_updata(int delta) {
-		if (!puase) return;
+		if (puase) return;
 
 		pass_time += delta;
 		if (pass_time >= wait_time) {

@@ -4,6 +4,7 @@
 #include "pokemon_player.h"
 #include "bullet_attribute.h"
 #include "animation.h"
+#include "timer.h"
 
 
 extern bool is_debug;
@@ -14,8 +15,16 @@ public:
 		bullet_ATK = val;
 	}
 
+	int get_ATK() {
+		return bullet_ATK;
+	}
+
 	void set_MATK(int val) {
 		bullet_MATK = val;
+	}
+
+	int get_MATK() {
+		return bullet_MATK;
 	}
 
 	void set_use_mp(int val) {
@@ -52,6 +61,14 @@ public:
 		return target_player;
 	}
 
+	BulletAttribute get_bullet_attribute() {
+		return bullet_attribute;
+	}
+
+	void reset_timer() {
+		timer_is_inflict_one_harm.reset();
+	}
+
 	void set_is_valid(bool flag) {
 		is_valid = flag;
 	}
@@ -60,8 +77,32 @@ public:
 		return is_valid;
 	}
 
+	void set_is_harm(bool flag) {
+		is_harm = flag;
+	}
+
+	void set_is_inflict_one_harm(bool flag) {
+		is_inflict_one_harm = flag;
+	}
+
+	bool get_is_inflict_one_harm() {
+		return is_inflict_one_harm;
+	}
+
 	void set_is_can_remove(bool flag) {
 		is_can_remove = flag;
+	}
+
+	bool check_is_can_remove() const {
+		return is_can_remove;
+	}
+
+	void set_bullet_is_follow_pokemon(bool flag) {
+		bullet_is_follow_pokemon = flag;
+	}
+
+	bool get_bullet_is_follow_pokemon() {
+		return bullet_is_follow_pokemon;
 	}
 
 	void set_callback(std::function<void()> callback) {
@@ -101,8 +142,13 @@ protected:
 	PokemonPlayer target_player = PokemonPlayer::P1;				// 子弹目标玩家
 	BulletAttribute bullet_attribute;								// 子弹属性
 
+	Timer timer_is_inflict_one_harm;								// 是否造成一次伤害的定时器
+
 	bool is_valid = true;											// 子弹是否有效果
+	bool is_harm = false;											// 子弹是否有伤害
+	bool is_inflict_one_harm = true;								// 是否造成一次伤害
 	bool is_can_remove = false;										// 子弹是否能被移除
+	bool bullet_is_follow_pokemon = false;							// 子弹是否跟随宝可梦
 
 	std::function<void()> callback;									// 子弹碰撞回调函数
 

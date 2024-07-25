@@ -3,6 +3,7 @@
 #include "picture.h"
 #include "pointf.h"
 #include "pokemon_player.h"
+#include "pokemon_attribute.h"
 #include "bullet.h"
 #include "animation.h"
 #include "collision_line.h"
@@ -44,6 +45,16 @@ public:
 		animation_current_pokemon->on_updata(delta);
 
 		move_collision(delta);
+
+		for (auto bullet : bullet_list) {
+			if (bullet->get_target_player() != player_id) break;
+			if (bullet->get_bullet_is_follow_pokemon()) {
+				bullet->set_bullet_pos(pokemon_left_top_dot.x + (pokemon_collision_size.x - bullet->get_bullet_size().x) / 2,
+					pokemon_left_top_dot.y + (pokemon_collision_size.y - bullet->get_bullet_size().y) / 2);
+			}
+				
+		}
+
 	}
 
 	virtual void on_draw() {
@@ -54,12 +65,25 @@ public:
 		_stprintf_s(hp_s, _T("hp: %d"), hp);
 		_stprintf_s(mp_s, _T("mp: %d"), mp);
 		if (player_id == PokemonPlayer::P1) {
-			outtextxy(10, 0, hp_s);
-			outtextxy(10, 15, mp_s);
+			outtextxy(10, 45, hp_s);
+			outtextxy(10, 60, mp_s);
 		} 
 		else {
-			outtextxy(getwidth() - 60, 0, hp_s);
-			outtextxy(getwidth() - 60, 15, mp_s);
+			outtextxy(getwidth() - 60, 45, hp_s);
+			outtextxy(getwidth() - 60, 60, mp_s);
+		}
+
+		if (player_id == PokemonPlayer::P1) {
+			setfillcolor(RGB(255, 0, 0));
+			fillrectangle(10, 0, 10 + hp, 20);
+			setfillcolor(RGB(0, 0, 255));
+			fillrectangle(10, 22, 10 + mp, 42);
+		} 
+		else {
+			setfillcolor(RGB(255, 0, 0));
+			fillrectangle(getwidth() - 160, 0, getwidth() - 160 + hp, 20);
+			setfillcolor(RGB(0, 0, 255));
+			fillrectangle(getwidth() - 160, 20, getwidth() - 160 + mp, 40);
 		}
 
 
@@ -84,16 +108,20 @@ public:
 				case 0x57:
 					jump();
 					break;
-				case 0x31:
+					// 'B'
+				case 0x42:
 					skill_1();
 					break;
-				case 0x32:
+					// 'N'
+				case 0x4E:
 					skill_2();
 					break;
-				case 0x33:
+					// 'M'
+				case 0x4D:
 					skill_3();
 					break;
-				case 0x34:
+					// ','
+				case 0xBC:
 					skill_4();
 					break;
 				}
@@ -111,6 +139,18 @@ public:
 					// '⬆'
 				case VK_UP:
 					jump();
+					break;
+				case 0x61:
+					skill_1();
+					break;
+				case 0x62:
+					skill_2();
+					break;
+				case 0x63:
+					skill_3();
+					break;
+				case 0x64:
+					skill_4();
 					break;
 				}
 				break;
@@ -178,10 +218,10 @@ protected:
 	int mp = 100;														// 能量值
 	float base_speed = 0.01f;											// 基础速度			
 	float move_speed;													// 奔跑速度
-	int pokemon_ATK;													// 宝可梦的基础物攻
-	int pokemon_MATK;													// 宝可梦的基础特攻
-	int pokemon_DEF;													// 宝可梦的基础物防
-	int pokemon_MDEF;													// 宝可梦的基础特防
+	int pokemon_base_ATK;												// 宝可梦的基础物攻
+	int pokemon_base_MATK;												// 宝可梦的基础特攻
+	int pokemon_base_DEF;												// 宝可梦的基础物防
+	int pokemon_base_MDEF;												// 宝可梦的基础特防
 
 	const float gravity = 1.6e-3f;										// 重力加速度
 	const float jump_velocity = -0.75f;									// 起跳速度
@@ -190,6 +230,7 @@ protected:
 	POINTF pokemon_velocity;											// 宝可梦速度
 	POINT pokemon_pos;													// 宝可梦的位置
 	POINT pokemon_size;													// 宝可梦的大小
+	POINT pokemon_collision_size = { 40, 65 };							// 宝可梦的碰撞区域大小
 	POINT pokemon_left_top_dot;											// 宝可梦的左上检测点
 	POINT pokemon_left_low_dot;											// 宝可梦的左下检测点
 	POINT pokemon_right_top_dot;										// 宝可梦的右上检测点
@@ -201,6 +242,7 @@ protected:
 	Animation animation_pokemon_right;									// 朝向向右的宝可梦动画
 
 	PokemonPlayer player_id;											// 玩家id
+	PokemonAttribute pokemon_attribute;									// 宝可梦属性
 
 	bool is_platform = false;											// 是否在平台上
 	bool is_facing_right = false;										// 当前是否朝向右边
@@ -268,12 +310,44 @@ private:
 		// 子弹与宝可梦的碰撞
 		for (auto bullet : bullet_list) {
 			if (!bullet->get_is_valid() || bullet->get_target_player() != player_id) continue;
-			if (bullet->check_is_collision(pokemon_left_top_dot, pokemon_size)) {
+			if (bullet->check_is_collision(pokemon_left_top_dot, pokemon_collision_size)) {
 				bullet->on_collision();
-				bullet->set_is_valid(false);
-				int damage = 10;
+				bullet->set_is_harm(true);
+				if (bullet->get_is_inflict_one_harm()) {
+					bullet->set_is_inflict_one_harm(false);
+					bullet->reset_timer();
+				}
+				else {
+					continue;
+				}
+
+				bullet->set_bullet_is_follow_pokemon(true);
+				BulletAttribute current_bullet_attribute = bullet->get_bullet_attribute();
+				float physics_k = 1.538462f;	// 物理攻击系数
+				float magic_k = 3.692308f;		// 属性攻击系数
+				int is_restrain = check_is_restrain(current_bullet_attribute, pokemon_attribute);	// 属性是否克制
+				int attribute_k = is_restrain > 0 ? 1.5 : is_restrain < 0 ? 0.8 : 1;
+				int damage = (bullet->get_ATK() * pokemon_base_ATK) / (pokemon_base_DEF * physics_k)
+					+ (bullet->get_MATK() * pokemon_base_MATK) / (pokemon_base_MDEF * magic_k) * attribute_k;
 				hp -= damage;
 			}
+		}
+	}
+
+	// 克制返回1 被克制返回-1 无克制关系返回0
+	int check_is_restrain(BulletAttribute bullet_attribute, PokemonAttribute pokemon_attribute) {
+		if ((int)bullet_attribute == (int)pokemon_attribute) return 1;
+		if ((int)bullet_attribute == 0) {
+			if ((int)pokemon_attribute == 1) return -1;
+			else if ((int)pokemon_attribute == 2) return 1;
+		}
+		else if ((int)bullet_attribute == 1) {
+			if ((int)pokemon_attribute == 2) return -1;
+			else if ((int)pokemon_attribute == 0) return 1;
+		}
+		else if ((int)bullet_attribute == 2) {
+			if ((int)pokemon_attribute == 0) return -1;
+			else if ((int)pokemon_attribute == 1) return 1;
 		}
 	}
 
