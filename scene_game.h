@@ -77,8 +77,12 @@ public:
 		restart_btn_pos.y = (getheight() - img_continue_game_button.getheight()) / 2;
 		continue_game_btn_pos.x = (restart_btn_pos.x - img_continue_game_button.getwidth()) / 2;
 		continue_game_btn_pos.y = restart_btn_pos.y;
+		again_btn_pos.x = getwidth() / 2 - img_again_button.getwidth() - 100;
+		again_btn_pos.y = restart_btn_pos.y;
 		return_menu_btn_pos.x = (getwidth() + restart_btn_pos.x + img_restart_button.getwidth() - img_return_menu_button.getwidth()) / 2 ;
 		return_menu_btn_pos.y = restart_btn_pos.y;
+		new_return_menu_btn_pos.x = getwidth() / 2 + 100;
+		new_return_menu_btn_pos.y = again_btn_pos.y;
 
 		// 宝可梦头像位置
 		head_portrait_1P_pos = { 0, 0 };
@@ -195,6 +199,10 @@ public:
 		CollisionLine& line_18 = collision_vertical_line_list[17];
 		line_18.line_pos.pos_1 = { getwidth(), 0 };
 		line_18.line_pos.pos_2 = { getwidth(), getheight() };
+
+		is_esc_btn = false;
+		game_over_is_pop_btn = false;
+		is_game_over = false;
 	}
 
 	void on_updata(int delta) {
@@ -278,6 +286,11 @@ public:
 			putimage_alpha(continue_game_btn_pos.x, continue_game_btn_pos.y, &img_continue_game_button);
 			putimage_alpha(restart_btn_pos.x, restart_btn_pos.y, &img_restart_button);
 			putimage_alpha(return_menu_btn_pos.x, return_menu_btn_pos.y, &img_return_menu_button);
+		}
+		
+		if (game_over_is_pop_btn) {
+			putimage_alpha(again_btn_pos.x, again_btn_pos.y, &img_again_button);
+			putimage_alpha(new_return_menu_btn_pos.x, new_return_menu_btn_pos.y, &img_new_return_menu_button);
 		}
 
 		pokemon_player_1->on_draw();
@@ -364,7 +377,7 @@ public:
 		pokemon_player_2->on_input(msg);
 
 		// 判断暂停后的情况
-		if (is_esc_btn) {
+		if (is_esc_btn && !is_game_over) {
 			switch (msg.message) {
 			case WM_LBUTTONDOWN: {
 				if (msg.y >= restart_btn_pos.y && msg.y <= restart_btn_pos.y + img_restart_button.getheight()) {
@@ -400,14 +413,12 @@ public:
 						break;
 					}
 					else if (msg.x >= restart_btn_pos.x && msg.x <= restart_btn_pos.x + img_restart_button.getwidth() && is_restart_btn) {
-						is_esc_btn = false;
 						is_restart_btn = false;
 						button_bulge_animatioin(5, 300, restart_btn_pos, &img_restart_button);
 						scene_manager->switch_scene(SceneManager::SceneType::Pokemon);
 						break;
 					}
 					else if (msg.x >= return_menu_btn_pos.x && msg.x <= return_menu_btn_pos.x + img_restart_button.getwidth() && is_return_menu_btn) {
-						is_esc_btn = false;
 						is_return_menu_btn = false;
 						button_bulge_animatioin(5, 300, return_menu_btn_pos, &img_return_menu_button);
 						scene_manager->switch_scene(SceneManager::SceneType::Menu);
@@ -443,6 +454,65 @@ public:
 						button_bulge_animatioin(5, 300, return_menu_btn_pos, &img_return_menu_button);
 					}
 
+				}
+				break;
+			}
+			}
+		}
+
+		// 判断游戏结束后的情况
+		if (game_over_is_pop_btn) {
+			switch (msg.message) {
+			case WM_LBUTTONDOWN: {
+				if (msg.y > again_btn_pos.y && msg.y < again_btn_pos.y + img_again_button.getheight()) {
+					if (msg.x > again_btn_pos.x && msg.x < again_btn_pos.x + img_again_button.getwidth()) {
+						is_again_game_btn = true;
+						button_sink_animatioin(5, 50, again_btn_pos, &img_again_button);
+						break;
+					}
+					else if (msg.x > new_return_menu_btn_pos.x && msg.x < new_return_menu_btn_pos.x + img_new_return_menu_button.getwidth()) {
+						is_new_return_menu_btn = true;
+						button_sink_animatioin(5, 50, new_return_menu_btn_pos, &img_new_return_menu_button);
+						break;
+					}
+				}
+				break;
+			}
+			case WM_LBUTTONUP: {
+				if (msg.y > again_btn_pos.y && msg.y < again_btn_pos.y + img_again_button.getheight()) {
+					if (msg.x > again_btn_pos.x && msg.x < again_btn_pos.x + img_again_button.getwidth() && is_again_game_btn) {
+						is_again_game_btn = false;
+						button_bulge_animatioin(5, 300, again_btn_pos, &img_again_button);
+						scene_manager->switch_scene(SceneManager::SceneType::Pokemon);
+						break;
+					}
+					else if (msg.x > new_return_menu_btn_pos.x && msg.x < new_return_menu_btn_pos.x + img_new_return_menu_button.getwidth() && is_new_return_menu_btn) {
+						is_new_return_menu_btn = false;
+						button_bulge_animatioin(5, 300, new_return_menu_btn_pos, &img_new_return_menu_button);
+						scene_manager->switch_scene(SceneManager::SceneType::Menu);
+						break;
+					}
+					else {
+						if (is_again_game_btn) {
+							is_again_game_btn = false;
+							button_bulge_animatioin(5, 300, again_btn_pos, &img_again_button);
+						}
+						else if (is_new_return_menu_btn) {
+							is_new_return_menu_btn = false;
+							button_bulge_animatioin(5, 300, new_return_menu_btn_pos, &img_new_return_menu_button);
+						}
+						break;
+					}
+				}
+				else {
+					if (is_again_game_btn) {
+						is_again_game_btn = false;
+						button_bulge_animatioin(5, 300, again_btn_pos, &img_again_button);
+					}
+					else if (is_new_return_menu_btn) {
+						is_new_return_menu_btn = false;
+						button_bulge_animatioin(5, 300, new_return_menu_btn_pos, &img_new_return_menu_button);
+					}
 				}
 				break;
 			}
@@ -488,7 +558,9 @@ private:
 	POINT player_2P_pos = { 0 };					// 玩家2P的宝可梦位置
 	POINT continue_game_btn_pos = { 0 };			// 继续游戏按钮的位置
 	POINT restart_btn_pos = { 0 };					// 重新开始按钮的位置
+	POINT again_btn_pos = { 0 };					// 再来一场按钮的位置
 	POINT return_menu_btn_pos = { 0 };				// 返回主菜单按钮的位置
+	POINT new_return_menu_btn_pos = { 0 };			// 新的返回主菜单按钮的位置
 	POINT head_portrait_1P_pos = { 0 };				// 1P宝可梦的头像位置
 	POINT head_portrait_2P_pos = { 0 };				// 1P宝可梦的头像位置
 	POINT winner_bar_pos = { 0 };					// 胜利背景条的位置
@@ -501,6 +573,8 @@ private:
 	bool is_continue_game_btn = false;				// 是否按下了继续游戏按钮
 	bool is_restart_btn = false;					// 是否按下了重新开始按钮
 	bool is_return_menu_btn = false;				// 是否按下了返回主菜单按钮
+	bool is_again_game_btn = false;					// 是否按下了再来一场按钮
+	bool is_new_return_menu_btn = false;			// 是否按下了新的返回菜单按钮
 	bool is_game_over = false;						// 游戏是否结束
 	bool is_winner_bar_slide_out = false;			// 胜利条是否开始滑出
 	bool game_over_is_pop_btn = false;				// 游戏结束后是否弹出按钮

@@ -46,7 +46,9 @@ IMAGE img_tree_2;									// 树二
 IMAGE img_tree_3;									// 树三
 IMAGE img_continue_game_button;						// 继续游戏按钮
 IMAGE img_restart_button;							// 重新开始按钮
+IMAGE img_again_button;								// 再来一把按钮
 IMAGE img_return_menu_button;						// 返回主菜单按钮
+IMAGE img_new_return_menu_button;					// 新的返回主菜单按钮
 IMAGE img_charmander_head_portrait_right;			// 朝向向右的小火龙头像
 IMAGE img_charmander_head_portrait_left;			// 朝向向左的小火龙头像
 IMAGE img_squirtle_head_portrait_right;				// 朝向向右的杰尼龟头像
@@ -126,7 +128,9 @@ void load_res() {
 	loadimage(&img_tree_3, _T("res/tree_3.png"));
 	loadimage(&img_continue_game_button, _T("res/continue_game_button.png"));
 	loadimage(&img_restart_button, _T("res/restart_button.png"));
+	loadimage(&img_again_button, _T("res/again_button.png"));
 	loadimage(&img_return_menu_button, _T("res/return_menu_button.png"));
+	loadimage(&img_new_return_menu_button, _T("res/new_return_menu_button.png"));
 
 	loadimage(&img_charmander_head_portrait_right, _T("res/charmander_head_portrait_right.png"));
 	flip_image(&img_charmander_head_portrait_right, &img_charmander_head_portrait_left);

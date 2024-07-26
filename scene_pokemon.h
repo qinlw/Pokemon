@@ -183,9 +183,9 @@ public:
 			case VK_RETURN:
 				is_enter_start = true;
 				break;
-			// 测试代码
+			// 调式代码 'B'
 			case 0x42:
-				scene_manager->switch_scene(SceneManager::SceneType::Game);
+				if (is_debug) scene_manager->switch_scene(SceneManager::SceneType::Game);
 				break;
 			}
 			break;
