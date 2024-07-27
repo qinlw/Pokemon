@@ -71,7 +71,7 @@ public:
 	}
 
 	void set_bullet_is_facing_right(bool flag) {
-		bullet_is_follow_pokemon = flag;
+		bullet_is_facing_right = flag;
 	}
 
 	void set_is_valid(bool flag) {

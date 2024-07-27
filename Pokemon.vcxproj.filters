@@ -114,4 +114,7 @@
       <Filter>头文件\skill\water_attribute_skill</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="bug_and_problem_list" />
+  </ItemGroup>
 </Project>

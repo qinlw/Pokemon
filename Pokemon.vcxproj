@@ -157,6 +157,9 @@
     <ClInclude Include="util.h" />
     <ClInclude Include="water_gun.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="bug_and_problem_list" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

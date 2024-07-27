@@ -162,7 +162,7 @@ void load_res() {
 	atlas_fire.load_from_file(_T("res/fire_%d.png"), 9);
 	atlas_water_droplet_right.load_from_file(_T("res/water_droplet_%d.png"), 11);
 	flip_atlas(atlas_water_droplet_right, atlas_water_droplet_left);
-	atlas_splashes.load_from_file(_T("res/splashes.png_%d"), 5);
+	atlas_splashes.load_from_file(_T("res/splashes_%d.png"), 5);
 	
 
 	//Ê¤Àû¶¯»­

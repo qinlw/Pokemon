@@ -14,6 +14,7 @@ public:
 		animation_water_droplet_left.set_interval(100);
 		animation_splashes.set_atlas(&atlas_splashes);
 		animation_splashes.set_interval(100);
+		animation_splashes.set_is_loop(false);
 		animation_splashes.set_callback([&]() {
 			is_can_remove = true;
 			});
@@ -36,9 +37,9 @@ public:
 
 	void on_updata(int delta) {
 		if (!is_harm) {
-			bullet_velocity.y += gravity;
-			bullet_pos.x += bullet_velocity.x;
-			bullet_pos.y += bullet_velocity.y;
+			bullet_velocity.y += gravity * delta;
+			bullet_pos.x += bullet_velocity.x * delta;
+			bullet_pos.y += bullet_velocity.y * delta;
 		}
 
 		if (!is_harm) {
@@ -88,7 +89,7 @@ void water_gun(int& mp, bool is_facing_right, POINT pokemon_pos, POINT pokemon_s
 	if (water_gun_use_mp > mp) return;
 	mp -= 20;
 
-	bullet->set_bullet_is_follow_pokemon(is_facing_right);
+	bullet->set_bullet_is_facing_right(is_facing_right);
 
 	const POINT& origin_bullet_size = bullet->get_bullet_size();
 	const POINTF& origin_bullet_velocity = bullet->get_bullet_velocity();
