@@ -1,6 +1,7 @@
 #pragma once
 
 #include "picture.h"
+#include "pointf.h"
 #include "pokemon_player.h"
 #include "bullet_attribute.h"
 #include "animation.h"
@@ -69,6 +70,10 @@ public:
 		timer_is_inflict_one_harm.reset();
 	}
 
+	void set_bullet_is_facing_right(bool flag) {
+		bullet_is_follow_pokemon = flag;
+	}
+
 	void set_is_valid(bool flag) {
 		is_valid = flag;
 	}
@@ -134,6 +139,8 @@ protected:
 	int bullet_MATK;												// 子弹的基础特攻
 	int use_mp;														// 能量消耗
 
+	float gravity;													// 子弹受到的重力
+
 protected:
 	POINTF bullet_velocity;											// 子弹速度
 	POINT bullet_size;												// 子弹大小
@@ -144,6 +151,7 @@ protected:
 
 	Timer timer_is_inflict_one_harm;								// 是否造成一次伤害的定时器
 
+	bool bullet_is_facing_right = true;								// 子弹是否面向右边
 	bool is_valid = true;											// 子弹是否有效果
 	bool is_harm = false;											// 子弹是否有伤害
 	bool is_inflict_one_harm = true;								// 是否造成一次伤害

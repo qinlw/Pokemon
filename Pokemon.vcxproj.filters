@@ -25,6 +25,9 @@
     <Filter Include="头文件\skill\fire_attribute_skill">
       <UniqueIdentifier>{379adb21-4d86-4230-8dff-587f3d5cfb2c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\skill\water_attribute_skill">
+      <UniqueIdentifier>{1f84fc31-e756-418e-8c7e-8728b1229c54}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -106,6 +109,9 @@
     </ClInclude>
     <ClInclude Include="pokemon_type.h">
       <Filter>头文件\pokemon</Filter>
+    </ClInclude>
+    <ClInclude Include="water_gun.h">
+      <Filter>头文件\skill\water_attribute_skill</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "pokemon.h"
+#include "water_gun.h"
 
 
 class PokemonSquirtle : public Pokemon {
@@ -28,7 +29,7 @@ public:
 	}
 
 	void skill_2() {
-		std::cout << "squirtle skill_2" << std::endl;
+		water_gun(mp, is_facing_right, pokemon_pos, pokemon_size, player_id);
 	}
 
 	void skill_3() {
@@ -56,5 +57,6 @@ public:
 			rectangle(pokemon_left_top_dot.x, pokemon_left_top_dot.y, pokemon_right_low_dot.x, pokemon_right_low_dot.y);
 		}
 	}
+
 
 };

@@ -33,7 +33,7 @@ public:
 	}
 
 	void skill_2() {
-		fire();
+		fire(mp, is_facing_right, pokemon_pos, pokemon_size, player_id);
 	}
 
 	void skill_3() {
@@ -60,37 +60,6 @@ public:
 			setcolor(RGB(0, 0, 255));
 			rectangle(pokemon_left_top_dot.x, pokemon_left_top_dot.y, pokemon_right_low_dot.x, pokemon_right_low_dot.y);
 		}
-	}
-
-
-private:
-	void fire() {
-		Bullet* bullet = new Fire();
-
-		const int fire_use_mp = bullet->get_use_mp();
-		if (fire_use_mp > mp) return;
-		mp -= 20;
-
-		const POINT& origin_bullet_size = bullet->get_bullet_size();
-		const POINTF& origin_bullet_velocity = bullet->get_bullet_velocity();
-
-		POINT current_bullet_position;
-		POINTF current_bullet_velocity;
-		current_bullet_position.x = is_facing_right ? pokemon_pos.x + pokemon_size.x - origin_bullet_size.x : pokemon_pos.x + origin_bullet_size.x;
-		current_bullet_position.y = pokemon_pos.y + pokemon_size.y / 2;
-		current_bullet_velocity.x = is_facing_right ? origin_bullet_velocity.x : -origin_bullet_velocity.x;
-		current_bullet_velocity.y = origin_bullet_velocity.y;
-
-		bullet->set_bullet_pos(current_bullet_position.x, current_bullet_position.y);
-		bullet->set_bullet_velocity(current_bullet_velocity.x, current_bullet_velocity.y);
-
-		bullet->set_target_player(player_id == PokemonPlayer::P1 ? PokemonPlayer::P2 : PokemonPlayer::P1);
-
-		bullet_list.push_back(bullet);
-
-		bullet->set_callback([&]() {
-
-			});
 	}
 
 

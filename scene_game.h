@@ -377,7 +377,7 @@ public:
 		pokemon_player_2->on_input(msg);
 
 		// 判断暂停后的情况
-		if (is_esc_btn && !is_game_over) {
+		if (is_esc_btn) {
 			switch (msg.message) {
 			case WM_LBUTTONDOWN: {
 				if (msg.y >= restart_btn_pos.y && msg.y <= restart_btn_pos.y + img_restart_button.getheight()) {
@@ -523,7 +523,7 @@ public:
 		case WM_KEYUP: {
 			// 'esc'
 			if (msg.vkcode == 0x001B) {
-				is_esc_btn = true;
+				if (!is_game_over && !game_over_is_pop_btn) is_esc_btn = true; 
 				break;
 			}
 			// ’Q'

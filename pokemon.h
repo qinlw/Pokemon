@@ -161,16 +161,20 @@ public:
 				case VK_UP:
 					jump();
 					break;
+					// 小键盘的'1'
 				case 0x61:
 					skill_1();
 					break;
+					// 小键盘的'2'
 				case 0x62:
 					skill_2();
 					break;
+					// 小键盘的'3'
 				case 0x63:
 					skill_3();
 					break;
 				case 0x64:
+					// 小键盘的'4'
 					skill_4();
 					break;
 				}
@@ -355,7 +359,6 @@ private:
 					continue;
 				}
 
-				bullet->set_bullet_is_follow_pokemon(true);
 				BulletAttribute current_bullet_attribute = bullet->get_bullet_attribute();
 				float physics_k = 1.538462f;	// 物理攻击系数
 				float magic_k = 3.692308f;		// 属性攻击系数

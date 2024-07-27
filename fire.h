@@ -1,12 +1,11 @@
 #pragma once
 
-#include "pokemon.h"
 #include "bullet.h"
 
 
 extern std::vector<Bullet*> bullet_list;
 
-class Fire : public Bullet, public Pokemon {
+class Fire : public Bullet {
 public:
 	Fire() {
 		animation_fireball.set_atlas(&atlas_fireball);
@@ -32,6 +31,10 @@ public:
 		bullet_velocity = { 0.5f, 0.0f };
 
 		bullet_attribute = BulletAttribute::Fire;
+
+		callback = [&]() {
+			bullet_is_follow_pokemon = true;
+			};
 	}
 
 	void on_updata(int delta) {
@@ -46,8 +49,6 @@ public:
 		if (!is_inflict_one_harm) timer_is_inflict_one_harm.on_updata(delta);
 
 		if (check_is_exceed_screen()) is_can_remove = true;
-
-		Bullet::on_draw();
 	}
 
 	void on_draw() {
@@ -70,4 +71,30 @@ private:
 	Animation animation_fireball;								// »ðÇò¶¯»­£¨»ð»¨Î´Åö×²¶¯»­£©
 	Animation animation_fire;									// »ð»¨¶¯»­
 
+
 };
+
+void fire(int& mp, bool is_facing_right, POINT pokemon_pos, POINT pokemon_size, PokemonPlayer player_id) {
+	Bullet* bullet = new Fire();
+
+	const int fire_use_mp = bullet->get_use_mp();
+	if (fire_use_mp > mp) return;
+	mp -= 20;
+
+	const POINT& origin_bullet_size = bullet->get_bullet_size();
+	const POINTF& origin_bullet_velocity = bullet->get_bullet_velocity();
+
+	POINT current_bullet_position;
+	POINTF current_bullet_velocity;
+	current_bullet_position.x = is_facing_right ? pokemon_pos.x + pokemon_size.x - origin_bullet_size.x : pokemon_pos.x + origin_bullet_size.x;
+	current_bullet_position.y = pokemon_pos.y + pokemon_size.y / 2;
+	current_bullet_velocity.x = is_facing_right ? origin_bullet_velocity.x : -origin_bullet_velocity.x;
+	current_bullet_velocity.y = origin_bullet_velocity.y;
+
+	bullet->set_bullet_pos(current_bullet_position.x, current_bullet_position.y);
+	bullet->set_bullet_velocity(current_bullet_velocity.x, current_bullet_velocity.y);
+
+	bullet->set_target_player(player_id == PokemonPlayer::P1 ? PokemonPlayer::P2 : PokemonPlayer::P1);
+
+	bullet_list.push_back(bullet);
+}

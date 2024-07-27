@@ -155,6 +155,7 @@
     <ClInclude Include="scene_set.h" />
     <ClInclude Include="timer.h" />
     <ClInclude Include="util.h" />
+    <ClInclude Include="water_gun.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

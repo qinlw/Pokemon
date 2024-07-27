@@ -73,6 +73,9 @@ Atlas atlas_bulbasaur_high_frame_right;				// 朝向向右的高帧妙蛙种子
 // 技能动画
 Atlas atlas_fireball;								// 火花发射出的动画
 Atlas atlas_fire;									// 火花命中后的动画 
+Atlas atlas_water_droplet_right;					// 水枪向右发射出的动画
+Atlas atlas_water_droplet_left;						// 水枪向左发射出的动画
+Atlas atlas_splashes;								// 水枪命中后的动画
 
 // 胜利动画
 IMAGE img_winnner_bar;								// 胜利条背景
@@ -157,6 +160,10 @@ void load_res() {
 	//技能动画资源加载
 	atlas_fireball.load_from_file(_T("res/fireball_%d.png"), 13);
 	atlas_fire.load_from_file(_T("res/fire_%d.png"), 9);
+	atlas_water_droplet_right.load_from_file(_T("res/water_droplet_%d.png"), 11);
+	flip_atlas(atlas_water_droplet_right, atlas_water_droplet_left);
+	atlas_splashes.load_from_file(_T("res/splashes.png_%d"), 5);
+	
 
 	//胜利动画
 	loadimage(&img_winnner_bar, _T("res/winner_bar.png"));
