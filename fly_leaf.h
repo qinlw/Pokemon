@@ -8,8 +8,8 @@ extern std::vector<Bullet*> bullet_list;
 class FlyLeaf : public Bullet {
 public:
 	FlyLeaf() {
-		bullet_ATK = 0;
-		bullet_MATK = 55;
+		bullet_ATK = 15;
+		bullet_MATK = 25;
 		use_mp = 20;
 
 		gravity = 0;
