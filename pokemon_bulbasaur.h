@@ -1,6 +1,7 @@
 #pragma once
 
 #include "pokemon.h"
+#include "fly_leaf.h"
 
 
 class PokemonBulbasaur : public Pokemon {
@@ -24,7 +25,7 @@ public:
 	}
 
 	void skill_1() {
-		std::cout << "bulbasaur skill_1" << std::endl;
+		fly_leaf(mp, pokemon_base_ATK, pokemon_base_MATK, is_facing_right, pokemon_pos, pokemon_size, player_id);
 	}
 
 	void skill_2() {

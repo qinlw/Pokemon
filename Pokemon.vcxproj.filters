@@ -28,6 +28,9 @@
     <Filter Include="头文件\skill\water_attribute_skill">
       <UniqueIdentifier>{1f84fc31-e756-418e-8c7e-8728b1229c54}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\skill\wood_attribute_skill">
+      <UniqueIdentifier>{f70e0b1d-1900-4646-a774-749f642e51ec}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -89,12 +92,6 @@
     <ClInclude Include="pokemon_attribute.h">
       <Filter>头文件\pokemon</Filter>
     </ClInclude>
-    <ClInclude Include="bullet.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="bullet_attribute.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="fire.h">
       <Filter>头文件\skill\fire_attribute_skill</Filter>
     </ClInclude>
@@ -112,6 +109,15 @@
     </ClInclude>
     <ClInclude Include="water_gun.h">
       <Filter>头文件\skill\water_attribute_skill</Filter>
+    </ClInclude>
+    <ClInclude Include="fly_leaf.h">
+      <Filter>头文件\skill\wood_attribute_skill</Filter>
+    </ClInclude>
+    <ClInclude Include="bullet.h">
+      <Filter>头文件\skill</Filter>
+    </ClInclude>
+    <ClInclude Include="bullet_attribute.h">
+      <Filter>头文件\skill</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -137,6 +137,7 @@
     <ClInclude Include="bullet_attribute.h" />
     <ClInclude Include="fire.h" />
     <ClInclude Include="collision_line.h" />
+    <ClInclude Include="fly_leaf.h" />
     <ClInclude Include="picture.h" />
     <ClInclude Include="pointf.h" />
     <ClInclude Include="pokeman_charmander.h" />

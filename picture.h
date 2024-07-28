@@ -35,6 +35,7 @@ Atlas atlas_selector_squirtle_right;				// 选择界面杰尼龟
 Atlas atlas_selector_bulbasaur_left;				// 选择界面妙蛙种子
 Atlas atlas_selector_bulbasaur_right;				// 选择界面妙蛙种子
 
+
 // 游戏场景
 IMAGE img_sky;										// 天空背景
 IMAGE img_sun;										// 太阳
@@ -56,7 +57,6 @@ IMAGE img_squirtle_head_portrait_left;				// 朝向向左的杰尼龟头像
 IMAGE img_bulbasaur_head_portrait_right;			// 朝向向右的妙蛙种子头像
 IMAGE img_bulbasaur_head_portrait_left;				// 朝向向左的妙蛙种子头像
 
-
 Atlas atlas_charmander_left;						// 朝向向左的小火龙
 Atlas atlas_charmander_right;						// 朝向向右的小火龙
 Atlas atlas_squirtle_left;							// 朝向向左的杰尼龟
@@ -73,9 +73,14 @@ Atlas atlas_bulbasaur_high_frame_right;				// 朝向向右的高帧妙蛙种子
 // 技能动画
 Atlas atlas_fireball;								// 火花发射出的动画
 Atlas atlas_fire;									// 火花命中后的动画 
+
 Atlas atlas_water_droplet_right;					// 水枪向右发射出的动画
 Atlas atlas_water_droplet_left;						// 水枪向左发射出的动画
 Atlas atlas_splashes;								// 水枪命中后的动画
+
+Atlas atlas_fly_leaf_left;							// 飞叶向左发射出的动画
+Atlas atlas_fly_leaf_right;							// 飞叶向右发射出的动画
+
 
 // 胜利动画
 IMAGE img_winnner_bar;								// 胜利条背景
@@ -163,7 +168,8 @@ void load_res() {
 	atlas_water_droplet_right.load_from_file(_T("res/water_droplet_%d.png"), 11);
 	flip_atlas(atlas_water_droplet_right, atlas_water_droplet_left);
 	atlas_splashes.load_from_file(_T("res/splashes_%d.png"), 5);
-	
+	atlas_fly_leaf_left.load_from_file(_T("res/fly_leaf_%d.png"), 3);
+	flip_atlas(atlas_fly_leaf_left, atlas_fly_leaf_right);
 
 	//胜利动画
 	loadimage(&img_winnner_bar, _T("res/winner_bar.png"));

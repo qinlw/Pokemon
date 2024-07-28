@@ -14,7 +14,7 @@
 #include "time.h"
 
 
-bool is_debug = true;
+bool is_debug = true;							
 
 Scene* menu_scene = nullptr;
 Scene* knapsack_scene = nullptr;
@@ -69,6 +69,7 @@ int main() {
 		DWORD delta_time = current_tick_time - last_tick_time;
 		scene_manager->on_updata(delta_time);
 		last_tick_time = current_start_time;
+
 
 		cleardevice();
 		scene_manager->on_draw();

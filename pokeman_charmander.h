@@ -33,7 +33,7 @@ public:
 	}
 
 	void skill_2() {
-		fire(mp, is_facing_right, pokemon_pos, pokemon_size, player_id);
+		fire(mp, pokemon_base_ATK, pokemon_base_MATK, is_facing_right, pokemon_pos, pokemon_size, player_id);
 	}
 
 	void skill_3() {

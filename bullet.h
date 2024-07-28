@@ -24,7 +24,7 @@ public:
 		bullet_MATK = val;
 	}
 
-	int get_MATK() {
+	int  get_MATK() {
 		return bullet_MATK;
 	}
 
@@ -142,6 +142,13 @@ protected:
 	float gravity;													// 子弹受到的重力
 
 protected:
+	POINTF bullet_skill_pre_action_pos_velocity;					// 子弹前摇期间的速度
+	POINT bullet_skill_pre_action_pos_delta;						// 子弹前摇导致的位置变化
+
+	bool bullet_is_follow_pokemon = false;							// 子弹是否跟随宝可梦
+	bool is_skill_pre_action = false;								// 是否在技能前摇阶段
+
+protected:
 	POINTF bullet_velocity;											// 子弹速度
 	POINT bullet_size;												// 子弹大小
 	POINT bullet_pos;												// 子弹位置
@@ -152,11 +159,10 @@ protected:
 	Timer timer_is_inflict_one_harm;								// 是否造成一次伤害的定时器
 
 	bool bullet_is_facing_right = true;								// 子弹是否面向右边
-	bool is_valid = true;											// 子弹是否有效果
-	bool is_harm = false;											// 子弹是否有伤害
 	bool is_inflict_one_harm = true;								// 是否造成一次伤害
 	bool is_can_remove = false;										// 子弹是否能被移除
-	bool bullet_is_follow_pokemon = false;							// 子弹是否跟随宝可梦
+	bool is_valid = true;											// 子弹是否有效果
+	bool is_harm = false;											// 子弹是否有伤害
 
 	std::function<void()> callback;									// 子弹碰撞回调函数
 

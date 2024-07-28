@@ -29,7 +29,7 @@ public:
 	}
 
 	void skill_2() {
-		water_gun(mp, is_facing_right, pokemon_pos, pokemon_size, player_id);
+		water_gun(mp, pokemon_base_ATK, pokemon_base_MATK, is_facing_right, pokemon_pos, pokemon_size, player_id);
 	}
 
 	void skill_3() {

@@ -523,7 +523,9 @@ public:
 		case WM_KEYUP: {
 			// 'esc'
 			if (msg.vkcode == 0x001B) {
-				if (!is_game_over && !game_over_is_pop_btn) is_esc_btn = true; 
+				if (!is_game_over && !game_over_is_pop_btn) {
+					is_esc_btn = true;
+				}
 				break;
 			}
 			// ’Q'
@@ -568,6 +570,7 @@ private:
 
 	Timer timer_winner_bar_slide_in;				// 胜利条滑入计时器
 	Timer timer_winner_bar_slide_out;				// 胜利条滑出计时器
+
 
 	bool is_esc_btn = false;						// 是否按下了esc按键
 	bool is_continue_game_btn = false;				// 是否按下了继续游戏按钮

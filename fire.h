@@ -24,7 +24,7 @@ public:
 			});
 
 		bullet_ATK = 0;
-		bullet_MATK = 15;
+		bullet_MATK = 10;
 		use_mp = 20;
 
 		bullet_size = { 32, 32 };
@@ -74,12 +74,15 @@ private:
 
 };
 
-void fire(int& mp, bool is_facing_right, POINT pokemon_pos, POINT pokemon_size, PokemonPlayer player_id) {
+void fire(int& mp, int ATK, int MATK, bool is_facing_right, POINT pokemon_pos, POINT pokemon_size, PokemonPlayer player_id) {
 	Bullet* bullet = new Fire();
 
 	const int fire_use_mp = bullet->get_use_mp();
 	if (fire_use_mp > mp) return;
 	mp -= 20;
+
+	bullet->set_ATK(bullet->get_ATK() * ATK);
+	bullet->set_MATK(bullet->get_MATK() * MATK);
 
 	const POINT& origin_bullet_size = bullet->get_bullet_size();
 	const POINTF& origin_bullet_velocity = bullet->get_bullet_velocity();

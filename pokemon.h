@@ -72,20 +72,8 @@ public:
 		int status_bar_interval = 2;
 		POINT status_bar_1P_pos = { 85, 0 };
 		POINT status_bar_2P_pos = { getwidth() - status_bar_width - status_bar_1P_pos.x, 0 };
-		setbkmode(TRANSPARENT);
-		TCHAR hp_s[20];
-		TCHAR mp_s[20];
-		_stprintf_s(hp_s, _T("hp: %d"), hp);
-		_stprintf_s(mp_s, _T("mp: %d"), mp);
-		if (player_id == PokemonPlayer::P1) {
-			outtextxy(status_bar_1P_pos.x, 2 * status_bar_height + 5, hp_s);
-			outtextxy(status_bar_1P_pos.x, 2 * status_bar_height + 20, mp_s);
-		} 
-		else {
-			outtextxy(getwidth() - 60, 2 * status_bar_height + 5, hp_s);
-			outtextxy(getwidth() - 60, 2 * status_bar_height + 20, mp_s);
-		}
 
+		//血条
 		setcolor(RGB(111, 84, 13));
 		rectangle(status_bar_1P_pos.x, status_bar_1P_pos.y, status_bar_1P_pos.x + status_bar_width, status_bar_height);
 		rectangle(status_bar_1P_pos.x, status_bar_1P_pos.y + status_bar_height + status_bar_interval, 
@@ -106,6 +94,22 @@ public:
 			fillroundrect(status_bar_2P_pos.x, status_bar_2P_pos.y + status_bar_height, status_bar_2P_pos.x + mp * 4, 2 * status_bar_height, 8, 8);
 		}
 
+		// 血条文字提示
+		setbkmode(TRANSPARENT);
+		TCHAR hp_s[20];
+		TCHAR mp_s[20];
+		_stprintf_s(hp_s, _T("hp: %d"), hp);
+		_stprintf_s(mp_s, _T("mp: %d"), mp);
+		if (player_id == PokemonPlayer::P1) {
+			setcolor(RGB(0, 0, 0));
+			outtextxy(10, status_bar_height * 2 + 5, hp_s);
+			outtextxy(10, status_bar_height * 2 + 20, mp_s);
+		}
+		else {
+			setcolor(RGB(0, 0, 0));
+			outtextxy(getwidth() - 60, status_bar_height * 2 + 5, hp_s);
+			outtextxy(getwidth() - 60, status_bar_height * 2 + 20, mp_s);
+		}
 
 		animation_current_pokemon->on_draw(pokemon_pos.x, pokemon_pos.y);
 	}
@@ -220,6 +224,14 @@ public:
 	void set_velocity(float x, float y) {
 		pokemon_velocity.x = x;
 		pokemon_velocity.y = y;
+	}
+
+	int get_pokemon_base_ATK() {
+		return pokemon_base_ATK;
+	}
+
+	int get_pokemon_base_MATK() {
+		return pokemon_base_MATK;
 	}
 
 	void set_pokemon_pos(int x, int y) {
@@ -364,8 +376,8 @@ private:
 				float magic_k = 3.692308f;		// 属性攻击系数
 				int is_restrain = check_is_restrain(current_bullet_attribute, pokemon_attribute);	// 属性是否克制
 				float attribute_k = is_restrain > 0 ? 1.5 : is_restrain < 0 ? 0.8 : 1;
-				int damage = (bullet->get_ATK() * pokemon_base_ATK) / (pokemon_base_DEF * physics_k)
-					+ (bullet->get_MATK() * pokemon_base_MATK) / (pokemon_base_MDEF * magic_k) * attribute_k;
+				int damage = (float)bullet->get_ATK() / (float)(pokemon_base_DEF * physics_k)
+					+ (float)bullet->get_MATK() / (float)(pokemon_base_MDEF * magic_k) * attribute_k;
 				hp -= damage;
 			}
 		}

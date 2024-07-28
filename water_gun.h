@@ -20,10 +20,11 @@ public:
 			});
 
 		bullet_ATK = 0;
-		bullet_MATK = 50;
+		bullet_MATK = 70;
 		use_mp = 20;
 
 		gravity = 1.6e-3f;
+
 
 		bullet_size = { 48, 48 };
 		bullet_velocity = { 0.5f, -0.5f };
@@ -82,13 +83,15 @@ private:
 };
 
 
-void water_gun(int& mp, bool is_facing_right, POINT pokemon_pos, POINT pokemon_size, PokemonPlayer player_id) {
+void water_gun(int& mp, int ATK, int MATK, bool is_facing_right, POINT pokemon_pos, POINT pokemon_size, PokemonPlayer player_id) {
 	Bullet* bullet = new WaterGun();
 
 	const int water_gun_use_mp = bullet->get_use_mp();
 	if (water_gun_use_mp > mp) return;
 	mp -= 20;
 
+	bullet->set_ATK(bullet->get_ATK() * ATK);
+	bullet->set_MATK(bullet->get_MATK() * MATK);
 	bullet->set_bullet_is_facing_right(is_facing_right);
 
 	const POINT& origin_bullet_size = bullet->get_bullet_size();
