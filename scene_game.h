@@ -66,6 +66,28 @@ public:
 			  is_regen(tree_3_pos, tree_2_pos, img_tree_3, img_tree_2)) tree_3_pos.x = rand() % 1280;
 		tree_3_pos.y = grassland_pos.y - img_tree_3.getheight();
 
+		// 宝可梦头像位置
+		head_portrait_1P_pos = { 0, 0 };
+		head_portrait_2P_pos = { getwidth() - 82, 0 };
+
+		// 技能框的位置
+		skill_frame_1P_1_pos.x = head_portrait_1P_pos.x + img_charmander_head_portrait_left.getwidth() + 3;
+		skill_frame_1P_1_pos.y = head_portrait_1P_pos.y + img_charmander_head_portrait_left.getheight();
+		skill_frame_1P_2_pos.x = skill_frame_1P_1_pos.x + img_skill_frame.getwidth();
+		skill_frame_1P_2_pos.y = skill_frame_1P_1_pos.y;
+		skill_frame_1P_3_pos.x = skill_frame_1P_1_pos.x + 2 * img_skill_frame.getwidth();
+		skill_frame_1P_3_pos.y = skill_frame_1P_1_pos.y;
+		skill_frame_1P_4_pos.x = skill_frame_1P_1_pos.x + 3 * img_skill_frame.getwidth();
+		skill_frame_1P_4_pos.y = skill_frame_1P_1_pos.y;
+		skill_frame_2P_1_pos.x = head_portrait_2P_pos.x - img_skill_frame.getwidth() - 3;
+		skill_frame_2P_1_pos.y = skill_frame_1P_1_pos.y;
+		skill_frame_2P_2_pos.x = head_portrait_2P_pos.x - 2 * img_skill_frame.getwidth();
+		skill_frame_2P_2_pos.y = skill_frame_1P_1_pos.y;
+		skill_frame_2P_3_pos.x = head_portrait_2P_pos.x - 3 * img_skill_frame.getwidth();
+		skill_frame_2P_3_pos.y = skill_frame_1P_1_pos.y;
+		skill_frame_2P_4_pos.x = head_portrait_2P_pos.x - 4 * img_skill_frame.getwidth();
+		skill_frame_2P_4_pos.y = skill_frame_1P_1_pos.y;
+
 		// 宝可梦位置
 		player_1P_pos.x = rand() % (getwidth() / 4 * 3);
 		player_1P_pos.y = rand() & (getheight() / 4 * 3);
@@ -83,10 +105,6 @@ public:
 		return_menu_btn_pos.y = restart_btn_pos.y;
 		new_return_menu_btn_pos.x = getwidth() / 2 + 100;
 		new_return_menu_btn_pos.y = again_btn_pos.y;
-
-		// 宝可梦头像位置
-		head_portrait_1P_pos = { 0, 0 };
-		head_portrait_2P_pos = { getwidth() - 82, 0 };
 
 		// 胜利条位置
 		winner_bar_pos.x = 0;
@@ -260,24 +278,54 @@ public:
 		switch (pokemon_player_1->get_pokemon_type()) {
 		case PokemonType::Charmander:
 			putimage_alpha(head_portrait_1P_pos.x, head_portrait_1P_pos.y, &img_charmander_head_portrait_right);
+
+			putimage_alpha(skill_frame_1P_1_pos.x, skill_frame_1P_1_pos.y, &img_skill_frame_strike);
+			putimage_alpha(skill_frame_1P_2_pos.x, skill_frame_1P_2_pos.y, &img_skill_frame_fire);
+			putimage_alpha(skill_frame_1P_3_pos.x, skill_frame_1P_3_pos.y, &img_skill_frame_flame_jet);
+			putimage_alpha(skill_frame_1P_4_pos.x, skill_frame_1P_4_pos.y, &img_skill_frame);
 			break;
 		case PokemonType::Squirtle:
 			putimage_alpha(head_portrait_1P_pos.x, head_portrait_1P_pos.y, &img_squirtle_head_portrait_right);
+
+			putimage_alpha(skill_frame_1P_1_pos.x, skill_frame_1P_1_pos.y, &img_skill_frame_strike);
+			putimage_alpha(skill_frame_1P_2_pos.x, skill_frame_1P_2_pos.y, &img_skill_frame_water_gun);
+			putimage_alpha(skill_frame_1P_3_pos.x, skill_frame_1P_3_pos.y, &img_skill_frame_drink_water);
+			putimage_alpha(skill_frame_1P_4_pos.x, skill_frame_1P_4_pos.y, &img_skill_frame);
 			break;
 		case PokemonType::Bulbasaur:
 			putimage_alpha(head_portrait_1P_pos.x, head_portrait_1P_pos.y, &img_bulbasaur_head_portrait_right);
+
+			putimage_alpha(skill_frame_1P_1_pos.x, skill_frame_1P_1_pos.y, &img_skill_frame_fly_leaf);
+			putimage_alpha(skill_frame_1P_2_pos.x, skill_frame_1P_2_pos.y, &img_skill_frame_parasitism);
+			putimage_alpha(skill_frame_1P_3_pos.x, skill_frame_1P_3_pos.y, &img_skill_frame_straw_tying);
+			putimage_alpha(skill_frame_1P_4_pos.x, skill_frame_1P_4_pos.y, &img_skill_frame);
 			break;
 		}
 
 		switch (pokemon_player_2->get_pokemon_type()) {
 		case PokemonType::Charmander:
 			putimage_alpha(head_portrait_2P_pos.x, head_portrait_2P_pos.y, &img_charmander_head_portrait_left);
+
+			putimage_alpha(skill_frame_2P_1_pos.x, skill_frame_2P_1_pos.y, &img_skill_frame_strike);
+			putimage_alpha(skill_frame_2P_2_pos.x, skill_frame_2P_2_pos.y, &img_skill_frame_fire);
+			putimage_alpha(skill_frame_2P_3_pos.x, skill_frame_2P_3_pos.y, &img_skill_frame_flame_jet);
+			putimage_alpha(skill_frame_2P_4_pos.x, skill_frame_2P_4_pos.y, &img_skill_frame);
 			break;
 		case PokemonType::Squirtle:
 			putimage_alpha(head_portrait_2P_pos.x, head_portrait_2P_pos.y, &img_squirtle_head_portrait_left);
+
+			putimage_alpha(skill_frame_2P_1_pos.x, skill_frame_2P_1_pos.y, &img_skill_frame_strike);
+			putimage_alpha(skill_frame_2P_2_pos.x, skill_frame_2P_2_pos.y, &img_skill_frame_water_gun);
+			putimage_alpha(skill_frame_2P_3_pos.x, skill_frame_2P_3_pos.y, &img_skill_frame_drink_water);
+			putimage_alpha(skill_frame_2P_4_pos.x, skill_frame_2P_4_pos.y, &img_skill_frame);
 			break;
 		case PokemonType::Bulbasaur:
 			putimage_alpha(head_portrait_2P_pos.x, head_portrait_2P_pos.y, &img_bulbasaur_head_portrait_left);
+
+			putimage_alpha(skill_frame_2P_1_pos.x, skill_frame_2P_1_pos.y, &img_skill_frame_fly_leaf);
+			putimage_alpha(skill_frame_2P_2_pos.x, skill_frame_2P_2_pos.y, &img_skill_frame_parasitism);
+			putimage_alpha(skill_frame_2P_3_pos.x, skill_frame_2P_3_pos.y, &img_skill_frame_straw_tying);
+			putimage_alpha(skill_frame_2P_4_pos.x, skill_frame_2P_4_pos.y, &img_skill_frame);
 			break;
 		}
 
@@ -556,6 +604,16 @@ private:
 	POINT tree_1_pos = { 0 };						// 树1的位置
 	POINT tree_2_pos = { 0 };						// 树2的位置
 	POINT tree_3_pos = { 0 };						// 树3的位置
+	POINT head_portrait_1P_pos = { 0 };				// 1P宝可梦的头像位置
+	POINT head_portrait_2P_pos = { 0 };				// 1P宝可梦的头像位置
+	POINT skill_frame_1P_1_pos = { 0 };				// 1P技能一框的位置
+	POINT skill_frame_1P_2_pos = { 0 };				// 1P技能二框的位置
+	POINT skill_frame_1P_3_pos = { 0 };				// 1P技能三框的位置
+	POINT skill_frame_1P_4_pos = { 0 };				// 1P技能四框的位置
+	POINT skill_frame_2P_1_pos = { 0 };				// 2P技能一框的位置
+	POINT skill_frame_2P_2_pos = { 0 };				// 2P技能二框的位置
+	POINT skill_frame_2P_3_pos = { 0 };				// 2P技能三框的位置
+	POINT skill_frame_2P_4_pos = { 0 };				// 2P技能四框的位置
 	POINT player_1P_pos = { 0 };					// 玩家1P的宝可梦位置
 	POINT player_2P_pos = { 0 };					// 玩家2P的宝可梦位置
 	POINT continue_game_btn_pos = { 0 };			// 继续游戏按钮的位置
@@ -563,8 +621,6 @@ private:
 	POINT again_btn_pos = { 0 };					// 再来一场按钮的位置
 	POINT return_menu_btn_pos = { 0 };				// 返回主菜单按钮的位置
 	POINT new_return_menu_btn_pos = { 0 };			// 新的返回主菜单按钮的位置
-	POINT head_portrait_1P_pos = { 0 };				// 1P宝可梦的头像位置
-	POINT head_portrait_2P_pos = { 0 };				// 1P宝可梦的头像位置
 	POINT winner_bar_pos = { 0 };					// 胜利背景条的位置
 	POINT winner_text_bar_pos = { 0 };				// 胜利文本条的位置
 

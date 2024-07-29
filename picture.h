@@ -57,6 +57,21 @@ IMAGE img_squirtle_head_portrait_left;				// 朝向向左的杰尼龟头像
 IMAGE img_bulbasaur_head_portrait_right;			// 朝向向右的妙蛙种子头像
 IMAGE img_bulbasaur_head_portrait_left;				// 朝向向左的妙蛙种子头像
 
+IMAGE img_skill_frame;								// 技能提示框
+
+IMAGE img_skill_frame_strike;						// 撞击的技能提示框
+
+IMAGE img_skill_frame_fire;							// 火花的技能提示框
+IMAGE img_skill_frame_flame_jet;					// 火焰喷射的技能提示框
+
+IMAGE img_skill_frame_water_gun;					// 水枪的技能提示框
+IMAGE img_skill_frame_drink_water;					// 饮水的技能提示框
+
+IMAGE img_skill_frame_fly_leaf;						// 飞叶的技能提示框
+IMAGE img_skill_frame_parasitism;					// 寄生的技能提示框
+IMAGE img_skill_frame_straw_tying;					// 打草结的技能提示框
+
+
 Atlas atlas_charmander_left;						// 朝向向左的小火龙
 Atlas atlas_charmander_right;						// 朝向向右的小火龙
 Atlas atlas_squirtle_left;							// 朝向向左的杰尼龟
@@ -146,6 +161,16 @@ void load_res() {
 	flip_image(&img_squirtle_head_portrait_right, &img_squirtle_head_portrait_left);
 	loadimage(&img_bulbasaur_head_portrait_right, _T("res/bulbasaur_head_portrait_right.png"));
 	flip_image(&img_bulbasaur_head_portrait_right, &img_bulbasaur_head_portrait_left);
+
+	loadimage(&img_skill_frame, _T("res/skill_frame.png"));
+	loadimage(&img_skill_frame_strike, _T("res/skill_frame_strike.png"));
+	loadimage(&img_skill_frame_fire, _T("res/skill_frame_fire.png"));
+	loadimage(&img_skill_frame_flame_jet, _T("res/skill_frame_flame_jet.png"));
+	loadimage(&img_skill_frame_water_gun, _T("res/skill_frame_water_gun.png"));
+	loadimage(&img_skill_frame_drink_water, _T("res/skill_frame_drink_water.png"));
+	loadimage(&img_skill_frame_fly_leaf, _T("res/skill_frame_fly_leaf.png"));
+	loadimage(&img_skill_frame_parasitism, _T("res/skill_frame_parasitism.png"));
+	loadimage(&img_skill_frame_straw_tying, _T("res/skill_frame_straw_tying.png"));
 
 
 	atlas_charmander_left.load_from_file(_T("res/charmander_%d.png"), 3);
