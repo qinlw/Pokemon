@@ -88,6 +88,22 @@ Atlas atlas_bulbasaur_high_frame_right;				// 朝向向右的高帧妙蛙种子
 // 技能动画
 Atlas atlas_fireball;								// 火花发射出的动画
 Atlas atlas_fire;									// 火花命中后的动画 
+Atlas atlas_flame_jet_x_01;							// 火焰喷射发射的动画切片1
+Atlas atlas_flame_jet_x_02;							// 火焰喷射发射的动画切片2
+Atlas atlas_flame_jet_x_03;							// 火焰喷射发射的动画切片3
+Atlas atlas_flame_jet_x_04;							// 火焰喷射发射的动画切片4
+Atlas atlas_flame_jet_x_05;							// 火焰喷射发射的动画切片5
+Atlas atlas_flame_jet_x_06;							// 火焰喷射发射的动画切片6
+Atlas atlas_flame_jet_x_07;							// 火焰喷射发射的动画切片7
+Atlas atlas_flame_jet_x_08;							// 火焰喷射发射的动画切片8
+Atlas atlas_flame_jet_x_09;							// 火焰喷射发射的动画切片9
+Atlas atlas_flame_jet_x_10;							// 火焰喷射发射的动画切片10
+Atlas atlas_flame_jet_x_11;							// 火焰喷射发射的动画切片11
+Atlas atlas_flame_jet_x_12;							// 火焰喷射发射的动画切片12
+Atlas atlas_flame_jet_x_13;							// 火焰喷射发射的动画切片13
+Atlas atlas_flame_jet_x_14;							// 火焰喷射发射的动画切片14
+Atlas atlas_flame_jet_x_15;							// 火焰喷射发射的动画切片15
+Atlas atlas_flame_jet_x_16;							// 火焰喷射发射的动画切片16
 
 Atlas atlas_water_droplet_right;					// 水枪向右发射出的动画
 Atlas atlas_water_droplet_left;						// 水枪向左发射出的动画
@@ -190,6 +206,22 @@ void load_res() {
 	//技能动画资源加载
 	atlas_fireball.load_from_file(_T("res/fireball_%d.png"), 13);
 	atlas_fire.load_from_file(_T("res/fire_%d.png"), 9);
+	atlas_flame_jet_x_01.load_from_file(_T("res/flame_jet_%d_01.png"), 5);
+	atlas_flame_jet_x_02.load_from_file(_T("res/flame_jet_%d_02.png"), 5);
+	atlas_flame_jet_x_03.load_from_file(_T("res/flame_jet_%d_03.png"), 5);
+	atlas_flame_jet_x_04.load_from_file(_T("res/flame_jet_%d_04.png"), 5);
+	atlas_flame_jet_x_05.load_from_file(_T("res/flame_jet_%d_05.png"), 5);
+	atlas_flame_jet_x_06.load_from_file(_T("res/flame_jet_%d_06.png"), 5);
+	atlas_flame_jet_x_07.load_from_file(_T("res/flame_jet_%d_07.png"), 5);
+	atlas_flame_jet_x_08.load_from_file(_T("res/flame_jet_%d_08.png"), 5);
+	atlas_flame_jet_x_09.load_from_file(_T("res/flame_jet_%d_09.png"), 5);
+	atlas_flame_jet_x_10.load_from_file(_T("res/flame_jet_%d_10.png"), 5);
+	atlas_flame_jet_x_11.load_from_file(_T("res/flame_jet_%d_11.png"), 5);
+	atlas_flame_jet_x_12.load_from_file(_T("res/flame_jet_%d_12.png"), 5);
+	atlas_flame_jet_x_13.load_from_file(_T("res/flame_jet_%d_13.png"), 5);
+	atlas_flame_jet_x_14.load_from_file(_T("res/flame_jet_%d_14.png"), 5);
+	atlas_flame_jet_x_15.load_from_file(_T("res/flame_jet_%d_15.png"), 5);
+	atlas_flame_jet_x_16.load_from_file(_T("res/flame_jet_%d_16.png"), 5);
 	atlas_water_droplet_right.load_from_file(_T("res/water_droplet_%d.png"), 11);
 	flip_atlas(atlas_water_droplet_right, atlas_water_droplet_left);
 	atlas_splashes.load_from_file(_T("res/splashes_%d.png"), 5);

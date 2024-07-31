@@ -36,6 +36,14 @@ public:
 		return use_mp;
 	}
 
+	void set_animation_number(int val) {
+		animation_number = val;
+	}
+
+	int get_animation_number() {
+		return animation_number;
+	}
+
 	void set_bullet_velocity(float x, float y) {
 		bullet_velocity.x = x;
 		bullet_velocity.y = y;
@@ -49,7 +57,25 @@ public:
 		return bullet_size;
 	}
 
-	void set_bullet_pos(int x, int y) {
+	void set_pokemon_pos(int x, int y) {
+		pokemon_pos.x = x;
+		pokemon_pos.y = y;
+	}
+
+	POINT get_pokemon_pos() {
+		return pokemon_pos;
+	}
+
+	void set_pokemon_size(int x, int y) {
+		pokemon_size.x = x;
+		pokemon_size.y = y;
+	}
+
+	POINT get_pokemon_size() {
+		return pokemon_size;
+	}
+
+	virtual void set_bullet_pos(int x, int y) {
 		bullet_pos.x = x;
 		bullet_pos.y = y;
 	}
@@ -142,6 +168,8 @@ protected:
 	float gravity;													// 子弹受到的重力
 
 protected:
+	int animation_number;											// 动画序号（连续性的技能播放动画时存在多个动画）
+
 	POINTF bullet_skill_pre_action_pos_velocity;					// 子弹前摇期间的速度
 	POINT bullet_skill_pre_action_pos_delta;						// 子弹前摇导致的位置变化
 
@@ -152,6 +180,8 @@ protected:
 	POINTF bullet_velocity;											// 子弹速度
 	POINT bullet_size;												// 子弹大小
 	POINT bullet_pos;												// 子弹位置
+	POINT pokemon_pos = { 0 };										// 发射时宝可梦的位置
+	POINT pokemon_size = { 0 };										// 发射时宝可梦的尺寸
 
 	PokemonPlayer target_player = PokemonPlayer::P1;				// 子弹目标玩家
 	BulletAttribute bullet_attribute;								// 子弹属性

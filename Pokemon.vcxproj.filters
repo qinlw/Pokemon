@@ -119,6 +119,9 @@
     <ClInclude Include="bullet_attribute.h">
       <Filter>头文件\skill</Filter>
     </ClInclude>
+    <ClInclude Include="flame_jet.h">
+      <Filter>头文件\skill\fire_attribute_skill</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="bug_and_problem_list" />

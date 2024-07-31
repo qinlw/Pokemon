@@ -2,6 +2,7 @@
 
 #include "pokemon.h"
 #include "fire.h"
+#include "flame_jet.h"
 
 
 extern bool is_debug;
@@ -37,7 +38,7 @@ public:
 	}
 
 	void skill_3() {
-		std::cout << "charmander skill_3" << std::endl;
+		flame_jet(mp, pokemon_base_ATK, pokemon_base_MATK, is_facing_right, pokemon_pos, pokemon_size, player_id);
 	}
 
 	void skill_4() {
