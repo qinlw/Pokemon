@@ -79,7 +79,7 @@ void fire(int& mp, int ATK, int MATK, bool is_facing_right, POINT pokemon_pos, P
 
 	const int fire_use_mp = bullet->get_use_mp();
 	if (fire_use_mp > mp) return;
-	mp -= 20;
+	mp -= fire_use_mp;
 
 	bullet->set_ATK(bullet->get_ATK() * ATK);
 	bullet->set_MATK(bullet->get_MATK() * MATK);

@@ -54,6 +54,8 @@ public:
 			if (bullet_is_facing_right) putimage_alpha(bullet_pos.x, bullet_pos.y, atlas_fly_leaf_right.get_image(1));
 			else putimage_alpha(bullet_pos.x, bullet_pos.y, atlas_fly_leaf_right.get_image(1));
 		}
+
+		Bullet::on_draw();
 	}
 
 };
@@ -63,7 +65,7 @@ void fly_leaf(int& mp, int ATK, int MATK, bool is_facing_right, POINT pokemon_po
 
 	const int water_gun_use_mp = bullet->get_use_mp();
 	if (water_gun_use_mp > mp) return;
-	mp -= 20;
+	mp -= water_gun_use_mp;
 
 	bullet->set_ATK(bullet->get_ATK() * ATK);
 	bullet->set_MATK(bullet->get_MATK() * MATK);

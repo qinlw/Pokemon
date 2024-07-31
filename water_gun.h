@@ -88,7 +88,7 @@ void water_gun(int& mp, int ATK, int MATK, bool is_facing_right, POINT pokemon_p
 
 	const int water_gun_use_mp = bullet->get_use_mp();
 	if (water_gun_use_mp > mp) return;
-	mp -= 20;
+	mp -= water_gun_use_mp;
 
 	bullet->set_ATK(bullet->get_ATK() * ATK);
 	bullet->set_MATK(bullet->get_MATK() * MATK);
