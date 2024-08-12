@@ -72,29 +72,11 @@ void check_is_first_game() {
 
 	const int rows = mysql_num_rows(res);			// 获取行数
 	const int fields = mysql_num_fields(res);		// 获取列数
+}
 
-	for (int i = 0; i < rows; i++) {
-		MYSQL_ROW row = mysql_fetch_row(res);
-		for (int j = 0; j < fields; j++) {
-			if (strcmp(row[j], "is_first_game") != 0) break;
-			if (strcmp(row[++j], "1") == 0) is_first_game = true;
-			else false;
-			return;
-		}
-	}
-}
-void set_is_first_game(bool flag) {
-	std::string sql = "update game_status set status = " + " where status_name = 'is_first_game'";
-	const int n = mysql_query(my, sql.c_str());
-	if (n == 0) std::cout << sql << " sucess:" << n << std::endl;
-	else std::cout << sql << " failed:" << n << std::endl;
-}
+HWND hwnd;
 
 int main() {
-	connect_mysql(host, user, password, db, port);
-	check_is_first_game();
-	set_is_first_game(false);
-
 	srand(time(NULL)); 
 
 	const int FPS = 60;
