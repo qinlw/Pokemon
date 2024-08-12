@@ -14,11 +14,11 @@
 #include "time.h"
 
 
-const std::string host = "127.0.0.1";
-const std::string user = "qin";
-const std::string password = "123456";
-const std::string db = "pokemon_db";
-const unsigned const int port = 3306;
+const std::string host = "127.0.0.1";											// 数据库连接的ip地址
+const std::string user = "qin";													// 用户名
+const std::string password = "123456";											// 用户名密码
+const std::string db = "pokemon_db";											// 宝可梦数据
+const unsigned const int port = 3306;											// 端口号
 
 bool is_debug = true;								                            // 是否开启调式模式
 bool is_mysql_connect;								                            // 是否成功连接数据库
@@ -42,6 +42,7 @@ std::vector<Bullet*> bullet_list;												// 子弹容器
 HWND hwnd;																		// 窗口句柄
 MYSQL* my;																		// mysql的连接句柄
 
+// 做初始化，仅连接数据库
 void connect_mysql(const string host, const string user, const string password, const string db, const unsigned const int port) {
 	my = mysql_init(nullptr);
 	if (my == nullptr)
@@ -61,7 +62,8 @@ void connect_mysql(const string host, const string user, const string password, 
 
 	mysql_set_character_set(my, "utf8");
 }
-void update_is_first_game() {
+// 检查并更新is_first_game的值
+void check_and_update_is_first_game() {
 	std::string sql = "select * from game_status";
 	const int n = mysql_query(my, sql.c_str());
 	if (n == 0) std::cout << sql << " sucess:" << n << std::endl;
@@ -84,28 +86,37 @@ void update_is_first_game() {
 		}
 	}
 }
+// 设置is_first_game的值
 void set_is_first_game(bool flag) {
 	std::string sql;
 	if (flag) sql = "update game_status set status = 1 where status_name = 'is_first_game'";
 	else sql = "update game_status set status = 0 where status_name = 'is_first_game'";
+
 	const int n = mysql_query(my, sql.c_str());
 	if (n == 0) std::cout << sql << " sucess:" << n << std::endl;
 	else std::cout << sql << " failed:" << n << std::endl;
 }
 
 int main() {
+	// 初始化数据库并给is_first_game赋值
 	connect_mysql(host, user, password, db, port);
-	update_is_first_game();
+	check_and_update_is_first_game();
+
 	srand(time(NULL)); 
 
+	// 帧率 （每一帧至少停留的时间，单位：ms)
 	const int FPS = 60;
 
+	// 定义一个ExMessage类型的变量msg，用于存储消息信息
 	ExMessage msg;
 
+	// 初始化句柄
     hwnd = initgraph(1280, 720, EX_SHOWCONSOLE);
 
+	// 加载音乐图片资源
 	load_res();
 
+	// 给不同的场景对象指针初始化
 	menu_scene = new SceneMenu();
 	knapsack_scene = new SceneKnapsack();
 	set_scene = new SceneSet();
@@ -114,28 +125,34 @@ int main() {
 
 	scene_manager = new SceneManager();
 
+	// 初始化场景位置，这里默认为菜单场景，即程序运行后会直接进入菜单场景
 	scene_manager->scene_set(menu_scene);
 
+	// 批量绘图函数
 	BeginBatchDraw();
 
 	while (true) {
+		// 记录现在的时间戳
 		DWORD current_start_time = GetTickCount();
 
+		// 处理消息，做到如场景切换，鼠标点击带动的其他功能等
 		while (peekmessage(&msg)) {
 			scene_manager->on_input(msg);
 		}
 
+		// 更新画面的信息及相关逻辑，时间增量为 本次时间戳 - 上次更新结束的时间戳
 		static DWORD last_tick_time = GetTickCount();
 		DWORD current_tick_time = GetTickCount();
 		DWORD delta_time = current_tick_time - last_tick_time;
 		scene_manager->on_update(delta_time);
 		last_tick_time = current_start_time;
 
-
+		// 根据更新的信息刷新画面
 		cleardevice();
 		scene_manager->on_draw();
 		FlushBatchDraw();
 
+		// 处理帧率
 		DWORD current_end_time = GetTickCount();
 		DWORD current_delta_time = current_end_time - current_start_time;
 		if (current_delta_time < 1000 / FPS) Sleep(1000 / FPS - current_delta_time);
@@ -150,15 +167,19 @@ int main() {
 int _main(int x, int y) {
 	srand(time(NULL));
 
+	// 帧率 （每一帧至少停留的时间，单位：ms)
 	const int FPS = 60;
 
+	// 定义一个ExMessage类型的变量msg，用于存储消息信息
 	ExMessage msg;
 
+	// 初始化句柄
 	hwnd = initgraph(1280, 720, EX_SHOWCONSOLE);
-	SetWindowPos(hwnd, HWND_TOP, x, y, 0, 0, SWP_NOSIZE);
 
+	// 加载音乐图片资源
 	load_res();
 
+	// 给不同的场景对象指针初始化
 	menu_scene = new SceneMenu();
 	knapsack_scene = new SceneKnapsack();
 	set_scene = new SceneSet();
@@ -167,27 +188,34 @@ int _main(int x, int y) {
 
 	scene_manager = new SceneManager();
 
+	// 初始化场景位置，这里默认为菜单场景，即程序运行后会直接进入菜单场景
 	scene_manager->scene_set(pokemon_scene);
 
+	// 批量绘图函数
 	BeginBatchDraw();
 
 	while (true) {
+		// 记录现在的时间戳
 		DWORD current_start_time = GetTickCount();
 
+		// 处理消息，做到如场景切换，鼠标点击带动的其他功能等
 		while (peekmessage(&msg)) {
 			scene_manager->on_input(msg);
 		}
 
+		// 更新画面的信息及相关逻辑，时间增量为 本次时间戳 - 上次更新结束的时间戳
 		static DWORD last_tick_time = GetTickCount();
 		DWORD current_tick_time = GetTickCount();
 		DWORD delta_time = current_tick_time - last_tick_time;
 		scene_manager->on_update(delta_time);
 		last_tick_time = current_start_time;
 
+		// 根据更新的信息刷新画面
 		cleardevice();
 		scene_manager->on_draw();
 		FlushBatchDraw();
 
+		// 处理帧率
 		DWORD current_end_time = GetTickCount();
 		DWORD current_delta_time = current_end_time - current_start_time;
 		if (current_delta_time < 1000 / FPS) Sleep(1000 / FPS - current_delta_time);
