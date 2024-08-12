@@ -61,7 +61,7 @@ void connect_mysql(const string host, const string user, const string password, 
 
 	mysql_set_character_set(my, "utf8");
 }
-void check_is_first_game() {
+void update_is_first_game() {
 	std::string sql = "select * from game_status";
 	const int n = mysql_query(my, sql.c_str());
 	if (n == 0) std::cout << sql << " sucess:" << n << std::endl;
@@ -72,9 +72,30 @@ void check_is_first_game() {
 
 	const int rows = mysql_num_rows(res);			// 获取行数
 	const int fields = mysql_num_fields(res);		// 获取列数
+
+	for (int i = 0; i < rows; i++) {
+		MYSQL_ROW row = mysql_fetch_row(res);
+		for (int j = 0; j < fields; j++) {
+			if (strcmp(row[j], "is_first_game") != 0) break;
+			if (strcmp(row[++j], "1") == 0) is_first_game = true;
+			else is_first_game = false;
+			std::cout << "is_first_game: " << is_first_game << std::endl;			// 方便测试
+			return;
+		}
+	}
+}
+void set_is_first_game(bool flag) {
+	std::string sql;
+	if (flag) sql = "update game_status set status = 1 where status_name = 'is_first_game'";
+	else sql = "update game_status set status = 0 where status_name = 'is_first_game'";
+	const int n = mysql_query(my, sql.c_str());
+	if (n == 0) std::cout << sql << " sucess:" << n << std::endl;
+	else std::cout << sql << " failed:" << n << std::endl;
 }
 
 int main() {
+	connect_mysql(host, user, password, db, port);
+	update_is_first_game();
 	srand(time(NULL)); 
 
 	const int FPS = 60;
