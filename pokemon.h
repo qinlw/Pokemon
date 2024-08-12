@@ -37,7 +37,7 @@ public:
 
 	virtual void skill_4() {}
 
-	virtual void on_updata(int delta) {
+	virtual void on_update(int delta) {
 		int direction = is_right_btn - is_left_btn;
 		if (direction) {
 			is_facing_right = direction > 0;
@@ -49,9 +49,9 @@ public:
 			animation_current_pokemon = is_facing_right ? &animation_pokemon_right : &animation_pokemon_left;
 		}
 
-		animation_current_pokemon->on_updata(delta);
+		animation_current_pokemon->on_update(delta);
 
-		if (hp > 0) timer_recover_mp.on_updata(delta);
+		if (hp > 0) timer_recover_mp.on_update(delta);
 		if (hp < 0) hp = 0;
 
 		move_collision(delta);

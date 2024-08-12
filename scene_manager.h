@@ -60,8 +60,8 @@ public:
 		current_scene->on_enter();
 	}
 
-	void on_updata(int delta) {
-		current_scene->on_updata(delta);
+	void on_update(int delta) {
+		current_scene->on_update(delta);
 	}
 
 	void on_draw() {

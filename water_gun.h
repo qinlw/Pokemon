@@ -36,7 +36,7 @@ public:
 			};
 	}
 
-	void on_updata(int delta) {
+	void on_update(int delta) {
 		if (!is_harm) {
 			bullet_velocity.y += gravity * delta;
 			bullet_pos.x += bullet_velocity.x * delta;
@@ -44,11 +44,11 @@ public:
 		}
 
 		if (!is_harm) {
-			if (bullet_is_facing_right) animation_water_droplet_right.on_updata(delta);
-			else animation_water_droplet_left.on_updata(delta);
+			if (bullet_is_facing_right) animation_water_droplet_right.on_update(delta);
+			else animation_water_droplet_left.on_update(delta);
 		}
 		else {
-			animation_splashes.on_updata(delta);
+			animation_splashes.on_update(delta);
 		}
 
 		if (check_is_exceed_screen()) is_can_remove = true;

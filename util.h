@@ -4,6 +4,7 @@
 #include "atlas.h"
 
 #include <graphics.h>
+#include <mysql.h>
 
 #pragma comment(lib, "MSIMG32.LIB")
 

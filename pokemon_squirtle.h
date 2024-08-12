@@ -40,8 +40,8 @@ public:
 		std::cout << "squirtle skill_4" << std::endl;
 	}
 
-	void on_updata(int delta) {
-		Pokemon::on_updata(delta);
+	void on_update(int delta) {
+		Pokemon::on_update(delta);
 
 		pokemon_left_top_dot = { is_facing_right ? pokemon_pos.x + 50 : pokemon_pos.x + 30, pokemon_pos.y + 50 };
 		pokemon_left_low_dot = { is_facing_right ? pokemon_pos.x + 50 : pokemon_pos.x + 30, pokemon_pos.y + 115 };

@@ -9,7 +9,7 @@ public:
 		std::cout << "set";
 	}
 
-	void on_updata(int delta) {
+	void on_update(int delta) {
 
 	}
 

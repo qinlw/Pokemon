@@ -9,7 +9,7 @@ public:
 		std::cout << "knapsack";
 	}
 
-	void on_updata(int delta) {
+	void on_update(int delta) {
 
 	}
 

@@ -149,7 +149,7 @@ public:
 			&& (max(bullet_pos.y + bullet_size.y, pos.y + size.y) - min(bullet_pos.y, pos.y)) < bullet_size.y + size.y;
 	}
 
-	virtual void on_updata(int delta) {}
+	virtual void on_update(int delta) {}
 
 	virtual void on_draw() {
 		if (is_debug) {

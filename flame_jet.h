@@ -55,7 +55,7 @@ public:
 			};
 	}
 
-	void on_updata(int delta) {
+	void on_update(int delta) {
 	//	if (!bullet_01_is_harm) bullet_01_pos.x += bullet_velocity.x * delta;
 	//	if (!bullet_02_is_harm) bullet_02_pos.x += bullet_velocity.x * delta;
 	//	if (!bullet_03_is_harm) bullet_03_pos.x += bullet_velocity.x * delta;
@@ -73,73 +73,73 @@ public:
 	//	if (!bullet_15_is_harm) bullet_15_pos.x += bullet_velocity.x * delta;
 	//	if (!bullet_16_is_harm) bullet_16_pos.x += bullet_velocity.x * delta;
 	//
-	//	if (!bullet_01_is_harm) animation_flame_jet_x_01.on_updata(delta);
-	//	if (!bullet_02_is_harm) animation_flame_jet_x_02.on_updata(delta);
-	//	if (!bullet_03_is_harm) animation_flame_jet_x_03.on_updata(delta);
-	//	if (!bullet_04_is_harm) animation_flame_jet_x_04.on_updata(delta);
-	//	if (!bullet_05_is_harm) animation_flame_jet_x_05.on_updata(delta);
-	//	if (!bullet_06_is_harm) animation_flame_jet_x_06.on_updata(delta);
-	//	if (!bullet_07_is_harm) animation_flame_jet_x_07.on_updata(delta);
-	//	if (!bullet_08_is_harm) animation_flame_jet_x_08.on_updata(delta);
-	//	if (!bullet_09_is_harm) animation_flame_jet_x_09.on_updata(delta);
-	//	if (!bullet_10_is_harm) animation_flame_jet_x_10.on_updata(delta);
-	//	if (!bullet_11_is_harm) animation_flame_jet_x_11.on_updata(delta);
-	//	if (!bullet_12_is_harm) animation_flame_jet_x_12.on_updata(delta);
-	//	if (!bullet_13_is_harm) animation_flame_jet_x_13.on_updata(delta);
-	//	if (!bullet_14_is_harm) animation_flame_jet_x_14.on_updata(delta);
-	//	if (!bullet_15_is_harm) animation_flame_jet_x_15.on_updata(delta);
-	//	if (!bullet_16_is_harm) animation_flame_jet_x_16.on_updata(delta);
+	//	if (!bullet_01_is_harm) animation_flame_jet_x_01.on_update(delta);
+	//	if (!bullet_02_is_harm) animation_flame_jet_x_02.on_update(delta);
+	//	if (!bullet_03_is_harm) animation_flame_jet_x_03.on_update(delta);
+	//	if (!bullet_04_is_harm) animation_flame_jet_x_04.on_update(delta);
+	//	if (!bullet_05_is_harm) animation_flame_jet_x_05.on_update(delta);
+	//	if (!bullet_06_is_harm) animation_flame_jet_x_06.on_update(delta);
+	//	if (!bullet_07_is_harm) animation_flame_jet_x_07.on_update(delta);
+	//	if (!bullet_08_is_harm) animation_flame_jet_x_08.on_update(delta);
+	//	if (!bullet_09_is_harm) animation_flame_jet_x_09.on_update(delta);
+	//	if (!bullet_10_is_harm) animation_flame_jet_x_10.on_update(delta);
+	//	if (!bullet_11_is_harm) animation_flame_jet_x_11.on_update(delta);
+	//	if (!bullet_12_is_harm) animation_flame_jet_x_12.on_update(delta);
+	//	if (!bullet_13_is_harm) animation_flame_jet_x_13.on_update(delta);
+	//	if (!bullet_14_is_harm) animation_flame_jet_x_14.on_update(delta);
+	//	if (!bullet_15_is_harm) animation_flame_jet_x_15.on_update(delta);
+	//	if (!bullet_16_is_harm) animation_flame_jet_x_16.on_update(delta);
 
 		if (!is_harm) bullet_pos.x += bullet_velocity.x * delta;
 
 		switch (animation_number) {
 		case 1:
-			if (!is_harm) animation_flame_jet_x_01.on_updata(delta);
+			if (!is_harm) animation_flame_jet_x_01.on_update(delta);
 			break;
 		case 2:
-			if (!is_harm) animation_flame_jet_x_02.on_updata(delta);
+			if (!is_harm) animation_flame_jet_x_02.on_update(delta);
 			break;
 		case 3:
-			if (!is_harm) animation_flame_jet_x_03.on_updata(delta);
+			if (!is_harm) animation_flame_jet_x_03.on_update(delta);
 			break;
 		case 4:
-			if (!is_harm) animation_flame_jet_x_04.on_updata(delta);
+			if (!is_harm) animation_flame_jet_x_04.on_update(delta);
 			break;
 		case 5:
-			if (!is_harm) animation_flame_jet_x_05.on_updata(delta);
+			if (!is_harm) animation_flame_jet_x_05.on_update(delta);
 			break;
 		case 6:
-			if (!is_harm) animation_flame_jet_x_06.on_updata(delta);
+			if (!is_harm) animation_flame_jet_x_06.on_update(delta);
 			break;
 		case 7:
-			if (!is_harm) animation_flame_jet_x_07.on_updata(delta);
+			if (!is_harm) animation_flame_jet_x_07.on_update(delta);
 			break;
 		case 8:
-			if (!is_harm) animation_flame_jet_x_08.on_updata(delta);
+			if (!is_harm) animation_flame_jet_x_08.on_update(delta);
 			break;
 		case 9:
-			if (!is_harm) animation_flame_jet_x_09.on_updata(delta);
+			if (!is_harm) animation_flame_jet_x_09.on_update(delta);
 			break;
 		case 10:
-			if (!is_harm) animation_flame_jet_x_10.on_updata(delta);
+			if (!is_harm) animation_flame_jet_x_10.on_update(delta);
 			break;
 		case 11:
-			if (!is_harm) animation_flame_jet_x_11.on_updata(delta);
+			if (!is_harm) animation_flame_jet_x_11.on_update(delta);
 			break;
 		case 12:
-			if (!is_harm) animation_flame_jet_x_12.on_updata(delta);
+			if (!is_harm) animation_flame_jet_x_12.on_update(delta);
 			break;
 		case 13:
-			if (!is_harm) animation_flame_jet_x_13.on_updata(delta);
+			if (!is_harm) animation_flame_jet_x_13.on_update(delta);
 			break;
 		case 14:
-			if (!is_harm) animation_flame_jet_x_14.on_updata(delta);
+			if (!is_harm) animation_flame_jet_x_14.on_update(delta);
 			break;
 		case 15:
-			if (!is_harm) animation_flame_jet_x_15.on_updata(delta);
+			if (!is_harm) animation_flame_jet_x_15.on_update(delta);
 			break;
 		case 16:
-			if (!is_harm) animation_flame_jet_x_16.on_updata(delta);
+			if (!is_harm) animation_flame_jet_x_16.on_update(delta);
 			break;
 		}
 	}

@@ -223,10 +223,10 @@ public:
 		is_game_over = false;
 	}
 
-	void on_updata(int delta) {
+	void on_update(int delta) {
 		if (is_esc_btn || game_over_is_pop_btn) return;
-		pokemon_player_1->on_updata(delta);
-		pokemon_player_2->on_updata(delta);
+		pokemon_player_1->on_update(delta);
+		pokemon_player_2->on_update(delta);
 
 		bullet_list.erase(std::remove_if(
 			bullet_list.begin(), bullet_list.end(), 
@@ -239,7 +239,7 @@ public:
 			);
 
 		for (auto bullet : bullet_list) {
-			bullet->on_updata(delta);
+			bullet->on_update(delta);
 		}
 
 		if (pokemon_player_1->get_hp() <= 0 || pokemon_player_2->get_hp() <= 0) {
@@ -250,7 +250,7 @@ public:
 			winner_text_bar_pos.x += winner_bar_speed;
 			
 			if (is_winner_bar_slide_out) {
-				timer_winner_bar_slide_out.on_updata(delta);
+				timer_winner_bar_slide_out.on_update(delta);
 				if (winner_text_bar_pos.x > getwidth()) {
 					winner_text_bar_pos.x = getwidth();
 					game_over_is_pop_btn = true;
@@ -259,7 +259,7 @@ public:
 			else {
 				if (winner_text_bar_pos.x > 0) {
 					winner_text_bar_pos.x = 0;
-					timer_winner_bar_slide_in.on_updata(delta);
+					timer_winner_bar_slide_in.on_update(delta);
 				}
 			}
 		}

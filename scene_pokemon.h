@@ -71,14 +71,14 @@ public:
 		btn_2P_right_pos.y = btn_2P_left_pos.y;
 	}
 
-	void on_updata(int delta) {
-		if (is_enter_start) animation_pokeball.on_updata(delta);
-		animation_selector_charmander_left.on_updata(delta);
-		animation_selector_charmander_right.on_updata(delta);
-		animation_selector_squirtle_left.on_updata(delta);
-		animation_selector_squirtle_right.on_updata(delta);
-		animation_selector_bulbasaur_left.on_updata(delta);
-		animation_selector_bulbasaur_right.on_updata(delta);
+	void on_update(int delta) {
+		if (is_enter_start) animation_pokeball.on_update(delta);
+		animation_selector_charmander_left.on_update(delta);
+		animation_selector_charmander_right.on_update(delta);
+		animation_selector_squirtle_left.on_update(delta);
+		animation_selector_squirtle_right.on_update(delta);
+		animation_selector_bulbasaur_left.on_update(delta);
+		animation_selector_bulbasaur_right.on_update(delta);
 
 		if (animation_pokeball.get_idx_frame() == atlas_pokeball.get_size() - 1) {
 			if (is_enter_game) {
@@ -88,7 +88,7 @@ public:
 				scene_manager->switch_scene(SceneManager::SceneType::Game);
 			}
 			else {
-				animation_pokeball.on_updata(delta);
+				animation_pokeball.on_update(delta);
 				is_enter_game = true;
 			}
 		}

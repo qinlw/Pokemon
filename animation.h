@@ -40,7 +40,7 @@ public:
 		return atlas->get_image(idx_frame);
 	}
 
-	void on_updata(int delta) {
+	void on_update(int delta) {
 		time += delta;
 		if (time >= interval) {
 			time = 0;

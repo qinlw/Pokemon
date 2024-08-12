@@ -27,7 +27,7 @@ public:
 		callback = [&]() {};
 	}
 
-	void on_updata(int delta) {
+	void on_update(int delta) {
 		if (is_skill_pre_action) {
 			if (bullet_skill_pre_action_pos_delta.x > 0 || bullet_skill_pre_action_pos_delta.y > 0) {
 				bullet_pos.x += bullet_skill_pre_action_pos_velocity.x * delta;

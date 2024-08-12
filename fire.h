@@ -37,16 +37,16 @@ public:
 			};
 	}
 
-	void on_updata(int delta) {
+	void on_update(int delta) {
 		if (!is_harm) {
 			bullet_pos.x += bullet_velocity.x * delta;
 			bullet_pos.y += bullet_velocity.y * delta;
 		}
 
-		if (!is_harm) animation_fireball.on_updata(delta);
-		else animation_fire.on_updata(delta);
+		if (!is_harm) animation_fireball.on_update(delta);
+		else animation_fire.on_update(delta);
 
-		if (!is_inflict_one_harm) timer_is_inflict_one_harm.on_updata(delta);
+		if (!is_inflict_one_harm) timer_is_inflict_one_harm.on_update(delta);
 
 		if (check_is_exceed_screen()) is_can_remove = true;
 	}

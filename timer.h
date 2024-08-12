@@ -30,7 +30,7 @@ public:
 		this->callback = callback;
 	}
 
-	void on_updata(int delta) {
+	void on_update(int delta) {
 		if (puase) return;
 
 		pass_time += delta;

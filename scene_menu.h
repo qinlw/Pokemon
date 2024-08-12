@@ -26,7 +26,7 @@ public:
 		exit_button_pos.y = start_button_pos.y + (img_start_button.getheight() + button_y_add) * 3;
 	}
 
-	void on_updata(int delta) {
+	void on_update(int delta) {
 	
 	}
 
