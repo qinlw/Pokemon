@@ -74,8 +74,6 @@ void check_is_first_game() {
 	const int fields = mysql_num_fields(res);		// 获取列数
 }
 
-HWND hwnd;
-
 int main() {
 	srand(time(NULL)); 
 
