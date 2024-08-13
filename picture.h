@@ -1,130 +1,139 @@
-#pragma once
+ï»¿#pragma once
 
 #include "atlas.h"
 
 
-// Ö÷²Ëµ¥³¡¾°
-IMAGE img_background_base;							// ±³¾°°æ
-IMAGE img_menu_background;							// Ö÷²Ëµ¥½çÃæ
-IMAGE img_start_button;								// ¿ªÊ¼°´Å¥
-IMAGE img_knapsack_button;							// ±³°ü°´Å¥
-IMAGE img_set_button;								// ÉèÖÃ°´Å¥
-IMAGE img_exit_button;								// ÍË³ö°´Å¥
+// ä¸»èœå•åœºæ™¯
+IMAGE img_background_base;							// èƒŒæ™¯ç‰ˆ
+IMAGE img_menu_background;							// ä¸»èœå•ç•Œé¢
+IMAGE img_start_button;								// å¼€å§‹æŒ‰é’®
+IMAGE img_knapsack_button;							// èƒŒåŒ…æŒ‰é’®
+IMAGE img_set_button;								// è®¾ç½®æŒ‰é’®
+IMAGE img_exit_button;								// é€€å‡ºæŒ‰é’®
 
 
-// Ñ¡Ôñ³¡¾°
-IMAGE img_selector_background;						// Ñ¡Ôñ½çÃæ
-IMAGE img_return_button;							// ·µ»Ø°´Å¥
-IMAGE img_pokeball;									// ¾«ÁéÇò
-IMAGE img_1P;										// 1PÍ¼Ïñ
-IMAGE img_2P;										// 2PÍ¼Ïñ
-IMAGE img_1P_selector_btn_idle_right;				// Íæ¼Ò1ÏòÓÒµÄÄ¬ÈÏÑ¡Ôñ°´Å¥
-IMAGE img_1P_selector_btn_idle_left;				// Íæ¼Ò1Ïò×óµÄÄ¬ÈÏÑ¡Ôñ°´Å¥
-IMAGE img_1P_selector_btn_down_right;				// Íæ¼Ò1ÏòÓÒµÄ°´ÏÂÑ¡Ôñ°´Å¥
-IMAGE img_1P_selector_btn_down_left;				// Íæ¼Ò1Ïò×óµÄ°´ÏÂÑ¡Ôñ°´Å¥
-IMAGE img_2P_selector_btn_idle_right;				// Íæ¼Ò2ÏòÓÒµÄÄ¬ÈÏÑ¡Ôñ°´Å¥
-IMAGE img_2P_selector_btn_idle_left;				// Íæ¼Ò2Ïò×óµÄÄ¬ÈÏÑ¡Ôñ°´Å¥
-IMAGE img_2P_selector_btn_down_right;				// Íæ¼Ò2ÏòÓÒµÄÄ¬ÈÏ°´ÏÂ°´Å¥
-IMAGE img_2P_selector_btn_down_left;				// Íæ¼Ò2Ïò×óµÄÄ¬ÈÏ°´ÏÂ°´Å¥
+// é€‰æ‹©åœºæ™¯
+IMAGE img_selector_background;						// é€‰æ‹©ç•Œé¢
+IMAGE img_return_button;							// è¿”å›æŒ‰é’®
+IMAGE img_pokeball;									// ç²¾çµçƒ
+IMAGE img_1P;										// 1På›¾åƒ
+IMAGE img_2P;										// 2På›¾åƒ
+IMAGE img_1P_selector_btn_idle_right;				// ç©å®¶1å‘å³çš„é»˜è®¤é€‰æ‹©æŒ‰é’®
+IMAGE img_1P_selector_btn_idle_left;				// ç©å®¶1å‘å·¦çš„é»˜è®¤é€‰æ‹©æŒ‰é’®
+IMAGE img_1P_selector_btn_down_right;				// ç©å®¶1å‘å³çš„æŒ‰ä¸‹é€‰æ‹©æŒ‰é’®
+IMAGE img_1P_selector_btn_down_left;				// ç©å®¶1å‘å·¦çš„æŒ‰ä¸‹é€‰æ‹©æŒ‰é’®
+IMAGE img_2P_selector_btn_idle_right;				// ç©å®¶2å‘å³çš„é»˜è®¤é€‰æ‹©æŒ‰é’®
+IMAGE img_2P_selector_btn_idle_left;				// ç©å®¶2å‘å·¦çš„é»˜è®¤é€‰æ‹©æŒ‰é’®
+IMAGE img_2P_selector_btn_down_right;				// ç©å®¶2å‘å³çš„é»˜è®¤æŒ‰ä¸‹æŒ‰é’®
+IMAGE img_2P_selector_btn_down_left;				// ç©å®¶2å‘å·¦çš„é»˜è®¤æŒ‰ä¸‹æŒ‰é’®
 
-Atlas atlas_pokeball;								// Ğı×ª¾«ÁéÇòÍ¼¼¯
-Atlas atlas_selector_charmander_left;				// Ñ¡Ôñ½çÃæĞ¡»ğÁú
-Atlas atlas_selector_charmander_right;				// Ñ¡Ôñ½çÃæĞ¡»ğÁú
-Atlas atlas_selector_squirtle_left;					// Ñ¡Ôñ½çÃæ½ÜÄá¹ê
-Atlas atlas_selector_squirtle_right;				// Ñ¡Ôñ½çÃæ½ÜÄá¹ê
-Atlas atlas_selector_bulbasaur_left;				// Ñ¡Ôñ½çÃæÃîÍÜÖÖ×Ó
-Atlas atlas_selector_bulbasaur_right;				// Ñ¡Ôñ½çÃæÃîÍÜÖÖ×Ó
-
-
-// ÓÎÏ·³¡¾°
-IMAGE img_sky;										// Ìì¿Õ±³¾°
-IMAGE img_sun;										// Ì«Ñô
-IMAGE img_hills;									// É½Âö
-IMAGE img_grassland;								// ²İµØ
-IMAGE img_tree_centre;								// ÖĞ¼äµÄÊ÷
-IMAGE img_tree_1;									// Ê÷Ò»
-IMAGE img_tree_2;									// Ê÷¶ş
-IMAGE img_tree_3;									// Ê÷Èı
-IMAGE img_continue_game_button;						// ¼ÌĞøÓÎÏ·°´Å¥
-IMAGE img_restart_button;							// ÖØĞÂ¿ªÊ¼°´Å¥
-IMAGE img_again_button;								// ÔÙÀ´Ò»°Ñ°´Å¥
-IMAGE img_return_menu_button;						// ·µ»ØÖ÷²Ëµ¥°´Å¥
-IMAGE img_new_return_menu_button;					// ĞÂµÄ·µ»ØÖ÷²Ëµ¥°´Å¥
-IMAGE img_charmander_head_portrait_right;			// ³¯ÏòÏòÓÒµÄĞ¡»ğÁúÍ·Ïñ
-IMAGE img_charmander_head_portrait_left;			// ³¯ÏòÏò×óµÄĞ¡»ğÁúÍ·Ïñ
-IMAGE img_squirtle_head_portrait_right;				// ³¯ÏòÏòÓÒµÄ½ÜÄá¹êÍ·Ïñ
-IMAGE img_squirtle_head_portrait_left;				// ³¯ÏòÏò×óµÄ½ÜÄá¹êÍ·Ïñ
-IMAGE img_bulbasaur_head_portrait_right;			// ³¯ÏòÏòÓÒµÄÃîÍÜÖÖ×ÓÍ·Ïñ
-IMAGE img_bulbasaur_head_portrait_left;				// ³¯ÏòÏò×óµÄÃîÍÜÖÖ×ÓÍ·Ïñ
-
-IMAGE img_skill_frame;								// ¼¼ÄÜÌáÊ¾¿ò
-
-IMAGE img_skill_frame_strike;						// ×²»÷µÄ¼¼ÄÜÌáÊ¾¿ò
-
-IMAGE img_skill_frame_fire;							// »ğ»¨µÄ¼¼ÄÜÌáÊ¾¿ò
-IMAGE img_skill_frame_flame_jet;					// »ğÑæÅçÉäµÄ¼¼ÄÜÌáÊ¾¿ò
-
-IMAGE img_skill_frame_water_gun;					// Ë®Ç¹µÄ¼¼ÄÜÌáÊ¾¿ò
-IMAGE img_skill_frame_drink_water;					// ÒûË®µÄ¼¼ÄÜÌáÊ¾¿ò
-
-IMAGE img_skill_frame_fly_leaf;						// ·ÉÒ¶µÄ¼¼ÄÜÌáÊ¾¿ò
-IMAGE img_skill_frame_parasitism;					// ¼ÄÉúµÄ¼¼ÄÜÌáÊ¾¿ò
-IMAGE img_skill_frame_straw_tying;					// ´ò²İ½áµÄ¼¼ÄÜÌáÊ¾¿ò
+Atlas atlas_pokeball;								// æ—‹è½¬ç²¾çµçƒå›¾é›†
+Atlas atlas_selector_charmander_left;				// é€‰æ‹©ç•Œé¢å°ç«é¾™
+Atlas atlas_selector_charmander_right;				// é€‰æ‹©ç•Œé¢å°ç«é¾™
+Atlas atlas_selector_squirtle_left;					// é€‰æ‹©ç•Œé¢æ°å°¼é¾Ÿ
+Atlas atlas_selector_squirtle_right;				// é€‰æ‹©ç•Œé¢æ°å°¼é¾Ÿ
+Atlas atlas_selector_bulbasaur_left;				// é€‰æ‹©ç•Œé¢å¦™è›™ç§å­
+Atlas atlas_selector_bulbasaur_right;				// é€‰æ‹©ç•Œé¢å¦™è›™ç§å­
 
 
-Atlas atlas_charmander_left;						// ³¯ÏòÏò×óµÄĞ¡»ğÁú
-Atlas atlas_charmander_right;						// ³¯ÏòÏòÓÒµÄĞ¡»ğÁú
-Atlas atlas_squirtle_left;							// ³¯ÏòÏò×óµÄ½ÜÄá¹ê
-Atlas atlas_squirtle_right;							// ³¯ÏòÏòÓÒµÄ½ÜÄá¹ê
-Atlas atlas_bulbasaur_left;							// ³¯ÏòÏò×óµÄÃîÍÜÖÖ×Ó
-Atlas atlas_bulbasaur_right;						// ³¯ÏòÏòÓÒµÄÃîÍÜÖÖ×Ó
-Atlas atlas_charmander_high_frame_left;				// ³¯ÏòÏò×óµÄ¸ßÖ¡Ğ¡»ğÁú
-Atlas atlas_charmander_high_frame_right;			// ³¯ÏòÏòÓÒµÄ¸ßÖ¡Ğ¡»ğÁú
-Atlas atlas_squirtle_high_frame_left;				// ³¯ÏòÏò×óµÄ¸ßÖ¡½ÜÄá¹ê
-Atlas atlas_squirtle_high_frame_right;				// ³¯ÏòÏòÓÒµÄ¸ßÖ¡½ÜÄá¹ê
-Atlas atlas_bulbasaur_high_frame_left;				// ³¯ÏòÏò×óµÄ¸ßÖ¡ÃîÍÜÖÖ×Ó
-Atlas atlas_bulbasaur_high_frame_right;				// ³¯ÏòÏòÓÒµÄ¸ßÖ¡ÃîÍÜÖÖ×Ó
+// æ¸¸æˆåœºæ™¯
+IMAGE img_sky;										// å¤©ç©ºèƒŒæ™¯
+IMAGE img_sun;										// å¤ªé˜³
+IMAGE img_hills;									// å±±è„‰
+IMAGE img_grassland;								// è‰åœ°
+IMAGE img_tree_centre;								// ä¸­é—´çš„æ ‘
+IMAGE img_tree_1;									// æ ‘ä¸€
+IMAGE img_tree_2;									// æ ‘äºŒ
+IMAGE img_tree_3;									// æ ‘ä¸‰
+IMAGE img_continue_game_button;						// ç»§ç»­æ¸¸æˆæŒ‰é’®
+IMAGE img_restart_button;							// é‡æ–°å¼€å§‹æŒ‰é’®
+IMAGE img_again_button;								// å†æ¥ä¸€æŠŠæŒ‰é’®
+IMAGE img_return_menu_button;						// è¿”å›ä¸»èœå•æŒ‰é’®
+IMAGE img_new_return_menu_button;					// æ–°çš„è¿”å›ä¸»èœå•æŒ‰é’®
+IMAGE img_charmander_head_portrait_right;			// æœå‘å‘å³çš„å°ç«é¾™å¤´åƒ
+IMAGE img_charmander_head_portrait_left;			// æœå‘å‘å·¦çš„å°ç«é¾™å¤´åƒ
+IMAGE img_squirtle_head_portrait_right;				// æœå‘å‘å³çš„æ°å°¼é¾Ÿå¤´åƒ
+IMAGE img_squirtle_head_portrait_left;				// æœå‘å‘å·¦çš„æ°å°¼é¾Ÿå¤´åƒ
+IMAGE img_bulbasaur_head_portrait_right;			// æœå‘å‘å³çš„å¦™è›™ç§å­å¤´åƒ
+IMAGE img_bulbasaur_head_portrait_left;				// æœå‘å‘å·¦çš„å¦™è›™ç§å­å¤´åƒ
 
-// ¼¼ÄÜ¶¯»­
-Atlas atlas_fireball;								// »ğ»¨·¢Éä³öµÄ¶¯»­
-Atlas atlas_fire;									// »ğ»¨ÃüÖĞºóµÄ¶¯»­ 
-Atlas atlas_flame_jet_x_01;							// »ğÑæÅçÉä·¢ÉäµÄ¶¯»­ÇĞÆ¬1
-Atlas atlas_flame_jet_x_02;							// »ğÑæÅçÉä·¢ÉäµÄ¶¯»­ÇĞÆ¬2
-Atlas atlas_flame_jet_x_03;							// »ğÑæÅçÉä·¢ÉäµÄ¶¯»­ÇĞÆ¬3
-Atlas atlas_flame_jet_x_04;							// »ğÑæÅçÉä·¢ÉäµÄ¶¯»­ÇĞÆ¬4
-Atlas atlas_flame_jet_x_05;							// »ğÑæÅçÉä·¢ÉäµÄ¶¯»­ÇĞÆ¬5
-Atlas atlas_flame_jet_x_06;							// »ğÑæÅçÉä·¢ÉäµÄ¶¯»­ÇĞÆ¬6
-Atlas atlas_flame_jet_x_07;							// »ğÑæÅçÉä·¢ÉäµÄ¶¯»­ÇĞÆ¬7
-Atlas atlas_flame_jet_x_08;							// »ğÑæÅçÉä·¢ÉäµÄ¶¯»­ÇĞÆ¬8
-Atlas atlas_flame_jet_x_09;							// »ğÑæÅçÉä·¢ÉäµÄ¶¯»­ÇĞÆ¬9
-Atlas atlas_flame_jet_x_10;							// »ğÑæÅçÉä·¢ÉäµÄ¶¯»­ÇĞÆ¬10
-Atlas atlas_flame_jet_x_11;							// »ğÑæÅçÉä·¢ÉäµÄ¶¯»­ÇĞÆ¬11
-Atlas atlas_flame_jet_x_12;							// »ğÑæÅçÉä·¢ÉäµÄ¶¯»­ÇĞÆ¬12
-Atlas atlas_flame_jet_x_13;							// »ğÑæÅçÉä·¢ÉäµÄ¶¯»­ÇĞÆ¬13
-Atlas atlas_flame_jet_x_14;							// »ğÑæÅçÉä·¢ÉäµÄ¶¯»­ÇĞÆ¬14
-Atlas atlas_flame_jet_x_15;							// »ğÑæÅçÉä·¢ÉäµÄ¶¯»­ÇĞÆ¬15
-Atlas atlas_flame_jet_x_16;							// »ğÑæÅçÉä·¢ÉäµÄ¶¯»­ÇĞÆ¬16
+IMAGE img_skill_frame;								// æŠ€èƒ½æç¤ºæ¡†
 
-Atlas atlas_water_droplet_right;					// Ë®Ç¹ÏòÓÒ·¢Éä³öµÄ¶¯»­
-Atlas atlas_water_droplet_left;						// Ë®Ç¹Ïò×ó·¢Éä³öµÄ¶¯»­
-Atlas atlas_splashes;								// Ë®Ç¹ÃüÖĞºóµÄ¶¯»­
+IMAGE img_skill_frame_strike;						// æ’å‡»çš„æŠ€èƒ½æç¤ºæ¡†
 
-Atlas atlas_fly_leaf_left;							// ·ÉÒ¶Ïò×ó·¢Éä³öµÄ¶¯»­
-Atlas atlas_fly_leaf_right;							// ·ÉÒ¶ÏòÓÒ·¢Éä³öµÄ¶¯»­
+IMAGE img_skill_frame_fire;							// ç«èŠ±çš„æŠ€èƒ½æç¤ºæ¡†
+IMAGE img_skill_frame_flame_jet;					// ç«ç„°å–·å°„çš„æŠ€èƒ½æç¤ºæ¡†
+
+IMAGE img_skill_frame_water_gun;					// æ°´æªçš„æŠ€èƒ½æç¤ºæ¡†
+IMAGE img_skill_frame_drink_water;					// é¥®æ°´çš„æŠ€èƒ½æç¤ºæ¡†
+
+IMAGE img_skill_frame_fly_leaf;						// é£å¶çš„æŠ€èƒ½æç¤ºæ¡†
+IMAGE img_skill_frame_parasitism;					// å¯„ç”Ÿçš„æŠ€èƒ½æç¤ºæ¡†
+IMAGE img_skill_frame_straw_tying;					// æ‰“è‰ç»“çš„æŠ€èƒ½æç¤ºæ¡†
+
+IMAGE img_tutorial_prompt_text_A;					// æ•™ç¨‹æç¤ºæ–‡æœ¬A
+IMAGE img_tutorial_prompt_text_D;					// æ•™ç¨‹æç¤ºæ–‡æœ¬D
+IMAGE img_tutorial_prompt_text_left_arrow;			// æ•™ç¨‹æç¤ºæ–‡æœ¬â¬…
+IMAGE img_tutorial_prompt_text_right_arrow;			// æ•™ç¨‹æç¤ºæ–‡æœ¬â¡
+IMAGE img_tutorial_prompt_text_jump_1P;				// æ•™ç¨‹æç¤ºæ–‡æœ¬W
+IMAGE img_tutorial_prompt_text_jump_2P;				// æ•™ç¨‹æç¤ºæ–‡æœ¬â¬†
+IMAGE img_tutorial_prompt_text_skill_1P;			// æ•™ç¨‹æç¤ºæ–‡æœ¬1Pçš„æŠ€èƒ½æŒ‰é’®
+IMAGE img_tutorial_prompt_text_skill_2P;			// æ•™ç¨‹æç¤ºæ–‡æœ¬2Pçš„æŠ€èƒ½æŒ‰é’®
 
 
-// Ê¤Àû¶¯»­
-IMAGE img_winnner_bar;								// Ê¤ÀûÌõ±³¾°
-IMAGE img_1P_charmander_win_text_bar;				// 1PĞ¡»ğÁúÊ¤ÀûÎÄ±¾Ìõ¶¯»­
-IMAGE img_2P_charmander_win_text_bar;				// 2PĞ¡»ğÁúÊ¤ÀûÎÄ±¾Ìõ¶¯»­
-IMAGE img_1P_squirtle_win_text_bar;					// 1P½ÜÄá¹êÊ¤ÀûÎÄ±¾Ìõ¶¯»­
-IMAGE img_2P_squirtle_win_text_bar;					// 2P½ÜÄá¹êÊ¤ÀûÎÄ±¾Ìõ¶¯»­
-IMAGE img_1P_bulbasaur_win_text_bar;				// 1PÃîÍÜÖÖ×ÓÊ¤ÀûÎÄ±¾Ìõ¶¯»­
-IMAGE img_2P_bulbasaur_win_text_bar;				// 2PÃîÍÜÖÖ×ÓÊ¤ÀûÎÄ±¾Ìõ¶¯»­
+Atlas atlas_charmander_left;						// æœå‘å‘å·¦çš„å°ç«é¾™
+Atlas atlas_charmander_right;						// æœå‘å‘å³çš„å°ç«é¾™
+Atlas atlas_squirtle_left;							// æœå‘å‘å·¦çš„æ°å°¼é¾Ÿ
+Atlas atlas_squirtle_right;							// æœå‘å‘å³çš„æ°å°¼é¾Ÿ
+Atlas atlas_bulbasaur_left;							// æœå‘å‘å·¦çš„å¦™è›™ç§å­
+Atlas atlas_bulbasaur_right;						// æœå‘å‘å³çš„å¦™è›™ç§å­
+Atlas atlas_charmander_high_frame_left;				// æœå‘å‘å·¦çš„é«˜å¸§å°ç«é¾™
+Atlas atlas_charmander_high_frame_right;			// æœå‘å‘å³çš„é«˜å¸§å°ç«é¾™
+Atlas atlas_squirtle_high_frame_left;				// æœå‘å‘å·¦çš„é«˜å¸§æ°å°¼é¾Ÿ
+Atlas atlas_squirtle_high_frame_right;				// æœå‘å‘å³çš„é«˜å¸§æ°å°¼é¾Ÿ
+Atlas atlas_bulbasaur_high_frame_left;				// æœå‘å‘å·¦çš„é«˜å¸§å¦™è›™ç§å­
+Atlas atlas_bulbasaur_high_frame_right;				// æœå‘å‘å³çš„é«˜å¸§å¦™è›™ç§å­
+
+// æŠ€èƒ½åŠ¨ç”»
+Atlas atlas_fireball;								// ç«èŠ±å‘å°„å‡ºçš„åŠ¨ç”»
+Atlas atlas_fire;									// ç«èŠ±å‘½ä¸­åçš„åŠ¨ç”» 
+Atlas atlas_flame_jet_x_01;							// ç«ç„°å–·å°„å‘å°„çš„åŠ¨ç”»åˆ‡ç‰‡1
+Atlas atlas_flame_jet_x_02;							// ç«ç„°å–·å°„å‘å°„çš„åŠ¨ç”»åˆ‡ç‰‡2
+Atlas atlas_flame_jet_x_03;							// ç«ç„°å–·å°„å‘å°„çš„åŠ¨ç”»åˆ‡ç‰‡3
+Atlas atlas_flame_jet_x_04;							// ç«ç„°å–·å°„å‘å°„çš„åŠ¨ç”»åˆ‡ç‰‡4
+Atlas atlas_flame_jet_x_05;							// ç«ç„°å–·å°„å‘å°„çš„åŠ¨ç”»åˆ‡ç‰‡5
+Atlas atlas_flame_jet_x_06;							// ç«ç„°å–·å°„å‘å°„çš„åŠ¨ç”»åˆ‡ç‰‡6
+Atlas atlas_flame_jet_x_07;							// ç«ç„°å–·å°„å‘å°„çš„åŠ¨ç”»åˆ‡ç‰‡7
+Atlas atlas_flame_jet_x_08;							// ç«ç„°å–·å°„å‘å°„çš„åŠ¨ç”»åˆ‡ç‰‡8
+Atlas atlas_flame_jet_x_09;							// ç«ç„°å–·å°„å‘å°„çš„åŠ¨ç”»åˆ‡ç‰‡9
+Atlas atlas_flame_jet_x_10;							// ç«ç„°å–·å°„å‘å°„çš„åŠ¨ç”»åˆ‡ç‰‡10
+Atlas atlas_flame_jet_x_11;							// ç«ç„°å–·å°„å‘å°„çš„åŠ¨ç”»åˆ‡ç‰‡11
+Atlas atlas_flame_jet_x_12;							// ç«ç„°å–·å°„å‘å°„çš„åŠ¨ç”»åˆ‡ç‰‡12
+Atlas atlas_flame_jet_x_13;							// ç«ç„°å–·å°„å‘å°„çš„åŠ¨ç”»åˆ‡ç‰‡13
+Atlas atlas_flame_jet_x_14;							// ç«ç„°å–·å°„å‘å°„çš„åŠ¨ç”»åˆ‡ç‰‡14
+Atlas atlas_flame_jet_x_15;							// ç«ç„°å–·å°„å‘å°„çš„åŠ¨ç”»åˆ‡ç‰‡15
+Atlas atlas_flame_jet_x_16;							// ç«ç„°å–·å°„å‘å°„çš„åŠ¨ç”»åˆ‡ç‰‡16
+
+Atlas atlas_water_droplet_right;					// æ°´æªå‘å³å‘å°„å‡ºçš„åŠ¨ç”»
+Atlas atlas_water_droplet_left;						// æ°´æªå‘å·¦å‘å°„å‡ºçš„åŠ¨ç”»
+Atlas atlas_splashes;								// æ°´æªå‘½ä¸­åçš„åŠ¨ç”»
+
+Atlas atlas_fly_leaf_left;							// é£å¶å‘å·¦å‘å°„å‡ºçš„åŠ¨ç”»
+Atlas atlas_fly_leaf_right;							// é£å¶å‘å³å‘å°„å‡ºçš„åŠ¨ç”»
+
+
+// èƒœåˆ©åŠ¨ç”»
+IMAGE img_winnner_bar;								// èƒœåˆ©æ¡èƒŒæ™¯
+IMAGE img_1P_charmander_win_text_bar;				// 1På°ç«é¾™èƒœåˆ©æ–‡æœ¬æ¡åŠ¨ç”»
+IMAGE img_2P_charmander_win_text_bar;				// 2På°ç«é¾™èƒœåˆ©æ–‡æœ¬æ¡åŠ¨ç”»
+IMAGE img_1P_squirtle_win_text_bar;					// 1Pæ°å°¼é¾Ÿèƒœåˆ©æ–‡æœ¬æ¡åŠ¨ç”»
+IMAGE img_2P_squirtle_win_text_bar;					// 2Pæ°å°¼é¾Ÿèƒœåˆ©æ–‡æœ¬æ¡åŠ¨ç”»
+IMAGE img_1P_bulbasaur_win_text_bar;				// 1På¦™è›™ç§å­èƒœåˆ©æ–‡æœ¬æ¡åŠ¨ç”»
+IMAGE img_2P_bulbasaur_win_text_bar;				// 2På¦™è›™ç§å­èƒœåˆ©æ–‡æœ¬æ¡åŠ¨ç”»
 
 
 void load_res() {
-	// Ö÷²Ëµ¥³¡¾°×ÊÔ´¼ÓÔØ
+	// ä¸»èœå•åœºæ™¯èµ„æºåŠ è½½
 	loadimage(&img_background_base, _T("res/background_base.png"));
 	loadimage(&img_menu_background, _T("res/menu_background.png"));
 	loadimage(&img_start_button, _T("res/start_button.png"));
@@ -132,7 +141,7 @@ void load_res() {
 	loadimage(&img_set_button, _T("res/set_button.png"));
 	loadimage(&img_exit_button, _T("res/exit_button.png"));
 
-	// Ñ¡Ôñ³¡¾°×ÊÔ´¼ÓÔØ
+	// é€‰æ‹©åœºæ™¯èµ„æºåŠ è½½
 	loadimage(&img_selector_background, _T("res/selector_background.png"));
 	loadimage(&img_return_button, _T("res/return_button.png"));
 	loadimage(&img_pokeball, _T("res/pokeball.png"));
@@ -156,7 +165,7 @@ void load_res() {
 	atlas_selector_bulbasaur_left.load_from_file(_T("res/selector_bulbasaur_%d.png"), 3);
 	flip_atlas(atlas_selector_bulbasaur_left, atlas_selector_bulbasaur_right);
 
-	// ÓÎÏ·ÄÚ³¡¾°×ÊÔ´¼ÓÔØ
+	// æ¸¸æˆå†…åœºæ™¯èµ„æºåŠ è½½
 	loadimage(&img_sky, _T("res/sky.png"));
 	loadimage(&img_sun, _T("res/sun.png"));
 	loadimage(&img_hills, _T("res/hills.png"));
@@ -187,6 +196,14 @@ void load_res() {
 	loadimage(&img_skill_frame_fly_leaf, _T("res/skill_frame_fly_leaf.png"));
 	loadimage(&img_skill_frame_parasitism, _T("res/skill_frame_parasitism.png"));
 	loadimage(&img_skill_frame_straw_tying, _T("res/skill_frame_straw_tying.png"));
+	loadimage(&img_tutorial_prompt_text_A, _T("res/tutorial_prompt_text_A.png"));
+	loadimage(&img_tutorial_prompt_text_D, _T("res/tutorial_prompt_text_D.png"));
+	loadimage(&img_tutorial_prompt_text_left_arrow, _T("res/tutorial_prompt_text_left_arrow.png"));
+	loadimage(&img_tutorial_prompt_text_right_arrow, _T("res/tutorial_prompt_text_right_arrow.png"));
+	loadimage(&img_tutorial_prompt_text_jump_1P, _T("res/tutorial_prompt_text_jump_1P.png"));
+	loadimage(&img_tutorial_prompt_text_jump_2P, _T("res/tutorial_prompt_text_jump_2P.png"));
+	loadimage(&img_tutorial_prompt_text_skill_1P, _T("res/tutorial_prompt_text_skill_1P.png"));
+	loadimage(&img_tutorial_prompt_text_skill_2P, _T("res/tutorial_prompt_text_skill_2P.png"));
 
 
 	atlas_charmander_left.load_from_file(_T("res/charmander_%d.png"), 3);
@@ -203,7 +220,7 @@ void load_res() {
 	atlas_bulbasaur_high_frame_left.high_frame_load_from_file(10, _T("res/bulbasaur_%d.png"), 2);
 	flip_atlas(atlas_bulbasaur_high_frame_left, atlas_bulbasaur_high_frame_right);
 
-	//¼¼ÄÜ¶¯»­×ÊÔ´¼ÓÔØ
+	//æŠ€èƒ½åŠ¨ç”»èµ„æºåŠ è½½
 	atlas_fireball.load_from_file(_T("res/fireball_%d.png"), 13);
 	atlas_fire.load_from_file(_T("res/fire_%d.png"), 9);
 	atlas_flame_jet_x_01.load_from_file(_T("res/flame_jet_%d_01.png"), 5);
@@ -228,7 +245,7 @@ void load_res() {
 	atlas_fly_leaf_left.load_from_file(_T("res/fly_leaf_%d.png"), 3);
 	flip_atlas(atlas_fly_leaf_left, atlas_fly_leaf_right);
 
-	//Ê¤Àû¶¯»­
+	//èƒœåˆ©åŠ¨ç”»
 	loadimage(&img_winnner_bar, _T("res/winner_bar.png"));
 	loadimage(&img_1P_charmander_win_text_bar, _T("res/1P_charmander_win_text_bar.png"));
 	loadimage(&img_2P_charmander_win_text_bar, _T("res/2P_charmander_win_text_bar.png"));
