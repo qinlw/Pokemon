@@ -76,7 +76,7 @@ public:
 		//血条
 		setcolor(RGB(111, 84, 13));
 		rectangle(status_bar_1P_pos.x, status_bar_1P_pos.y, status_bar_1P_pos.x + status_bar_width, status_bar_height);
-		rectangle(status_bar_1P_pos.x, status_bar_1P_pos.y + status_bar_height + status_bar_interval, 
+		rectangle(status_bar_1P_pos.x, status_bar_1P_pos.y + status_bar_height + status_bar_interval,
 			status_bar_1P_pos.x + status_bar_width, status_bar_1P_pos.y + 2 * status_bar_height + status_bar_interval);
 		rectangle(status_bar_2P_pos.x, status_bar_2P_pos.y, status_bar_2P_pos.x + status_bar_width, status_bar_height);
 		rectangle(status_bar_2P_pos.x, status_bar_2P_pos.y + status_bar_height + status_bar_interval,
@@ -185,7 +185,7 @@ public:
 				break;
 			}
 		}
-		break;
+					   break;
 		case WM_KEYUP: {
 			switch (player_id) {
 			case PokemonPlayer::P1:
@@ -237,6 +237,14 @@ public:
 	void set_pokemon_pos(int x, int y) {
 		pokemon_pos.x = x;
 		pokemon_pos.y = y;
+	}
+
+	POINT get_pokemon_pos() {
+		return pokemon_pos;
+	}
+
+	POINT get_pokemon_size() {
+		return pokemon_size;
 	}
 
 	void set_id(PokemonPlayer id) {

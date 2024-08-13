@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "scene.h"
 #include "scene_manager.h"
@@ -7,12 +7,15 @@
 
 
 extern bool is_debug;
+extern bool is_first_game;
 
 extern SceneManager* scene_manager;
 
 extern std::vector<CollisionLine> collision_thwartwise_line_list;
 extern std::vector<CollisionLine> collision_vertical_line_list;
 extern std::vector<Bullet*> bullet_list;
+
+extern void set_is_first_game(bool flag);
 
 class SceneGame : public Scene {
 public:
@@ -30,7 +33,7 @@ public:
 		timer_winner_bar_slide_out.set_callback([&]() {
 			});
 
-		// ±³¾°×ø±ê
+		// èƒŒæ™¯åæ ‡
 		sky_pos.x = 0;
 		sky_pos.y = 0;
 		sun_pos.x = getwidth() - img_sun.getwidth() * 2;
@@ -40,37 +43,37 @@ public:
 		grassland_pos.x = 0;
 		grassland_pos.y = getheight() - img_grassland.getheight();
 
-		// Ê÷µÄÎ»ÖÃ×ø±ê
+		// æ ‘çš„ä½ç½®åæ ‡
 		tree_centre_pos.x = (getwidth() - img_tree_centre.getwidth()) / 2;
 		tree_centre_pos.y = grassland_pos.y - img_tree_centre.getheight();
 
 		tree_1_pos.x = rand() % 1280;
-		// Èç¹ûºÍÖÐ¼äµÄÊ÷ÖØºÏÔòÐèÒªÖØÐÂÉú³É×ø±êÎ»ÖÃ
+		// å¦‚æžœå’Œä¸­é—´çš„æ ‘é‡åˆåˆ™éœ€è¦é‡æ–°ç”Ÿæˆåæ ‡ä½ç½®
 		while (is_regen(tree_1_pos, tree_centre_pos, img_tree_1, img_tree_centre)) 
 			tree_1_pos.x = rand() % 1280;
 		tree_1_pos.y = grassland_pos.y - img_tree_1.getheight();
 
 		tree_2_pos.x = rand() % 1280;
-		// Èç¹ûºÍÖÐ¼äµÄÊ÷ÖØºÏÔòÐèÒªÖØÐÂÉú³É×ø±êÎ»ÖÃ
-		// Èç¹ûºÍµÚÒ»¿ÃÊ÷ÖØºÏÔòÐèÒªÖØÐÂÉú³É×ø±êÎ»ÖÃ
+		// å¦‚æžœå’Œä¸­é—´çš„æ ‘é‡åˆåˆ™éœ€è¦é‡æ–°ç”Ÿæˆåæ ‡ä½ç½®
+		// å¦‚æžœå’Œç¬¬ä¸€æ£µæ ‘é‡åˆåˆ™éœ€è¦é‡æ–°ç”Ÿæˆåæ ‡ä½ç½®
 		while (is_regen(tree_2_pos, tree_centre_pos, img_tree_2, img_tree_centre) ||
 			   is_regen(tree_2_pos, tree_1_pos, img_tree_2, img_tree_1)) tree_2_pos.x = rand() % 1280;
 		tree_2_pos.y = grassland_pos.y - img_tree_2.getheight();
 
 		tree_3_pos.x = rand() % 1280;
-		// Èç¹ûºÍÖÐ¼äµÄÊ÷ÖØºÏÔòÐèÒªÖØÐÂÉú³É×ø±êÎ»ÖÃ
-		// Èç¹ûºÍµÚÒ»¿ÃÊ÷ÖØºÏÔòÐèÒªÖØÐÂÉú³É×ø±êÎ»ÖÃ
-		// Èç¹ûºÍµÚ¶þ¿ÃÊ÷ÖØºÏÔòÐèÒªÖØÐÂÉú³É×ø±êÎ»ÖÃ
+		// å¦‚æžœå’Œä¸­é—´çš„æ ‘é‡åˆåˆ™éœ€è¦é‡æ–°ç”Ÿæˆåæ ‡ä½ç½®
+		// å¦‚æžœå’Œç¬¬ä¸€æ£µæ ‘é‡åˆåˆ™éœ€è¦é‡æ–°ç”Ÿæˆåæ ‡ä½ç½®
+		// å¦‚æžœå’Œç¬¬äºŒæ£µæ ‘é‡åˆåˆ™éœ€è¦é‡æ–°ç”Ÿæˆåæ ‡ä½ç½®
 		while (is_regen(tree_3_pos, tree_centre_pos, img_tree_3, img_tree_centre) ||
 			  is_regen(tree_3_pos, tree_1_pos, img_tree_3, img_tree_1) ||
 			  is_regen(tree_3_pos, tree_2_pos, img_tree_3, img_tree_2)) tree_3_pos.x = rand() % 1280;
 		tree_3_pos.y = grassland_pos.y - img_tree_3.getheight();
 
-		// ±¦¿ÉÃÎÍ·ÏñÎ»ÖÃ
+		// å®å¯æ¢¦å¤´åƒä½ç½®
 		head_portrait_1P_pos = { 0, 0 };
 		head_portrait_2P_pos = { getwidth() - 82, 0 };
 
-		// ¼¼ÄÜ¿òµÄÎ»ÖÃ
+		// æŠ€èƒ½æ¡†çš„ä½ç½®
 		skill_frame_1P_1_pos.x = head_portrait_1P_pos.x + img_charmander_head_portrait_left.getwidth() + 3;
 		skill_frame_1P_1_pos.y = head_portrait_1P_pos.y + img_charmander_head_portrait_left.getheight();
 		skill_frame_1P_2_pos.x = skill_frame_1P_1_pos.x + img_skill_frame.getwidth();
@@ -88,13 +91,13 @@ public:
 		skill_frame_2P_4_pos.x = head_portrait_2P_pos.x - 4 * img_skill_frame.getwidth();
 		skill_frame_2P_4_pos.y = skill_frame_1P_1_pos.y;
 
-		// ±¦¿ÉÃÎÎ»ÖÃ
+		// å®å¯æ¢¦ä½ç½®
 		player_1P_pos.x = rand() % (getwidth() / 4 * 3);
 		player_1P_pos.y = rand() & (getheight() / 4 * 3);
 		player_2P_pos.x = rand() % (getwidth() / 4 * 3);
 		player_2P_pos.y = rand() % (getwidth() / 4 * 3);
 
-		// °´Å¥Î»ÖÃ
+		// æŒ‰é’®ä½ç½®
 		restart_btn_pos.x = (getwidth() - img_restart_button.getwidth()) / 2;
 		restart_btn_pos.y = (getheight() - img_continue_game_button.getheight()) / 2;
 		continue_game_btn_pos.x = (restart_btn_pos.x - img_continue_game_button.getwidth()) / 2;
@@ -106,20 +109,26 @@ public:
 		new_return_menu_btn_pos.x = getwidth() / 2 + 100;
 		new_return_menu_btn_pos.y = again_btn_pos.y;
 
-		// Ê¤ÀûÌõÎ»ÖÃ
+		// èƒœåˆ©æ¡ä½ç½®
 		winner_bar_pos.x = 0;
 		winner_bar_pos.y = (getheight() - img_winnner_bar.getheight()) / 2;
 		winner_text_bar_pos.x = - getwidth();
 		winner_text_bar_pos.y = winner_bar_pos.y;
 
-		// ±¦¿ÉÃÎÎ»ÖÃ
+		// å®å¯æ¢¦ä½ç½® æš‚ä¸ä½¿ç”¨éšæœºä½ç½®
 		pokemon_player_1->set_pokemon_pos(200, 50);
 		pokemon_player_2->set_pokemon_pos(975, 50);
 
-		// ±¦¿ÉÃÎËÙ¶È
+		// æç¤ºæ–‡æœ¬ä½ç½®
+		tutorial_prompt_text_skill_1P_pos.x = 0;
+		tutorial_prompt_text_skill_1P_pos.y = 120;
+		tutorial_prompt_text_skill_2P_pos.x = getwidth() - img_tutorial_prompt_text_skill_2P.getwidth();
+		tutorial_prompt_text_skill_2P_pos.y = tutorial_prompt_text_skill_1P_pos.y;
+
+		// å®å¯æ¢¦é€Ÿåº¦
 		pokemon_player_1->set_velocity(0, 0);
 
-		// Åö×²ÏßÌõ³õÊ¼»¯ÐÅÏ¢
+		// ç¢°æ’žçº¿æ¡åˆå§‹åŒ–ä¿¡æ¯
 		collision_thwartwise_line_list.resize(9);
 		collision_vertical_line_list.resize(18);
 
@@ -224,6 +233,23 @@ public:
 	}
 
 	void on_update(int delta) {
+		if (is_first_game) {
+			tutorial_prompt_text_A_pos.x = pokemon_player_1->get_pokemon_pos().x - img_tutorial_prompt_text_A.getwidth();
+			tutorial_prompt_text_A_pos.y = pokemon_player_1->get_pokemon_pos().y;
+			tutorial_prompt_text_D_pos.x = pokemon_player_1->get_pokemon_pos().x + pokemon_player_1->get_pokemon_size().x;
+			tutorial_prompt_text_D_pos.y = pokemon_player_1->get_pokemon_pos().y;
+			tutorial_prompt_text_left_arrow_pos.x = pokemon_player_2->get_pokemon_pos().x - img_tutorial_prompt_text_left_arrow.getwidth();
+			tutorial_prompt_text_left_arrow_pos.y = pokemon_player_2->get_pokemon_pos().y;
+			tutorial_prompt_text_right_arrow_pos.x = pokemon_player_2->get_pokemon_pos().x + pokemon_player_2->get_pokemon_size().x;
+			tutorial_prompt_text_right_arrow_pos.y = pokemon_player_2->get_pokemon_pos().y;
+			tutorial_prompt_text_jump_1P_pos.x = pokemon_player_1->get_pokemon_pos().x -
+				(img_tutorial_prompt_text_jump_1P.getwidth() - pokemon_player_1->get_pokemon_size().x) / 2;
+			tutorial_prompt_text_jump_1P_pos.y = pokemon_player_1->get_pokemon_pos().y - img_tutorial_prompt_text_jump_1P.getheight();
+			tutorial_prompt_text_jump_2P_pos.x = pokemon_player_2->get_pokemon_pos().x -
+				(img_tutorial_prompt_text_jump_2P.getwidth() - pokemon_player_2->get_pokemon_size().x) / 2;
+			tutorial_prompt_text_jump_2P_pos.y = pokemon_player_2->get_pokemon_pos().y - img_tutorial_prompt_text_jump_2P.getheight();
+		}
+
 		if (is_esc_btn || game_over_is_pop_btn) return;
 		pokemon_player_1->on_update(delta);
 		pokemon_player_2->on_update(delta);
@@ -274,6 +300,19 @@ public:
 		putimage_alpha(tree_1_pos.x, tree_1_pos.y, &img_tree_1);
 		putimage_alpha(tree_2_pos.x, tree_2_pos.y, &img_tree_2);
 		putimage_alpha(tree_3_pos.x, tree_3_pos.y, &img_tree_3);
+
+		if (is_first_game) {
+			set_is_first_game(false);
+			putimage_alpha(tutorial_prompt_text_A_pos.x, tutorial_prompt_text_A_pos.y, &img_tutorial_prompt_text_A);
+			putimage_alpha(tutorial_prompt_text_D_pos.x, tutorial_prompt_text_D_pos.y, &img_tutorial_prompt_text_D);
+			putimage_alpha(tutorial_prompt_text_left_arrow_pos.x, tutorial_prompt_text_left_arrow_pos.y, &img_tutorial_prompt_text_left_arrow);
+			putimage_alpha(tutorial_prompt_text_right_arrow_pos.x, tutorial_prompt_text_right_arrow_pos.y, &img_tutorial_prompt_text_right_arrow);
+			putimage_alpha(tutorial_prompt_text_jump_1P_pos.x, tutorial_prompt_text_jump_1P_pos.y, &img_tutorial_prompt_text_jump_1P);
+			putimage_alpha(tutorial_prompt_text_jump_2P_pos.x, tutorial_prompt_text_jump_2P_pos.y, &img_tutorial_prompt_text_jump_2P);
+			putimage_alpha(tutorial_prompt_text_skill_1P_pos.x, tutorial_prompt_text_skill_1P_pos.y, &img_tutorial_prompt_text_skill_1P);
+			putimage_alpha(tutorial_prompt_text_skill_2P_pos.x, tutorial_prompt_text_skill_2P_pos.y, &img_tutorial_prompt_text_skill_2P);
+		}
+
 
 		switch (pokemon_player_1->get_pokemon_type()) {
 		case PokemonType::Charmander:
@@ -375,9 +414,9 @@ public:
 
 		}
 
-		// ²âÊÔ´úÂë
+		// æµ‹è¯•ä»£ç 
 		//if (pokemon_player_1->get_hp() <= 0 || pokemon_player_2->get_hp() <= 0) {
-		//	MessageBox(GetHWnd(), _T("ÓÎÏ·½áÊø"), _T("²âÊÔ"), MB_OK);
+		//	MessageBox(GetHWnd(), _T("æ¸¸æˆç»“æŸ"), _T("æµ‹è¯•"), MB_OK);
 		//	scene_manager->switch_scene(SceneManager::SceneType::Menu);
 		//}
 
@@ -394,55 +433,55 @@ public:
 			bullet->on_draw();
 		}
 
-		// Åö×²ÏßÌõ
+		// ç¢°æ’žçº¿æ¡
 		/*
 			line(grassland_pos.x, grassland_pos.y, grassland_pos.x + img_grassland.getwidth(), grassland_pos.y);
-			line(tree_centre_pos.x + 10, tree_centre_pos.y + 20, tree_centre_pos.x + img_tree_centre.getwidth() - 10, tree_centre_pos.y + 20);	// ÖÐÐÄÊ÷Ä¾ÉÏ²ãÅö×²Ïß
-			line(tree_centre_pos.x + 10, tree_centre_pos.y + 60, tree_centre_pos.x + img_tree_centre.getwidth() - 15, tree_centre_pos.y + 60);	// ÖÐÐÄÊ÷Ä¾ÏÂ²ãÅö×²Ïß
-			line(tree_centre_pos.x + 60, grassland_pos.y - img_tree_centre.getheight() + 22 , tree_centre_pos.x + 60, grassland_pos.y);			// ÖÐÐÄÊ÷×®×ó²àÅö×²ÊúÏß
-			line(tree_centre_pos.x + 93, grassland_pos.y - img_tree_centre.getheight() + 22 , tree_centre_pos.x + 93, grassland_pos.y);			// ÖÐÐÄÊ÷×®×ó²àÅö×²ÊúÏß
+			line(tree_centre_pos.x + 10, tree_centre_pos.y + 20, tree_centre_pos.x + img_tree_centre.getwidth() - 10, tree_centre_pos.y + 20);	// ä¸­å¿ƒæ ‘æœ¨ä¸Šå±‚ç¢°æ’žçº¿
+			line(tree_centre_pos.x + 10, tree_centre_pos.y + 60, tree_centre_pos.x + img_tree_centre.getwidth() - 15, tree_centre_pos.y + 60);	// ä¸­å¿ƒæ ‘æœ¨ä¸‹å±‚ç¢°æ’žçº¿
+			line(tree_centre_pos.x + 60, grassland_pos.y - img_tree_centre.getheight() + 22 , tree_centre_pos.x + 60, grassland_pos.y);			// ä¸­å¿ƒæ ‘æ¡©å·¦ä¾§ç¢°æ’žç«–çº¿
+			line(tree_centre_pos.x + 93, grassland_pos.y - img_tree_centre.getheight() + 22 , tree_centre_pos.x + 93, grassland_pos.y);			// ä¸­å¿ƒæ ‘æ¡©å·¦ä¾§ç¢°æ’žç«–çº¿
 
-			line(tree_1_pos.x + 10, tree_1_pos.y + 25, tree_1_pos.x + img_tree_1.getwidth() - 10, tree_1_pos.y + 25);							// Ê÷1ÉÏ²ãÅö×²Ïß
-			line(tree_1_pos.x + 10, tree_1_pos.y + 50, tree_1_pos.x + img_tree_1.getwidth() - 20, tree_1_pos.y + 50);							// Ê÷1ÏÂ²ãÅö×²Ïß
-			line(tree_1_pos.x + 70, grassland_pos.y - img_tree_1.getheight() + 27, tree_1_pos.x + 70, grassland_pos.y);							// ÖÐÐÄÊ÷×®×ó²àÅö×²ÊúÏß
-			line(tree_1_pos.x + 113, grassland_pos.y - img_tree_1.getheight() + 27, tree_1_pos.x + 113, grassland_pos.y);						// ÖÐÐÄÊ÷×®×ó²àÅö×²ÊúÏß
+			line(tree_1_pos.x + 10, tree_1_pos.y + 25, tree_1_pos.x + img_tree_1.getwidth() - 10, tree_1_pos.y + 25);							// æ ‘1ä¸Šå±‚ç¢°æ’žçº¿
+			line(tree_1_pos.x + 10, tree_1_pos.y + 50, tree_1_pos.x + img_tree_1.getwidth() - 20, tree_1_pos.y + 50);							// æ ‘1ä¸‹å±‚ç¢°æ’žçº¿
+			line(tree_1_pos.x + 70, grassland_pos.y - img_tree_1.getheight() + 27, tree_1_pos.x + 70, grassland_pos.y);							// ä¸­å¿ƒæ ‘æ¡©å·¦ä¾§ç¢°æ’žç«–çº¿
+			line(tree_1_pos.x + 113, grassland_pos.y - img_tree_1.getheight() + 27, tree_1_pos.x + 113, grassland_pos.y);						// ä¸­å¿ƒæ ‘æ¡©å·¦ä¾§ç¢°æ’žç«–çº¿
 
-			line(tree_2_pos.x + 10, tree_2_pos.y + 30, tree_2_pos.x + img_tree_2.getwidth() - 10, tree_2_pos.y + 30);							// Ê÷2ÉÏ²ãÅö×²Ïß
-			line(tree_2_pos.x + 10, tree_2_pos.y + 80, tree_2_pos.x + img_tree_2.getwidth() - 20, tree_2_pos.y + 80);							// Ê÷2ÏÂ²ãÅö×²Ïß
-			line(tree_2_pos.x + 60, grassland_pos.y - img_tree_2.getheight() + 33, tree_2_pos.x + 60, grassland_pos.y);							// ÖÐÐÄÊ÷×®×ó²àÅö×²ÊúÏß
-			line(tree_2_pos.x + 95, grassland_pos.y - img_tree_2.getheight() + 33, tree_2_pos.x + 95, grassland_pos.y);							// ÖÐÐÄÊ÷×®ÓÒ²àÅö×²ÊúÏß
+			line(tree_2_pos.x + 10, tree_2_pos.y + 30, tree_2_pos.x + img_tree_2.getwidth() - 10, tree_2_pos.y + 30);							// æ ‘2ä¸Šå±‚ç¢°æ’žçº¿
+			line(tree_2_pos.x + 10, tree_2_pos.y + 80, tree_2_pos.x + img_tree_2.getwidth() - 20, tree_2_pos.y + 80);							// æ ‘2ä¸‹å±‚ç¢°æ’žçº¿
+			line(tree_2_pos.x + 60, grassland_pos.y - img_tree_2.getheight() + 33, tree_2_pos.x + 60, grassland_pos.y);							// ä¸­å¿ƒæ ‘æ¡©å·¦ä¾§ç¢°æ’žç«–çº¿
+			line(tree_2_pos.x + 95, grassland_pos.y - img_tree_2.getheight() + 33, tree_2_pos.x + 95, grassland_pos.y);							// ä¸­å¿ƒæ ‘æ¡©å³ä¾§ç¢°æ’žç«–çº¿
 
-			line(tree_3_pos.x + 10, tree_3_pos.y + 60, tree_3_pos.x + img_tree_3.getwidth() - 10, tree_3_pos.y + 60);							// Ê÷3ÉÏ²ãÅö×²Ïß
-			line(tree_3_pos.x + 10, tree_3_pos.y + 120, tree_3_pos.x + img_tree_3.getwidth() - 20, tree_3_pos.y + 120);							// Ê÷3ÉÏ²ãÅö×²Ïß
-			line(tree_3_pos.x + 75, grassland_pos.y - img_tree_3.getheight() + 65, tree_3_pos.x + 75, grassland_pos.y);							// Ê÷3ÉÏ²ãÅö×²Ïß
-			line(tree_3_pos.x + 123, grassland_pos.y - img_tree_3.getheight() + 65, tree_3_pos.x + 123, grassland_pos.y);						// Ê÷3ÉÏ²ãÅö×²Ïß	
+			line(tree_3_pos.x + 10, tree_3_pos.y + 60, tree_3_pos.x + img_tree_3.getwidth() - 10, tree_3_pos.y + 60);							// æ ‘3ä¸Šå±‚ç¢°æ’žçº¿
+			line(tree_3_pos.x + 10, tree_3_pos.y + 120, tree_3_pos.x + img_tree_3.getwidth() - 20, tree_3_pos.y + 120);							// æ ‘3ä¸Šå±‚ç¢°æ’žçº¿
+			line(tree_3_pos.x + 75, grassland_pos.y - img_tree_3.getheight() + 65, tree_3_pos.x + 75, grassland_pos.y);							// æ ‘3ä¸Šå±‚ç¢°æ’žçº¿
+			line(tree_3_pos.x + 123, grassland_pos.y - img_tree_3.getheight() + 65, tree_3_pos.x + 123, grassland_pos.y);						// æ ‘3ä¸Šå±‚ç¢°æ’žçº¿	
 		*/
 	}
 
 	void on_input(const ExMessage& msg) {
-		// ±¦¿ÉÃÎ¿ØÖÆ
+		// å®å¯æ¢¦æŽ§åˆ¶
 		pokemon_player_1->on_input(msg);
 		pokemon_player_2->on_input(msg);
 
-		// ÅÐ¶ÏÔÝÍ£ºóµÄÇé¿ö
+		// åˆ¤æ–­æš‚åœåŽçš„æƒ…å†µ
 		if (is_esc_btn) {
 			switch (msg.message) {
 			case WM_LBUTTONDOWN: {
 				if (msg.y >= restart_btn_pos.y && msg.y <= restart_btn_pos.y + img_restart_button.getheight()) {
-					// ¼ÌÐøÓÎÏ·
+					// ç»§ç»­æ¸¸æˆ
 					if (msg.x >= continue_game_btn_pos.x && msg.x <= continue_game_btn_pos.x + img_continue_game_button.getwidth()) {
 						is_continue_game_btn = true;
 						button_sink_animatioin(5, 50, continue_game_btn_pos, &img_continue_game_button);
 						break;
 					}
-					// ÖØÐÂ¿ªÊ¼
+					// é‡æ–°å¼€å§‹
 					else if (msg.x >= restart_btn_pos.x && msg.x <= restart_btn_pos.x + img_restart_button.getwidth()) {
 						is_restart_btn = true;
 						button_sink_animatioin(5, 50, restart_btn_pos, &img_restart_button);
 						bullet_list.clear();
 						break;
 					}
-					// ·µ»Ø²Ëµ¥
+					// è¿”å›žèœå•
 					else if (msg.x >= return_menu_btn_pos.x && msg.x <= return_menu_btn_pos.x + img_restart_button.getwidth()) {
 						is_return_menu_btn = true;
 						button_sink_animatioin(5, 50, return_menu_btn_pos, &img_return_button);
@@ -508,7 +547,7 @@ public:
 			}
 		}
 
-		// ÅÐ¶ÏÓÎÏ·½áÊøºóµÄÇé¿ö
+		// åˆ¤æ–­æ¸¸æˆç»“æŸåŽçš„æƒ…å†µ
 		if (game_over_is_pop_btn) {
 			switch (msg.message) {
 			case WM_LBUTTONDOWN: {
@@ -576,7 +615,7 @@ public:
 				}
 				break;
 			}
-			// ¡¯Q'
+			// â€™Q'
 			if (msg.vkcode == 0x51) {
 				is_debug = !is_debug;
 				break;
@@ -592,51 +631,60 @@ public:
 	}
 
 private:
-	const float winner_bar_speed = 20.0f;			// ×´Ì¬Ìõ»¬¶¯ËÙ¶È
+	const float winner_bar_speed = 20.0f;			            // çŠ¶æ€æ¡æ»‘åŠ¨é€Ÿåº¦
 
 
 private:
-	POINT sky_pos = { 0 };							// Ìì¿ÕÎ»ÖÃ
-	POINT sun_pos = { 0 };							// Ì«ÑôÎ»ÖÃ
-	POINT hills_pos = { 0 };						// É½ÂöÎ»ÖÃ
-	POINT grassland_pos = { 0 };					// ²ÝµØÎ»ÖÃ
-	POINT tree_centre_pos = { 0 };					// ÖÐ¼äÊ÷µÄÎ»ÖÃ
-	POINT tree_1_pos = { 0 };						// Ê÷1µÄÎ»ÖÃ
-	POINT tree_2_pos = { 0 };						// Ê÷2µÄÎ»ÖÃ
-	POINT tree_3_pos = { 0 };						// Ê÷3µÄÎ»ÖÃ
-	POINT head_portrait_1P_pos = { 0 };				// 1P±¦¿ÉÃÎµÄÍ·ÏñÎ»ÖÃ
-	POINT head_portrait_2P_pos = { 0 };				// 1P±¦¿ÉÃÎµÄÍ·ÏñÎ»ÖÃ
-	POINT skill_frame_1P_1_pos = { 0 };				// 1P¼¼ÄÜÒ»¿òµÄÎ»ÖÃ
-	POINT skill_frame_1P_2_pos = { 0 };				// 1P¼¼ÄÜ¶þ¿òµÄÎ»ÖÃ
-	POINT skill_frame_1P_3_pos = { 0 };				// 1P¼¼ÄÜÈý¿òµÄÎ»ÖÃ
-	POINT skill_frame_1P_4_pos = { 0 };				// 1P¼¼ÄÜËÄ¿òµÄÎ»ÖÃ
-	POINT skill_frame_2P_1_pos = { 0 };				// 2P¼¼ÄÜÒ»¿òµÄÎ»ÖÃ
-	POINT skill_frame_2P_2_pos = { 0 };				// 2P¼¼ÄÜ¶þ¿òµÄÎ»ÖÃ
-	POINT skill_frame_2P_3_pos = { 0 };				// 2P¼¼ÄÜÈý¿òµÄÎ»ÖÃ
-	POINT skill_frame_2P_4_pos = { 0 };				// 2P¼¼ÄÜËÄ¿òµÄÎ»ÖÃ
-	POINT player_1P_pos = { 0 };					// Íæ¼Ò1PµÄ±¦¿ÉÃÎÎ»ÖÃ
-	POINT player_2P_pos = { 0 };					// Íæ¼Ò2PµÄ±¦¿ÉÃÎÎ»ÖÃ
-	POINT continue_game_btn_pos = { 0 };			// ¼ÌÐøÓÎÏ·°´Å¥µÄÎ»ÖÃ
-	POINT restart_btn_pos = { 0 };					// ÖØÐÂ¿ªÊ¼°´Å¥µÄÎ»ÖÃ
-	POINT again_btn_pos = { 0 };					// ÔÙÀ´Ò»³¡°´Å¥µÄÎ»ÖÃ
-	POINT return_menu_btn_pos = { 0 };				// ·µ»ØÖ÷²Ëµ¥°´Å¥µÄÎ»ÖÃ
-	POINT new_return_menu_btn_pos = { 0 };			// ÐÂµÄ·µ»ØÖ÷²Ëµ¥°´Å¥µÄÎ»ÖÃ
-	POINT winner_bar_pos = { 0 };					// Ê¤Àû±³¾°ÌõµÄÎ»ÖÃ
-	POINT winner_text_bar_pos = { 0 };				// Ê¤ÀûÎÄ±¾ÌõµÄÎ»ÖÃ
+	POINT sky_pos = { 0 };							            // å¤©ç©ºä½ç½®
+	POINT sun_pos = { 0 };							            // å¤ªé˜³ä½ç½®
+	POINT hills_pos = { 0 };						            // å±±è„‰ä½ç½®
+	POINT grassland_pos = { 0 };					            // è‰åœ°ä½ç½®
+	POINT tree_centre_pos = { 0 };					            // ä¸­é—´æ ‘çš„ä½ç½®
+	POINT tree_1_pos = { 0 };						            // æ ‘1çš„ä½ç½®
+	POINT tree_2_pos = { 0 };						            // æ ‘2çš„ä½ç½®
+	POINT tree_3_pos = { 0 };						            // æ ‘3çš„ä½ç½®
+	POINT head_portrait_1P_pos = { 0 };				            // 1På®å¯æ¢¦çš„å¤´åƒä½ç½®
+	POINT head_portrait_2P_pos = { 0 };				            // 1På®å¯æ¢¦çš„å¤´åƒä½ç½®
+	POINT skill_frame_1P_1_pos = { 0 };				            // 1PæŠ€èƒ½ä¸€æ¡†çš„ä½ç½®
+	POINT skill_frame_1P_2_pos = { 0 };				            // 1PæŠ€èƒ½äºŒæ¡†çš„ä½ç½®
+	POINT skill_frame_1P_3_pos = { 0 };				            // 1PæŠ€èƒ½ä¸‰æ¡†çš„ä½ç½®
+	POINT skill_frame_1P_4_pos = { 0 };				            // 1PæŠ€èƒ½å››æ¡†çš„ä½ç½®
+	POINT skill_frame_2P_1_pos = { 0 };				            // 2PæŠ€èƒ½ä¸€æ¡†çš„ä½ç½®
+	POINT skill_frame_2P_2_pos = { 0 };				            // 2PæŠ€èƒ½äºŒæ¡†çš„ä½ç½®
+	POINT skill_frame_2P_3_pos = { 0 };				            // 2PæŠ€èƒ½ä¸‰æ¡†çš„ä½ç½®
+	POINT skill_frame_2P_4_pos = { 0 };				            // 2PæŠ€èƒ½å››æ¡†çš„ä½ç½®
+	POINT player_1P_pos = { 0 };					            // çŽ©å®¶1Pçš„å®å¯æ¢¦ä½ç½®
+	POINT player_2P_pos = { 0 };					            // çŽ©å®¶2Pçš„å®å¯æ¢¦ä½ç½®
+	POINT continue_game_btn_pos = { 0 };			            // ç»§ç»­æ¸¸æˆæŒ‰é’®çš„ä½ç½®
+	POINT restart_btn_pos = { 0 };					            // é‡æ–°å¼€å§‹æŒ‰é’®çš„ä½ç½®
+	POINT again_btn_pos = { 0 };					            // å†æ¥ä¸€åœºæŒ‰é’®çš„ä½ç½®
+	POINT return_menu_btn_pos = { 0 };				            // è¿”å›žä¸»èœå•æŒ‰é’®çš„ä½ç½®
+	POINT new_return_menu_btn_pos = { 0 };			            // æ–°çš„è¿”å›žä¸»èœå•æŒ‰é’®çš„ä½ç½®
+	POINT winner_bar_pos = { 0 };					            // èƒœåˆ©èƒŒæ™¯æ¡çš„ä½ç½®
+	POINT winner_text_bar_pos = { 0 };				            // èƒœåˆ©æ–‡æœ¬æ¡çš„ä½ç½®
+	POINT tutorial_prompt_text_A_pos = { 0 };		            // æ•™ç¨‹æç¤ºæ–‡æœ¬Açš„ä½ç½®
+	POINT tutorial_prompt_text_D_pos = { 0 };		            // æ•™ç¨‹æç¤ºæ–‡æœ¬Dçš„ä½ç½®
+	POINT tutorial_prompt_text_left_arrow_pos = { 0 };			// æ•™ç¨‹æç¤ºæ–‡æœ¬â¬…çš„ä½ç½®
+	POINT tutorial_prompt_text_right_arrow_pos = { 0 };			// æ•™ç¨‹æç¤ºæ–‡æœ¬âž¡çš„ä½ç½®
+	POINT tutorial_prompt_text_jump_1P_pos = { 0 };				// æ•™ç¨‹æç¤ºæ–‡æœ¬W
+	POINT tutorial_prompt_text_jump_2P_pos = { 0 };				// æ•™ç¨‹æç¤ºæ–‡æœ¬â¬†
+	POINT tutorial_prompt_text_skill_1P_pos = { 0 };		    // æ•™ç¨‹æç¤ºæ–‡æœ¬1PæŠ€èƒ½æŒ‰é’®çš„ä½ç½®
+	POINT tutorial_prompt_text_skill_2P_pos = { 0 };		    // æ•™ç¨‹æç¤ºæ–‡æœ¬2PæŠ€èƒ½æŒ‰é’®çš„ä½ç½®
 
-	Timer timer_winner_bar_slide_in;				// Ê¤ÀûÌõ»¬Èë¼ÆÊ±Æ÷
-	Timer timer_winner_bar_slide_out;				// Ê¤ÀûÌõ»¬³ö¼ÆÊ±Æ÷
+
+	Timer timer_winner_bar_slide_in;				            // èƒœåˆ©æ¡æ»‘å…¥è®¡æ—¶å™¨
+	Timer timer_winner_bar_slide_out;				            // èƒœåˆ©æ¡æ»‘å‡ºè®¡æ—¶å™¨
 
 
-	bool is_esc_btn = false;						// ÊÇ·ñ°´ÏÂÁËesc°´¼ü
-	bool is_continue_game_btn = false;				// ÊÇ·ñ°´ÏÂÁË¼ÌÐøÓÎÏ·°´Å¥
-	bool is_restart_btn = false;					// ÊÇ·ñ°´ÏÂÁËÖØÐÂ¿ªÊ¼°´Å¥
-	bool is_return_menu_btn = false;				// ÊÇ·ñ°´ÏÂÁË·µ»ØÖ÷²Ëµ¥°´Å¥
-	bool is_again_game_btn = false;					// ÊÇ·ñ°´ÏÂÁËÔÙÀ´Ò»³¡°´Å¥
-	bool is_new_return_menu_btn = false;			// ÊÇ·ñ°´ÏÂÁËÐÂµÄ·µ»Ø²Ëµ¥°´Å¥
-	bool is_game_over = false;						// ÓÎÏ·ÊÇ·ñ½áÊø
-	bool is_winner_bar_slide_out = false;			// Ê¤ÀûÌõÊÇ·ñ¿ªÊ¼»¬³ö
-	bool game_over_is_pop_btn = false;				// ÓÎÏ·½áÊøºóÊÇ·ñµ¯³ö°´Å¥
+	bool is_esc_btn = false;						            // æ˜¯å¦æŒ‰ä¸‹äº†escæŒ‰é”®
+	bool is_continue_game_btn = false;				            // æ˜¯å¦æŒ‰ä¸‹äº†ç»§ç»­æ¸¸æˆæŒ‰é’®
+	bool is_restart_btn = false;					            // æ˜¯å¦æŒ‰ä¸‹äº†é‡æ–°å¼€å§‹æŒ‰é’®
+	bool is_return_menu_btn = false;				            // æ˜¯å¦æŒ‰ä¸‹äº†è¿”å›žä¸»èœå•æŒ‰é’®
+	bool is_again_game_btn = false;					            // æ˜¯å¦æŒ‰ä¸‹äº†å†æ¥ä¸€åœºæŒ‰é’®
+	bool is_new_return_menu_btn = false;			            // æ˜¯å¦æŒ‰ä¸‹äº†æ–°çš„è¿”å›žèœå•æŒ‰é’®
+	bool is_game_over = false;						            // æ¸¸æˆæ˜¯å¦ç»“æŸ
+	bool is_winner_bar_slide_out = false;			            // èƒœåˆ©æ¡æ˜¯å¦å¼€å§‹æ»‘å‡º
+	bool game_over_is_pop_btn = false;				            // æ¸¸æˆç»“æŸåŽæ˜¯å¦å¼¹å‡ºæŒ‰é’®
 
 
 };
