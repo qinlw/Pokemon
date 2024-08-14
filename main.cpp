@@ -21,8 +21,8 @@ const std::string db = "pokemon_db";											// 宝可梦数据
 const unsigned const int port = 3306;											// 端口号
 
 bool is_debug = true;								                            // 是否开启调式模式
-bool is_mysql_connect;								                            // 是否成功连接数据库
-bool is_first_game;									                            // 是否是第一次游戏
+bool is_mysql_connect = false;						                            // 是否成功连接数据库
+bool is_first_game = true;							                            // 是否是第一次游戏
 
 Scene* menu_scene = nullptr;						                            // 菜单场景对象指针
 Scene* knapsack_scene = nullptr;					                            // 背包场景对象指针
@@ -49,12 +49,14 @@ void connect_mysql(const string host, const string user, const string password, 
 	{
 		std::cerr << "init MySQL error" << std::endl;
 		is_mysql_connect = false;
+		return;
 	}
 
 	if (mysql_real_connect(my, host.c_str(), user.c_str(), password.c_str(), db.c_str(), port, nullptr, 0) == nullptr)
 	{
 		std::cerr << "connect MySQL error" << std::endl;
 		is_mysql_connect = false;
+		return;
 	}
 	is_mysql_connect = true;
 
@@ -70,7 +72,10 @@ void check_and_update_is_first_game() {
 	else std::cout << sql << " failed:" << n << std::endl;
 
 	MYSQL_RES* res = mysql_store_result(my);
-	if (res == nullptr) std::cerr << "mysql_store_result error" << std::endl;
+	if (res == nullptr) {
+		std::cerr << "mysql_store_result error" << std::endl;
+		return;
+	}
 
 	const int rows = mysql_num_rows(res);			// 获取行数
 	const int fields = mysql_num_fields(res);		// 获取列数

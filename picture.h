@@ -4,12 +4,23 @@
 
 
 // 主菜单场景
-IMAGE img_background_base;							// 背景版
+IMAGE img_background_base;							// 主菜单背景版
 IMAGE img_menu_background;							// 主菜单界面
 IMAGE img_start_button;								// 开始按钮
 IMAGE img_knapsack_button;							// 背包按钮
 IMAGE img_set_button;								// 设置按钮
 IMAGE img_exit_button;								// 退出按钮
+
+
+// 设置场景
+IMAGE img_set_background;							// 设置场景背景
+// set_is_first_game
+IMAGE img_set_bar_background_color;					// 背景色
+IMAGE img_novice_teaching_text;						// 新手教程文本
+IMAGE img_open_or_close_white_background;			// 白色背景（上面绘制打开和关闭文本）
+IMAGE img_is_open_or_is_close;						// 是打开 or 是关闭
+IMAGE img_open_text;								// 打开文本
+IMAGE img_close_text;								// 关闭文本
 
 
 // 选择场景
@@ -140,6 +151,16 @@ void load_res() {
 	loadimage(&img_knapsack_button, _T("res/knapsack_button.png"));
 	loadimage(&img_set_button, _T("res/set_button.png"));
 	loadimage(&img_exit_button, _T("res/exit_button.png"));
+
+	//设置场景资源加载
+	loadimage(&img_set_background, _T("res/set/set_background.png"));
+	// set_is_first_game
+	loadimage(&img_set_bar_background_color, _T("res/set/set_is_first_game/set_bar_background_color.png"));
+	loadimage(&img_novice_teaching_text, _T("res/set/set_is_first_game/novice_teaching_text.png"));
+	loadimage(&img_open_or_close_white_background, _T("res/set/set_is_first_game/open_or_close_white_background.png"));
+	loadimage(&img_is_open_or_is_close, _T("res/set/set_is_first_game/is_open_or_is_close.png"));
+	loadimage(&img_open_text, _T("res/set/set_is_first_game/open_text.png"));
+	loadimage(&img_close_text, _T("res/set/set_is_first_game/close_text.png"));
 
 	// 选择场景资源加载
 	loadimage(&img_selector_background, _T("res/selector_background.png"));
