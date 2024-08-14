@@ -15,8 +15,8 @@ IMAGE img_exit_button;								// 退出按钮
 // 设置场景
 IMAGE img_set_background;							// 设置场景背景
 IMAGE img_set_return_to_menu_button;				// 返回按钮
-// set_is_first_game
-IMAGE img_set_bar_background_color;					// 背景色
+// 设置新手教程
+IMAGE img_set_bar_background_color;					// 设置条背景色
 IMAGE img_novice_teaching_text;						// 新手教程文本
 IMAGE img_open_or_close_white_background;			// 白色背景（上面绘制打开和关闭文本）
 IMAGE img_is_open_or_is_close;						// 是打开 or 是关闭
@@ -156,7 +156,7 @@ void load_res() {
 	//设置场景资源加载
 	loadimage(&img_set_background, _T("res/set/set_background.png"));
 	loadimage(&img_set_return_to_menu_button, _T("res/set/set_return_to_menu_button.png"));
-	// set_is_first_game
+	// 设置新手教程
 	loadimage(&img_set_bar_background_color, _T("res/set/set_is_first_game/set_bar_background_color.png"));
 	loadimage(&img_novice_teaching_text, _T("res/set/set_is_first_game/novice_teaching_text.png"));
 	loadimage(&img_open_or_close_white_background, _T("res/set/set_is_first_game/open_or_close_white_background.png"));
