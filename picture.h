@@ -11,6 +11,8 @@ IMAGE img_knapsack_button;							// 背包按钮
 IMAGE img_set_button;								// 设置按钮
 IMAGE img_exit_button;								// 退出按钮
 
+Atlas atlas_mysql_unconnected;						// 数据库未连接的文本提示
+
 
 // 设置场景
 IMAGE img_set_background;							// 设置场景背景
@@ -153,16 +155,18 @@ void load_res() {
 	loadimage(&img_set_button, _T("res/set_button.png"));
 	loadimage(&img_exit_button, _T("res/exit_button.png"));
 
+	atlas_mysql_unconnected.load_from_file(_T("res/mysql_unconnected_%d.png"), 21);
+
 	//设置场景资源加载
 	loadimage(&img_set_background, _T("res/set/set_background.png"));
 	loadimage(&img_set_return_to_menu_button, _T("res/set/set_return_to_menu_button.png"));
 	// 设置新手教程
-	loadimage(&img_set_bar_background_color, _T("res/set/set_is_first_game/set_bar_background_color.png"));
-	loadimage(&img_novice_teaching_text, _T("res/set/set_is_first_game/novice_teaching_text.png"));
-	loadimage(&img_open_or_close_white_background, _T("res/set/set_is_first_game/open_or_close_white_background.png"));
-	loadimage(&img_is_open_or_is_close, _T("res/set/set_is_first_game/is_open_or_is_close.png"));
-	loadimage(&img_open_text, _T("res/set/set_is_first_game/open_text.png"));
-	loadimage(&img_close_text, _T("res/set/set_is_first_game/close_text.png"));
+	loadimage(&img_set_bar_background_color, _T("res/set/set_bar_background_color.png"));
+	loadimage(&img_novice_teaching_text, _T("res/set/novice_teaching_text.png"));
+	loadimage(&img_open_or_close_white_background, _T("res/set/open_or_close_white_background.png"));
+	loadimage(&img_is_open_or_is_close, _T("res/set/is_open_or_is_close.png"));
+	loadimage(&img_open_text, _T("res/set/open_text.png"));
+	loadimage(&img_close_text, _T("res/set/close_text.png"));
 
 	// 选择场景资源加载
 	loadimage(&img_selector_background, _T("res/selector_background.png"));
