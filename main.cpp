@@ -22,7 +22,6 @@ const unsigned const int port = 3306;											// 端口号
 
 bool is_debug = true;								                            // 是否开启调式模式
 bool is_mysql_connect = false;						                            // 是否成功连接数据库
-bool is_first_game = true;							                            // 是否是第一次游戏
 
 Scene* menu_scene = nullptr;						                            // 菜单场景对象指针
 Scene* knapsack_scene = nullptr;					                            // 背包场景对象指针
@@ -41,6 +40,11 @@ std::vector<Bullet*> bullet_list;												// 子弹容器
 
 HWND hwnd;																		// 窗口句柄
 MYSQL* my;																		// mysql的连接句柄
+
+// 设置内容
+bool is_first_game = false;							                            // 是否是第一次游戏
+bool is_attribute_restrain = true;												// 是否有属性克制
+
 
 // 做初始化，仅连接数据库
 void connect_mysql(const string host, const string user, const string password, const string db, const unsigned const int port) {

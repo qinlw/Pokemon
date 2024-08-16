@@ -17,6 +17,8 @@ extern std::vector<CollisionLine> collision_thwartwise_line_list;
 extern std::vector<CollisionLine> collision_vertical_line_list;
 extern std::vector<Bullet*> bullet_list;
 
+extern bool is_attribute_restrain;
+
 class Pokemon {
 public:
 	Pokemon(bool flag = true) : is_facing_right(flag) {
@@ -384,6 +386,7 @@ private:
 				float magic_k = 3.692308f;		// 属性攻击系数
 				int is_restrain = check_is_restrain(current_bullet_attribute, pokemon_attribute);	// 属性是否克制
 				float attribute_k = is_restrain > 0 ? 1.5 : is_restrain < 0 ? 0.8 : 1;
+				if (!is_attribute_restrain) attribute_k = 1;
 				int damage = (float)bullet->get_ATK() / (float)(pokemon_base_DEF * physics_k)
 					+ (float)bullet->get_MATK() / (float)(pokemon_base_MDEF * magic_k) * attribute_k;
 				hp -= damage;
