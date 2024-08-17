@@ -75,18 +75,22 @@ public:
 			if (msg.x >= start_button_pos.x && msg.x <= start_button_pos.x + img_start_button.getwidth()) {
 				if (msg.y >= start_button_pos.y && msg.y < start_button_pos.y + img_start_button.getheight()) {
 					is_start_btn = true;
+					if (is_open_sound_effect) mciSendString(_T("play click_sound_2_1 from 0"), NULL, 0, NULL);
 					button_sink_animatioin(5, 50, start_button_pos, &img_start_button);
 				}
 				else if (msg.y >= knapsack_button_pos.y && msg.y < knapsack_button_pos.y + img_knapsack_button.getheight()) {
 					is_knapsack_btn = true;
+					if (is_open_sound_effect) mciSendString(_T("play click_sound_2_1 from 0"), NULL, 0, NULL);
 					button_sink_animatioin(5, 50, knapsack_button_pos, &img_knapsack_button);
 				}
 				else if (msg.y >= set_button_pos.y && msg.y < set_button_pos.y + img_set_button.getheight()) {
 					is_set_btn = true;
+					if (is_open_sound_effect) mciSendString(_T("play click_sound_2_1 from 0"), NULL, 0, NULL);
 					button_sink_animatioin(5, 50, set_button_pos, &img_set_button);
 				}
 				else if (msg.y >= exit_button_pos.y && msg.y < exit_button_pos.y + img_exit_button.getheight()) {
 					is_exit_btn = true;
+					if (is_open_sound_effect) mciSendString(_T("play click_sound_2_1 from 0"), NULL, 0, NULL);
 					button_sink_animatioin(5, 50, exit_button_pos, &img_exit_button);
 				}
 			}
@@ -97,39 +101,47 @@ public:
 			if (msg.x >= start_button_pos.x && msg.x <= start_button_pos.x + img_start_button.getwidth()) {
 				if (msg.y >= start_button_pos.y && msg.y < start_button_pos.y + img_start_button.getheight() && is_start_btn) {
 					is_start_btn = false;
+					if (is_open_sound_effect) mciSendString(_T("play click_sound_2_2 from 0"), NULL, 0, NULL);
 					button_bulge_animatioin(5, 300, start_button_pos, &img_start_button);
 					scene_manager->switch_scene(SceneManager::SceneType::Pokemon);
 				}
 				else if (msg.y >= knapsack_button_pos.y && msg.y < knapsack_button_pos.y + img_knapsack_button.getheight() && is_knapsack_btn) {
 					is_knapsack_btn = false;
+					if (is_open_sound_effect) mciSendString(_T("play click_sound_2_2 from 0"), NULL, 0, NULL);
 					button_bulge_animatioin(5, 300, knapsack_button_pos, &img_knapsack_button);
 					scene_manager->switch_scene(SceneManager::SceneType::Knapscack);
 				}
 				else if (msg.y >= set_button_pos.y && msg.y < set_button_pos.y + img_set_button.getheight() && is_set_btn) {
 					is_set_btn = false;
+					if (is_open_sound_effect) mciSendString(_T("play click_sound_2_2 from 0"), NULL, 0, NULL);
 					button_bulge_animatioin(5, 300, set_button_pos, &img_set_button);
 					scene_manager->switch_scene(SceneManager::SceneType::Set);
 				}
 				else if (msg.y >= exit_button_pos.y && msg.y < exit_button_pos.y + img_exit_button.getheight() && is_exit_btn) {
 					is_exit_btn = false;
+					if (is_open_sound_effect) mciSendString(_T("play click_sound_2_2 from 0"), NULL, 0, NULL);
 					button_bulge_animatioin(5, 300, exit_button_pos, &img_exit_button);
 					exit(0);
 				}
 				else {
 					if (is_start_btn) {
 						is_start_btn = false;
+						if (is_open_sound_effect) mciSendString(_T("play click_sound_2_2 from 0"), NULL, 0, NULL);
 						button_bulge_animatioin(5, 300, start_button_pos, &img_start_button);
 					}
 					else if (is_knapsack_btn) {
 						is_knapsack_btn = false;
+						if (is_open_sound_effect) mciSendString(_T("play click_sound_2_2 from 0"), NULL, 0, NULL);
 						button_bulge_animatioin(5, 300, knapsack_button_pos, &img_knapsack_button);
 					}
 					else if (is_set_btn) {
 						is_set_btn = false;
+						if (is_open_sound_effect) mciSendString(_T("play click_sound_2_2 from 0"), NULL, 0, NULL);
 						button_bulge_animatioin(5, 300, set_button_pos, &img_set_button);
 					}
 					else if (is_exit_btn) {
 						is_exit_btn = false;
+						if (is_open_sound_effect) mciSendString(_T("play click_sound_2_2 from 0"), NULL, 0, NULL);
 						button_bulge_animatioin(5, 300, exit_button_pos, &img_exit_button);
 					}
 				}
@@ -137,18 +149,22 @@ public:
 			else {
 				if (is_start_btn) {
 					is_start_btn = false;
+					if (is_open_sound_effect) mciSendString(_T("play click_sound_2_2 from 0"), NULL, 0, NULL);
 					button_bulge_animatioin(5, 300, start_button_pos, &img_start_button);
 				}
 				else if (is_knapsack_btn) {
 					is_knapsack_btn = false;
+					if (is_open_sound_effect) mciSendString(_T("play click_sound_2_2 from 0"), NULL, 0, NULL);
 					button_bulge_animatioin(5, 300, knapsack_button_pos, &img_knapsack_button);
 				}
 				else if (is_set_btn) {
 					is_set_btn = false;
+					if (is_open_sound_effect) mciSendString(_T("play click_sound_2_2 from 0"), NULL, 0, NULL);
 					button_bulge_animatioin(5, 300, set_button_pos, &img_set_button);
 				}
 				else if (is_exit_btn) {
 					is_exit_btn = false;
+					if (is_open_sound_effect) mciSendString(_T("play click_sound_2_2 from 0"), NULL, 0, NULL);
 					button_bulge_animatioin(5, 300, exit_button_pos, &img_exit_button);
 				}
 			}

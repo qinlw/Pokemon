@@ -30,6 +30,8 @@ IMAGE img_close_text;								// 关闭文本
 // 设置选项名等
 IMAGE img_novice_teaching_text;						// 新手教程文本
 IMAGE img_attribute_restrain_switch;				// 属性克制开关选项的文本
+IMAGE img_is_open_music_text;						// 是否打开音乐
+IMAGE img_is_open_sound_effect_text;						// 是否打开音效
 
 
 // 选择场景
@@ -175,6 +177,8 @@ void load_res() {
 	// 设置选项名等
 	loadimage(&img_novice_teaching_text, _T("res/set/novice_teaching_text.png"));
 	loadimage(&img_attribute_restrain_switch, _T("res/set/attribute_restrain_switch.png"));
+	loadimage(&img_is_open_music_text, _T("res/set/is_open_music_text.png"));
+	loadimage(&img_is_open_sound_effect_text, _T("res/set/is_open_sound effect_text.png"));
 
 
 	// 选择场景资源加载
@@ -295,5 +299,9 @@ void load_res() {
 	mciSendString(_T("open res/music/background_music_3.mp3 alias background_music_3"), NULL, 0, NULL);
 	mciSendString(_T("open res/music/click_sound_1.wav alias click_sound_1"), NULL, 0, NULL);
 	mciSendString(_T("open res/music/click_sound_2.wav alias click_sound_2"), NULL, 0, NULL);
+	mciSendString(_T("open res/music/click_sound_2_1.wav alias click_sound_2_1"), NULL, 0, NULL);
+	mciSendString(_T("open res/music/click_sound_2_2.wav alias click_sound_2_2"), NULL, 0, NULL);
 	mciSendString(_T("open res/music/click_sound_3.wav alias click_sound_3"), NULL, 0, NULL);
+	mciSendString(_T("open res/music/wooden_cabinet_sound_slide_out.wav alias wooden_cabinet_sound_slide_out"), NULL, 0, NULL);
+	mciSendString(_T("open res/music/wooden_cabinet_sound_slide_in.wav alias wooden_cabinet_sound_slide_in"), NULL, 0, NULL);
 }
