@@ -14,6 +14,8 @@ extern SceneManager* scene_manager;
 extern Pokemon* pokemon_player_1;
 extern Pokemon* pokemon_player_2;
 
+extern bool is_open_sound_effect;
+
 class ScenePokemon : public Scene {
 public:
 	void on_enter() {
@@ -195,6 +197,7 @@ public:
 			if (msg.x >= return_btn_pos.x && msg.x <= return_btn_pos.x + img_return_button.getwidth() &&
 				msg.y >= return_btn_pos.y && msg.y <= return_btn_pos.y + img_return_button.getheight()) {
 				is_return_btn = true;
+				if (is_open_sound_effect) mciSendString(_T("play click_sound_2_1 from 0"), NULL, 0, NULL);
 				button_sink_animatioin(5, 50, return_btn_pos, &img_return_button);
 				break;
 			}
@@ -245,12 +248,14 @@ public:
 				if (msg.x >= return_btn_pos.x && msg.x <= return_btn_pos.x + img_return_button.getwidth() &&
 					msg.y >= return_btn_pos.y && msg.y <= return_btn_pos.y + img_return_button.getheight()) {
 					is_return_btn = false;
+					if (is_open_sound_effect) mciSendString(_T("play click_sound_2_2 from 0"), NULL, 0, NULL);
 					button_bulge_animatioin(5, 300, return_btn_pos, &img_return_button);
 					scene_manager->switch_scene(SceneManager::SceneType::Menu);
 				}
 				else {
 					if (is_return_btn) {
 						is_return_btn = false;
+						if (is_open_sound_effect) mciSendString(_T("play click_sound_2_2 from 0"), NULL, 0, NULL);
 						button_bulge_animatioin(5, 300, return_btn_pos, &img_return_button);
 					}
 				}
@@ -270,7 +275,6 @@ public:
 					int centreL = btn_1P_right_pos.y + img_1P_selector_btn_idle_right.getheight() / 2;
 					int yL = abs(msg.y - centreL);
 					int innerL = abs(img_1P_selector_btn_idle_right.getheight() / 2 - msg.x + btn_1P_right_pos.x);
-					if (yL <= innerL) is_1P_right_btn = true;
 					if (yL <= innerL) player_type_1P = (PokemonType)(((int)player_type_1P + 1) % (int)PokemonType::Invalid);
 					break;
 				}
@@ -291,11 +295,19 @@ public:
 					break;
 				}
 				else {
-					bool is_1P_left_btn = false;					
-					bool is_1P_right_btn = false;					
-					bool is_2P_left_btn = false;					
-					bool is_2P_right_btn = false;
+					is_1P_left_btn = false;					
+					is_1P_right_btn = false;					
+					is_2P_left_btn = false;					
+					is_2P_right_btn = false;
+					break;
 				}
+			}
+			else {
+				is_1P_left_btn = false;
+				is_1P_right_btn = false;
+				is_2P_left_btn = false;
+				is_2P_right_btn = false;
+				break;
 			}
 
 
