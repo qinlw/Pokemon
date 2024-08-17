@@ -29,7 +29,7 @@ public:
 			mp += 5;
 			if (mp > 100) mp = 100;
 			});
-		timer_move_sound.set_wait_time(50);
+		timer_move_sound.set_wait_time(100);
 		timer_move_sound.set_callback([&]() {
 			is_play_move_sound = true;
 			});
@@ -266,7 +266,7 @@ public:
 		pokemon_pos.x += distance;
 
 		if (!is_play_move_sound || !check_land()) return;
-		switch (idx) {
+		switch (rand() % 10) {
 		case 1:
 			mciSendString(_T("play move_sound_1 from 0"), NULL, 0, NULL);
 			break;
@@ -295,8 +295,6 @@ public:
 			mciSendString(_T("play move_sound_9 from 0"), NULL, 0, NULL);
 			break;
 		}
-		++idx;
-		if (idx > 7) idx = 1;
 		is_play_move_sound = false;
 	}
 
@@ -351,7 +349,6 @@ protected:
 	bool is_facing_right = false;										// 当前是否朝向右边
 	bool is_left_btn = false;											// 是否按下了左移按钮
 	bool is_right_btn = false;											// 是否按下了右移按钮
-	int idx = 1;
 
 private:
 	void move_collision(int delta) {
