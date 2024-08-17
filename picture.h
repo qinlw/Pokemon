@@ -2,6 +2,10 @@
 
 #include "atlas.h"
 
+#include <Windows.h>
+
+#pragma comment(lib, "Winmm.lib")
+
 
 // 主菜单场景
 IMAGE img_background_base;							// 主菜单背景版
@@ -285,4 +289,11 @@ void load_res() {
 	loadimage(&img_2P_squirtle_win_text_bar, _T("res/2P_squirtle_win_text_bar.png"));
 	loadimage(&img_1P_bulbasaur_win_text_bar, _T("res/1P_bulbasaur_win_text_bar.png"));
 	loadimage(&img_2P_bulbasaur_win_text_bar, _T("res/2P_bulbasaur_win_text_bar.png"));
+
+	mciSendString(_T("open res/music/background_music_1.mp3 alias background_music_1"), NULL, 0, NULL);
+	mciSendString(_T("open res/music/background_music_2.mp3 alias background_music_2"), NULL, 0, NULL);
+	mciSendString(_T("open res/music/background_music_3.mp3 alias background_music_3"), NULL, 0, NULL);
+	mciSendString(_T("open res/music/click_sound_1.wav alias click_sound_1"), NULL, 0, NULL);
+	mciSendString(_T("open res/music/click_sound_2.wav alias click_sound_2"), NULL, 0, NULL);
+	mciSendString(_T("open res/music/click_sound_3.wav alias click_sound_3"), NULL, 0, NULL);
 }

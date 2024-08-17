@@ -7,9 +7,13 @@
 #pragma comment(lib, "MSIMG32.LIB")
 
 
-extern bool is_mysql_connect;
-
 extern SceneManager* scene_manager;
+
+extern bool is_mysql_connect;
+extern bool is_open_music;
+extern int background_music_id;
+extern bool is_playing_music;
+
 
 class SceneMenu : public Scene {
 public:
@@ -31,6 +35,23 @@ public:
 		animation_mysql_unconnected_text.set_atlas(&atlas_mysql_unconnected);
 		animation_mysql_unconnected_text.set_interval(200);
 		animation_mysql_unconnected_text.set_is_loop(false);
+
+		if (is_open_music && !is_playing_music) {
+			switch (background_music_id) {
+			case 1:
+				mciSendString(_T("play background_music_1 repeat from 0"), NULL, 0, NULL);
+				is_playing_music = true;
+				break;
+			case 2:
+				mciSendString(_T("play background_music_2 repeat from 0"), NULL, 0, NULL);
+				is_playing_music = true;
+				break;
+			case 3:
+				mciSendString(_T("play background_music_3 repeat from 0"), NULL, 0, NULL);
+				is_playing_music = true;
+				break;
+			}
+		}
 	}
 
 	void on_update(int delta) {

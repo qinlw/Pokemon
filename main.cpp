@@ -1,4 +1,5 @@
 #include "util.h"
+#include "mysql_fun.h"
 #include "picture.h"
 #include "scene_manager.h"
 #include "scene_menu.h"
@@ -44,72 +45,20 @@ MYSQL* my;																		// mysql的连接句柄
 // 设置内容
 bool is_first_game = false;							                            // 是否是第一次游戏
 bool is_attribute_restrain = true;												// 是否有属性克制
+bool is_open_music = true;														// 是否打开音乐
+bool is_open_sound_effect = true;												// 是否打开音效
+int background_music_id = 1;													// 主菜单播放的背景音乐 
+bool is_playing_music = false;													// 是否正在播放音乐
+bool is_playing_sound_effect = false;											// 是否正在播放音乐
 
-
-// 做初始化，仅连接数据库
-void connect_mysql(const string host, const string user, const string password, const string db, const unsigned const int port) {
-	my = mysql_init(nullptr);
-	if (my == nullptr)
-	{
-		std::cerr << "init MySQL error" << std::endl;
-		is_mysql_connect = false;
-		return;
-	}
-
-	if (mysql_real_connect(my, host.c_str(), user.c_str(), password.c_str(), db.c_str(), port, nullptr, 0) == nullptr)
-	{
-		std::cerr << "connect MySQL error" << std::endl;
-		is_mysql_connect = false;
-		return;
-	}
-	is_mysql_connect = true;
-
-	std::cout << "mysql connect sucess" << std::endl;
-
-	mysql_set_character_set(my, "utf8");
-}
-// 检查并更新is_first_game的值
-void check_and_update_is_first_game() {
-	std::string sql = "select * from game_status";
-	const int n = mysql_query(my, sql.c_str());
-	if (n == 0) std::cout << sql << " sucess:" << n << std::endl;
-	else std::cout << sql << " failed:" << n << std::endl;
-
-	MYSQL_RES* res = mysql_store_result(my);
-	if (res == nullptr) {
-		std::cerr << "mysql_store_result error" << std::endl;
-		return;
-	}
-
-	const int rows = mysql_num_rows(res);			// 获取行数
-	const int fields = mysql_num_fields(res);		// 获取列数
-
-	for (int i = 0; i < rows; i++) {
-		MYSQL_ROW row = mysql_fetch_row(res);
-		for (int j = 0; j < fields; j++) {
-			if (strcmp(row[j], "is_first_game") != 0) break;
-			if (strcmp(row[++j], "1") == 0) is_first_game = true;
-			else is_first_game = false;
-			std::cout << "is_first_game: " << is_first_game << std::endl;			// 方便测试
-			return;
-		}
-	}
-}
-// 设置is_first_game的值
-void set_is_first_game(bool flag) {
-	std::string sql;
-	if (flag) sql = "update game_status set status = 1 where status_name = 'is_first_game'";
-	else sql = "update game_status set status = 0 where status_name = 'is_first_game'";
-
-	const int n = mysql_query(my, sql.c_str());
-	if (n == 0) std::cout << sql << " sucess:" << n << std::endl;
-	else std::cout << sql << " failed:" << n << std::endl;
-}
 
 int main() {
-	// 初始化数据库并给is_first_game赋值
+	// 初始化数据库并给相关参数赋值
 	connect_mysql(host, user, password, db, port);
 	check_and_update_is_first_game();
+	check_and_update_is_open_music();
+	check_and_update_is_open_sound_effect();
+	check_update_background_music_id();
 
 	srand(time(NULL)); 
 
