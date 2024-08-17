@@ -144,18 +144,22 @@ public:
 			// 'A'
 			case 0x41:
 				is_1P_left_btn = true;
+				if (is_open_sound_effect) mciSendString(_T("play click_sound_2_1 from 0"), NULL, 0, NULL);
 				break;
 			// 'D'
 			case 0x44:
 				is_1P_right_btn = true;
+				if (is_open_sound_effect) mciSendString(_T("play click_sound_2_1 from 0"), NULL, 0, NULL);
 				break;
 			// '⬅'
 			case VK_LEFT:
 				is_2P_left_btn = true;
+				if (is_open_sound_effect) mciSendString(_T("play click_sound_2_1 from 0"), NULL, 0, NULL);
 				break;
 			// '➡'
 			case VK_RIGHT:
 				is_2P_right_btn = true;
+				if (is_open_sound_effect) mciSendString(_T("play click_sound_2_1 from 0"), NULL, 0, NULL);
 				break;
 			}
 			break;
@@ -164,26 +168,31 @@ public:
 			// 'A'
 			case 0x41:
 				is_1P_left_btn = false;
+				if (is_open_sound_effect) mciSendString(_T("play click_sound_2_2 from 0"), NULL, 0, NULL);
 				player_type_1P = (PokemonType)(((int)PokemonType::Invalid + (int)player_type_1P - 1) % (int)PokemonType::Invalid);
 				break;
 			// 'D'
 			case 0x44:
 				is_1P_right_btn = false;
+				if (is_open_sound_effect) mciSendString(_T("play click_sound_2_2 from 0"), NULL, 0, NULL);
 				player_type_1P = (PokemonType)(((int)player_type_1P + 1) % (int)PokemonType::Invalid);
 				break;
 			// '⬅'
 			case VK_LEFT:
 				is_2P_left_btn = false;
+				if (is_open_sound_effect) mciSendString(_T("play click_sound_2_2 from 0"), NULL, 0, NULL);
 				player_type_2P = (PokemonType)(((int)PokemonType::Invalid + (int)player_type_2P - 1) % (int)PokemonType::Invalid);
 				break;
 			// '➡'
 			case VK_RIGHT:
 				is_2P_right_btn = false;
+				if (is_open_sound_effect) mciSendString(_T("play click_sound_2_2 from 0"), NULL, 0, NULL);
 				player_type_2P = (PokemonType)(((int)player_type_2P + 1) % (int)PokemonType::Invalid);
 				break;
 			// 'enter'
 			case VK_RETURN:
 				is_enter_start = true;
+				if (is_open_sound_effect) mciSendString(_T("play mechanical_rotation_sound from 0"), NULL, 0, NULL);
 				break;
 			// 调式代码 'B'
 			case 0x42:
@@ -211,6 +220,7 @@ public:
 			// 切换宝可梦按钮
 			if (msg.y >= btn_1P_left_pos.y && msg.y <= btn_1P_left_pos.y + img_1P_selector_btn_idle_left.getheight()) {
 				if (msg.x >= btn_1P_left_pos.x && msg.x <= btn_1P_left_pos.x + img_1P_selector_btn_idle_left.getwidth()) {
+					if (is_open_sound_effect) mciSendString(_T("play click_sound_2_1 from 0"), NULL, 0, NULL);
 					int centreL = btn_1P_left_pos.y + img_1P_selector_btn_idle_left.getheight() / 2;
 					int yL = abs(msg.y - centreL);
 					int innerL = abs(msg.x - btn_1P_left_pos.x);
@@ -218,6 +228,7 @@ public:
 					break;
 				}
 				else if (msg.x >= btn_1P_right_pos.x && msg.x <= btn_1P_right_pos.x + img_1P_selector_btn_idle_right.getwidth()) {
+					if (is_open_sound_effect) mciSendString(_T("play click_sound_2_1 from 0"), NULL, 0, NULL);
 					int centreL = btn_1P_right_pos.y + img_1P_selector_btn_idle_right.getheight() / 2;
 					int yL = abs(msg.y - centreL);
 					int innerL = abs(img_1P_selector_btn_idle_right.getheight() / 2 - msg.x + btn_1P_right_pos.x);
@@ -225,6 +236,7 @@ public:
 					break;
 				}
 				else if (msg.x >= btn_2P_left_pos.x && msg.x <= btn_2P_left_pos.x + img_2P_selector_btn_idle_left.getwidth()) {
+					if (is_open_sound_effect) mciSendString(_T("play click_sound_2_1 from 0"), NULL, 0, NULL);
 					int centreL = btn_2P_left_pos.y + img_2P_selector_btn_idle_left.getheight() / 2;
 					int yL = abs(msg.y - centreL);
 					int innerL = abs(msg.x - btn_2P_left_pos.x);
@@ -232,6 +244,7 @@ public:
 					break;
 				}
 				else if (msg.x >= btn_2P_right_pos.x && msg.x <= btn_2P_right_pos.x + img_2P_selector_btn_idle_right.getwidth()) {
+					if (is_open_sound_effect) mciSendString(_T("play click_sound_2_1 from 0"), NULL, 0, NULL);
 					int centreL = btn_2P_right_pos.y + img_2P_selector_btn_idle_right.getheight() / 2;
 					int yL = abs(msg.y - centreL);
 					int innerL = abs(img_2P_selector_btn_idle_right.getheight() / 2 - msg.x + btn_2P_right_pos.x);
@@ -263,6 +276,7 @@ public:
 			// 切换宝可梦按钮
 			if (msg.y >= btn_1P_left_pos.y && msg.y <= btn_1P_left_pos.y + img_1P_selector_btn_idle_left.getheight()) {
 				if (msg.x >= btn_1P_left_pos.x && msg.x <= btn_1P_left_pos.x + img_1P_selector_btn_idle_left.getwidth() && is_1P_left_btn) {
+					if (is_open_sound_effect) mciSendString(_T("play click_sound_2_2 from 0"), NULL, 0, NULL);
 					is_1P_left_btn = false;
 					int centreL = btn_1P_left_pos.y + img_1P_selector_btn_idle_left.getheight() / 2;
 					int yL = abs(msg.y - centreL);
@@ -271,6 +285,7 @@ public:
 					break;
 				}
 				else if (msg.x >= btn_1P_right_pos.x && msg.x <= btn_1P_right_pos.x + img_1P_selector_btn_idle_right.getwidth() && is_1P_right_btn) {
+					if (is_open_sound_effect) mciSendString(_T("play click_sound_2_2 from 0"), NULL, 0, NULL);
 					is_1P_right_btn = false;
 					int centreL = btn_1P_right_pos.y + img_1P_selector_btn_idle_right.getheight() / 2;
 					int yL = abs(msg.y - centreL);
@@ -279,6 +294,7 @@ public:
 					break;
 				}
 				else if (msg.x >= btn_2P_left_pos.x && msg.x <= btn_2P_left_pos.x + img_2P_selector_btn_idle_left.getwidth() && is_2P_left_btn) {
+					if (is_open_sound_effect) mciSendString(_T("play click_sound_2_2 from 0"), NULL, 0, NULL);
 					is_2P_left_btn = false;
 					int centreL = btn_2P_left_pos.y + img_2P_selector_btn_idle_left.getheight() / 2;
 					int yL = abs(msg.y - centreL);
@@ -287,6 +303,7 @@ public:
 					break;
 				}
 				else if (msg.x >= btn_2P_right_pos.x && msg.x <= btn_2P_right_pos.x + img_2P_selector_btn_idle_right.getwidth() && is_2P_right_btn) {
+					if (is_open_sound_effect) mciSendString(_T("play click_sound_2_2 from 0"), NULL, 0, NULL);
 					is_2P_right_btn = false;
 					int centreL = btn_2P_right_pos.y + img_2P_selector_btn_idle_right.getheight() / 2;
 					int yL = abs(msg.y - centreL);
@@ -295,6 +312,7 @@ public:
 					break;
 				}
 				else {
+					if (is_open_sound_effect) mciSendString(_T("play click_sound_2_2 from 0"), NULL, 0, NULL);
 					is_1P_left_btn = false;					
 					is_1P_right_btn = false;					
 					is_2P_left_btn = false;					
@@ -302,7 +320,8 @@ public:
 					break;
 				}
 			}
-			else {
+			else if (is_1P_left_btn || is_1P_right_btn || is_2P_left_btn || is_2P_right_btn) {
+				if (is_open_sound_effect) mciSendString(_T("play click_sound_2_2 from 0"), NULL, 0, NULL);
 				is_1P_left_btn = false;
 				is_1P_right_btn = false;
 				is_2P_left_btn = false;
@@ -317,7 +336,10 @@ public:
 			int yL = msg.y - pokeball_circle_center.y;
 			int L_square = xL * xL + yL * yL;
 			int circleR_square = (img_pokeball.getwidth() / 2) * (img_pokeball.getwidth() / 2);
-			if (L_square <= circleR_square) is_enter_start = true;
+			if (L_square <= circleR_square) {
+				is_enter_start = true;
+				if (is_open_sound_effect) mciSendString(_T("play mechanical_rotation_sound from 0"), NULL, 0, NULL);
+			}
 
 			break;
 		}

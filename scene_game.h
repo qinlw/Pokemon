@@ -471,12 +471,14 @@ public:
 					// 继续游戏
 					if (msg.x >= continue_game_btn_pos.x && msg.x <= continue_game_btn_pos.x + img_continue_game_button.getwidth()) {
 						is_continue_game_btn = true;
+						if (is_open_sound_effect) mciSendString(_T("play click_sound_2_1 from 0"), NULL, 0, NULL);
 						button_sink_animatioin(5, 50, continue_game_btn_pos, &img_continue_game_button);
 						break;
 					}
 					// 重新开始
 					else if (msg.x >= restart_btn_pos.x && msg.x <= restart_btn_pos.x + img_restart_button.getwidth()) {
 						is_restart_btn = true;
+						if (is_open_sound_effect) mciSendString(_T("play click_sound_2_1 from 0"), NULL, 0, NULL);
 						button_sink_animatioin(5, 50, restart_btn_pos, &img_restart_button);
 						bullet_list.clear();
 						break;
@@ -484,6 +486,7 @@ public:
 					// 返回菜单
 					else if (msg.x >= return_menu_btn_pos.x && msg.x <= return_menu_btn_pos.x + img_restart_button.getwidth()) {
 						is_return_menu_btn = true;
+						if (is_open_sound_effect) mciSendString(_T("play click_sound_2_1 from 0"), NULL, 0, NULL);
 						button_sink_animatioin(5, 50, return_menu_btn_pos, &img_return_button);
 						bullet_list.clear();
 						break;
@@ -495,18 +498,21 @@ public:
 				if (msg.y >= restart_btn_pos.y && msg.y <= restart_btn_pos.y + img_restart_button.getheight()) {
 					if (msg.x >= continue_game_btn_pos.x && msg.x <= continue_game_btn_pos.x + img_continue_game_button.getwidth() && is_continue_game_btn) {
 						is_continue_game_btn = false;
+						if (is_open_sound_effect) mciSendString(_T("play click_sound_2_2 from 0"), NULL, 0, NULL);
 						button_bulge_animatioin(5, 300, continue_game_btn_pos, &img_continue_game_button);
 						is_esc_btn = false;
 						break;
 					}
 					else if (msg.x >= restart_btn_pos.x && msg.x <= restart_btn_pos.x + img_restart_button.getwidth() && is_restart_btn) {
 						is_restart_btn = false;
+						if (is_open_sound_effect) mciSendString(_T("play click_sound_2_2 from 0"), NULL, 0, NULL);
 						button_bulge_animatioin(5, 300, restart_btn_pos, &img_restart_button);
 						scene_manager->switch_scene(SceneManager::SceneType::Pokemon);
 						break;
 					}
 					else if (msg.x >= return_menu_btn_pos.x && msg.x <= return_menu_btn_pos.x + img_restart_button.getwidth() && is_return_menu_btn) {
 						is_return_menu_btn = false;
+						if (is_open_sound_effect) mciSendString(_T("play click_sound_2_2 from 0"), NULL, 0, NULL);
 						button_bulge_animatioin(5, 300, return_menu_btn_pos, &img_return_menu_button);
 						scene_manager->switch_scene(SceneManager::SceneType::Menu);
 						break;
@@ -514,14 +520,17 @@ public:
 					else {
 						if (is_continue_game_btn) {
 							is_continue_game_btn = false;
+							if (is_open_sound_effect) mciSendString(_T("play click_sound_2_2 from 0"), NULL, 0, NULL);
 							button_bulge_animatioin(5, 300, continue_game_btn_pos, &img_continue_game_button);
 						}
 						else if (is_restart_btn) {
 							is_restart_btn = false;
+							if (is_open_sound_effect) mciSendString(_T("play click_sound_2_2 from 0"), NULL, 0, NULL);
 							button_bulge_animatioin(5, 300, restart_btn_pos, &img_restart_button);
 						}
 						else if (is_return_menu_btn) {
 							is_return_menu_btn = false;
+							if (is_open_sound_effect) mciSendString(_T("play click_sound_2_2 from 0"), NULL, 0, NULL);
 							button_bulge_animatioin(5, 300, return_menu_btn_pos, &img_return_menu_button);
 						}
 
@@ -530,14 +539,17 @@ public:
 				else {
 					if (is_continue_game_btn) {
 						is_continue_game_btn = false;
+						if (is_open_sound_effect) mciSendString(_T("play click_sound_2_2 from 0"), NULL, 0, NULL);
 						button_bulge_animatioin(5, 300, continue_game_btn_pos, &img_continue_game_button);
 					}
 					else if (is_restart_btn) {
 						is_restart_btn = false;
+						if (is_open_sound_effect) mciSendString(_T("play click_sound_2_2 from 0"), NULL, 0, NULL);
 						button_bulge_animatioin(5, 300, restart_btn_pos, &img_restart_button);
 					}
 					else if (is_return_menu_btn) {
 						is_return_menu_btn = false;
+						if (is_open_sound_effect) mciSendString(_T("play click_sound_2_2 from 0"), NULL, 0, NULL);
 						button_bulge_animatioin(5, 300, return_menu_btn_pos, &img_return_menu_button);
 					}
 

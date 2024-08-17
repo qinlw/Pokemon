@@ -29,6 +29,10 @@ public:
 			mp += 5;
 			if (mp > 100) mp = 100;
 			});
+		timer_move_sound.set_wait_time(50);
+		timer_move_sound.set_callback([&]() {
+			is_play_move_sound = true;
+			});
 	}
 
 	virtual void skill_1() {}
@@ -55,6 +59,7 @@ public:
 
 		if (hp > 0) timer_recover_mp.on_update(delta);
 		if (hp < 0) hp = 0;
+		if (!is_play_move_sound) timer_move_sound.on_update(delta);
 
 		move_collision(delta);
 
@@ -259,12 +264,50 @@ public:
 
 	void run_pos_change(float distance) {
 		pokemon_pos.x += distance;
+
+		if (!is_play_move_sound || !check_land()) return;
+		switch (idx) {
+		case 1:
+			mciSendString(_T("play move_sound_1 from 0"), NULL, 0, NULL);
+			break;
+		case 2:
+			mciSendString(_T("play move_sound_2 from 0"), NULL, 0, NULL);
+			break;
+		case 3:
+			mciSendString(_T("play move_sound_3 from 0"), NULL, 0, NULL);
+			break;
+		case 4:
+			mciSendString(_T("play move_sound_4 from 0"), NULL, 0, NULL);
+			break;
+		case 5:
+			mciSendString(_T("play move_sound_5 from 0"), NULL, 0, NULL);
+			break;
+		case 6:
+			mciSendString(_T("play move_sound_6 from 0"), NULL, 0, NULL);
+			break;
+		case 7:
+			mciSendString(_T("play move_sound_7 from 0"), NULL, 0, NULL);
+			break;
+		case 8:
+			mciSendString(_T("play move_sound_8 from 0"), NULL, 0, NULL);
+			break;
+		case 9:
+			mciSendString(_T("play move_sound_9 from 0"), NULL, 0, NULL);
+			break;
+		}
+		++idx;
+		if (idx > 7) idx = 1;
+		is_play_move_sound = false;
 	}
 
 	void jump() {
 		if (!is_platform) return;
 		pokemon_velocity.y += jump_velocity;
 		is_platform = false;
+	}
+
+	bool check_land() {
+		return pokemon_velocity.y == 0;
 	}
 	
 
@@ -297,15 +340,18 @@ protected:
 	Animation animation_pokemon_right;									// 朝向向右的宝可梦动画
 
 	Timer timer_recover_mp;												// 恢复蓝条的定时器
+	Timer timer_move_sound;												// 移动音效的定时器
 
 	PokemonPlayer player_id;											// 玩家id
 	PokemonAttribute pokemon_attribute;									// 宝可梦属性
 	PokemonType pokemon_type;											// 宝可梦种类
 
+	bool is_play_move_sound = true;										// 是否播放移动音效
 	bool is_platform = false;											// 是否在平台上
 	bool is_facing_right = false;										// 当前是否朝向右边
 	bool is_left_btn = false;											// 是否按下了左移按钮
 	bool is_right_btn = false;											// 是否按下了右移按钮
+	int idx = 1;
 
 private:
 	void move_collision(int delta) {

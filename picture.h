@@ -304,4 +304,7 @@ void load_res() {
 	mciSendString(_T("open res/music/click_sound_3.wav alias click_sound_3"), NULL, 0, NULL);
 	mciSendString(_T("open res/music/wooden_cabinet_sound_slide_out.wav alias wooden_cabinet_sound_slide_out"), NULL, 0, NULL);
 	mciSendString(_T("open res/music/wooden_cabinet_sound_slide_in.wav alias wooden_cabinet_sound_slide_in"), NULL, 0, NULL);
+	mciSendString(_T("open res/music/mechanical_rotation_sound.wav alias mechanical_rotation_sound"), NULL, 0, NULL);
+	
+	load_music(_T("open res/music/move_sound_%d.wav alias move_sound_%d"), 10);
 }
