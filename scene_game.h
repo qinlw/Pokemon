@@ -8,6 +8,11 @@
 
 extern bool is_debug;
 extern bool is_first_game;
+extern bool is_open_music;
+extern bool is_playing_game_music;
+
+extern int background_music_id;
+extern int game_music_id;
 
 extern SceneManager* scene_manager;
 
@@ -230,6 +235,47 @@ public:
 		is_esc_btn = false;
 		game_over_is_pop_btn = false;
 		is_game_over = false;
+
+		switch (background_music_id) {
+		case 1:
+			mciSendString(_T("stop background_music_1"), NULL, 0, NULL);
+			is_playing_background_music = false;
+			break;
+		case 2:
+			mciSendString(_T("stop background_music_2"), NULL, 0, NULL);
+			is_playing_background_music = false;
+			break;
+		case 3:
+			mciSendString(_T("stop background_music_3"), NULL, 0, NULL);
+			is_playing_background_music = false;
+			break;
+		}
+
+		int a = 1;
+		if (is_open_music && !is_playing_game_music) {
+			switch (background_music_id) {
+			case 1:
+				mciSendString(_T("play game_music_1 repeat from 0"), NULL, 0, NULL);
+				is_playing_game_music = true;
+				break;
+			case 2:
+				mciSendString(_T("play game_music_2 repeat from 0"), NULL, 0, NULL);
+				is_playing_game_music = true;
+				break;
+			case 3:
+				mciSendString(_T("play game_music_3 repeat from 0"), NULL, 0, NULL);
+				is_playing_game_music = true;
+				break;
+			case 4:
+				mciSendString(_T("play game_music_4 repeat from 0"), NULL, 0, NULL);
+				is_playing_game_music = true;
+				break;
+			case 5:
+				mciSendString(_T("play game_music_5 repeat from 0"), NULL, 0, NULL);
+				is_playing_game_music = true;
+				break;
+			}
+		}
 	}
 
 	void on_update(int delta) {

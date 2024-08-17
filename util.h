@@ -87,7 +87,7 @@ inline bool is_regen(POINT pos_1, POINT pos_2, IMAGE& img_1, IMAGE img_2) {
 void load_music(LPCTSTR path_template, int n) {
 	TCHAR path_file[256];
 	for (int i = 0; i < n; ++i) {
-		_stprintf_s(path_file, path_template, i + 1);
-		mciSendString(path_file, NULL, 0, NULL);
+		_stprintf_s(path_file, path_template, i + 1, i + 1);
+		std::cout << "load_music:" << i + 1 << "->" << mciSendString(path_file, NULL, 0, NULL) << std::endl;	// ²âÊÔ´úÂë
 	}
 }

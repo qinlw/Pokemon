@@ -10,6 +10,7 @@ extern bool is_first_game;
 extern bool is_open_music;
 extern bool is_open_sound_effect;
 extern int background_music_id;
+extern int game_music_id;
 
 
 
@@ -182,8 +183,11 @@ void check_update_background_music_id() {
 		MYSQL_ROW row = mysql_fetch_row(res);
 		for (int j = 0; j < fields; j++) {
 			if (strcmp(row[j], "background_music_id") != 0) break;
-			if (strcmp(row[++j], "1") == 0) background_music_id = true;
-			else background_music_id = false;
+			if (strcmp(row[++j], "0") == 0) background_music_id = 0;
+			else if (strcmp(row[j], "1") == 0) background_music_id = 1;
+			else if (strcmp(row[j], "2") == 0) background_music_id = 2;
+			else if (strcmp(row[j], "3") == 0) background_music_id = 3;
+			else std::cout << "background_music_id error!" << std::endl;
 			std::cout << "background_music_id: " << background_music_id << std::endl;			// 方便测试
 			return;
 		}
@@ -193,9 +197,62 @@ void check_update_background_music_id() {
 // 设置background_music_id的值
 void set_background_music_id(int val) {
 	std::string sql;
+	if (val == 0) sql = "update game_status set status = 1 where status_name = 'background_music_id'";
 	if (val == 1) sql = "update game_status set status = 1 where status_name = 'background_music_id'";
 	else if (val == 2) sql = "update game_status set status = 2 where status_name = 'background_music_id'";
-	else sql = "update game_status set status = 3 where status_name = 'background_music_id'";
+	else if (val == 3) sql = "update game_status set status = 3 where status_name = 'background_music_id'";
+	else sql = "update game_status set status = 0 where status_name = 'background_music_id'";
+
+	const int n = mysql_query(my, sql.c_str());
+	if (n == 0) std::cout << sql << " sucess:" << n << std::endl;
+	else std::cout << sql << " failed:" << n << std::endl;
+}
+
+
+
+// 检查并更新game_music_id的值
+void check_update_game_music_id() {
+	std::string sql = "select * from game_status";
+	const int n = mysql_query(my, sql.c_str());
+	if (n == 0) std::cout << sql << " sucess:" << n << std::endl;
+	else std::cout << sql << " failed:" << n << std::endl;
+
+	MYSQL_RES* res = mysql_store_result(my);
+	if (res == nullptr) {
+		std::cerr << "mysql_store_result error" << std::endl;
+		return;
+	}
+
+	const int rows = mysql_num_rows(res);			// 获取行数
+	const int fields = mysql_num_fields(res);		// 获取列数
+
+	for (int i = 0; i < rows; i++) {
+		MYSQL_ROW row = mysql_fetch_row(res);
+		for (int j = 0; j < fields; j++) {
+			if (strcmp(row[j], "game_music_id") != 0) break;
+			if (strcmp(row[++j], "0") == 0) game_music_id = 0;
+			else if (strcmp(row[j], "1") == 0) game_music_id = 1;
+			else if (strcmp(row[j], "2") == 0) game_music_id = 2;
+			else if (strcmp(row[j], "3") == 0) game_music_id = 3;
+			else if (strcmp(row[j], "4") == 0) game_music_id = 4;
+			else if (strcmp(row[j], "5") == 0) game_music_id = 5;
+			else std::cout << "game_music_id error!" << std::endl;
+			std::cout << "game_music_id: " << game_music_id << std::endl;			// 方便测试
+			return;
+		}
+	}
+}
+
+// 设置game_music_id的值
+void set_game_music_id(int val) {
+	std::string sql;
+	if (val == 0) sql = "update game_status set status = 0 where status_name = 'background_music_id'";
+	else if (val == 1) sql = "update game_status set status = 1 where status_name = 'background_music_id'";
+	else if (val == 2) sql = "update game_status set status = 2 where status_name = 'background_music_id'";
+	else if (val == 3) sql = "update game_status set status = 3 where status_name = 'background_music_id'";
+	else if (val == 4) sql = "update game_status set status = 4 where status_name = 'background_music_id'";
+	else if (val == 5) sql = "update game_status set status = 5 where status_name = 'background_music_id'";
+	else sql = "update game_status set status = 0 where status_name = 'background_music_id'";
 
 	const int n = mysql_query(my, sql.c_str());
 	if (n == 0) std::cout << sql << " sucess:" << n << std::endl;

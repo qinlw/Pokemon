@@ -30,8 +30,21 @@ IMAGE img_close_text;								// 关闭文本
 // 设置选项名等
 IMAGE img_novice_teaching_text;						// 新手教程文本
 IMAGE img_attribute_restrain_switch;				// 属性克制开关选项的文本
+IMAGE img_background_music_text;					// 背景音乐文本
+IMAGE img_game_music_text;							// 战斗音乐文本(即游戏场景中的音乐)
 IMAGE img_is_open_music_text;						// 是否打开音乐
-IMAGE img_is_open_sound_effect_text;						// 是否打开音效
+IMAGE img_is_open_sound_effect_text;				// 是否打开音效
+// 选项内容及选择器
+IMAGE img_choice;									// 选择
+IMAGE img_choice_background_color;					// 选择的颜色
+IMAGE img_music_1;									// 音乐1
+IMAGE img_music_2;									// 音乐2
+IMAGE img_music_3;									// 音乐3
+IMAGE img_music_4;									// 音乐4
+IMAGE img_music_5;									// 音乐5
+// 背景色
+IMAGE img_background_music_underpainting;			// 背景音乐设置的背景色
+IMAGE img_game_music_underpainting;					// 背景音乐设置的背景色
 
 
 // 选择场景
@@ -177,8 +190,21 @@ void load_res() {
 	// 设置选项名等
 	loadimage(&img_novice_teaching_text, _T("res/set/novice_teaching_text.png"));
 	loadimage(&img_attribute_restrain_switch, _T("res/set/attribute_restrain_switch.png"));
+	loadimage(&img_background_music_text, _T("res/set/background_music_text.png"));
+	loadimage(&img_game_music_text, _T("res/set/game_music_text.png"));
 	loadimage(&img_is_open_music_text, _T("res/set/is_open_music_text.png"));
 	loadimage(&img_is_open_sound_effect_text, _T("res/set/is_open_sound effect_text.png"));
+	// 选项内容及选择器
+	loadimage(&img_choice, _T("res/set/choice.png"));
+	loadimage(&img_choice_background_color, _T("res/set/choice_background_color.png"));
+	loadimage(&img_music_1, _T("res/set/music_1.png"));
+	loadimage(&img_music_2, _T("res/set/music_2.png"));
+	loadimage(&img_music_3, _T("res/set/music_3.png"));
+	loadimage(&img_music_4, _T("res/set/music_4.png"));
+	loadimage(&img_music_5, _T("res/set/music_5.png"));
+	// 背景色
+	loadimage(&img_background_music_underpainting, _T("res/set/background_music_underpainting.png"));
+	loadimage(&img_game_music_underpainting, _T("res/set/game_music_underpainting.png"));
 
 
 	// 选择场景资源加载
@@ -306,5 +332,6 @@ void load_res() {
 	mciSendString(_T("open res/music/wooden_cabinet_sound_slide_in.wav alias wooden_cabinet_sound_slide_in"), NULL, 0, NULL);
 	mciSendString(_T("open res/music/mechanical_rotation_sound.wav alias mechanical_rotation_sound"), NULL, 0, NULL);
 	
-	load_music(_T("open res/music/move_sound_%d.wav alias move_sound_%d"), 10);
+	load_music(_T("open res/music/move_sound_%d.wav alias move_sound_%d"), 9);
+	load_music(_T("open res/music/game_music_%d.mp3 alias game_music_%d"), 5);
 }

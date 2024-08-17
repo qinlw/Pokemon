@@ -43,14 +43,18 @@ HWND hwnd;																		// 窗口句柄
 MYSQL* my;																		// mysql的连接句柄
 
 // 设置内容
+constexpr int background_music_num = 3;											// 背景音乐的数量
+constexpr int game_music_num = 5;												// 战斗音乐的数量
+
 bool is_first_game = false;							                            // 是否是第一次游戏
 bool is_attribute_restrain = true;												// 是否有属性克制
 bool is_open_music = true;														// 是否打开音乐
 bool is_open_sound_effect = true;												// 是否打开音效
-int background_music_id = 1;													// 主菜单播放的背景音乐 
-bool is_playing_music = false;													// 是否正在播放音乐
-bool is_playing_sound_effect = false;											// 是否正在播放音乐
+bool is_playing_background_music = false;										// 是否正在播放背景音乐
+bool is_playing_game_music = false;												// 是否正在播放战斗音乐(游戏场景的音乐)
 
+int background_music_id = 1;													// 主菜单播放的背景音乐 
+int game_music_id = 1;															// 游戏场景正在播放的战斗音乐
 
 int main() {
 	// 初始化数据库并给相关参数赋值
@@ -59,6 +63,7 @@ int main() {
 	check_and_update_is_open_music();
 	check_and_update_is_open_sound_effect();
 	check_update_background_music_id();
+	check_update_game_music_id();
 
 	srand(time(NULL)); 
 
@@ -135,7 +140,7 @@ int _main(int x, int y) {
 	hwnd = initgraph(1280, 720, EX_SHOWCONSOLE);
 
 	// 加载音乐图片资源
-	load_res();
+	//load_res();
 
 	// 给不同的场景对象指针初始化
 	menu_scene = new SceneMenu();
