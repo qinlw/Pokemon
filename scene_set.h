@@ -424,77 +424,87 @@ public:
 			}
 
 			// 背景音乐的选择
-			if (is_choosing_background_music && msg.x < background_music_underpainting_pos.x + img_background_music_underpainting.getwidth()
-				&& msg.x > background_music_underpainting_pos.x && msg.y < background_music_underpainting_pos.y +
-				img_background_music_underpainting.getheight() && msg.y > background_music_underpainting_pos.y) {
-				// 随机音乐
-				if (msg.y < background_music_rand_music_pos.y + img_rand_music.getheight() && msg.y > background_music_rand_music_pos.y) {
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_1 from 50"), NULL, 0, NULL);
-					set_background_music_id(0);
-					play_background_music();
-					is_choosing_background_music = false;
+			if (is_choosing_background_music) {
+				if (msg.x < background_music_underpainting_pos.x + img_background_music_underpainting.getwidth()
+					&& msg.x > background_music_underpainting_pos.x && msg.y < background_music_underpainting_pos.y +
+					img_background_music_underpainting.getheight() && msg.y > background_music_underpainting_pos.y) {
+					// 随机音乐
+					if (msg.y < background_music_rand_music_pos.y + img_rand_music.getheight() && msg.y > background_music_rand_music_pos.y) {
+						if (is_open_sound_effect) mciSendString(_T("play click_sound_1 from 50"), NULL, 0, NULL);
+						set_background_music_id(0);
+						play_background_music();
+						is_choosing_background_music = false;
+					}
+					// 音乐1
+					else if (msg.y < background_music_1.y + img_music_1.getheight() && msg.y > background_music_1.y) {
+						if (is_open_sound_effect) mciSendString(_T("play click_sound_1 from 50"), NULL, 0, NULL);
+						set_background_music_id(1);
+						play_background_music();
+						is_choosing_background_music = false;
+					}
+					// 音乐2
+					else if (msg.y < background_music_2.y + img_music_2.getheight() && msg.y > background_music_2.y) {
+						if (is_open_sound_effect) mciSendString(_T("play click_sound_1 from 50"), NULL, 0, NULL);
+						set_background_music_id(2);
+						play_background_music();
+						is_choosing_background_music = false;
+					}
+					// 音乐3
+					else if (msg.y < background_music_3.y + img_music_3.getheight() && msg.y > background_music_3.y) {
+						if (is_open_sound_effect) mciSendString(_T("play click_sound_1 from 50"), NULL, 0, NULL);
+						set_background_music_id(3);
+						play_background_music();
+						is_choosing_background_music = false;
+					}
 				}
-				// 音乐1
-				else if (msg.y < background_music_1.y + img_music_1.getheight() && msg.y > background_music_1.y) {
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_1 from 50"), NULL, 0, NULL);
-					set_background_music_id(1);
-					play_background_music();
-					is_choosing_background_music = false;
-				}
-				// 音乐2
-				else if (msg.y < background_music_2.y + img_music_2.getheight() && msg.y > background_music_2.y) {
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_1 from 50"), NULL, 0, NULL);
-					set_background_music_id(2);
-					play_background_music();
-					is_choosing_background_music = false;
-				}
-				// 音乐3
-				else if (msg.y < background_music_3.y + img_music_3.getheight() && msg.y > background_music_3.y) {
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_1 from 50"), NULL, 0, NULL);
-					set_background_music_id(3);
-					play_background_music();
+				else {
 					is_choosing_background_music = false;
 				}
 			}
 
 			// 战斗音乐的选择
-			if (is_choosing_game_music && msg.x < game_music_underpainting_pos.x + img_game_music_underpainting.getwidth()
-				&& msg.x > game_music_underpainting_pos.x && msg.y < game_music_underpainting_pos.y +
-				img_game_music_underpainting.getheight() && msg.y > game_music_underpainting_pos.y) {
-				// 随机音乐
-				if (msg.y < game_music_rand_music_pos.y + img_rand_music.getheight() && msg.y > game_music_rand_music_pos.y) {
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_1 from 50"), NULL, 0, NULL);
-					set_game_music_id(0);
-					is_choosing_game_music = false;
+			if (is_choosing_game_music) {
+				if (is_choosing_game_music && msg.x < game_music_underpainting_pos.x + img_game_music_underpainting.getwidth()
+					&& msg.x > game_music_underpainting_pos.x && msg.y < game_music_underpainting_pos.y +
+					img_game_music_underpainting.getheight() && msg.y > game_music_underpainting_pos.y) {
+					// 随机音乐
+					if (msg.y < game_music_rand_music_pos.y + img_rand_music.getheight() && msg.y > game_music_rand_music_pos.y) {
+						if (is_open_sound_effect) mciSendString(_T("play click_sound_1 from 50"), NULL, 0, NULL);
+						set_game_music_id(0);
+						is_choosing_game_music = false;
+					}
+					// 音乐1
+					else if (msg.y < game_music_1.y + img_music_1.getheight() && msg.y > game_music_1.y) {
+						if (is_open_sound_effect) mciSendString(_T("play click_sound_1 from 50"), NULL, 0, NULL);
+						set_game_music_id(1);
+						is_choosing_game_music = false;
+					}
+					// 音乐2
+					else if (msg.y < game_music_2.y + img_music_2.getheight() && msg.y > game_music_2.y) {
+						if (is_open_sound_effect) mciSendString(_T("play click_sound_1 from 50"), NULL, 0, NULL);
+						set_game_music_id(2);
+						is_choosing_game_music = false;
+					}
+					// 音乐3
+					else if (msg.y < game_music_3.y + img_music_3.getheight() && msg.y > game_music_3.y) {
+						if (is_open_sound_effect) mciSendString(_T("play click_sound_1 from 50"), NULL, 0, NULL);
+						set_game_music_id(3);
+						is_choosing_game_music = false;
+					}
+					// 音乐4
+					else if (msg.y < game_music_4.y + img_music_4.getheight() && msg.y > game_music_4.y) {
+						if (is_open_sound_effect) mciSendString(_T("play click_sound_1 from 50"), NULL, 0, NULL);
+						set_game_music_id(4);
+						is_choosing_game_music = false;
+					}
+					// 音乐5
+					else if (msg.y < game_music_5.y + img_music_5.getheight() && msg.y > game_music_5.y) {
+						if (is_open_sound_effect) mciSendString(_T("play click_sound_1 from 50"), NULL, 0, NULL);
+						set_game_music_id(5);
+						is_choosing_game_music = false;
+					}
 				}
-				// 音乐1
-				else if (msg.y < game_music_1.y + img_music_1.getheight() && msg.y > game_music_1.y) {
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_1 from 50"), NULL, 0, NULL);
-					set_game_music_id(1);
-					is_choosing_game_music = false;
-				}
-				// 音乐2
-				else if (msg.y < game_music_2.y + img_music_2.getheight() && msg.y > game_music_2.y) {
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_1 from 50"), NULL, 0, NULL);
-					set_game_music_id(2);
-					is_choosing_game_music = false;
-				}
-				// 音乐3
-				else if (msg.y < game_music_3.y + img_music_3.getheight() && msg.y > game_music_3.y) {
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_1 from 50"), NULL, 0, NULL);
-					set_game_music_id(3);
-					is_choosing_game_music = false;
-				}
-				// 音乐4
-				else if (msg.y < game_music_4.y + img_music_4.getheight() && msg.y > game_music_4.y) {
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_1 from 50"), NULL, 0, NULL);
-					set_game_music_id(4);
-					is_choosing_game_music = false;
-				}
-				// 音乐5
-				else if (msg.y < game_music_5.y + img_music_5.getheight() && msg.y > game_music_5.y) {
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_1 from 50"), NULL, 0, NULL);
-					set_game_music_id(5);
+				else {
 					is_choosing_game_music = false;
 				}
 			}
@@ -642,7 +652,6 @@ private:
 	POINT is_open_sound_effect_is_open_or_is_close_pos = { 0 };						// 是打开 or 是关闭  的位置
 
 	bool is_exit_set = false;														// 是否退出设置
-	//bool set_is_first_game_is_open = is_first_game;									// 设置新手教程 是否为打开状态
 	bool is_choosing_background_music = false;										// 是否正在选择背景音乐
 	bool is_choosing_game_music = false;											// 是否正在选择战斗音乐
 	bool is_updated_underpainting_pos = false;										// 是否更新过背景色的位置
