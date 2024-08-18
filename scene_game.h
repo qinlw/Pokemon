@@ -236,46 +236,9 @@ public:
 		game_over_is_pop_btn = false;
 		is_game_over = false;
 
-		switch (background_music_id) {
-		case 1:
-			mciSendString(_T("stop background_music_1"), NULL, 0, NULL);
-			is_playing_background_music = false;
-			break;
-		case 2:
-			mciSendString(_T("stop background_music_2"), NULL, 0, NULL);
-			is_playing_background_music = false;
-			break;
-		case 3:
-			mciSendString(_T("stop background_music_3"), NULL, 0, NULL);
-			is_playing_background_music = false;
-			break;
-		}
+		stop_background_music();
 
-		int a = 1;
-		if (is_open_music && !is_playing_game_music) {
-			switch (background_music_id) {
-			case 1:
-				mciSendString(_T("play game_music_1 repeat from 0"), NULL, 0, NULL);
-				is_playing_game_music = true;
-				break;
-			case 2:
-				mciSendString(_T("play game_music_2 repeat from 0"), NULL, 0, NULL);
-				is_playing_game_music = true;
-				break;
-			case 3:
-				mciSendString(_T("play game_music_3 repeat from 0"), NULL, 0, NULL);
-				is_playing_game_music = true;
-				break;
-			case 4:
-				mciSendString(_T("play game_music_4 repeat from 0"), NULL, 0, NULL);
-				is_playing_game_music = true;
-				break;
-			case 5:
-				mciSendString(_T("play game_music_5 repeat from 0"), NULL, 0, NULL);
-				is_playing_game_music = true;
-				break;
-			}
-		}
+		if (is_open_music && !is_playing_game_music) play_game_music();
 	}
 
 	void on_update(int delta) {
@@ -348,7 +311,6 @@ public:
 		putimage_alpha(tree_3_pos.x, tree_3_pos.y, &img_tree_3);
 
 		if (is_first_game) {
-			set_is_first_game(false);
 			putimage_alpha(tutorial_prompt_text_A_pos.x, tutorial_prompt_text_A_pos.y, &img_tutorial_prompt_text_A);
 			putimage_alpha(tutorial_prompt_text_D_pos.x, tutorial_prompt_text_D_pos.y, &img_tutorial_prompt_text_D);
 			putimage_alpha(tutorial_prompt_text_left_arrow_pos.x, tutorial_prompt_text_left_arrow_pos.y, &img_tutorial_prompt_text_left_arrow);
@@ -685,7 +647,8 @@ public:
 	}
 
 	void on_exit() {
-
+		stop_game_music();
+		set_is_first_game(false);
 	}
 
 private:

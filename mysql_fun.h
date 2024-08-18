@@ -74,6 +74,8 @@ void set_is_first_game(bool flag) {
 	if (flag) sql = "update game_status set status = 1 where status_name = 'is_first_game'";
 	else sql = "update game_status set status = 0 where status_name = 'is_first_game'";
 
+	is_first_game = flag;
+
 	const int n = mysql_query(my, sql.c_str());
 	if (n == 0) std::cout << sql << " sucess:" << n << std::endl;
 	else std::cout << sql << " failed:" << n << std::endl;
