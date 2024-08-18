@@ -125,6 +125,9 @@
     <ClInclude Include="mysql_fun.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="music_fun.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="bug_and_problem_list" />

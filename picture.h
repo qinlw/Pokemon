@@ -37,6 +37,7 @@ IMAGE img_is_open_sound_effect_text;				// 是否打开音效
 // 选项内容及选择器
 IMAGE img_choice;									// 选择
 IMAGE img_choice_background_color;					// 选择的颜色
+IMAGE img_rand_music;								// 随机音乐
 IMAGE img_music_1;									// 音乐1
 IMAGE img_music_2;									// 音乐2
 IMAGE img_music_3;									// 音乐3
@@ -45,6 +46,7 @@ IMAGE img_music_5;									// 音乐5
 // 背景色
 IMAGE img_background_music_underpainting;			// 背景音乐设置的背景色
 IMAGE img_game_music_underpainting;					// 背景音乐设置的背景色
+IMAGE img_underpainting_block;						// 单块背景色
 
 
 // 选择场景
@@ -197,6 +199,7 @@ void load_res() {
 	// 选项内容及选择器
 	loadimage(&img_choice, _T("res/set/choice.png"));
 	loadimage(&img_choice_background_color, _T("res/set/choice_background_color.png"));
+	loadimage(&img_rand_music, _T("res/set/rand_music.png"));
 	loadimage(&img_music_1, _T("res/set/music_1.png"));
 	loadimage(&img_music_2, _T("res/set/music_2.png"));
 	loadimage(&img_music_3, _T("res/set/music_3.png"));
@@ -205,6 +208,7 @@ void load_res() {
 	// 背景色
 	loadimage(&img_background_music_underpainting, _T("res/set/background_music_underpainting.png"));
 	loadimage(&img_game_music_underpainting, _T("res/set/game_music_underpainting.png"));
+	loadimage(&img_underpainting_block, _T("res/set/underpainting_block.png"));
 
 
 	// 选择场景资源加载

@@ -197,11 +197,13 @@ void check_update_background_music_id() {
 // ÉèÖÃbackground_music_idµÄÖµ
 void set_background_music_id(int val) {
 	std::string sql;
-	if (val == 0) sql = "update game_status set status = 1 where status_name = 'background_music_id'";
+	if (val == 0) sql = "update game_status set status = 0 where status_name = 'background_music_id'";
 	if (val == 1) sql = "update game_status set status = 1 where status_name = 'background_music_id'";
 	else if (val == 2) sql = "update game_status set status = 2 where status_name = 'background_music_id'";
 	else if (val == 3) sql = "update game_status set status = 3 where status_name = 'background_music_id'";
 	else sql = "update game_status set status = 0 where status_name = 'background_music_id'";
+
+	background_music_id = val;
 
 	const int n = mysql_query(my, sql.c_str());
 	if (n == 0) std::cout << sql << " sucess:" << n << std::endl;
@@ -253,6 +255,8 @@ void set_game_music_id(int val) {
 	else if (val == 4) sql = "update game_status set status = 4 where status_name = 'background_music_id'";
 	else if (val == 5) sql = "update game_status set status = 5 where status_name = 'background_music_id'";
 	else sql = "update game_status set status = 0 where status_name = 'background_music_id'";
+
+	game_music_id = val;
 
 	const int n = mysql_query(my, sql.c_str());
 	if (n == 0) std::cout << sql << " sucess:" << n << std::endl;

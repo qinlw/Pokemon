@@ -54,7 +54,9 @@ bool is_playing_background_music = false;										// 是否正在播放背景音乐
 bool is_playing_game_music = false;												// 是否正在播放战斗音乐(游戏场景的音乐)
 
 int background_music_id = 1;													// 主菜单播放的背景音乐 
+int temp_background_music_id = background_music_id;								// 正在播放的音乐id
 int game_music_id = 1;															// 游戏场景正在播放的战斗音乐
+int temp_game_music_id = game_music_id;											// 正在播放的音乐id
 
 int main() {
 	// 初始化数据库并给相关参数赋值

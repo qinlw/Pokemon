@@ -3,6 +3,7 @@
 #include "scene.h"
 #include "animation.h"
 #include "util.h"
+#include "music_fun.h"
 
 #pragma comment(lib, "MSIMG32.LIB")
 
@@ -36,22 +37,7 @@ public:
 		animation_mysql_unconnected_text.set_interval(200);
 		animation_mysql_unconnected_text.set_is_loop(false);
 
-		if (is_open_music && !is_playing_background_music) {
-			switch (background_music_id) {
-			case 1:
-				mciSendString(_T("play background_music_1 repeat from 0"), NULL, 0, NULL);
-				is_playing_background_music = true;
-				break;
-			case 2:
-				mciSendString(_T("play background_music_2 repeat from 0"), NULL, 0, NULL);
-				is_playing_background_music = true;
-				break;
-			case 3:
-				mciSendString(_T("play background_music_3 repeat from 0"), NULL, 0, NULL);
-				is_playing_background_music = true;
-				break;
-			}
-		}
+		if (is_open_music && !is_playing_background_music) play_background_music();
 	}
 
 	void on_update(int delta) {

@@ -22,6 +22,7 @@ public:
 	}
 
 	void on_update(int delta) {
+		// 更新滑动的位置
 		// 背景的位置
 		if (is_exit_set) {
 			set_background_pos.x += set_background_slide_speed * delta * 2;
@@ -39,7 +40,24 @@ public:
 		set_return_to_menu_button_pos.x = set_background_pos.x - img_set_return_to_menu_button.getwidth();
 		set_return_to_menu_button_pos.y = 0;
 
+		// 背景音乐选择后背景色的位置
+		if (is_choosing_background_music) {
+			background_music_underpainting_pos.y += set_content_slide_speed * delta * 2;
+			if (background_music_underpainting_pos.y >= background_music_set_bar_background_clolr_pos.y + img_set_bar_background_color.getheight()) {
+				background_music_underpainting_pos.y = background_music_set_bar_background_clolr_pos.y + img_set_bar_background_color.getheight();
+			}
+		}
+		else {
+			background_music_underpainting_pos.y -= set_content_slide_speed * delta;
+			if (background_music_underpainting_pos.y <= background_music_set_bar_background_clolr_pos.y + 
+				img_set_bar_background_color.getheight() - img_background_music_underpainting.getheight()) {
+				background_music_underpainting_pos.y = background_music_set_bar_background_clolr_pos.y +
+					img_set_bar_background_color.getheight() - img_background_music_underpainting.getheight();
+			}
+		}
 
+
+		// 非滑动或者不需要处理及已处理的位置
 		const int first_bar_to_top_distance = 73;
 		const int up_bar_to_down_bar_distance = 60;
 		const int left_to_bar_distance = 33;
@@ -85,9 +103,14 @@ public:
 		background_music_current_set_music_pos.x = background_music_choice_pos.x - img_choice_background_color.getwidth();
 		background_music_current_set_music_pos.y = background_music_choice_pos.y;
 		background_music_underpainting_pos.x = background_music_current_set_music_pos.x;
-		background_music_underpainting_pos.y = background_music_current_set_music_pos.y - img_background_music_underpainting.getheight();
-		background_music_1.x = background_music_underpainting_pos.x;
-		background_music_1.y = background_music_underpainting_pos.y;
+		if (!is_updated_underpainting_pos) {
+			background_music_underpainting_pos.y = background_music_current_set_music_pos.y - img_background_music_underpainting.getheight();
+			is_updated_underpainting_pos = true;
+		}
+		background_music_rand_music_pos.x = background_music_underpainting_pos.x;
+		background_music_rand_music_pos.y = background_music_underpainting_pos.y;
+		background_music_1.x = background_music_rand_music_pos.x;
+		background_music_1.y = background_music_rand_music_pos.y + option_hight;
 		background_music_2.x = background_music_1.x;
 		background_music_2.y = background_music_1.y + option_hight;
 		background_music_3.x = background_music_2.x;
@@ -164,24 +187,6 @@ public:
 		putimage_alpha(background_music_text_pos.x, background_music_text_pos.y, &img_background_music_text);
 		putimage_alpha(background_music_choice_pos.x, background_music_choice_pos.y, &img_choice);
 		putimage_alpha(background_music_current_set_music_pos.x, background_music_current_set_music_pos.y, &img_choice_background_color);
-		putimage_alpha(background_music_underpainting_pos.x, background_music_underpainting_pos.y, &img_background_music_underpainting);
-		switch (background_music_id) {
-		case 1:
-			putimage_alpha(background_music_current_set_music_pos.x, background_music_current_set_music_pos.y, &img_music_1);
-			putimage_alpha(background_music_1.x, background_music_1.y, &img_choice_background_color);
-			break;
-		case 2:
-			putimage_alpha(background_music_current_set_music_pos.x, background_music_current_set_music_pos.y, &img_music_2);
-			putimage_alpha(background_music_2.x, background_music_2.y, &img_choice_background_color);
-			break;
-		case 3:
-			putimage_alpha(background_music_current_set_music_pos.x, background_music_current_set_music_pos.y, &img_music_3);
-			putimage_alpha(background_music_3.x, background_music_3.y, &img_choice_background_color);
-			break;
-		}
-		putimage_alpha(background_music_1.x, background_music_1.y, &img_music_1);
-		putimage_alpha(background_music_2.x, background_music_2.y, &img_music_2);
-		putimage_alpha(background_music_3.x, background_music_3.y, &img_music_3);
 		// 设置战斗音乐
 		putimage_alpha(game_music_text_pos.x, game_music_text_pos.y, &img_game_music_text);
 		// 设置音乐
@@ -196,9 +201,110 @@ public:
 		putimage_alpha(is_open_sound_effect_is_open_or_is_close_pos.x, is_open_sound_effect_is_open_or_is_close_pos.y, &img_is_open_or_is_close);
 		putimage_alpha(is_open_sound_effect_close_text_pos.x, is_open_sound_effect_close_text_pos.y, &img_close_text);
 		putimage_alpha(is_open_sound_effect_open_text_pos.x, is_open_sound_effect_open_text_pos.y, &img_open_text);
+
+		// 设置背景音乐中需要置顶的画面
+		if (background_music_underpainting_pos.y >= background_music_set_bar_background_clolr_pos.y + img_set_bar_background_color.getheight())
+			putimage_alpha(background_music_underpainting_pos.x, background_music_underpainting_pos.y, &img_background_music_underpainting);
+		if (background_music_rand_music_pos.y >= background_music_set_bar_background_clolr_pos.y + img_set_bar_background_color.getheight())
+			putimage_alpha(background_music_rand_music_pos.x, background_music_rand_music_pos.y, &img_underpainting_block);
+		if (background_music_1.y >= background_music_set_bar_background_clolr_pos.y + img_set_bar_background_color.getheight())
+			putimage_alpha(background_music_1.x, background_music_1.y, &img_underpainting_block);
+		if (background_music_2.y >= background_music_set_bar_background_clolr_pos.y + img_set_bar_background_color.getheight())
+			putimage_alpha(background_music_2.x, background_music_2.y, &img_underpainting_block);
+		if (background_music_3.y >= background_music_set_bar_background_clolr_pos.y + img_set_bar_background_color.getheight())
+			putimage_alpha(background_music_3.x, background_music_3.y, &img_underpainting_block);
+
+		switch (background_music_id) {
+		case 0:
+			putimage_alpha(background_music_current_set_music_pos.x, background_music_current_set_music_pos.y, &img_rand_music);
+			if (background_music_rand_music_pos.y >= background_music_set_bar_background_clolr_pos.y + img_set_bar_background_color.getheight())
+				putimage_alpha(background_music_rand_music_pos.x, background_music_rand_music_pos.y, &img_choice_background_color);
+			break;
+		case 1:
+			putimage_alpha(background_music_current_set_music_pos.x, background_music_current_set_music_pos.y, &img_music_1);
+			if (background_music_1.y >= background_music_set_bar_background_clolr_pos.y + img_set_bar_background_color.getheight())
+				putimage_alpha(background_music_1.x, background_music_1.y, &img_choice_background_color);
+			break;
+		case 2:
+			putimage_alpha(background_music_current_set_music_pos.x, background_music_current_set_music_pos.y, &img_music_2);
+			if (background_music_2.y >= background_music_set_bar_background_clolr_pos.y + img_set_bar_background_color.getheight())
+				putimage_alpha(background_music_2.x, background_music_2.y, &img_choice_background_color);
+			break;
+		case 3:
+			putimage_alpha(background_music_current_set_music_pos.x, background_music_current_set_music_pos.y, &img_music_3);
+			if (background_music_3.y >= background_music_set_bar_background_clolr_pos.y + img_set_bar_background_color.getheight())
+				putimage_alpha(background_music_3.x, background_music_3.y, &img_choice_background_color);
+			break;
+		}
+		if (background_music_rand_music_pos.y >= background_music_set_bar_background_clolr_pos.y + img_set_bar_background_color.getheight())
+			putimage_alpha(background_music_rand_music_pos.x, background_music_rand_music_pos.y, &img_rand_music);
+		if (background_music_1.y >= background_music_set_bar_background_clolr_pos.y + img_set_bar_background_color.getheight())
+			putimage_alpha(background_music_1.x, background_music_1.y, &img_music_1);
+		if (background_music_2.y >= background_music_set_bar_background_clolr_pos.y + img_set_bar_background_color.getheight())
+			putimage_alpha(background_music_2.x, background_music_2.y, &img_music_2);
+		if (background_music_3.y >= background_music_set_bar_background_clolr_pos.y + img_set_bar_background_color.getheight())
+			putimage_alpha(background_music_3.x, background_music_3.y, &img_music_3);
 	}
 
 	void on_input(const ExMessage& msg) {
+		switch (msg.message) {
+		case WM_LBUTTONUP:
+			// 退出判断
+			if (msg.x < set_background_pos.x) {
+				is_exit_set = true;
+				mciSendString(_T("play wooden_cabinet_sound_slide_in from 0"), NULL, 0, NULL);
+				is_choosing_background_music = false;
+				is_choosing_game_music = false;
+				is_updated_underpainting_pos = false;
+				break;
+			}
+
+			// 设置背景音乐的设置判断
+			if (msg.x < background_music_choice_pos.x + img_choice.getwidth() && msg.x > background_music_current_set_music_pos.x &&
+				msg.y < background_music_choice_pos.y + img_choice.getheight() && msg.y > background_music_choice_pos.y) {
+				is_choosing_background_music = !is_choosing_background_music;
+				if (is_open_sound_effect) mciSendString(_T("play click_sound_1 from 50"), NULL, 0, NULL);
+				break;
+			}
+
+			// 背景音乐的选择
+			if (is_choosing_background_music && msg.x < background_music_underpainting_pos.x + img_background_music_underpainting.getwidth()
+				&& msg.x > background_music_underpainting_pos.x && msg.y < background_music_underpainting_pos.y +
+				img_background_music_underpainting.getheight() && msg.y > background_music_underpainting_pos.y) {
+				// 随机音乐
+				if (msg.y < background_music_rand_music_pos.y + img_rand_music.getheight() && msg.y > background_music_rand_music_pos.y) {
+					if (is_open_sound_effect) mciSendString(_T("play click_sound_1 from 50"), NULL, 0, NULL);
+					set_background_music_id(0);
+					play_background_music();
+					is_choosing_background_music = false;
+				}
+				// 音乐1
+				else if (msg.y < background_music_1.y + img_music_1.getheight() && msg.y > background_music_1.y) {
+					if (is_open_sound_effect) mciSendString(_T("play click_sound_1 from 50"), NULL, 0, NULL);
+					set_background_music_id(1);
+					play_background_music();
+					is_choosing_background_music = false;
+				}
+				// 音乐2
+				else if (msg.y < background_music_2.y + img_music_2.getheight() && msg.y > background_music_2.y) {
+					if (is_open_sound_effect) mciSendString(_T("play click_sound_1 from 50"), NULL, 0, NULL);
+					set_background_music_id(2);
+					play_background_music();
+					is_choosing_background_music = false;
+				}
+				// 音乐3
+				else if (msg.y < background_music_3.y + img_music_3.getheight() && msg.y > background_music_3.y) {
+					if (is_open_sound_effect) mciSendString(_T("play click_sound_1 from 50"), NULL, 0, NULL);
+					set_background_music_id(3);
+					play_background_music();
+					is_choosing_background_music = false;
+				}
+			}
+			break;
+		}
+
+		if (is_choosing_background_music || is_choosing_game_music) return;
+
 		switch (msg.message) {
 		case WM_LBUTTONUP:
 			// 退出判断
@@ -210,10 +316,12 @@ public:
 
 			// 设置新手教程的设置判断
 			if (msg.y < is_first_game_set_bar_background_clolr_pos.y + img_set_bar_background_color.getheight() && msg.y > is_first_game_set_bar_background_clolr_pos.y) {
+				// 打开
 				if (msg.x < is_first_game_open_text_pos.x + img_open_text.getwidth() && msg.x > is_first_game_open_text_pos.x) {
 					set_is_first_game_is_open = true;
 					if (is_open_sound_effect) mciSendString(_T("play click_sound_1 from 50"), NULL, 0, NULL);
 				}
+				// 关闭
 				else if (msg.x < is_first_game_close_text_pos.x + img_close_text.getwidth() && msg.x > is_first_game_close_text_pos.x) {
 					set_is_first_game_is_open = false;
 					if (is_open_sound_effect) mciSendString(_T("play click_sound_1 from 50"), NULL, 0, NULL);
@@ -223,10 +331,12 @@ public:
 
 			// 设置属性克制的设置判断
 			if (msg.y < attribute_restrain_switch_set_bar_background_clolr_pos.y + img_set_bar_background_color.getheight() && msg.y > attribute_restrain_switch_set_bar_background_clolr_pos.y) {
+				// 打开
 				if (msg.x < attribute_restrain_switch_open_text_pos.x + img_open_text.getwidth() && msg.x > attribute_restrain_switch_open_text_pos.x) {
 					is_attribute_restrain = true;
 					if (is_open_sound_effect) mciSendString(_T("play click_sound_1 from 50"), NULL, 0, NULL);
 				}
+				// 关闭
 				else if (msg.x < attribute_restrain_switch_close_text_pos.x + img_close_text.getwidth() && msg.x > attribute_restrain_switch_close_text_pos.x) {
 					is_attribute_restrain = false;
 					if (is_open_sound_effect) mciSendString(_T("play click_sound_1 from 50"), NULL, 0, NULL);
@@ -234,57 +344,35 @@ public:
 				break;
 			}
 
-			// 设置音乐的设置判断
+			// 设置音乐开关的设置判断
 			if (msg.y < is_open_music_set_bar_background_clolr_pos.y + img_set_bar_background_color.getheight() && msg.y > is_open_music_set_bar_background_clolr_pos.y) {
+				// 打开
 				if (msg.x < is_open_music_open_text_pos.x + img_open_text.getwidth() && msg.x > is_open_music_open_text_pos.x) {
+					if (is_open_sound_effect) mciSendString(_T("play click_sound_1 from 50"), NULL, 0, NULL);
 					if (is_open_music) break;
 					set_is_open_music(true);
 					is_open_music = true;			
-					switch (background_music_id) {
-					case 1:
-						mciSendString(_T("play background_music_1 repeat from 0"), NULL, 0, NULL);
-						is_playing_background_music = true;
-						break;
-					case 2:
-						mciSendString(_T("play background_music_2 repeat from 0"), NULL, 0, NULL);
-						is_playing_background_music = true;
-						break;
-					case 3:
-						mciSendString(_T("play background_music_3 repeat from 0"), NULL, 0, NULL);
-						is_playing_background_music = true;
-						break;
-					}
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_1 from 50"), NULL, 0, NULL);
+					play_background_music();
 				}
+				// 关闭
 				else if (msg.x < is_open_music_close_text_pos.x + img_close_text.getwidth() && msg.x > is_open_music_close_text_pos.x) {
+					if (is_open_sound_effect) mciSendString(_T("play click_sound_1 from 50"), NULL, 0, NULL);
 					is_open_music = false;
 					set_is_open_music(false);
-					switch (background_music_id) {
-					case 1:
-						mciSendString(_T("stop background_music_1"), NULL, 0, NULL);
-						is_playing_background_music = false;
-						break;
-					case 2:
-						mciSendString(_T("stop background_music_2"), NULL, 0, NULL);
-						is_playing_background_music = false;
-						break;
-					case 3:
-						mciSendString(_T("stop background_music_3"), NULL, 0, NULL);
-						is_playing_background_music = false;
-						break;
-					}
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_1 from 50"), NULL, 0, NULL);
+					stop_background_music();
 				}
 				break;
 			}
 
-			// 设置音效的设置判断
+			// 设置音效开关的设置判断
 			if (msg.y < is_open_sound_effect_set_bar_background_clolr_pos.y + img_set_bar_background_color.getheight() && msg.y > is_open_sound_effect_set_bar_background_clolr_pos.y) {
+				// 打开
 				if (msg.x < is_open_sound_effect_open_text_pos.x + img_open_text.getwidth() && msg.x > is_open_sound_effect_open_text_pos.x) {
+					mciSendString(_T("play click_sound_1 from 50"), NULL, 0, NULL);
 					is_open_sound_effect = true;
 					set_is_open_sound_effect(true);
-					mciSendString(_T("play click_sound_1 from 50"), NULL, 0, NULL);
 				}
+				// 关闭
 				else if (msg.x < is_open_sound_effect_close_text_pos.x + img_close_text.getwidth() && msg.x > is_open_sound_effect_close_text_pos.x) {
 					if (is_open_sound_effect) mciSendString(_T("play click_sound_1 from 50"), NULL, 0, NULL);
 					set_is_open_sound_effect(false);
@@ -301,6 +389,7 @@ public:
 
 private:
 	const float set_background_slide_speed = 0.8f;									// 设置背景滑动速度
+	const float set_content_slide_speed = 0.7f;										// 设置内容滑动速度
 
 private:
 	POINT set_background_pos = { 0 };												// 设置背景的位置
@@ -325,6 +414,7 @@ private:
 	POINT background_music_current_set_music_pos = { 0 };							// 当前设置的音乐的位置
 	POINT background_music_underpainting_pos = { 0 };								// 背景色的位置
 	POINT background_music_choice_background_color_pos = { 0 };						// 选择的音乐的颜色
+	POINT background_music_rand_music_pos = { 0 };									// 随机音乐的位置
 	POINT background_music_1 = { 0 };												// 音乐1的位置
 	POINT background_music_2 = { 0 };												// 音乐2的位置
 	POINT background_music_3 = { 0 };												// 音乐3的位置
@@ -335,11 +425,12 @@ private:
 	POINT game_music_current_set_music_pos = { 0 };									// 当前设置的音乐的位置
 	POINT game_music_underpainting_pos = { 0 };										// 背景色的位置
 	POINT game_music_choice_background_color_pos = { 0 };							// 选择的音乐的颜色
-	POINT game_music_1 = { 0 };														// 音乐5的位置
-	POINT game_music_2 = { 0 };														// 音乐4的位置
+	POINT game_music_rand_music_pos = { 0 };										// 随机音乐的位置
+	POINT game_music_1 = { 0 };														// 音乐1的位置
+	POINT game_music_2 = { 0 };														// 音乐2的位置
 	POINT game_music_3 = { 0 };														// 音乐3的位置
-	POINT game_music_4 = { 0 };														// 音乐2的位置
-	POINT game_music_5 = { 0 };														// 音乐1的位置
+	POINT game_music_4 = { 0 };														// 音乐4的位置
+	POINT game_music_5 = { 0 };														// 音乐5的位置
 	// 设置音乐的位置			
 	POINT is_open_music_set_bar_background_clolr_pos = { 0 };						// 设置条背景色的位置
 	POINT is_open_music_text_pos = { 0 };											// 音乐文本的位置
@@ -355,4 +446,7 @@ private:
 
 	bool is_exit_set = false;														// 是否退出设置
 	bool set_is_first_game_is_open = is_first_game;									// 设置新手教程 是否为打开状态
+	bool is_choosing_background_music = false;										// 是否正在选择背景音乐
+	bool is_choosing_game_music = false;											// 是否正在选择战斗音乐
+	bool is_updated_underpainting_pos = false;										// 是否更新过背景色的位置
 };

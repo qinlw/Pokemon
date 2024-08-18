@@ -141,6 +141,7 @@
     <ClInclude Include="collision_line.h" />
     <ClInclude Include="flame_jet.h" />
     <ClInclude Include="fly_leaf.h" />
+    <ClInclude Include="music_fun.h" />
     <ClInclude Include="mysql_fun.h" />
     <ClInclude Include="picture.h" />
     <ClInclude Include="pointf.h" />
