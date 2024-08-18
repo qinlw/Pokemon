@@ -28,6 +28,11 @@ public:
 		this->callback = callback;
 	}
 
+	void set_peremptory_callback(std::function<void()> callback) {
+		this->callback = callback;
+		is_exist_peremptory_callback = true;
+	}
+
 	int get_interval() {
 		return interval;
 	}
@@ -48,6 +53,7 @@ public:
 			if (idx_frame >= atlas->get_size() - 1) {
 				idx_frame = is_loop ? 0 : atlas->get_size() - 1;
 				if (!is_loop && callback) callback();
+				else if (is_exist_peremptory_callback && callback) callback();
 			}
 		}
 	}
@@ -59,10 +65,11 @@ public:
 	
 
 private:
-	int time = 0;							// 计时器
-	int interval = 0;						// 帧间隔
-	int idx_frame = 0;						// 帧下标
-	bool is_loop = true;					// 是否循环播放
+	int time = 0;									// 计时器
+	int interval = 0;								// 帧间隔
+	int idx_frame = 0;								// 帧下标
+	bool is_loop = true;							// 是否循环播放
+	bool is_exist_peremptory_callback = false;		// 是否存在强制回调
 	Atlas* atlas = nullptr;					
 	std::function<void()> callback;			
 

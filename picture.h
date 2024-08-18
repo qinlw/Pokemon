@@ -324,18 +324,47 @@ void load_res() {
 	loadimage(&img_1P_bulbasaur_win_text_bar, _T("res/1P_bulbasaur_win_text_bar.png"));
 	loadimage(&img_2P_bulbasaur_win_text_bar, _T("res/2P_bulbasaur_win_text_bar.png"));
 
-	mciSendString(_T("open res/music/background_music_1.mp3 alias background_music_1"), NULL, 0, NULL);
-	mciSendString(_T("open res/music/background_music_2.mp3 alias background_music_2"), NULL, 0, NULL);
-	mciSendString(_T("open res/music/background_music_3.mp3 alias background_music_3"), NULL, 0, NULL);
+
+	// 点击音效
 	mciSendString(_T("open res/music/click_sound_1.wav alias click_sound_1"), NULL, 0, NULL);
 	mciSendString(_T("open res/music/click_sound_2.wav alias click_sound_2"), NULL, 0, NULL);
 	mciSendString(_T("open res/music/click_sound_2_1.wav alias click_sound_2_1"), NULL, 0, NULL);
 	mciSendString(_T("open res/music/click_sound_2_2.wav alias click_sound_2_2"), NULL, 0, NULL);
 	mciSendString(_T("open res/music/click_sound_3.wav alias click_sound_3"), NULL, 0, NULL);
+
+	// 推拉木柜音效
 	mciSendString(_T("open res/music/wooden_cabinet_sound_slide_out.wav alias wooden_cabinet_sound_slide_out"), NULL, 0, NULL);
 	mciSendString(_T("open res/music/wooden_cabinet_sound_slide_in.wav alias wooden_cabinet_sound_slide_in"), NULL, 0, NULL);
+
+	// 机械转动音效
 	mciSendString(_T("open res/music/mechanical_rotation_sound.wav alias mechanical_rotation_sound"), NULL, 0, NULL);
+	// 撕纸音效
+	mciSendString(_T("open res/music/tear_paper.wav alias tear_paper"), NULL, 0, NULL);
+
+	// 游戏内音效
+	// 火球发射音效
+	mciSendString(_T("open res/music/fire_shoot_sound_effect.wav alias fire_shoot_sound_effect"), NULL, 0, NULL);
+	// 火焰喷射音效
+	mciSendString(_T("open res/music/flame_jet_sound_effect.wav alias flame_jet_sound_effect"), NULL, 0, NULL);
+	// 燃烧音效
+	mciSendString(_T("open res/music/burn_sound_effect.wav alias burn_sound_effect"), NULL, 0, NULL);
+	mciSendString(_T("open res/music/short_burn_sound_effect.wav alias short_burn_sound_effect"), NULL, 0, NULL);
+	// 水枪发射音效
+	mciSendString(_T("open res/music/water_gun_sound_effect.wav alias water_gun_sound_effect"), NULL, 0, NULL);
+	// 溅水音效
+	mciSendString(_T("open res/music/splash.wav alias splash"), NULL, 0, NULL);
+	// 飞叶上升音效
+	mciSendString(_T("open res/music/fly_leaf_up.wav alias fly_leaf_up"), NULL, 0, NULL);
+	// 飞叶命中音效
+	mciSendString(_T("open res/music/fly_leaf_hit.wav alias fly_leaf_hit"), NULL, 0, NULL);
 	
-	load_music(_T("open res/music/move_sound_%d.wav alias move_sound_%d"), 9);
+	// 背景音乐
+	load_music(_T("open res/music/background_music_%d.mp3 alias background_music_%d"), 3);
+	// 战斗音乐
 	load_music(_T("open res/music/game_music_%d.mp3 alias game_music_%d"), 5);
+
+	// 移动音效
+	load_music(_T("open res/music/move_sound_%d.wav alias move_sound_%d"), 9);
+	// 短燃烧音效
+	load_music(_T("open res/music/short_burn_sound_effect_%d.wav alias short_burn_sound_effect_%d"), 8);
 }

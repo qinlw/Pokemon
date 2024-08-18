@@ -3,6 +3,8 @@
 #include "bullet.h"
 
 
+extern bool is_open_sound_effect;
+
 extern std::vector<Bullet*> bullet_list;
 
 class FlameJet : public Bullet {
@@ -52,6 +54,33 @@ public:
 
 		callback = [&]() {
 			is_can_remove = true;
+			if (!is_open_sound_effect) return;
+			switch (rand() % 8 + 1) {
+			case 1:
+				mciSendString(_T("play short_burn_sound_effect_1 from 0"), NULL, 0, NULL);
+				break;
+			case 2:
+				mciSendString(_T("play short_burn_sound_effect_2 from 0"), NULL, 0, NULL);
+				break;
+			case 3:
+				mciSendString(_T("play short_burn_sound_effect_3 from 0"), NULL, 0, NULL);
+				break;
+			case 4:
+				mciSendString(_T("play short_burn_sound_effect_4 from 0"), NULL, 0, NULL);
+				break;
+			case 5:
+				mciSendString(_T("play short_burn_sound_effect_5 from 0"), NULL, 0, NULL);
+				break;
+			case 6:
+				mciSendString(_T("play short_burn_sound_effect_6 from 0"), NULL, 0, NULL);
+				break;
+			case 7:
+				mciSendString(_T("play short_burn_sound_effect_7 from 0"), NULL, 0, NULL);
+				break;
+			case 8:
+				mciSendString(_T("play short_burn_sound_effect_8 from 0"), NULL, 0, NULL);
+				break;
+			}
 			};
 	}
 
@@ -241,39 +270,39 @@ public:
 
 
 protected:
-	//POINT bullet_01_pos = { 0 };					// 子弹切片01的位置
-	//POINT bullet_02_pos = { 0 };					// 子弹切片02的位置
-	//POINT bullet_03_pos = { 0 };					// 子弹切片03的位置
-	//POINT bullet_04_pos = { 0 };					// 子弹切片04的位置
-	//POINT bullet_05_pos = { 0 };					// 子弹切片05的位置
-	//POINT bullet_06_pos = { 0 };					// 子弹切片06的位置
-	//POINT bullet_07_pos = { 0 };					// 子弹切片07的位置
-	//POINT bullet_08_pos = { 0 };					// 子弹切片08的位置
-	//POINT bullet_09_pos = { 0 };					// 子弹切片09的位置
-	//POINT bullet_10_pos = { 0 };					// 子弹切片10的位置
-	//POINT bullet_11_pos = { 0 };					// 子弹切片11的位置
-	//POINT bullet_12_pos = { 0 };					// 子弹切片12的位置
-	//POINT bullet_13_pos = { 0 };					// 子弹切片13的位置
-	//POINT bullet_14_pos = { 0 };					// 子弹切片14的位置
-	//POINT bullet_15_pos = { 0 };					// 子弹切片15的位置
-	//POINT bullet_16_pos = { 0 };					// 子弹切片16的位置
+	//POINT bullet_01_pos = { 0 };					    // 子弹切片01的位置
+	//POINT bullet_02_pos = { 0 };					    // 子弹切片02的位置
+	//POINT bullet_03_pos = { 0 };					    // 子弹切片03的位置
+	//POINT bullet_04_pos = { 0 };					    // 子弹切片04的位置
+	//POINT bullet_05_pos = { 0 };					    // 子弹切片05的位置
+	//POINT bullet_06_pos = { 0 };					    // 子弹切片06的位置
+	//POINT bullet_07_pos = { 0 };					    // 子弹切片07的位置
+	//POINT bullet_08_pos = { 0 };					    // 子弹切片08的位置
+	//POINT bullet_09_pos = { 0 };					    // 子弹切片09的位置
+	//POINT bullet_10_pos = { 0 };					    // 子弹切片10的位置
+	//POINT bullet_11_pos = { 0 };					    // 子弹切片11的位置
+	//POINT bullet_12_pos = { 0 };					    // 子弹切片12的位置
+	//POINT bullet_13_pos = { 0 };					    // 子弹切片13的位置
+	//POINT bullet_14_pos = { 0 };					    // 子弹切片14的位置
+	//POINT bullet_15_pos = { 0 };					    // 子弹切片15的位置
+	//POINT bullet_16_pos = { 0 };					    // 子弹切片16的位置
 
-	Animation animation_flame_jet_x_01;				// 火焰喷射切片01的动画
-	Animation animation_flame_jet_x_02;				// 火焰喷射切片02的动画
-	Animation animation_flame_jet_x_03;				// 火焰喷射切片03的动画
-	Animation animation_flame_jet_x_04;				// 火焰喷射切片04的动画
-	Animation animation_flame_jet_x_05;				// 火焰喷射切片05的动画
-	Animation animation_flame_jet_x_06;				// 火焰喷射切片06的动画
-	Animation animation_flame_jet_x_07;				// 火焰喷射切片07的动画
-	Animation animation_flame_jet_x_08;				// 火焰喷射切片08的动画
-	Animation animation_flame_jet_x_09;				// 火焰喷射切片09的动画
-	Animation animation_flame_jet_x_10;				// 火焰喷射切片10的动画
-	Animation animation_flame_jet_x_11;				// 火焰喷射切片11的动画
-	Animation animation_flame_jet_x_12;				// 火焰喷射切片12的动画
-	Animation animation_flame_jet_x_13;				// 火焰喷射切片13的动画
-	Animation animation_flame_jet_x_14;				// 火焰喷射切片14的动画
-	Animation animation_flame_jet_x_15;				// 火焰喷射切片15的动画
-	Animation animation_flame_jet_x_16;				// 火焰喷射切片16的动画
+	Animation animation_flame_jet_x_01;				    // 火焰喷射切片01的动画
+	Animation animation_flame_jet_x_02;				    // 火焰喷射切片02的动画
+	Animation animation_flame_jet_x_03;				    // 火焰喷射切片03的动画
+	Animation animation_flame_jet_x_04;				    // 火焰喷射切片04的动画
+	Animation animation_flame_jet_x_05;				    // 火焰喷射切片05的动画
+	Animation animation_flame_jet_x_06;				    // 火焰喷射切片06的动画
+	Animation animation_flame_jet_x_07;				    // 火焰喷射切片07的动画
+	Animation animation_flame_jet_x_08;				    // 火焰喷射切片08的动画
+	Animation animation_flame_jet_x_09;				    // 火焰喷射切片09的动画
+	Animation animation_flame_jet_x_10;				    // 火焰喷射切片10的动画
+	Animation animation_flame_jet_x_11;				    // 火焰喷射切片11的动画
+	Animation animation_flame_jet_x_12;				    // 火焰喷射切片12的动画
+	Animation animation_flame_jet_x_13;				    // 火焰喷射切片13的动画
+	Animation animation_flame_jet_x_14;				    // 火焰喷射切片14的动画
+	Animation animation_flame_jet_x_15;				    // 火焰喷射切片15的动画
+	Animation animation_flame_jet_x_16;				    // 火焰喷射切片16的动画
 
 	//bool bullet_01_is_harm = false;					// 子弹切片01是否有伤害
 	//bool bullet_02_is_harm = false;					// 子弹切片02是否有伤害
@@ -800,4 +829,6 @@ void flame_jet(int& mp, int ATK, int MATK, bool is_facing_right, POINT pokemon_p
 	bullet_list.push_back(bullet_03);
 	bullet_list.push_back(bullet_02);
 	bullet_list.push_back(bullet_01);
+
+	if (is_open_sound_effect) mciSendString(_T("play flame_jet_sound_effect from 0"), NULL, 0, NULL);
 }

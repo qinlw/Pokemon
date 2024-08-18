@@ -3,6 +3,8 @@
 #include "bullet.h"
 
 
+extern bool is_open_sound_effect;
+
 extern std::vector<Bullet*> bullet_list;
 
 class WaterGun : public Bullet {
@@ -13,7 +15,7 @@ public:
 		animation_water_droplet_left.set_atlas(&atlas_water_droplet_left);
 		animation_water_droplet_left.set_interval(100);
 		animation_splashes.set_atlas(&atlas_splashes);
-		animation_splashes.set_interval(100);
+		animation_splashes.set_interval(200);
 		animation_splashes.set_is_loop(false);
 		animation_splashes.set_callback([&]() {
 			is_can_remove = true;
@@ -48,7 +50,11 @@ public:
 			else animation_water_droplet_left.on_update(delta);
 		}
 		else {
-			animation_splashes.on_update(delta);
+			animation_splashes.on_update(delta); 			
+			if (is_permit_play_splash_sound_effect) {
+				if (is_open_sound_effect) mciSendString(_T("play splash from 0"), NULL, 0, NULL);
+				is_permit_play_splash_sound_effect = false;
+			}
 		}
 
 		if (check_is_exceed_screen()) is_can_remove = true;
@@ -80,6 +86,8 @@ private:
 	Animation animation_water_droplet_left;							// 水枪发射向左的动画
 	Animation animation_splashes;									// 水枪命中后的动画
 
+	bool is_permit_play_splash_sound_effect = true;					// 是否允许播放溅水音效
+
 };
 
 
@@ -110,4 +118,6 @@ void water_gun(int& mp, int ATK, int MATK, bool is_facing_right, POINT pokemon_p
 	bullet->set_target_player(player_id == PokemonPlayer::P1 ? PokemonPlayer::P2 : PokemonPlayer::P1);
 
 	bullet_list.push_back(bullet);
+
+	if (is_open_sound_effect) mciSendString(_T("play water_gun_sound_effect from 0"), NULL, 0, NULL);
 }

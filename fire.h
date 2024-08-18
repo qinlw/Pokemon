@@ -3,6 +3,8 @@
 #include "bullet.h"
 
 
+extern bool is_open_sound_effect;
+
 extern std::vector<Bullet*> bullet_list;
 
 class Fire : public Bullet {
@@ -43,8 +45,16 @@ public:
 			bullet_pos.y += bullet_velocity.y * delta;
 		}
 
-		if (!is_harm) animation_fireball.on_update(delta);
-		else animation_fire.on_update(delta);
+		if (!is_harm) {
+			animation_fireball.on_update(delta);
+		}
+		else {
+			animation_fire.on_update(delta);
+			if (is_permit_play_burn_sound_effect) {
+				if (is_open_sound_effect) mciSendString(_T("play burn_sound_effect from 0"), NULL, 0, NULL);
+				is_permit_play_burn_sound_effect = false;
+			}
+		}
 
 		if (!is_inflict_one_harm) timer_is_inflict_one_harm.on_update(delta);
 
@@ -70,6 +80,8 @@ public:
 private:
 	Animation animation_fireball;								// 火球动画（火花未碰撞动画）
 	Animation animation_fire;									// 火花动画
+
+	bool is_permit_play_burn_sound_effect = true;				// 是否可以播放燃烧音效
 
 
 };
@@ -100,4 +112,6 @@ void fire(int& mp, int ATK, int MATK, bool is_facing_right, POINT pokemon_pos, P
 	bullet->set_target_player(player_id == PokemonPlayer::P1 ? PokemonPlayer::P2 : PokemonPlayer::P1);
 
 	bullet_list.push_back(bullet);
+
+	if (is_open_sound_effect) mciSendString(_T("play fire_shoot_sound_effect from 0"), NULL, 0, NULL);
 }

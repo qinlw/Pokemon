@@ -3,6 +3,8 @@
 #include "bullet.h"
 
 
+extern bool is_open_sound_effect;
+
 extern std::vector<Bullet*> bullet_list;
 
 class FlyLeaf : public Bullet {
@@ -24,7 +26,9 @@ public:
 
 		bullet_attribute = BulletAttribute::Wood;
 
-		callback = [&]() {};
+		callback = [&]() {
+			if (is_open_sound_effect) mciSendString(_T("play fly_leaf_hit from 0"), NULL, 0, NULL);
+			};
 	}
 
 	void on_update(int delta) {
@@ -87,4 +91,6 @@ void fly_leaf(int& mp, int ATK, int MATK, bool is_facing_right, POINT pokemon_po
 	bullet->set_target_player(player_id == PokemonPlayer::P1 ? PokemonPlayer::P2 : PokemonPlayer::P1);
 
 	bullet_list.push_back(bullet);
+
+	if (is_open_sound_effect) mciSendString(_T("play fly_leaf_up from 0"), NULL, 0, NULL);
 }

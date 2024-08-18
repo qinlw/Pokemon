@@ -649,6 +649,7 @@ public:
 	void on_exit() {
 		stop_game_music();
 		set_is_first_game(false);
+		play_background_music();
 	}
 
 private:

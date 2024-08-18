@@ -13,6 +13,8 @@
 #include <string>
 
 
+extern bool is_open_sound_effect;
+
 extern std::vector<CollisionLine> collision_thwartwise_line_list;
 extern std::vector<CollisionLine> collision_vertical_line_list;
 extern std::vector<Bullet*> bullet_list;

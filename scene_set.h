@@ -411,7 +411,7 @@ public:
 				msg.y < background_music_choice_pos.y + img_choice.getheight() && msg.y > background_music_choice_pos.y && 
 				!is_choosing_game_music) {
 				is_choosing_background_music = !is_choosing_background_music;
-				if (is_open_sound_effect) mciSendString(_T("play click_sound_1 from 50"), NULL, 0, NULL);
+				if (is_open_sound_effect) mciSendString(_T("play tear_paper from 50"), NULL, 0, NULL);
 				break;
 			}
 
@@ -419,7 +419,7 @@ public:
 			if (msg.x < game_music_choice_pos.x + img_choice.getwidth() && msg.x > game_music_current_set_music_pos.x &&
 				msg.y < game_music_choice_pos.y + img_choice.getheight() && msg.y > game_music_choice_pos.y && !is_choosing_background_music) {
 				is_choosing_game_music = !is_choosing_game_music;
-				if (is_open_sound_effect) mciSendString(_T("play click_sound_1 from 50"), NULL, 0, NULL);
+				if (is_open_sound_effect) mciSendString(_T("play tear_paper from 50"), NULL, 0, NULL);
 				break;
 			}
 
@@ -432,33 +432,35 @@ public:
 					if (msg.y < background_music_rand_music_pos.y + img_rand_music.getheight() && msg.y > background_music_rand_music_pos.y) {
 						if (is_open_sound_effect) mciSendString(_T("play click_sound_1 from 50"), NULL, 0, NULL);
 						set_background_music_id(0);
-						play_background_music();
+						if (is_open_music) play_background_music();
 						is_choosing_background_music = false;
 					}
 					// “Ù¿÷1
 					else if (msg.y < background_music_1.y + img_music_1.getheight() && msg.y > background_music_1.y) {
 						if (is_open_sound_effect) mciSendString(_T("play click_sound_1 from 50"), NULL, 0, NULL);
 						set_background_music_id(1);
-						play_background_music();
+						if (is_open_music) play_background_music();
 						is_choosing_background_music = false;
 					}
 					// “Ù¿÷2
 					else if (msg.y < background_music_2.y + img_music_2.getheight() && msg.y > background_music_2.y) {
 						if (is_open_sound_effect) mciSendString(_T("play click_sound_1 from 50"), NULL, 0, NULL);
 						set_background_music_id(2);
-						play_background_music();
+						if (is_open_music) play_background_music();
 						is_choosing_background_music = false;
 					}
 					// “Ù¿÷3
 					else if (msg.y < background_music_3.y + img_music_3.getheight() && msg.y > background_music_3.y) {
 						if (is_open_sound_effect) mciSendString(_T("play click_sound_1 from 50"), NULL, 0, NULL);
 						set_background_music_id(3);
-						play_background_music();
+						if (is_open_music) play_background_music();
 						is_choosing_background_music = false;
 					}
+					return;
 				}
 				else {
 					is_choosing_background_music = false;
+					return;
 				}
 			}
 
@@ -503,9 +505,11 @@ public:
 						set_game_music_id(5);
 						is_choosing_game_music = false;
 					}
+					return;
 				}
 				else {
 					is_choosing_game_music = false;
+					return;
 				}
 			}
 		}
