@@ -3,11 +3,16 @@
 #include "scene.h"
 #include "picture.h"
 #include "util.h"
+#include "music_fun.h"
 #include "animation.h"
 #include "timer.h"
 
 
 extern SceneManager* scene_manager;
+
+extern bool is_open_music;
+extern bool is_playing_background_music;
+extern bool is_open_sound_effect;
 
 class SceneProgressBar : public Scene{
 public:
@@ -45,6 +50,7 @@ public:
 		timer_switch_login_registration_scene.set_wait_time(1000);
 		timer_switch_login_registration_scene.set_one_shot(true);
 		timer_switch_login_registration_scene.set_callback([&]() {
+			if (is_open_sound_effect) mciSendString(_T("play click_sound_3 from 50"), NULL, 0, NULL);
 			scene_manager->switch_scene(SceneManager::SceneType::LoginRegistration);
 			});
 
@@ -55,6 +61,8 @@ public:
 		progress_bar_percentage_num_tens_digit_pos.y = progress_bar_percentage_num_units_digit_pos.y;
 		progress_bar_percentage_num_hundreds_digit_pos.x = progress_bar_percentage_num_tens_digit_pos.x - img_progress_bar_percentage_num_0.getwidth();
 		progress_bar_percentage_num_hundreds_digit_pos.y = progress_bar_percentage_num_tens_digit_pos.y;
+
+		if (is_open_music && !is_playing_background_music) play_background_music();
 	}
 
 	void on_update(int delta) {
