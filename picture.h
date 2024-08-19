@@ -7,6 +7,23 @@
 #pragma comment(lib, "Winmm.lib")
 
 
+// 进度条场景
+IMAGE img_progress_bar_background;					// 进度条背景
+IMAGE img_progress_bar_percent;						// 进度条的百分号
+IMAGE img_progress_bar_percentage_num_0;			// 进度条百分比的数字0
+IMAGE img_progress_bar_percentage_num_1;			// 进度条百分比的数字1
+IMAGE img_progress_bar_percentage_num_2;			// 进度条百分比的数字2
+IMAGE img_progress_bar_percentage_num_3;			// 进度条百分比的数字3
+IMAGE img_progress_bar_percentage_num_4;			// 进度条百分比的数字4
+IMAGE img_progress_bar_percentage_num_5;			// 进度条百分比的数字5
+IMAGE img_progress_bar_percentage_num_6;			// 进度条百分比的数字6
+IMAGE img_progress_bar_percentage_num_7;			// 进度条百分比的数字7
+IMAGE img_progress_bar_percentage_num_8;			// 进度条百分比的数字8
+IMAGE img_progress_bar_percentage_num_9;			// 进度条百分比的数字9
+
+Atlas atlas_progress_bar_piece;						// 进度条切片图集
+
+
 // 主菜单场景
 IMAGE img_background_base;							// 主菜单背景版
 IMAGE img_menu_background;							// 主菜单界面
@@ -170,6 +187,24 @@ IMAGE img_2P_bulbasaur_win_text_bar;				// 2P妙蛙种子胜利文本条动画
 
 
 void load_res() {
+	// 进度条场景资源加载
+	loadimage(&img_progress_bar_background, _T("res/progress_bar_background.png"));
+	loadimage(&img_progress_bar_percent, _T("res/progress_bar_percent.png"));
+	loadimage(&img_progress_bar_percentage_num_0, _T("res/progress_bar_percentage_num_0.png"));
+	loadimage(&img_progress_bar_percentage_num_1, _T("res/progress_bar_percentage_num_1.png"));
+	loadimage(&img_progress_bar_percentage_num_2, _T("res/progress_bar_percentage_num_2.png"));
+	loadimage(&img_progress_bar_percentage_num_3, _T("res/progress_bar_percentage_num_3.png"));
+	loadimage(&img_progress_bar_percentage_num_4, _T("res/progress_bar_percentage_num_4.png"));
+	loadimage(&img_progress_bar_percentage_num_5, _T("res/progress_bar_percentage_num_5.png"));
+	loadimage(&img_progress_bar_percentage_num_6, _T("res/progress_bar_percentage_num_6.png"));
+	loadimage(&img_progress_bar_percentage_num_7, _T("res/progress_bar_percentage_num_7.png"));
+	loadimage(&img_progress_bar_percentage_num_8, _T("res/progress_bar_percentage_num_8.png"));
+	loadimage(&img_progress_bar_percentage_num_9, _T("res/progress_bar_percentage_num_9.png"));
+
+
+	atlas_progress_bar_piece.load_from_file(_T("res/progress_bar_piece/progress_bar_piece_%d.png"), 100);
+
+
 	// 主菜单场景资源加载
 	loadimage(&img_background_base, _T("res/background_base.png"));
 	loadimage(&img_menu_background, _T("res/menu_background.png"));
@@ -179,6 +214,7 @@ void load_res() {
 	loadimage(&img_exit_button, _T("res/exit_button.png"));
 
 	atlas_mysql_unconnected.load_from_file(_T("res/mysql_unconnected_%d.png"), 21);
+
 
 	//设置场景资源加载
 	loadimage(&img_set_background, _T("res/set/set_background.png"));
