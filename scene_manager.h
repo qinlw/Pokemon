@@ -5,6 +5,8 @@
 
 extern int _main(int x, int y);
 
+extern Scene* progress_bar_scene;
+extern Scene* login_registration_scene;
 extern Scene* menu_scene;
 extern Scene* knapsack_scene;
 extern Scene* set_scene;
@@ -16,6 +18,8 @@ extern HWND hwnd;
 class SceneManager {
 public:
 	enum class SceneType {
+		ProgressBar,
+		LoginRegistration,
 		Menu,
 		Knapscack,
 		Set,
@@ -31,16 +35,22 @@ public:
 	void switch_scene(SceneType type) {
 		current_scene->on_exit();
 		switch (type) {
-		case SceneManager::SceneType::Menu:
+		case SceneType::ProgressBar:
+			current_scene = progress_bar_scene;
+			break;
+		case SceneType::LoginRegistration:
+			current_scene = login_registration_scene;
+			break;
+		case SceneType::Menu:
 			current_scene = menu_scene;
 			break;
-		case SceneManager::SceneType::Knapscack:
+		case SceneType::Knapscack:
 			current_scene = knapsack_scene;
 			break;
-		case SceneManager::SceneType::Set:
+		case SceneType::Set:
 			current_scene = set_scene;
 			break;
-		case SceneManager::SceneType::Pokemon: {
+		case SceneType::Pokemon: {
 			if (current_scene == menu_scene) {
 				RECT rect;
 				if (GetWindowRect(hwnd, &rect)) 
@@ -49,7 +59,7 @@ public:
 			current_scene = pokemon_scene;
 			break;
 		}
-		case SceneManager::SceneType::Game:
+		case SceneType::Game:
 			current_scene = game_scene;
 			break;
 		}

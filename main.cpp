@@ -2,6 +2,8 @@
 #include "mysql_fun.h"
 #include "picture.h"
 #include "scene_manager.h"
+#include "scene_progress_bar.h"
+#include "scene_login_registration.h"
 #include "scene_menu.h"
 #include "scene_knapsack.h"
 #include "scene_set.h"
@@ -24,6 +26,8 @@ const unsigned const int port = 3306;											// 端口号
 bool is_debug = true;								                            // 是否开启调式模式
 bool is_mysql_connect = false;						                            // 是否成功连接数据库
 
+Scene* progress_bar_scene = nullptr;											// 进度条场景对象指针
+Scene* login_registration_scene = nullptr;										// 登录注册场景对象指针
 Scene* menu_scene = nullptr;						                            // 菜单场景对象指针
 Scene* knapsack_scene = nullptr;					                            // 背包场景对象指针
 Scene* set_scene = nullptr;							                            // 设置场景对象指针
@@ -82,6 +86,8 @@ int main() {
 	load_res();
 
 	// 给不同的场景对象指针初始化
+	progress_bar_scene = new SceneProgressBar();
+	login_registration_scene = new SceneLoginRegistration();
 	menu_scene = new SceneMenu();
 	knapsack_scene = new SceneKnapsack();
 	set_scene = new SceneSet();
@@ -91,7 +97,7 @@ int main() {
 	scene_manager = new SceneManager();
 
 	// 初始化场景位置，这里默认为菜单场景，即程序运行后会直接进入菜单场景
-	scene_manager->scene_set(menu_scene);
+	scene_manager->scene_set(progress_bar_scene);
 
 	// 批量绘图函数
 	BeginBatchDraw();

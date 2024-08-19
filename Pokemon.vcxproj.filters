@@ -128,6 +128,12 @@
     <ClInclude Include="music_fun.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="scene_progress_bar.h">
+      <Filter>头文件\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="scene_login_registration.h">
+      <Filter>头文件\scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="bug_and_problem_list" />

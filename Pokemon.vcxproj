@@ -155,9 +155,11 @@
     <ClInclude Include="scene.h" />
     <ClInclude Include="scene_game.h" />
     <ClInclude Include="scene_knapsack.h" />
+    <ClInclude Include="scene_login_registration.h" />
     <ClInclude Include="scene_manager.h" />
     <ClInclude Include="scene_menu.h" />
     <ClInclude Include="scene_pokemon.h" />
+    <ClInclude Include="scene_progress_bar.h" />
     <ClInclude Include="scene_set.h" />
     <ClInclude Include="timer.h" />
     <ClInclude Include="util.h" />
