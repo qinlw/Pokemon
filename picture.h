@@ -24,6 +24,118 @@ IMAGE img_progress_bar_percentage_num_9;			// 进度条百分比的数字9
 Atlas atlas_progress_bar_piece;						// 进度条切片图集
 
 
+// 登录注册场景
+IMAGE img_login_registration_background;			// 登录注册背景
+IMAGE img_login_registration_interface;				// 登录注册界面
+IMAGE img_registration_idle_text;					// 默认注册文本
+IMAGE img_registration_down_text;					// 按下注册文本
+IMAGE img_login_idle_text;							// 默认登录文本
+IMAGE img_login_down_text;							// 按下登录文本
+IMAGE img_login_registration_account_text;			// 登录注册的账号文本
+IMAGE img_login_registration_password_text;			// 登录注册的密码文本
+IMAGE img_login_registration_input_box;				// 登录注册的输入框
+IMAGE img_login_idle_button;						// 默认的登录按钮
+IMAGE img_login_down_button;						// 按下的登录按钮
+IMAGE img_registration_idle_button;					// 默认的注册按钮
+IMAGE img_registration_down_button;					// 按下的注册按钮
+IMAGE img_eye;										// 眼睛
+IMAGE img_nullptr;									// 空图像
+IMAGE img_account_input_box_1;						// 账户输入框里的第1个数或字母									
+IMAGE img_account_input_box_2;						// 账户输入框里的第2个数或字母									
+IMAGE img_account_input_box_3;						// 账户输入框里的第3个数或字母									
+IMAGE img_account_input_box_4;						// 账户输入框里的第4个数或字母									
+IMAGE img_account_input_box_5;						// 账户输入框里的第5个数或字母									
+IMAGE img_account_input_box_6;						// 账户输入框里的第6个数或字母									
+IMAGE img_account_input_box_7;						// 账户输入框里的第7个数或字母									
+IMAGE img_account_input_box_8;						// 账户输入框里的第8个数或字母									
+IMAGE img_account_input_box_9;						// 账户输入框里的第9个数或字母									
+IMAGE img_account_input_box_10;						// 账户输入框里的第10个数或字母									
+IMAGE img_account_input_box_11;						// 账户输入框里的第11个数或字母									
+IMAGE img_account_input_box_12;						// 账户输入框里的第12个数或字母									
+IMAGE img_account_input_box_13;						// 账户输入框里的第13个数或字母									
+IMAGE img_account_input_box_14;						// 账户输入框里的第14个数或字母									
+IMAGE img_account_input_box_15;						// 账户输入框里的第15个数或字母									
+IMAGE img_account_input_box_16;						// 账户输入框里的第16个数或字母	
+IMAGE img_password_input_box_1;						// 密码输入框里的第1个数或字母									
+IMAGE img_password_input_box_2;						// 密码输入框里的第2个数或字母									
+IMAGE img_password_input_box_3;						// 密码输入框里的第3个数或字母									
+IMAGE img_password_input_box_4;						// 密码输入框里的第4个数或字母									
+IMAGE img_password_input_box_5;						// 密码输入框里的第5个数或字母									
+IMAGE img_password_input_box_6;						// 密码输入框里的第6个数或字母									
+IMAGE img_password_input_box_7;						// 密码输入框里的第7个数或字母									
+IMAGE img_password_input_box_8;						// 密码输入框里的第8个数或字母									
+IMAGE img_password_input_box_9;						// 密码输入框里的第9个数或字母									
+IMAGE img_password_input_box_10;					// 密码输入框里的第10个数或字母									
+IMAGE img_password_input_box_11;					// 密码输入框里的第11个数或字母									
+IMAGE img_password_input_box_12;					// 密码输入框里的第12个数或字母									
+IMAGE img_password_input_box_13;					// 密码输入框里的第13个数或字母									
+IMAGE img_password_input_box_14;					// 密码输入框里的第14个数或字母									
+IMAGE img_password_input_box_15;					// 密码输入框里的第15个数或字母									
+IMAGE img_password_input_box_16;					// 密码输入框里的第16个数或字母	
+IMAGE img_login_registration_capital_letters_A;		// 大写字母A
+IMAGE img_login_registration_capital_letters_B;		// 大写字母B
+IMAGE img_login_registration_capital_letters_C;		// 大写字母C
+IMAGE img_login_registration_capital_letters_D;		// 大写字母D
+IMAGE img_login_registration_capital_letters_E;		// 大写字母E
+IMAGE img_login_registration_capital_letters_F;		// 大写字母F
+IMAGE img_login_registration_capital_letters_G;		// 大写字母G
+IMAGE img_login_registration_capital_letters_H;		// 大写字母H
+IMAGE img_login_registration_capital_letters_I;		// 大写字母I
+IMAGE img_login_registration_capital_letters_J;		// 大写字母J
+IMAGE img_login_registration_capital_letters_K;		// 大写字母K
+IMAGE img_login_registration_capital_letters_L;		// 大写字母L
+IMAGE img_login_registration_capital_letters_M;		// 大写字母M
+IMAGE img_login_registration_capital_letters_N;		// 大写字母N
+IMAGE img_login_registration_capital_letters_O;		// 大写字母O
+IMAGE img_login_registration_capital_letters_P;		// 大写字母P
+IMAGE img_login_registration_capital_letters_Q;		// 大写字母Q
+IMAGE img_login_registration_capital_letters_R;		// 大写字母R
+IMAGE img_login_registration_capital_letters_S;		// 大写字母S
+IMAGE img_login_registration_capital_letters_T;		// 大写字母T
+IMAGE img_login_registration_capital_letters_U;		// 大写字母U
+IMAGE img_login_registration_capital_letters_V;		// 大写字母V
+IMAGE img_login_registration_capital_letters_W;		// 大写字母W
+IMAGE img_login_registration_capital_letters_X;		// 大写字母X
+IMAGE img_login_registration_capital_letters_Y;		// 大写字母Y
+IMAGE img_login_registration_capital_letters_Z;		// 大写字母Z
+IMAGE img_login_registration_small_letters_a;		// 小写字母a
+IMAGE img_login_registration_small_letters_b;		// 小写字母b
+IMAGE img_login_registration_small_letters_c;		// 小写字母c
+IMAGE img_login_registration_small_letters_d;		// 小写字母d
+IMAGE img_login_registration_small_letters_e;		// 小写字母e
+IMAGE img_login_registration_small_letters_f;		// 小写字母f
+IMAGE img_login_registration_small_letters_g;		// 小写字母g
+IMAGE img_login_registration_small_letters_h;		// 小写字母h
+IMAGE img_login_registration_small_letters_i;		// 小写字母i
+IMAGE img_login_registration_small_letters_j;		// 小写字母j
+IMAGE img_login_registration_small_letters_k;		// 小写字母k
+IMAGE img_login_registration_small_letters_l;		// 小写字母l
+IMAGE img_login_registration_small_letters_m;		// 小写字母m
+IMAGE img_login_registration_small_letters_n;		// 小写字母n
+IMAGE img_login_registration_small_letters_o;		// 小写字母o
+IMAGE img_login_registration_small_letters_p;		// 小写字母p
+IMAGE img_login_registration_small_letters_q;		// 小写字母q
+IMAGE img_login_registration_small_letters_r;		// 小写字母r
+IMAGE img_login_registration_small_letters_s;		// 小写字母s
+IMAGE img_login_registration_small_letters_t;		// 小写字母t
+IMAGE img_login_registration_small_letters_u;		// 小写字母u
+IMAGE img_login_registration_small_letters_v;		// 小写字母v
+IMAGE img_login_registration_small_letters_w;		// 小写字母w
+IMAGE img_login_registration_small_letters_x;		// 小写字母x
+IMAGE img_login_registration_small_letters_y;		// 小写字母y
+IMAGE img_login_registration_small_letters_z;		// 小写字母z
+IMAGE img_login_registration_number_0;				// 数字0
+IMAGE img_login_registration_number_1;				// 数字1
+IMAGE img_login_registration_number_2;				// 数字2
+IMAGE img_login_registration_number_3;				// 数字3
+IMAGE img_login_registration_number_4;				// 数字4
+IMAGE img_login_registration_number_5;				// 数字5
+IMAGE img_login_registration_number_6;				// 数字6
+IMAGE img_login_registration_number_7;				// 数字7
+IMAGE img_login_registration_number_8;				// 数字8
+IMAGE img_login_registration_number_9;				// 数字9
+
+
 // 主菜单场景
 IMAGE img_background_base;							// 主菜单背景版
 IMAGE img_menu_background;							// 主菜单界面
@@ -201,8 +313,86 @@ void load_res() {
 	loadimage(&img_progress_bar_percentage_num_8, _T("res/progress_bar_percentage_num_8.png"));
 	loadimage(&img_progress_bar_percentage_num_9, _T("res/progress_bar_percentage_num_9.png"));
 
-
 	atlas_progress_bar_piece.load_from_file(_T("res/progress_bar_piece/progress_bar_piece_%d.png"), 100);
+
+
+	// 登录注册场景
+	loadimage(&img_login_registration_background, _T("res/login_registration/login_registration_background.png"));
+	loadimage(&img_login_registration_interface, _T("res/login_registration/login_registration_interface.png"));
+	loadimage(&img_registration_idle_text, _T("res/login_registration/registration_idle_text.png"));
+	loadimage(&img_registration_down_text, _T("res/login_registration/registration_down_text.png"));
+	loadimage(&img_login_idle_text, _T("res/login_registration/login_idle_text.png"));
+	loadimage(&img_login_down_text, _T("res/login_registration/login_down_text.png"));
+	loadimage(&img_login_registration_account_text, _T("res/login_registration/login_registration_account_text.png"));
+	loadimage(&img_login_registration_password_text, _T("res/login_registration/login_registration_password_text.png"));
+	loadimage(&img_login_registration_input_box, _T("res/login_registration/login_registration_input_box.png"));
+	loadimage(&img_login_idle_button, _T("res/login_registration/login_idle_button.png"));
+	loadimage(&img_login_down_button, _T("res/login_registration/login_down_button.png"));
+	loadimage(&img_registration_idle_button, _T("res/login_registration/registration_idle_button.png"));
+	loadimage(&img_registration_down_button, _T("res/login_registration/registration_down_button.png"));
+	loadimage(&img_eye, _T("res/login_registration/eye.png"));
+	loadimage(&img_nullptr, _T("res/login_registration/nullptr.png"));
+	loadimage(&img_login_registration_capital_letters_A, _T("res/login_registration/login_registration_capital_letters_A.png"));
+	loadimage(&img_login_registration_capital_letters_B, _T("res/login_registration/login_registration_capital_letters_B.png"));
+	loadimage(&img_login_registration_capital_letters_C, _T("res/login_registration/login_registration_capital_letters_C.png"));
+	loadimage(&img_login_registration_capital_letters_D, _T("res/login_registration/login_registration_capital_letters_D.png"));
+	loadimage(&img_login_registration_capital_letters_E, _T("res/login_registration/login_registration_capital_letters_E.png"));
+	loadimage(&img_login_registration_capital_letters_F, _T("res/login_registration/login_registration_capital_letters_F.png"));
+	loadimage(&img_login_registration_capital_letters_G, _T("res/login_registration/login_registration_capital_letters_G.png"));
+	loadimage(&img_login_registration_capital_letters_H, _T("res/login_registration/login_registration_capital_letters_H.png"));
+	loadimage(&img_login_registration_capital_letters_I, _T("res/login_registration/login_registration_capital_letters_I.png"));
+	loadimage(&img_login_registration_capital_letters_J, _T("res/login_registration/login_registration_capital_letters_J.png"));
+	loadimage(&img_login_registration_capital_letters_K, _T("res/login_registration/login_registration_capital_letters_K.png"));
+	loadimage(&img_login_registration_capital_letters_L, _T("res/login_registration/login_registration_capital_letters_L.png"));
+	loadimage(&img_login_registration_capital_letters_M, _T("res/login_registration/login_registration_capital_letters_M.png"));
+	loadimage(&img_login_registration_capital_letters_N, _T("res/login_registration/login_registration_capital_letters_N.png"));
+	loadimage(&img_login_registration_capital_letters_O, _T("res/login_registration/login_registration_capital_letters_O.png"));
+	loadimage(&img_login_registration_capital_letters_P, _T("res/login_registration/login_registration_capital_letters_P.png"));
+	loadimage(&img_login_registration_capital_letters_Q, _T("res/login_registration/login_registration_capital_letters_Q.png"));
+	loadimage(&img_login_registration_capital_letters_R, _T("res/login_registration/login_registration_capital_letters_R.png"));
+	loadimage(&img_login_registration_capital_letters_S, _T("res/login_registration/login_registration_capital_letters_S.png"));
+	loadimage(&img_login_registration_capital_letters_T, _T("res/login_registration/login_registration_capital_letters_T.png"));
+	loadimage(&img_login_registration_capital_letters_U, _T("res/login_registration/login_registration_capital_letters_U.png"));
+	loadimage(&img_login_registration_capital_letters_V, _T("res/login_registration/login_registration_capital_letters_V.png"));
+	loadimage(&img_login_registration_capital_letters_W, _T("res/login_registration/login_registration_capital_letters_W.png"));
+	loadimage(&img_login_registration_capital_letters_X, _T("res/login_registration/login_registration_capital_letters_X.png"));
+	loadimage(&img_login_registration_capital_letters_Y, _T("res/login_registration/login_registration_capital_letters_Y.png"));
+	loadimage(&img_login_registration_capital_letters_Z, _T("res/login_registration/login_registration_capital_letters_Z.png"));
+	loadimage(&img_login_registration_small_letters_a, _T("res/login_registration/login_registration_small_letters_a.png"));
+	loadimage(&img_login_registration_small_letters_b, _T("res/login_registration/login_registration_small_letters_b.png"));
+	loadimage(&img_login_registration_small_letters_c, _T("res/login_registration/login_registration_small_letters_c.png"));
+	loadimage(&img_login_registration_small_letters_d, _T("res/login_registration/login_registration_small_letters_d.png"));
+	loadimage(&img_login_registration_small_letters_e, _T("res/login_registration/login_registration_small_letters_e.png"));
+	loadimage(&img_login_registration_small_letters_f, _T("res/login_registration/login_registration_small_letters_f.png"));
+	loadimage(&img_login_registration_small_letters_g, _T("res/login_registration/login_registration_small_letters_g.png"));
+	loadimage(&img_login_registration_small_letters_h, _T("res/login_registration/login_registration_small_letters_h.png"));
+	loadimage(&img_login_registration_small_letters_i, _T("res/login_registration/login_registration_small_letters_i.png"));
+	loadimage(&img_login_registration_small_letters_j, _T("res/login_registration/login_registration_small_letters_j.png"));
+	loadimage(&img_login_registration_small_letters_k, _T("res/login_registration/login_registration_small_letters_k.png"));
+	loadimage(&img_login_registration_small_letters_m, _T("res/login_registration/login_registration_small_letters_m.png"));
+	loadimage(&img_login_registration_small_letters_n, _T("res/login_registration/login_registration_small_letters_n.png"));
+	loadimage(&img_login_registration_small_letters_o, _T("res/login_registration/login_registration_small_letters_o.png"));
+	loadimage(&img_login_registration_small_letters_p, _T("res/login_registration/login_registration_small_letters_p.png"));
+	loadimage(&img_login_registration_small_letters_q, _T("res/login_registration/login_registration_small_letters_q.png"));
+	loadimage(&img_login_registration_small_letters_r, _T("res/login_registration/login_registration_small_letters_r.png"));
+	loadimage(&img_login_registration_small_letters_s, _T("res/login_registration/login_registration_small_letters_s.png"));
+	loadimage(&img_login_registration_small_letters_t, _T("res/login_registration/login_registration_small_letters_t.png"));
+	loadimage(&img_login_registration_small_letters_u, _T("res/login_registration/login_registration_small_letters_u.png"));
+	loadimage(&img_login_registration_small_letters_v, _T("res/login_registration/login_registration_small_letters_v.png"));
+	loadimage(&img_login_registration_small_letters_w, _T("res/login_registration/login_registration_small_letters_w.png"));
+	loadimage(&img_login_registration_small_letters_x, _T("res/login_registration/login_registration_small_letters_x.png"));
+	loadimage(&img_login_registration_small_letters_y, _T("res/login_registration/login_registration_small_letters_y.png"));
+	loadimage(&img_login_registration_small_letters_z, _T("res/login_registration/login_registration_small_letters_z.png"));
+	loadimage(&img_login_registration_number_0, _T("res/login_registration/login_registration_number_0.png"));
+	loadimage(&img_login_registration_number_1, _T("res/login_registration/login_registration_number_1.png"));
+	loadimage(&img_login_registration_number_2, _T("res/login_registration/login_registration_number_2.png"));
+	loadimage(&img_login_registration_number_3, _T("res/login_registration/login_registration_number_3.png"));
+	loadimage(&img_login_registration_number_4, _T("res/login_registration/login_registration_number_4.png"));
+	loadimage(&img_login_registration_number_5, _T("res/login_registration/login_registration_number_5.png"));
+	loadimage(&img_login_registration_number_6, _T("res/login_registration/login_registration_number_6.png"));
+	loadimage(&img_login_registration_number_7, _T("res/login_registration/login_registration_number_7.png"));
+	loadimage(&img_login_registration_number_8, _T("res/login_registration/login_registration_number_8.png"));
+	loadimage(&img_login_registration_number_9, _T("res/login_registration/login_registration_number_9.png"));
 
 
 	// 主菜单场景资源加载
