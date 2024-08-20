@@ -38,7 +38,7 @@ public:
 	}
 
 	void on_update(int delta) {
-		// 账户输入框
+		// 账号输入框
 		account_input_box_1_pos.x = account_input_box_pos.x;
 		account_input_box_1_pos.y = account_input_box_pos.y;
 		account_input_box_2_pos.x = account_input_box_1_pos.x + img_account_input_box_1.getwidth();
@@ -360,7 +360,7 @@ public:
 	void on_input(const ExMessage& msg) {
 		switch (msg.message) {
 		case WM_LBUTTONDOWN:
-			// 账户输入框
+			// 账号输入框
 			if (msg.x < account_input_box_pos.x + img_login_registration_input_box.getwidth() && msg.x > account_input_box_pos.x &&
 				msg.y < account_input_box_pos.y + img_login_registration_input_box.getheight() && msg.y > account_input_box_pos.y) {
 				current_is_input_password = false;
@@ -5041,22 +5041,22 @@ private:
 	POINT password_input_box_pos = { 0 };										// 密码的输入框的位置
 	POINT login_or_registration_button_pos = { 0 };								// 登录或注册按钮的位置
 	POINT eye_pos = { 0 };														// 眼睛的位置
-	POINT account_input_box_1_pos = { 0 };										// 账户输入框里的第1个数或字母
-	POINT account_input_box_2_pos = { 0 };										// 账户输入框里的第2个数或字母									
-	POINT account_input_box_3_pos = { 0 };										// 账户输入框里的第3个数或字母									
-	POINT account_input_box_4_pos = { 0 };										// 账户输入框里的第4个数或字母									
-	POINT account_input_box_5_pos = { 0 };										// 账户输入框里的第5个数或字母									
-	POINT account_input_box_6_pos = { 0 };										// 账户输入框里的第6个数或字母									
-	POINT account_input_box_7_pos = { 0 };										// 账户输入框里的第7个数或字母									
-	POINT account_input_box_8_pos = { 0 };										// 账户输入框里的第8个数或字母									
-	POINT account_input_box_9_pos = { 0 };										// 账户输入框里的第9个数或字母									
-	POINT account_input_box_10_pos = { 0 };										// 账户输入框里的第10个数或字母									
-	POINT account_input_box_11_pos = { 0 };										// 账户输入框里的第11个数或字母									
-	POINT account_input_box_12_pos = { 0 };										// 账户输入框里的第12个数或字母									
-	POINT account_input_box_13_pos = { 0 };										// 账户输入框里的第13个数或字母									
-	POINT account_input_box_14_pos = { 0 };										// 账户输入框里的第14个数或字母									
-	POINT account_input_box_15_pos = { 0 };										// 账户输入框里的第15个数或字母									
-	POINT account_input_box_16_pos = { 0 };										// 账户输入框里的第16个数或字母	
+	POINT account_input_box_1_pos = { 0 };										// 账号输入框里的第1个数或字母
+	POINT account_input_box_2_pos = { 0 };										// 账号输入框里的第2个数或字母									
+	POINT account_input_box_3_pos = { 0 };										// 账号输入框里的第3个数或字母									
+	POINT account_input_box_4_pos = { 0 };										// 账号输入框里的第4个数或字母									
+	POINT account_input_box_5_pos = { 0 };										// 账号输入框里的第5个数或字母									
+	POINT account_input_box_6_pos = { 0 };										// 账号输入框里的第6个数或字母									
+	POINT account_input_box_7_pos = { 0 };										// 账号输入框里的第7个数或字母									
+	POINT account_input_box_8_pos = { 0 };										// 账号输入框里的第8个数或字母									
+	POINT account_input_box_9_pos = { 0 };										// 账号输入框里的第9个数或字母									
+	POINT account_input_box_10_pos = { 0 };										// 账号输入框里的第10个数或字母									
+	POINT account_input_box_11_pos = { 0 };										// 账号输入框里的第11个数或字母									
+	POINT account_input_box_12_pos = { 0 };										// 账号输入框里的第12个数或字母									
+	POINT account_input_box_13_pos = { 0 };										// 账号输入框里的第13个数或字母									
+	POINT account_input_box_14_pos = { 0 };										// 账号输入框里的第14个数或字母									
+	POINT account_input_box_15_pos = { 0 };										// 账号输入框里的第15个数或字母									
+	POINT account_input_box_16_pos = { 0 };										// 账号输入框里的第16个数或字母	
 	POINT password_input_box_1_pos = { 0 };										// 密码输入框里的第1个数或字母
 	POINT password_input_box_2_pos = { 0 };										// 密码输入框里的第2个数或字母									
 	POINT password_input_box_3_pos = { 0 };										// 密码输入框里的第3个数或字母									
@@ -5078,7 +5078,7 @@ private:
 	bool is_down_eye_button = true;												// 是否按下了眼睛按钮
 	bool current_is_login = true;												// 现在是否是登录界面
 	bool is_down_login_or_registration_button = false;							// 是否按下了登录或注册按钮 
-	bool current_is_input_account = false;										// 当前是否正在输入账户
+	bool current_is_input_account = false;										// 当前是否正在输入账号
 	bool current_is_input_password = false;										// 当前是否正在输入密码
 
 
