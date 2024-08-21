@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "scene.h"
 #include "picture.h"
@@ -11,7 +11,7 @@ extern bool is_open_sound_effect;
 class SceneLoginRegistration : public Scene {
 public:
 	void on_enter() {
-		// µÇÂ¼×¢²á³¡¾°ÖĞ±³¾°½çÃæµÈÎ»ÖÃ
+		// ç™»å½•æ³¨å†Œåœºæ™¯ä¸­èƒŒæ™¯ç•Œé¢ç­‰ä½ç½®
 		const int login_or_registration_text_to_login_registration_interface_distance_x = 100;
 		const int login_or_registration_text_to_login_registration_interface_distance_y = 70;
 		const int account_text_to_login_registration_interface_distance_x = 50;
@@ -38,7 +38,7 @@ public:
 	}
 
 	void on_update(int delta) {
-		// ÕËºÅÊäÈë¿ò
+		// è´¦å·è¾“å…¥æ¡†
 		account_input_box_1_pos.x = account_input_box_pos.x;
 		account_input_box_1_pos.y = account_input_box_pos.y;
 		account_input_box_2_pos.x = account_input_box_1_pos.x + img_account_input_box_1.getwidth();
@@ -72,7 +72,7 @@ public:
 		account_input_box_16_pos.x = account_input_box_15_pos.x + img_account_input_box_15.getwidth();
 		account_input_box_16_pos.y = account_input_box_1_pos.y;
 
-		// ÃÜÂëÊäÈë¿ò
+		// å¯†ç è¾“å…¥æ¡†
 		password_input_box_1_pos.x = password_input_box_pos.x;
 		password_input_box_1_pos.y = password_input_box_pos.y;
 		password_input_box_2_pos.x = password_input_box_1_pos.x + img_password_input_box_1.getwidth();
@@ -299,7 +299,7 @@ public:
 	}
 
 	void on_draw() {
-		// Ö÷Òª±³¾°½çÃæµÈ
+		// ä¸»è¦èƒŒæ™¯ç•Œé¢ç­‰
 		putimage_alpha(login_registration_background_pos_pos.x, login_registration_background_pos_pos.y, &img_login_registration_background);
 		putimage_alpha(login_registration_interface_pos.x, login_registration_interface_pos.y, &img_login_registration_interface);
 		putimage_alpha(registration_text_pos.x, registration_text_pos.y, is_down_login_registration_text_button ? (
@@ -314,11 +314,11 @@ public:
 			current_is_login ? &img_login_idle_button : &img_registration_idle_button));
 		putimage_alpha(eye_pos.x, eye_pos.y, &img_eye);
 		if (is_down_eye_button) {
-			setlinecolor(RGB(0, 0, 0));	//ºÚ
+			setlinecolor(RGB(0, 0, 0));	//é»‘
 			line(eye_pos.x + img_eye.getwidth() / 4, eye_pos.y, eye_pos.x + img_eye.getwidth() - img_eye.getwidth() / 4, eye_pos.y + img_eye.getheight());
 		}
 
-		// ÕËºÅÊäÈë¿òÖĞµÄ×ÖÄ¸Êı×Ö
+		// è´¦å·è¾“å…¥æ¡†ä¸­çš„å­—æ¯æ•°å­—
 		putimage_alpha(account_input_box_1_pos.x, account_input_box_1_pos.y, &img_account_input_box_1);
 		putimage_alpha(account_input_box_2_pos.x, account_input_box_2_pos.y, &img_account_input_box_2);
 		putimage_alpha(account_input_box_3_pos.x, account_input_box_3_pos.y, &img_account_input_box_3);
@@ -336,7 +336,7 @@ public:
 		putimage_alpha(account_input_box_15_pos.x, account_input_box_15_pos.y, &img_account_input_box_15);
 		putimage_alpha(account_input_box_16_pos.x, account_input_box_16_pos.y, &img_account_input_box_16);
 
-		// ÃÜÂëÊäÈë¿òÖĞµÄ×ÖÄ¸Êı×Ö
+		// å¯†ç è¾“å…¥æ¡†ä¸­çš„å­—æ¯æ•°å­—
 		if (!is_down_eye_button) {
 			putimage_alpha(password_input_box_1_pos.x, password_input_box_1_pos.y, &img_password_input_box_1);
 			putimage_alpha(password_input_box_2_pos.x, password_input_box_2_pos.y, &img_password_input_box_2);
@@ -360,15 +360,15 @@ public:
 	void on_input(const ExMessage& msg) {
 		switch (msg.message) {
 		case WM_LBUTTONDOWN:
-			// ÕËºÅÊäÈë¿ò
+			// è´¦å·è¾“å…¥æ¡†
 			if (msg.x < account_input_box_pos.x + img_login_registration_input_box.getwidth() && msg.x > account_input_box_pos.x &&
 				msg.y < account_input_box_pos.y + img_login_registration_input_box.getheight() && msg.y > account_input_box_pos.y) {
 				current_is_input_password = false;
 				current_is_input_account = true;
-				if (is_open_sound_effect) mciSendString(_T("play click_sound_2_2 from 0"), NULL, 0, NULL);		// ÏÈ½«¾ÍÓÃ×Å£¬ÒÔºóÔÙ»»ÒôĞ§
+				if (is_open_sound_effect) mciSendString(_T("play click_sound_2_2 from 0"), NULL, 0, NULL);		// å…ˆå°†å°±ç”¨ç€ï¼Œä»¥åå†æ¢éŸ³æ•ˆ
 			}
 
-			// ÃÜÂëÊäÈë¿ò
+			// å¯†ç è¾“å…¥æ¡†
 			if (msg.x < password_input_box_pos.x + img_login_registration_input_box.getwidth() && msg.x > password_input_box_pos.x &&
 				msg.y < password_input_box_pos.y + img_login_registration_input_box.getheight() && msg.y > password_input_box_pos.y) {
 				current_is_input_password = true;
@@ -376,7 +376,7 @@ public:
 				if (is_open_sound_effect) mciSendString(_T("play click_sound_2_2 from 0"), NULL, 0, NULL);
 			}
 
-			// ×ª»¯×¢²á»òÕßµÇÂ¼°´Å¥
+			// è½¬åŒ–æ³¨å†Œæˆ–è€…ç™»å½•æŒ‰é’®
 			if (msg.x < registration_text_pos.x + img_registration_idle_text.getwidth() && msg.x > registration_text_pos.x &&
 				msg.y < registration_text_pos.y + img_registration_idle_text.getheight() && msg.y > registration_text_pos.y) {
 				is_down_login_registration_text_button = true;
@@ -384,7 +384,7 @@ public:
 				break;
 			}
 
-			// µÇÂ¼»ò×¢²á°´Å¥
+			// ç™»å½•æˆ–æ³¨å†ŒæŒ‰é’®
 			if (msg.x < login_or_registration_button_pos.x + img_login_idle_button.getwidth() && msg.x > login_or_registration_button_pos.x &&
 				msg.y < login_or_registration_button_pos.y + img_login_idle_button.getheight() && msg.y > login_or_registration_button_pos.y) {
 				is_down_login_or_registration_button = true;
@@ -392,7 +392,7 @@ public:
 				break;
 			}
 
-			// ÑÛ¾¦°´Å¥
+			// çœ¼ç›æŒ‰é’®
 			if (msg.x < eye_pos.x + img_eye.getwidth() && msg.x > eye_pos.x && msg.y < eye_pos.y + img_eye.getheight() && msg.y > eye_pos.y) {
 				is_down_eye_button = !is_down_eye_button;
 				if (is_open_sound_effect) mciSendString(_T("play click_sound_1 from 0"), NULL, 0, NULL);
@@ -401,7 +401,7 @@ public:
 
 			break;
 		case WM_LBUTTONUP:
-			// ×ª»¯×¢²á»òµÇÂ¼°´Å¥
+			// è½¬åŒ–æ³¨å†Œæˆ–ç™»å½•æŒ‰é’®
 			if (is_down_login_registration_text_button) {
 				if (msg.x < registration_text_pos.x + img_registration_idle_text.getwidth() && msg.x > registration_text_pos.x &&
 					msg.y < registration_text_pos.y + img_registration_idle_text.getheight() && msg.y > registration_text_pos.y) {
@@ -423,22 +423,26 @@ public:
 				}
 			}
 
-			// µÇÂ¼»ò×¢²á°´Å¥
+			// ç™»å½•æˆ–æ³¨å†ŒæŒ‰é’®
 			if (is_down_login_or_registration_button) {
 				if (msg.x < login_or_registration_button_pos.x + img_login_idle_button.getwidth() && msg.x > login_or_registration_button_pos.x &&
-					msg.y < login_or_registration_button_pos.y + img_login_idle_button.getheight() && msg.y > login_or_registration_button_pos.y) {
+					msg.y < login_or_registration_button_pos.y + img_login_idle_button.getheight() && msg.y > login_or_registration_button_pos.y ) {
 					current_is_input_password = false;
 					current_is_input_account = false;
 					is_down_login_or_registration_button = false;
 					if (is_open_sound_effect) mciSendString(_T("play click_sound_2_2 from 0"), NULL, 0, NULL);
-					// µÇÂ¼
+					// ç™»å½•
 					if (current_is_login) {
 						putimage_alpha(login_or_registration_button_pos.x, login_or_registration_button_pos.y, &img_login_idle_button);
-						scene_manager->switch_scene(SceneManager::SceneType::Menu);
+						if (check_is_can_login(account, password)) scene_manager->switch_scene(SceneManager::SceneType::Menu);
+						else break;
 					}
-					// ×¢²á
+					// æ³¨å†Œ
 					else {
-
+						if (account.size() < 6 || password.size() < 6) {
+							break;
+						}
+						registration_account(account, password);
 					}
 					break;
 				}
@@ -451,346 +455,413 @@ public:
 			break;
 		}
 
-		// ÊäÈëÕËºÅÃÜÂë
+		// è´¦å·å¯†ç è¾“å…¥æ¡†
 		switch (msg.message) {
-		case WM_KEYUP:
-			// É¾³ı
+		case WM_KEYDOWN: {
+			switch (msg.vkcode) {
+				// 'enter'
+			case 0x0D:
+			{
+				if (current_is_input_account) {
+					current_is_input_account = false;
+					current_is_input_password = true;
+				}
+				else if (current_is_input_password) {
+					// æ¨¡ä»¿ç‚¹å‡»äº†ç™»å½•æ³¨å†Œ
+					current_is_input_password = false;
+					current_is_input_account = false;
+					is_down_login_or_registration_button = false;
+					if (is_open_sound_effect) mciSendString(_T("play click_sound_2_2 from 0"), NULL, 0, NULL);
+					// ç™»å½•
+					if (current_is_login) {
+						putimage_alpha(login_or_registration_button_pos.x, login_or_registration_button_pos.y, &img_login_idle_button);
+						if (check_is_can_login(account, password)) scene_manager->switch_scene(SceneManager::SceneType::Menu);
+						else break;
+					}
+					// æ³¨å†Œ
+					else {
+						if (account.size() < 6 || password.size() < 6) {
+							break;
+						}
+						registration_account(account, password);
+					}
+					break;
+				}
+			}
+			}
+
+
+
+
+			// åˆ é™¤
 			if ((current_is_input_account || current_is_input_password) && msg.vkcode == 0x08) {
-				if (is_open_sound_effect) mciSendString(_T("play click_sound_1 from 0"), NULL, 0, NULL);
+				if (is_open_sound_effect) mciSendString(_T("play keyboard_sound_2 from 0"), NULL, 0, NULL);
 				if (!(current_is_input_account ? account.size() : password.size())) break;
 				clear_input_box_id(current_is_input_account ? account.size() : password.size());
 				current_is_input_account ? account.pop_back() : password.pop_back();
 			}
 
-			// ´óĞ´
+			// å¤§å†™
 			if ((GetKeyState(VK_CAPITAL) & 0x0001) != 0) {
 				if ((!current_is_input_account && !current_is_input_password) || (current_is_input_account ? account.size() >= 16 : password.size() >= 16)) break;
 				switch (msg.vkcode) {
 					// 'A'
 				case 0x41:
 					current_is_input_account ? account += 'A' : password += 'A';
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_3 from 0"), NULL, 0, NULL);
+					if (is_open_sound_effect) mciSendString(_T("play keyboard_sound_1 from 0"), NULL, 0, NULL);
 					break;
 					// 'B'
 				case 0x42:
 					current_is_input_account ? account += 'B' : password += 'B';
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_3 from 0"), NULL, 0, NULL);
+					if (is_open_sound_effect) mciSendString(_T("play keyboard_sound_1 from 0"), NULL, 0, NULL);
 					break;
 					// 'C'
 				case 0x43:
 					current_is_input_account ? account += 'C' : password += 'C';
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_3 from 0"), NULL, 0, NULL);
+					if (is_open_sound_effect) mciSendString(_T("play keyboard_sound_1 from 0"), NULL, 0, NULL);
 					break;
 					// 'D'
 				case 0x44:
 					current_is_input_account ? account += 'D' : password += 'D';
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_3 from 0"), NULL, 0, NULL);
+					if (is_open_sound_effect) mciSendString(_T("play keyboard_sound_1 from 0"), NULL, 0, NULL);
 					break;
 					// 'E'
 				case 0x45:
 					current_is_input_account ? account += 'E' : password += 'E';
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_3 from 0"), NULL, 0, NULL);
+					if (is_open_sound_effect) mciSendString(_T("play keyboard_sound_1 from 0"), NULL, 0, NULL);
 					break;
 					// 'F'
 				case 0x46:
 					current_is_input_account ? account += 'F' : password += 'F';
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_3 from 0"), NULL, 0, NULL);
+					if (is_open_sound_effect) mciSendString(_T("play keyboard_sound_1 from 0"), NULL, 0, NULL);
 					break;
 					// 'G'
 				case 0x47:
 					current_is_input_account ? account += 'G' : password += 'G';
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_3 from 0"), NULL, 0, NULL);
+					if (is_open_sound_effect) mciSendString(_T("play keyboard_sound_1 from 0"), NULL, 0, NULL);
 					break;
 					// 'H'
 				case 0x48:
 					current_is_input_account ? account += 'H' : password += 'H';
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_3 from 0"), NULL, 0, NULL);
+					if (is_open_sound_effect) mciSendString(_T("play keyboard_sound_1 from 0"), NULL, 0, NULL);
 					break;
 					// 'I'
 				case 0x49:
 					current_is_input_account ? account += 'I' : password += 'I';
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_3 from 0"), NULL, 0, NULL);
+					if (is_open_sound_effect) mciSendString(_T("play keyboard_sound_1 from 0"), NULL, 0, NULL);
 					break;
 					// 'J'
 				case 0x4A:
 					current_is_input_account ? account += 'J' : password += 'J';
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_3 from 0"), NULL, 0, NULL);
+					if (is_open_sound_effect) mciSendString(_T("play keyboard_sound_1 from 0"), NULL, 0, NULL);
 					break;
 					// 'K'
 				case 0x4B:
 					current_is_input_account ? account += 'K' : password += 'K';
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_3 from 0"), NULL, 0, NULL);
+					if (is_open_sound_effect) mciSendString(_T("play keyboard_sound_1 from 0"), NULL, 0, NULL);
 					break;
 					// 'L'
 				case 0x4C:
 					current_is_input_account ? account += 'L' : password += 'L';
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_3 from 0"), NULL, 0, NULL);
+					if (is_open_sound_effect) mciSendString(_T("play keyboard_sound_1 from 0"), NULL, 0, NULL);
 					break;
 					// 'M'
 				case 0x4D:
 					current_is_input_account ? account += 'M' : password += 'M';
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_3 from 0"), NULL, 0, NULL);
+					if (is_open_sound_effect) mciSendString(_T("play keyboard_sound_1 from 0"), NULL, 0, NULL);
 					break;
 					// 'N'
 				case 0x4E:
 					current_is_input_account ? account += 'N' : password += 'N';
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_3 from 0"), NULL, 0, NULL);
+					if (is_open_sound_effect) mciSendString(_T("play keyboard_sound_1 from 0"), NULL, 0, NULL);
 					break;
 					// 'O'
 				case 0x4F:
 					current_is_input_account ? account += 'O' : password += 'O';
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_3 from 0"), NULL, 0, NULL);
+					if (is_open_sound_effect) mciSendString(_T("play keyboard_sound_1 from 0"), NULL, 0, NULL);
 					break;
 					// 'P'
 				case 0x50:
 					current_is_input_account ? account += 'P' : password += 'P';
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_3 from 0"), NULL, 0, NULL);
+					if (is_open_sound_effect) mciSendString(_T("play keyboard_sound_1 from 0"), NULL, 0, NULL);
 					break;
 					// 'Q'
 				case 0x51:
 					current_is_input_account ? account += 'Q' : password += 'Q';
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_3 from 0"), NULL, 0, NULL);
+					if (is_open_sound_effect) mciSendString(_T("play keyboard_sound_1 from 0"), NULL, 0, NULL);
 					break;
 					// 'R'
 				case 0x52:
 					current_is_input_account ? account += 'R' : password += 'R';
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_3 from 0"), NULL, 0, NULL);
+					if (is_open_sound_effect) mciSendString(_T("play keyboard_sound_1 from 0"), NULL, 0, NULL);
 					break;
 					// 'S'
 				case 0x53:
 					current_is_input_account ? account += 'S' : password += 'S';
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_3 from 0"), NULL, 0, NULL);
+					if (is_open_sound_effect) mciSendString(_T("play keyboard_sound_1 from 0"), NULL, 0, NULL);
 					break;
 					// 'T'
 				case 0x54:
 					current_is_input_account ? account += 'T' : password += 'T';
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_3 from 0"), NULL, 0, NULL);
+					if (is_open_sound_effect) mciSendString(_T("play keyboard_sound_1 from 0"), NULL, 0, NULL);
 					break;
 					// 'U'
 				case 0x55:
 					current_is_input_account ? account += 'U' : password += 'U';
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_3 from 0"), NULL, 0, NULL);
+					if (is_open_sound_effect) mciSendString(_T("play keyboard_sound_1 from 0"), NULL, 0, NULL);
 					break;
 					// 'V'
 				case 0x56:
 					current_is_input_account ? account += 'V' : password += 'V';
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_3 from 0"), NULL, 0, NULL);
+					if (is_open_sound_effect) mciSendString(_T("play keyboard_sound_1 from 0"), NULL, 0, NULL);
 					break;
 					// 'W'
 				case 0x57:
 					current_is_input_account ? account += 'W' : password += 'W';
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_3 from 0"), NULL, 0, NULL);
+					if (is_open_sound_effect) mciSendString(_T("play keyboard_sound_1 from 0"), NULL, 0, NULL);
 					break;
 					// 'X'
 				case 0x58:
 					current_is_input_account ? account += 'X' : password += 'X';
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_3 from 0"), NULL, 0, NULL);
+					if (is_open_sound_effect) mciSendString(_T("play keyboard_sound_1 from 0"), NULL, 0, NULL);
 					break;
 					// 'Y'
 				case 0x59:
 					current_is_input_account ? account += 'Y' : password += 'Y';
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_3 from 0"), NULL, 0, NULL);
+					if (is_open_sound_effect) mciSendString(_T("play keyboard_sound_1 from 0"), NULL, 0, NULL);
 					break;
 					// 'Z'
 				case 0x5A:
 					current_is_input_account ? account += 'Z' : password += 'Z';
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_3 from 0"), NULL, 0, NULL);
+					if (is_open_sound_effect) mciSendString(_T("play keyboard_sound_1 from 0"), NULL, 0, NULL);
 					break;
 				}
 			}
-			// Ğ¡Ğ´
+			// å°å†™
 			else {
 				if ((!current_is_input_account && !current_is_input_password) || (current_is_input_account ? account.size() >= 16 : password.size() >= 16)) break;
 				switch (msg.vkcode) {
 					// 'a'
 				case 0x41:
 					current_is_input_account ? account += 'a' : password += 'a';
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_3 from 0"), NULL, 0, NULL);
+					if (is_open_sound_effect) mciSendString(_T("play keyboard_sound_1 from 0"), NULL, 0, NULL);
 					break;
 					// 'b'
 				case 0x42:
 					current_is_input_account ? account += 'b' : password += 'b';
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_3 from 0"), NULL, 0, NULL);
+					if (is_open_sound_effect) mciSendString(_T("play keyboard_sound_1 from 0"), NULL, 0, NULL);
 					break;
 					// 'c'
 				case 0x43:
 					current_is_input_account ? account += 'c' : password += 'c';
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_3 from 0"), NULL, 0, NULL);
+					if (is_open_sound_effect) mciSendString(_T("play keyboard_sound_1 from 0"), NULL, 0, NULL);
 					break;
 					// 'd'
 				case 0x44:
 					current_is_input_account ? account += 'd' : password += 'd';
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_3 from 0"), NULL, 0, NULL);
+					if (is_open_sound_effect) mciSendString(_T("play keyboard_sound_1 from 0"), NULL, 0, NULL);
 					break;
 					// 'e'
 				case 0x45:
 					current_is_input_account ? account += 'e' : password += 'e';
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_3 from 0"), NULL, 0, NULL);
+					if (is_open_sound_effect) mciSendString(_T("play keyboard_sound_1 from 0"), NULL, 0, NULL);
 					break;
 					// 'f'
 				case 0x46:
 					current_is_input_account ? account += 'f' : password += 'f';
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_3 from 0"), NULL, 0, NULL);
+					if (is_open_sound_effect) mciSendString(_T("play keyboard_sound_1 from 0"), NULL, 0, NULL);
 					break;
 					// 'g'
 				case 0x47:
 					current_is_input_account ? account += 'g' : password += 'g';
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_3 from 0"), NULL, 0, NULL);
+					if (is_open_sound_effect) mciSendString(_T("play keyboard_sound_1 from 0"), NULL, 0, NULL);
 					break;
 					// 'h'
 				case 0x48:
 					current_is_input_account ? account += 'h' : password += 'h';
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_3 from 0"), NULL, 0, NULL);
+					if (is_open_sound_effect) mciSendString(_T("play keyboard_sound_1 from 0"), NULL, 0, NULL);
 					break;
-					// 'I'
+					// 'i'
 				case 0x49:
 					current_is_input_account ? account += 'i' : password += 'i';
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_3 from 0"), NULL, 0, NULL);
+					if (is_open_sound_effect) mciSendString(_T("play keyboard_sound_1 from 0"), NULL, 0, NULL);
 					break;
-					// 'J'
+					// 'j'
 				case 0x4A:
 					current_is_input_account ? account += 'j' : password += 'j';
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_3 from 0"), NULL, 0, NULL);
+					if (is_open_sound_effect) mciSendString(_T("play keyboard_sound_1 from 0"), NULL, 0, NULL);
 					break;
-					// 'K'
+					// 'k'
 				case 0x4B:
 					current_is_input_account ? account += 'k' : password += 'k';
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_3 from 0"), NULL, 0, NULL);
+					if (is_open_sound_effect) mciSendString(_T("play keyboard_sound_1 from 0"), NULL, 0, NULL);
 					break;
-					// 'L'
+					// 'l'
 				case 0x4C:
 					current_is_input_account ? account += 'l' : password += 'l';
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_3 from 0"), NULL, 0, NULL);
+					if (is_open_sound_effect) mciSendString(_T("play keyboard_sound_1 from 0"), NULL, 0, NULL);
 					break;
-					// 'M'
+					// 'm'
 				case 0x4D:
 					current_is_input_account ? account += 'm' : password += 'm';
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_3 from 0"), NULL, 0, NULL);
+					if (is_open_sound_effect) mciSendString(_T("play keyboard_sound_1 from 0"), NULL, 0, NULL);
 					break;
-					// 'N'
+					// 'n'
 				case 0x4E:
 					current_is_input_account ? account += 'n' : password += 'n';
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_3 from 0"), NULL, 0, NULL);
+					if (is_open_sound_effect) mciSendString(_T("play keyboard_sound_1 from 0"), NULL, 0, NULL);
 					break;
-					// 'O'
+					// 'o'
 				case 0x4F:
 					current_is_input_account ? account += 'o' : password += 'o';
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_3 from 0"), NULL, 0, NULL);
+					if (is_open_sound_effect) mciSendString(_T("play keyboard_sound_1 from 0"), NULL, 0, NULL);
 					break;
-					// 'P'
+					// 'p'
 				case 0x50:
-					current_is_input_account ? account += 'f' : password += 'p';
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_3 from 0"), NULL, 0, NULL);
+					current_is_input_account ? account += 'p' : password += 'p';
+					if (is_open_sound_effect) mciSendString(_T("play keyboard_sound_1 from 0"), NULL, 0, NULL);
 					break;
-					// 'Q'
+					// 'q'
 				case 0x51:
 					current_is_input_account ? account += 'q' : password += 'q';
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_3 from 0"), NULL, 0, NULL);
+					if (is_open_sound_effect) mciSendString(_T("play keyboard_sound_1 from 0"), NULL, 0, NULL);
 					break;
-					// 'R'
+					// 'r'
 				case 0x52:
 					current_is_input_account ? account += 'r' : password += 'r';
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_3 from 0"), NULL, 0, NULL);
+					if (is_open_sound_effect) mciSendString(_T("play keyboard_sound_1 from 0"), NULL, 0, NULL);
 					break;
-					// 'S'
+					// 's'
 				case 0x53:
 					current_is_input_account ? account += 's' : password += 's';
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_3 from 0"), NULL, 0, NULL);
+					if (is_open_sound_effect) mciSendString(_T("play keyboard_sound_1 from 0"), NULL, 0, NULL);
 					break;
-					// 'T'
+					// 't'
 				case 0x54:
 					current_is_input_account ? account += 't' : password += 't';
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_3 from 0"), NULL, 0, NULL);
+					if (is_open_sound_effect) mciSendString(_T("play keyboard_sound_1 from 0"), NULL, 0, NULL);
 					break;
-					// 'U'
+					// 'u'
 				case 0x55:
 					current_is_input_account ? account += 'u' : password += 'u';
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_3 from 0"), NULL, 0, NULL);
+					if (is_open_sound_effect) mciSendString(_T("play keyboard_sound_1 from 0"), NULL, 0, NULL);
 					break;
-					// 'V'
+					// 'v'
 				case 0x56:
 					current_is_input_account ? account += 'v' : password += 'v';
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_3 from 0"), NULL, 0, NULL);
+					if (is_open_sound_effect) mciSendString(_T("play keyboard_sound_1 from 0"), NULL, 0, NULL);
 					break;
-					// 'W'
+					// 'w'
 				case 0x57:
 					current_is_input_account ? account += 'w' : password += 'w';
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_3 from 0"), NULL, 0, NULL);
+					if (is_open_sound_effect) mciSendString(_T("play keyboard_sound_1 from 0"), NULL, 0, NULL);
 					break;
-					// 'X'
+					// 'x'
 				case 0x58:
 					current_is_input_account ? account += 'x' : password += 'x';
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_3 from 0"), NULL, 0, NULL);
+					if (is_open_sound_effect) mciSendString(_T("play keyboard_sound_1 from 0"), NULL, 0, NULL);
 					break;
-					// 'Y'
+					// 'y'
 				case 0x59:
 					current_is_input_account ? account += 'y' : password += 'y';
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_3 from 0"), NULL, 0, NULL);
+					if (is_open_sound_effect) mciSendString(_T("play keyboard_sound_1 from 0"), NULL, 0, NULL);
 					break;
-					// 'Z'
+					// 'z'
 				case 0x5A:
 					current_is_input_account ? account += 'z' : password += 'z';
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_3 from 0"), NULL, 0, NULL);
+					if (is_open_sound_effect) mciSendString(_T("play keyboard_sound_1 from 0"), NULL, 0, NULL);
 					break;
 				}
 			}
-			// Êı×Ö
+			// æ•°å­—
 			if (!((!current_is_input_account && !current_is_input_password) || (current_is_input_account ? account.size() >= 16 : password.size() >= 16))) {
 				switch (msg.vkcode) {
-				// '0'
+					// '0'
 				case 0x30:
 					current_is_input_account ? account += '0' : password += '0';
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_3 from 0"), NULL, 0, NULL);
+					if (is_open_sound_effect) mciSendString(_T("play keyboard_sound_1 from 0"), NULL, 0, NULL);
 					break;
-				// '1'
+					// '1'
 				case 0x31:
 					current_is_input_account ? account += '1' : password += '1';
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_3 from 0"), NULL, 0, NULL);
+					if (is_open_sound_effect) mciSendString(_T("play keyboard_sound_1 from 0"), NULL, 0, NULL);
 					break;
-				// '2'
+					// '2'
 				case 0x32:
 					current_is_input_account ? account += '2' : password += '2';
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_3 from 0"), NULL, 0, NULL);
+					if (is_open_sound_effect) mciSendString(_T("play keyboard_sound_1 from 0"), NULL, 0, NULL);
 					break;
-				// '3'
+					// '3'
 				case 0x33:
 					current_is_input_account ? account += '3' : password += '3';
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_3 from 0"), NULL, 0, NULL);
+					if (is_open_sound_effect) mciSendString(_T("play keyboard_sound_1 from 0"), NULL, 0, NULL);
 					break;
-				// '4'
+					// '4'
 				case 0x34:
 					current_is_input_account ? account += '4' : password += '4';
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_3 from 0"), NULL, 0, NULL);
+					if (is_open_sound_effect) mciSendString(_T("play keyboard_sound_1 from 0"), NULL, 0, NULL);
 					break;
-				// '5'
+					// '5'
 				case 0x35:
 					current_is_input_account ? account += '5' : password += '5';
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_3 from 0"), NULL, 0, NULL);
+					if (is_open_sound_effect) mciSendString(_T("play keyboard_sound_1 from 0"), NULL, 0, NULL);
 					break;
-				// '6'
+					// '6'
 				case 0x36:
 					current_is_input_account ? account += '6' : password += '6';
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_3 from 0"), NULL, 0, NULL);
+					if (is_open_sound_effect) mciSendString(_T("play keyboard_sound_1 from 0"), NULL, 0, NULL);
 					break;
-				// '7'
+					// '7'
 				case 0x37:
 					current_is_input_account ? account += '7' : password += '7';
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_3 from 0"), NULL, 0, NULL);
+					if (is_open_sound_effect) mciSendString(_T("play keyboard_sound_1 from 0"), NULL, 0, NULL);
 					break;
-				// '8'
+					// '8'
 				case 0x38:
 					current_is_input_account ? account += '8' : password += '8';
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_3 from 0"), NULL, 0, NULL);
+					if (is_open_sound_effect) mciSendString(_T("play keyboard_sound_1 from 0"), NULL, 0, NULL);
 					break;
-				// '9'
+					// '9'
 				case 0x39:
 					current_is_input_account ? account += '9' : password += '9';
-					if (is_open_sound_effect) mciSendString(_T("play click_sound_3 from 0"), NULL, 0, NULL);
+					if (is_open_sound_effect) mciSendString(_T("play keyboard_sound_1 from 0"), NULL, 0, NULL);
 					break;
 				}
 			}
 			break;
 		}
+		case WM_KEYUP: {
+			switch (msg.vkcode) {
+				// 'â¬†'
+			case 0x26: {
+				if (current_is_input_password) {
+					current_is_input_account = true;
+					current_is_input_password = false;
+				}
+				if (is_open_sound_effect) mciSendString(_T("play keyboard_sound_2 from 0"), NULL, 0, NULL);
+				break;
+			}
+					 // 'â¬‡'
+			case 0x28: {
+				if (current_is_input_account) {
+					current_is_input_account = false;
+					current_is_input_password = true;
+				}
+				if (is_open_sound_effect) mciSendString(_T("play keyboard_sound_2 from 0"), NULL, 0, NULL);
+				break;
+			}
+					 // 'â†â€˜
+			case 0x37: {
+
+			}
+					 // 'â†’' 
+			case 0x39: {
+
+			}
+			}
+		}
+		}
+
 	}
 
 	void on_exit() {
@@ -5032,54 +5103,54 @@ private:
 
 
 private:
-	POINT login_registration_background_pos_pos = { 0 };						// µÇÂ¼×¢²á±³¾°µÄÎ»ÖÃ
-	POINT login_registration_interface_pos = { 0 };								// µÇÂ¼×¢²á½çÃæµÄÎ»ÖÃ
-	POINT registration_text_pos = { 0 };										// ×¢²áÎÄ±¾µÄÎ»ÖÃ
-	POINT login_registration_account_text_pos = { 0 };							// µÇÂ¼×¢²áµÄÕËºÅÎÄ±¾µÄÎ»ÖÃ
-	POINT login_registration_password_text_pos = { 0 };							// µÇÂ¼×¢²áµÄÃÜÂëÎÄ±¾µÄÎ»ÖÃ
-	POINT account_input_box_pos = { 0 };										// ÕËºÅµÄÊäÈë¿òµÄÎ»ÖÃ
-	POINT password_input_box_pos = { 0 };										// ÃÜÂëµÄÊäÈë¿òµÄÎ»ÖÃ
-	POINT login_or_registration_button_pos = { 0 };								// µÇÂ¼»ò×¢²á°´Å¥µÄÎ»ÖÃ
-	POINT eye_pos = { 0 };														// ÑÛ¾¦µÄÎ»ÖÃ
-	POINT account_input_box_1_pos = { 0 };										// ÕËºÅÊäÈë¿òÀïµÄµÚ1¸öÊı»ò×ÖÄ¸
-	POINT account_input_box_2_pos = { 0 };										// ÕËºÅÊäÈë¿òÀïµÄµÚ2¸öÊı»ò×ÖÄ¸									
-	POINT account_input_box_3_pos = { 0 };										// ÕËºÅÊäÈë¿òÀïµÄµÚ3¸öÊı»ò×ÖÄ¸									
-	POINT account_input_box_4_pos = { 0 };										// ÕËºÅÊäÈë¿òÀïµÄµÚ4¸öÊı»ò×ÖÄ¸									
-	POINT account_input_box_5_pos = { 0 };										// ÕËºÅÊäÈë¿òÀïµÄµÚ5¸öÊı»ò×ÖÄ¸									
-	POINT account_input_box_6_pos = { 0 };										// ÕËºÅÊäÈë¿òÀïµÄµÚ6¸öÊı»ò×ÖÄ¸									
-	POINT account_input_box_7_pos = { 0 };										// ÕËºÅÊäÈë¿òÀïµÄµÚ7¸öÊı»ò×ÖÄ¸									
-	POINT account_input_box_8_pos = { 0 };										// ÕËºÅÊäÈë¿òÀïµÄµÚ8¸öÊı»ò×ÖÄ¸									
-	POINT account_input_box_9_pos = { 0 };										// ÕËºÅÊäÈë¿òÀïµÄµÚ9¸öÊı»ò×ÖÄ¸									
-	POINT account_input_box_10_pos = { 0 };										// ÕËºÅÊäÈë¿òÀïµÄµÚ10¸öÊı»ò×ÖÄ¸									
-	POINT account_input_box_11_pos = { 0 };										// ÕËºÅÊäÈë¿òÀïµÄµÚ11¸öÊı»ò×ÖÄ¸									
-	POINT account_input_box_12_pos = { 0 };										// ÕËºÅÊäÈë¿òÀïµÄµÚ12¸öÊı»ò×ÖÄ¸									
-	POINT account_input_box_13_pos = { 0 };										// ÕËºÅÊäÈë¿òÀïµÄµÚ13¸öÊı»ò×ÖÄ¸									
-	POINT account_input_box_14_pos = { 0 };										// ÕËºÅÊäÈë¿òÀïµÄµÚ14¸öÊı»ò×ÖÄ¸									
-	POINT account_input_box_15_pos = { 0 };										// ÕËºÅÊäÈë¿òÀïµÄµÚ15¸öÊı»ò×ÖÄ¸									
-	POINT account_input_box_16_pos = { 0 };										// ÕËºÅÊäÈë¿òÀïµÄµÚ16¸öÊı»ò×ÖÄ¸	
-	POINT password_input_box_1_pos = { 0 };										// ÃÜÂëÊäÈë¿òÀïµÄµÚ1¸öÊı»ò×ÖÄ¸
-	POINT password_input_box_2_pos = { 0 };										// ÃÜÂëÊäÈë¿òÀïµÄµÚ2¸öÊı»ò×ÖÄ¸									
-	POINT password_input_box_3_pos = { 0 };										// ÃÜÂëÊäÈë¿òÀïµÄµÚ3¸öÊı»ò×ÖÄ¸									
-	POINT password_input_box_4_pos = { 0 };										// ÃÜÂëÊäÈë¿òÀïµÄµÚ4¸öÊı»ò×ÖÄ¸									
-	POINT password_input_box_5_pos = { 0 };										// ÃÜÂëÊäÈë¿òÀïµÄµÚ5¸öÊı»ò×ÖÄ¸									
-	POINT password_input_box_6_pos = { 0 };										// ÃÜÂëÊäÈë¿òÀïµÄµÚ6¸öÊı»ò×ÖÄ¸									
-	POINT password_input_box_7_pos = { 0 };										// ÃÜÂëÊäÈë¿òÀïµÄµÚ7¸öÊı»ò×ÖÄ¸									
-	POINT password_input_box_8_pos = { 0 };										// ÃÜÂëÊäÈë¿òÀïµÄµÚ8¸öÊı»ò×ÖÄ¸									
-	POINT password_input_box_9_pos = { 0 };										// ÃÜÂëÊäÈë¿òÀïµÄµÚ9¸öÊı»ò×ÖÄ¸									
-	POINT password_input_box_10_pos = { 0 };									// ÃÜÂëÊäÈë¿òÀïµÄµÚ10¸öÊı»ò×ÖÄ¸									
-	POINT password_input_box_11_pos = { 0 };									// ÃÜÂëÊäÈë¿òÀïµÄµÚ11¸öÊı»ò×ÖÄ¸									
-	POINT password_input_box_12_pos = { 0 };									// ÃÜÂëÊäÈë¿òÀïµÄµÚ12¸öÊı»ò×ÖÄ¸									
-	POINT password_input_box_13_pos = { 0 };									// ÃÜÂëÊäÈë¿òÀïµÄµÚ13¸öÊı»ò×ÖÄ¸									
-	POINT password_input_box_14_pos = { 0 };									// ÃÜÂëÊäÈë¿òÀïµÄµÚ14¸öÊı»ò×ÖÄ¸									
-	POINT password_input_box_15_pos = { 0 };									// ÃÜÂëÊäÈë¿òÀïµÄµÚ15¸öÊı»ò×ÖÄ¸									
-	POINT password_input_box_16_pos = { 0 };									// ÃÜÂëÊäÈë¿òÀïµÄµÚ16¸öÊı»ò×ÖÄ¸	
+	POINT login_registration_background_pos_pos = { 0 };						// ç™»å½•æ³¨å†ŒèƒŒæ™¯çš„ä½ç½®
+	POINT login_registration_interface_pos = { 0 };								// ç™»å½•æ³¨å†Œç•Œé¢çš„ä½ç½®
+	POINT registration_text_pos = { 0 };										// æ³¨å†Œæ–‡æœ¬çš„ä½ç½®
+	POINT login_registration_account_text_pos = { 0 };							// ç™»å½•æ³¨å†Œçš„è´¦å·æ–‡æœ¬çš„ä½ç½®
+	POINT login_registration_password_text_pos = { 0 };							// ç™»å½•æ³¨å†Œçš„å¯†ç æ–‡æœ¬çš„ä½ç½®
+	POINT account_input_box_pos = { 0 };										// è´¦å·çš„è¾“å…¥æ¡†çš„ä½ç½®
+	POINT password_input_box_pos = { 0 };										// å¯†ç çš„è¾“å…¥æ¡†çš„ä½ç½®
+	POINT login_or_registration_button_pos = { 0 };								// ç™»å½•æˆ–æ³¨å†ŒæŒ‰é’®çš„ä½ç½®
+	POINT eye_pos = { 0 };														// çœ¼ç›çš„ä½ç½®
+	POINT account_input_box_1_pos = { 0 };										// è´¦å·è¾“å…¥æ¡†é‡Œçš„ç¬¬1ä¸ªæ•°æˆ–å­—æ¯
+	POINT account_input_box_2_pos = { 0 };										// è´¦å·è¾“å…¥æ¡†é‡Œçš„ç¬¬2ä¸ªæ•°æˆ–å­—æ¯									
+	POINT account_input_box_3_pos = { 0 };										// è´¦å·è¾“å…¥æ¡†é‡Œçš„ç¬¬3ä¸ªæ•°æˆ–å­—æ¯									
+	POINT account_input_box_4_pos = { 0 };										// è´¦å·è¾“å…¥æ¡†é‡Œçš„ç¬¬4ä¸ªæ•°æˆ–å­—æ¯									
+	POINT account_input_box_5_pos = { 0 };										// è´¦å·è¾“å…¥æ¡†é‡Œçš„ç¬¬5ä¸ªæ•°æˆ–å­—æ¯									
+	POINT account_input_box_6_pos = { 0 };										// è´¦å·è¾“å…¥æ¡†é‡Œçš„ç¬¬6ä¸ªæ•°æˆ–å­—æ¯									
+	POINT account_input_box_7_pos = { 0 };										// è´¦å·è¾“å…¥æ¡†é‡Œçš„ç¬¬7ä¸ªæ•°æˆ–å­—æ¯									
+	POINT account_input_box_8_pos = { 0 };										// è´¦å·è¾“å…¥æ¡†é‡Œçš„ç¬¬8ä¸ªæ•°æˆ–å­—æ¯									
+	POINT account_input_box_9_pos = { 0 };										// è´¦å·è¾“å…¥æ¡†é‡Œçš„ç¬¬9ä¸ªæ•°æˆ–å­—æ¯									
+	POINT account_input_box_10_pos = { 0 };										// è´¦å·è¾“å…¥æ¡†é‡Œçš„ç¬¬10ä¸ªæ•°æˆ–å­—æ¯									
+	POINT account_input_box_11_pos = { 0 };										// è´¦å·è¾“å…¥æ¡†é‡Œçš„ç¬¬11ä¸ªæ•°æˆ–å­—æ¯									
+	POINT account_input_box_12_pos = { 0 };										// è´¦å·è¾“å…¥æ¡†é‡Œçš„ç¬¬12ä¸ªæ•°æˆ–å­—æ¯									
+	POINT account_input_box_13_pos = { 0 };										// è´¦å·è¾“å…¥æ¡†é‡Œçš„ç¬¬13ä¸ªæ•°æˆ–å­—æ¯									
+	POINT account_input_box_14_pos = { 0 };										// è´¦å·è¾“å…¥æ¡†é‡Œçš„ç¬¬14ä¸ªæ•°æˆ–å­—æ¯									
+	POINT account_input_box_15_pos = { 0 };										// è´¦å·è¾“å…¥æ¡†é‡Œçš„ç¬¬15ä¸ªæ•°æˆ–å­—æ¯									
+	POINT account_input_box_16_pos = { 0 };										// è´¦å·è¾“å…¥æ¡†é‡Œçš„ç¬¬16ä¸ªæ•°æˆ–å­—æ¯	
+	POINT password_input_box_1_pos = { 0 };										// å¯†ç è¾“å…¥æ¡†é‡Œçš„ç¬¬1ä¸ªæ•°æˆ–å­—æ¯
+	POINT password_input_box_2_pos = { 0 };										// å¯†ç è¾“å…¥æ¡†é‡Œçš„ç¬¬2ä¸ªæ•°æˆ–å­—æ¯									
+	POINT password_input_box_3_pos = { 0 };										// å¯†ç è¾“å…¥æ¡†é‡Œçš„ç¬¬3ä¸ªæ•°æˆ–å­—æ¯									
+	POINT password_input_box_4_pos = { 0 };										// å¯†ç è¾“å…¥æ¡†é‡Œçš„ç¬¬4ä¸ªæ•°æˆ–å­—æ¯									
+	POINT password_input_box_5_pos = { 0 };										// å¯†ç è¾“å…¥æ¡†é‡Œçš„ç¬¬5ä¸ªæ•°æˆ–å­—æ¯									
+	POINT password_input_box_6_pos = { 0 };										// å¯†ç è¾“å…¥æ¡†é‡Œçš„ç¬¬6ä¸ªæ•°æˆ–å­—æ¯									
+	POINT password_input_box_7_pos = { 0 };										// å¯†ç è¾“å…¥æ¡†é‡Œçš„ç¬¬7ä¸ªæ•°æˆ–å­—æ¯									
+	POINT password_input_box_8_pos = { 0 };										// å¯†ç è¾“å…¥æ¡†é‡Œçš„ç¬¬8ä¸ªæ•°æˆ–å­—æ¯									
+	POINT password_input_box_9_pos = { 0 };										// å¯†ç è¾“å…¥æ¡†é‡Œçš„ç¬¬9ä¸ªæ•°æˆ–å­—æ¯									
+	POINT password_input_box_10_pos = { 0 };									// å¯†ç è¾“å…¥æ¡†é‡Œçš„ç¬¬10ä¸ªæ•°æˆ–å­—æ¯									
+	POINT password_input_box_11_pos = { 0 };									// å¯†ç è¾“å…¥æ¡†é‡Œçš„ç¬¬11ä¸ªæ•°æˆ–å­—æ¯									
+	POINT password_input_box_12_pos = { 0 };									// å¯†ç è¾“å…¥æ¡†é‡Œçš„ç¬¬12ä¸ªæ•°æˆ–å­—æ¯									
+	POINT password_input_box_13_pos = { 0 };									// å¯†ç è¾“å…¥æ¡†é‡Œçš„ç¬¬13ä¸ªæ•°æˆ–å­—æ¯									
+	POINT password_input_box_14_pos = { 0 };									// å¯†ç è¾“å…¥æ¡†é‡Œçš„ç¬¬14ä¸ªæ•°æˆ–å­—æ¯									
+	POINT password_input_box_15_pos = { 0 };									// å¯†ç è¾“å…¥æ¡†é‡Œçš„ç¬¬15ä¸ªæ•°æˆ–å­—æ¯									
+	POINT password_input_box_16_pos = { 0 };									// å¯†ç è¾“å…¥æ¡†é‡Œçš„ç¬¬16ä¸ªæ•°æˆ–å­—æ¯	
 
-	bool is_down_login_registration_text_button = false;						// ÊÇ·ñ°´ÏÂÁËµÇÂ¼»òÕß×¢²áÎÄ±¾µÄ°´Å¥
-	bool is_down_eye_button = true;												// ÊÇ·ñ°´ÏÂÁËÑÛ¾¦°´Å¥
-	bool current_is_login = true;												// ÏÖÔÚÊÇ·ñÊÇµÇÂ¼½çÃæ
-	bool is_down_login_or_registration_button = false;							// ÊÇ·ñ°´ÏÂÁËµÇÂ¼»ò×¢²á°´Å¥ 
-	bool current_is_input_account = false;										// µ±Ç°ÊÇ·ñÕıÔÚÊäÈëÕËºÅ
-	bool current_is_input_password = false;										// µ±Ç°ÊÇ·ñÕıÔÚÊäÈëÃÜÂë
+	bool is_down_login_registration_text_button = false;						// æ˜¯å¦æŒ‰ä¸‹äº†ç™»å½•æˆ–è€…æ³¨å†Œæ–‡æœ¬çš„æŒ‰é’®
+	bool is_down_eye_button = true;												// æ˜¯å¦æŒ‰ä¸‹äº†çœ¼ç›æŒ‰é’®
+	bool current_is_login = true;												// ç°åœ¨æ˜¯å¦æ˜¯ç™»å½•ç•Œé¢
+	bool is_down_login_or_registration_button = false;							// æ˜¯å¦æŒ‰ä¸‹äº†ç™»å½•æˆ–æ³¨å†ŒæŒ‰é’® 
+	bool current_is_input_account = false;										// å½“å‰æ˜¯å¦æ­£åœ¨è¾“å…¥è´¦å·
+	bool current_is_input_password = false;										// å½“å‰æ˜¯å¦æ­£åœ¨è¾“å…¥å¯†ç 
 
 
 };

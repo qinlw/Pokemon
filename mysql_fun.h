@@ -264,3 +264,46 @@ void set_game_music_id(int val) {
 	if (n == 0) std::cout << sql << " sucess:" << n << std::endl;
 	else std::cout << sql << " failed:" << n << std::endl;
 }
+
+
+
+
+// 注册账号
+void registration_account(string account, string password) {
+	std::string sql;
+	sql = "insert into accounts values('" + account + "', '" + password + "')";
+
+	const int n = mysql_query(my, sql.c_str());
+	if (n == 0) std::cout << sql << " sucess:" << n << std::endl;
+	else std::cout << sql << " failed:" << n << std::endl;
+}
+
+// 检查是否可以登录
+bool check_is_can_login(string account, string password) {
+	std::string sql = "select * from accounts";
+	const int n = mysql_query(my, sql.c_str());
+	if (n == 0) std::cout << sql << " sucess:" << n << std::endl;
+	else std::cout << sql << " failed:" << n << std::endl;
+
+	MYSQL_RES* res = mysql_store_result(my);
+	if (res == nullptr) {
+		std::cerr << "mysql_store_result error" << std::endl;
+		return false;
+	}
+
+	const int rows = mysql_num_rows(res);			// 获取行数
+	const int fields = mysql_num_fields(res);		// 获取列数
+
+	for (int i = 0; i < rows; i++) {
+		MYSQL_ROW row = mysql_fetch_row(res);
+		for (int j = 0; j < fields; j++) {
+			if (strcmp(row[j], account.c_str()) == 0 && strcmp(row[++j], password.c_str()) == 0) {
+				std::cout << "login sucess!" << std::endl;
+				return true;
+			}
+		}
+	}
+
+	std::cout << "login failed" << std::endl;
+	return false;
+}
