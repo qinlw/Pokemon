@@ -369,6 +369,7 @@ void load_res() {
 	loadimage(&img_login_registration_small_letters_i, _T("res/login_registration/login_registration_small_letters_i.png"));
 	loadimage(&img_login_registration_small_letters_j, _T("res/login_registration/login_registration_small_letters_j.png"));
 	loadimage(&img_login_registration_small_letters_k, _T("res/login_registration/login_registration_small_letters_k.png"));
+	loadimage(&img_login_registration_small_letters_l, _T("res/login_registration/login_registration_small_letters_l.png"));
 	loadimage(&img_login_registration_small_letters_m, _T("res/login_registration/login_registration_small_letters_m.png"));
 	loadimage(&img_login_registration_small_letters_n, _T("res/login_registration/login_registration_small_letters_n.png"));
 	loadimage(&img_login_registration_small_letters_o, _T("res/login_registration/login_registration_small_letters_o.png"));
@@ -550,6 +551,11 @@ void load_res() {
 	loadimage(&img_1P_bulbasaur_win_text_bar, _T("res/1P_bulbasaur_win_text_bar.png"));
 	loadimage(&img_2P_bulbasaur_win_text_bar, _T("res/2P_bulbasaur_win_text_bar.png"));
 
+
+	// 键盘音效
+	mciSendString(_T("open res/music/keyboard_sound_1.wav alias keyboard_sound_1"), NULL, 0, NULL);
+	mciSendString(_T("open res/music/keyboard_sound_2.wav alias keyboard_sound_2"), NULL, 0, NULL);
+	mciSendString(_T("open res/music/keyboard_sound_3.wav alias keyboard_sound_3"), NULL, 0, NULL);
 
 	// 点击音效
 	mciSendString(_T("open res/music/click_sound_1.wav alias click_sound_1"), NULL, 0, NULL);
