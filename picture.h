@@ -139,6 +139,8 @@ IMAGE img_account_or_password_error_text;			// 账号或密码错误的提示文
 IMAGE img_account_and_password_length_hint_text;	// 账号和密码长度的提示文本
 IMAGE img_do_not_remember_password;					// 不记住密码
 IMAGE img_remember_password;						// 记住密码
+IMAGE img_registration_sucess_text;					// 注册成功的文本
+IMAGE img_registered_text;							// 账号已被注册的文本
 
 
 // 主菜单场景
@@ -401,9 +403,11 @@ void load_res() {
 	loadimage(&img_login_registration_number_9, _T("res/login_registration/login_registration_number_9.png"));
 	loadimage(&img_input_position_hint, _T("res/login_registration/input_position_hint.png"));
 	loadimage(&img_account_or_password_error_text, _T("res/login_registration/account_or_password_error_text.png"));
-	loadimage(&img_account_and_password_length_hint_text, _T("res/login_registration/img_account_and_password_length_hint_text.png"));
+	loadimage(&img_account_and_password_length_hint_text, _T("res/login_registration/account_and_password_length_hint_text.png"));
 	loadimage(&img_do_not_remember_password, _T("res/login_registration/do_not_remember_password.png"));
 	loadimage(&img_remember_password, _T("res/login_registration/remember_password.png"));
+	loadimage(&img_registration_sucess_text, _T("res/login_registration/registration_sucess_text.png"));
+	loadimage(&img_registered_text, _T("res/login_registration/registered_text.png"));
 
 
 	// 主菜单场景资源加载
