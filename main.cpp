@@ -21,7 +21,7 @@ const std::string host = "127.0.0.1";											// 数据库连接的ip地址
 const std::string user = "qin";													// 用户名
 const std::string password = "123456";											// 用户名密码
 const std::string db = "pokemon_db";											// 宝可梦数据
-const unsigned const int port = 3306;											// 端口号
+const unsigned int port = 3306;													// 端口号
 
 bool is_debug = true;								                            // 是否开启调式模式
 bool is_mysql_connect = false;						                            // 是否成功连接数据库

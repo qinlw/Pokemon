@@ -16,7 +16,7 @@ extern int game_music_id;
 
 
 // 做初始化，仅连接数据库
-void connect_mysql(const string host, const string user, const string password, const string db, const unsigned const int port) {
+void connect_mysql(const string host, const string user, const string password, const string db, const unsigned int port) {
 	my = mysql_init(nullptr);
 	if (my == nullptr)
 	{
@@ -267,15 +267,102 @@ void set_game_music_id(int val) {
 
 
 
+// 检查并更新是否记住密码
+bool check_update_is_remember_password() {
+	std::string sql = "select * from game_status";
+	const int n = mysql_query(my, sql.c_str());
+	if (n == 0) std::cout << sql << " sucess:" << n << std::endl;
+	else std::cout << sql << " failed:" << n << std::endl;
 
-// 注册账号
-void registration_account(string account, string password) {
+	MYSQL_RES* res = mysql_store_result(my);
+	if (res == nullptr) {
+		std::cerr << "mysql_store_result error" << std::endl;
+		return false;
+	}
+
+	const int rows = mysql_num_rows(res);			// 获取行数
+	const int fields = mysql_num_fields(res);		// 获取列数
+
+	for (int i = 0; i < rows; i++) {
+		MYSQL_ROW row = mysql_fetch_row(res);
+		for (int j = 0; j < fields; j++) {
+			if (strcmp(row[j], "is_remember_password") != 0) break;
+			if (strcmp(row[++j], "1") == 0) return true;
+			else return false;
+		}
+	}
+
+	return false;
+}
+
+// 设置is_remember_password
+void set_is_remember_password(bool flag) {
 	std::string sql;
-	sql = "insert into accounts values('" + account + "', '" + password + "')";
+	if (flag) sql = "update game_status set status = 1 where status_name = 'is_remember_password'";
+	else sql = "update game_status set status = 0 where status_name = 'is_remember_password'";
 
 	const int n = mysql_query(my, sql.c_str());
 	if (n == 0) std::cout << sql << " sucess:" << n << std::endl;
 	else std::cout << sql << " failed:" << n << std::endl;
+}
+
+
+
+// 检查并更新是否打开眼睛(是否显示密码)
+bool check_update_is_open_eye() {
+	std::string sql = "select * from game_status";
+	const int n = mysql_query(my, sql.c_str());
+	if (n == 0) std::cout << sql << " sucess:" << n << std::endl;
+	else std::cout << sql << " failed:" << n << std::endl;
+
+	MYSQL_RES* res = mysql_store_result(my);
+	if (res == nullptr) {
+		std::cerr << "mysql_store_result error" << std::endl;
+		return false;
+	}
+
+	const int rows = mysql_num_rows(res);			// 获取行数
+	const int fields = mysql_num_fields(res);		// 获取列数
+
+	for (int i = 0; i < rows; i++) {
+		MYSQL_ROW row = mysql_fetch_row(res);
+		for (int j = 0; j < fields; j++) {
+			if (strcmp(row[j], "is_open_eye") != 0) break;
+			if (strcmp(row[++j], "1") == 0) return true;
+			else return false;
+		}
+	}
+
+	return false;
+}
+
+// 设置is_open_eye
+void set_is_open_eye(bool flag) {
+	std::string sql;
+	if (flag) sql = "update game_status set status = 1 where status_name = 'is_open_eye'";
+	else sql = "update game_status set status = 0 where status_name = 'is_open_eye'";
+
+	const int n = mysql_query(my, sql.c_str());
+	if (n == 0) std::cout << sql << " sucess:" << n << std::endl;
+	else std::cout << sql << " failed:" << n << std::endl;
+}
+
+
+
+// 注册账号
+bool registration_account(string account, string password) {
+	std::string sql;
+	sql = "insert into accounts values('" + account + "', '" + password + "')";
+
+	const int n = mysql_query(my, sql.c_str());
+	if (n == 0) {
+		std::cout << sql << " sucess:" << n << std::endl;
+		return true;
+	}
+	else {
+		std::cout << sql << " failed:" << n << std::endl;
+		return false;
+	}
 }
 
 // 检查是否可以登录
@@ -306,4 +393,74 @@ bool check_is_can_login(string account, string password) {
 
 	std::cout << "login failed" << std::endl;
 	return false;
+}
+
+// 清空被记住的账号
+void clear_remembered_accounts() {
+	std::string sql;
+	sql = "delete from remembered_accounts";
+
+	const int n = mysql_query(my, sql.c_str());
+	if (n == 0) std::cout << sql << " sucess:" << n << std::endl;
+	else std::cout << sql << " failed:" << n << std::endl;
+}
+
+// 设置更新被记住的账号
+void set_update_remembered_accounts(string account, string password) {
+	clear_remembered_accounts();
+
+	std::string sql;
+	sql = "insert into remembered_accounts values('" + account + "', '" + password + "')";
+
+	const int n = mysql_query(my, sql.c_str());
+	if (n == 0) std::cout << sql << " sucess:" << n << std::endl;
+	else std::cout << sql << " failed:" << n << std::endl;
+}
+
+// 获取被记住的账号中的账号
+string get_remembered_accounts_accounts() {
+	std::string sql = "select * from remembered_accounts";
+	const int n = mysql_query(my, sql.c_str());
+	if (n == 0) std::cout << sql << " sucess:" << n << std::endl;
+	else std::cout << sql << " failed:" << n << std::endl;
+
+	MYSQL_RES* res = mysql_store_result(my);
+	if (res == nullptr) {
+		std::cerr << "mysql_store_result error" << std::endl;
+		return "";
+	}
+
+	const int rows = mysql_num_rows(res);			// 获取行数
+	const int fields = mysql_num_fields(res);		// 获取列数
+
+	for (int i = 0; i < rows; ++i) {
+		MYSQL_ROW row = mysql_fetch_row(res);
+		return row[0];
+	}
+
+	return "";
+}
+
+// 获取被记住的账号中的密码
+string get_remembered_accounts_password() {
+	std::string sql = "select * from remembered_accounts";
+	const int n = mysql_query(my, sql.c_str());
+	if (n == 0) std::cout << sql << " sucess:" << n << std::endl;
+	else std::cout << sql << " failed:" << n << std::endl;
+
+	MYSQL_RES* res = mysql_store_result(my);
+	if (res == nullptr) {
+		std::cerr << "mysql_store_result error" << std::endl;
+		return "";
+	}
+
+	const int rows = mysql_num_rows(res);			// 获取行数
+	const int fields = mysql_num_fields(res);		// 获取列数
+
+	for (int i = 0; i < rows; ++i) {
+		MYSQL_ROW row = mysql_fetch_row(res);
+		return row[1];
+	}
+
+	return "";
 }

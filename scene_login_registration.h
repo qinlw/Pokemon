@@ -11,9 +11,25 @@ extern bool is_open_sound_effect;
 class SceneLoginRegistration : public Scene {
 public:
 	void on_enter() {
+		account = get_remembered_accounts_accounts();
+		password = get_remembered_accounts_password();
+
+		is_open_eye = check_update_is_open_eye();
+		is_remember_password = check_update_is_remember_password();
+
 		timer_input_position_hint_blink.set_wait_time(500);
 		timer_input_position_hint_blink.set_callback([&]() {
 			is_display_input_position_hint = !is_display_input_position_hint;
+			});
+		timer_display_account_or_password_error_text.set_wait_time(2000);
+		timer_display_account_or_password_error_text.set_callback([&]() {
+			is_display_account_or_password_error_text = false;
+			timer_display_account_or_password_error_text.reset();
+			});
+		timer_registration_sucess_or_falied_text.set_wait_time(2000);
+		timer_registration_sucess_or_falied_text.set_callback([&]() {
+			is_display_registration_sucess_or_failed = false;
+			timer_registration_sucess_or_falied_text.reset();
 			});
 
 		if (current_is_input_account) account_insert_id = account.size();
@@ -43,10 +59,25 @@ public:
 		login_or_registration_button_pos.y = login_registration_password_text_pos.y + img_login_registration_password_text.getheight() + box_to_box_distance;
 		eye_pos.x = password_input_box_pos.x + img_login_registration_input_box.getwidth() - img_eye.getwidth() - eye_to_input_box_distance;
 		eye_pos.y = password_input_box_pos.y + (img_login_registration_input_box.getheight() - img_eye.getheight()) / 2;
+
+		// 文本提示的位置
+		account_or_password_error_text_pos.x = login_registration_interface_pos.x + (img_login_registration_interface.getwidth() - img_account_or_password_error_text.getwidth()) / 2;
+		account_or_password_error_text_pos.y = login_registration_interface_pos.y + account_text_to_login_registration_interface_distance_x;
+		account_and_password_length_hint_text_pos.x = login_or_registration_button_pos.x + img_login_down_button.getwidth() - img_account_and_password_length_hint_text.getwidth();
+		account_and_password_length_hint_text_pos.y = login_or_registration_button_pos.y - img_account_and_password_length_hint_text.getheight();
+		is_remember_password_pos.x = login_or_registration_button_pos.x + img_login_down_button.getwidth() - img_remember_password.getwidth();
+		is_remember_password_pos.y = login_or_registration_button_pos.y + img_login_down_button.getheight() + 
+			password_input_box_pos.y - account_input_box_pos.y - img_login_registration_input_box.getheight() - img_remember_password.getheight();
+		registration_sucess_text_pos.x = login_registration_interface_pos.x + (img_login_registration_interface.getwidth() - img_registration_sucess_text.getwidth()) / 2;
+		registration_sucess_text_pos.y = login_registration_interface_pos.y + account_text_to_login_registration_interface_distance_x;
+		registered_text_pos.x = login_registration_interface_pos.x + (img_login_registration_interface.getwidth() - img_registered_text.getwidth()) / 2;
+		registered_text_pos.y = login_registration_interface_pos.y + account_text_to_login_registration_interface_distance_x;
 	}
 
 	void on_update(int delta) {
 		timer_input_position_hint_blink.on_update(delta);
+		if (is_display_account_or_password_error_text) timer_display_account_or_password_error_text.on_update(delta);
+		if (is_display_registration_sucess_or_failed) timer_registration_sucess_or_falied_text.on_update(delta);
 
 		const int input_box_letter_or_number_interval = 5;			// 输入框中的字母数字间隔
 		const int hint_distance_to_letter_or_number = 2;			// 提示距离字母数字的距离
@@ -398,7 +429,7 @@ public:
 			current_is_login ? &img_login_down_button : &img_registration_down_button) : (
 			current_is_login ? &img_login_idle_button : &img_registration_idle_button));
 		putimage_alpha(eye_pos.x, eye_pos.y, &img_eye);
-		if (is_down_eye_button) {
+		if (!is_open_eye) {
 			setlinecolor(RGB(0, 0, 0));	//黑
 			line(eye_pos.x + img_eye.getwidth() / 4, eye_pos.y, eye_pos.x + img_eye.getwidth() - img_eye.getwidth() / 4, eye_pos.y + img_eye.getheight());
 		}
@@ -422,7 +453,7 @@ public:
 		putimage_alpha(account_input_box_16_pos.x, account_input_box_16_pos.y, &img_account_input_box_16);
 
 		// 密码输入框中的字母数字
-		if (!is_down_eye_button) {
+		if (is_open_eye) {
 			putimage_alpha(password_input_box_1_pos.x, password_input_box_1_pos.y, &img_password_input_box_1);
 			putimage_alpha(password_input_box_2_pos.x, password_input_box_2_pos.y, &img_password_input_box_2);
 			putimage_alpha(password_input_box_3_pos.x, password_input_box_3_pos.y, &img_password_input_box_3);
@@ -441,7 +472,18 @@ public:
 			putimage_alpha(password_input_box_16_pos.x, password_input_box_16_pos.y, &img_password_input_box_16);
 		}
 
-		if (is_display_input_position_hint) putimage_alpha(input_position_hint_pos.x, input_position_hint_pos.y, &img_input_position_hint);
+		// 输入位置提示图像的位置
+		if (is_display_input_position_hint && (current_is_input_account || current_is_input_password)) putimage_alpha(input_position_hint_pos.x, input_position_hint_pos.y, &img_input_position_hint);
+
+		// 文本提示
+		if (is_display_account_or_password_error_text) putimage_alpha(account_or_password_error_text_pos.x, account_or_password_error_text_pos.y, &img_account_or_password_error_text);
+		if (current_is_input_account ? account.size() < 6 : password.size() < 6 && (current_is_input_account || current_is_input_password))
+			putimage_alpha(account_and_password_length_hint_text_pos.x, account_and_password_length_hint_text_pos.y, &img_account_and_password_length_hint_text);
+		if (current_is_login) putimage_alpha(is_remember_password_pos.x, is_remember_password_pos.y, is_remember_password ? &img_remember_password : &img_do_not_remember_password);
+		if (is_display_registration_sucess_or_failed) {
+			if (is_registration_sucess) putimage_alpha(registration_sucess_text_pos.x, registration_sucess_text_pos.y, &img_registration_sucess_text);
+			else putimage_alpha(registered_text_pos.x, registered_text_pos.y, &img_registered_text);
+		}
 	}
 
 	void on_input(const ExMessage& msg) {
@@ -482,9 +524,17 @@ public:
 
 			// 眼睛按钮
 			if (msg.x < eye_pos.x + img_eye.getwidth() && msg.x > eye_pos.x && msg.y < eye_pos.y + img_eye.getheight() && msg.y > eye_pos.y) {
-				is_down_eye_button = !is_down_eye_button;
+				is_open_eye = !is_open_eye;
+				set_is_open_eye(is_open_eye);
 				if (is_open_sound_effect) mciSendString(_T("play click_sound_1 from 0"), NULL, 0, NULL);
 				break;
+			}
+
+			// 记住密码
+			if (msg.x < is_remember_password_pos.x + img_remember_password.getwidth() && msg.x > is_remember_password_pos.x &&
+				msg.y < is_remember_password_pos.y + img_remember_password.getheight() && msg.y > is_remember_password_pos.y && current_is_login) {
+				is_down_remember_password = true;
+				if (is_open_sound_effect) mciSendString(_T("play click_sound_2_1 from 0"), NULL, 0, NULL);
 			}
 
 			break;
@@ -497,6 +547,8 @@ public:
 					current_is_input_account = false;
 					account = "";
 					password = "";
+					account_insert_id = 0;
+					password_insert_id = 0;
 					clear_input_box();
 
 					is_down_login_registration_text_button = false;
@@ -519,23 +571,26 @@ public:
 					current_is_input_account = false;
 					is_down_login_or_registration_button = false;
 					if (is_open_sound_effect) mciSendString(_T("play click_sound_2_2 from 0"), NULL, 0, NULL);
-					// 登录
-					if (current_is_login) {
-						putimage_alpha(login_or_registration_button_pos.x, login_or_registration_button_pos.y, &img_login_idle_button);
-						if (check_is_can_login(account, password)) scene_manager->switch_scene(SceneManager::SceneType::Menu);
-						else break;
-					}
-					// 注册
-					else {
-						if (account.size() < 6 || password.size() < 6) {
-							break;
-						}
-						registration_account(account, password);
-					}
+					login_registration();
 					break;
 				}
 				else {
 					is_down_login_or_registration_button = false;
+					if (is_open_sound_effect) mciSendString(_T("play click_sound_2_2 from 0"), NULL, 0, NULL);
+				}
+			}
+
+			// 记住密码
+			if (is_down_remember_password) {
+				if (msg.x < is_remember_password_pos.x + img_remember_password.getwidth() && msg.x > is_remember_password &&
+					msg.y < is_remember_password_pos.y + img_remember_password.getheight() && msg.y > is_remember_password_pos.y) {
+					is_remember_password = !is_remember_password;
+					is_down_remember_password = true;
+					set_is_remember_password(is_remember_password);
+					if (is_open_sound_effect) mciSendString(_T("play click_sound_2_2 from 0"), NULL, 0, NULL);
+				}
+				else {
+					is_down_remember_password = false;
 					if (is_open_sound_effect) mciSendString(_T("play click_sound_2_2 from 0"), NULL, 0, NULL);
 				}
 			}
@@ -559,7 +614,10 @@ public:
 			}
 					 // '⬆'
 			case 0x26: {
-				if (current_is_input_password) {
+				if (!current_is_input_account && !current_is_input_password) {
+					current_is_input_password = true;
+				}
+				else if (current_is_input_password) {
 					current_is_input_account = true;
 					current_is_input_password = false;
 				}
@@ -568,7 +626,10 @@ public:
 			}
 					 // '⬇'
 			case 0x28: {
-				if (current_is_input_account) {
+				if (!current_is_input_account && !current_is_input_password) {
+					current_is_input_account = true;
+				}
+				else if (current_is_input_account) {
 					current_is_input_account = false;
 					current_is_input_password = true;
 				}
@@ -1009,7 +1070,11 @@ public:
 			switch (msg.vkcode) {
 				// 'enter'
 			case 0x0D: {
-				if (current_is_input_account) {
+				if (!current_is_input_account && !current_is_input_password) {
+					current_is_input_account = true;
+					if (is_open_sound_effect) mciSendString(_T("play keyboard_sound_2 from 0"), NULL, 0, NULL);
+				}
+				else if (current_is_input_account) {
 					current_is_input_account = false;
 					current_is_input_password = true;
 					if (is_open_sound_effect) mciSendString(_T("play keyboard_sound_2 from 0"), NULL, 0, NULL);
@@ -1020,19 +1085,7 @@ public:
 					current_is_input_account = false;
 					is_down_login_or_registration_button = false;
 					if (is_open_sound_effect) mciSendString(_T("play click_sound_2_2 from 0"), NULL, 0, NULL);
-					// 登录
-					if (current_is_login) {
-						putimage_alpha(login_or_registration_button_pos.x, login_or_registration_button_pos.y, &img_login_idle_button);
-						if (check_is_can_login(account, password)) scene_manager->switch_scene(SceneManager::SceneType::Menu);
-						else break;
-					}
-					// 注册
-					else {
-						if (account.size() < 6 || password.size() < 6) {
-							break;
-						}
-						registration_account(account, password);
-					}
+					login_registration();
 					break;
 				}
 				break;
@@ -1045,6 +1098,25 @@ public:
 
 	void on_exit() {
 
+	}
+
+	void login_registration() {
+		// 登录
+		if (current_is_login) {
+			putimage_alpha(login_or_registration_button_pos.x, login_or_registration_button_pos.y, &img_login_idle_button);
+			if (check_is_can_login(account, password)) scene_manager->switch_scene(SceneManager::SceneType::Menu);
+			else is_display_account_or_password_error_text = true;
+			if (is_remember_password) set_update_remembered_accounts(account, password);
+			else clear_remembered_accounts();
+		}
+		// 注册
+		else {
+			if (account.size() < 6 || password.size() < 6) {
+				return;
+			}
+			is_registration_sucess = registration_account(account, password);
+			is_display_registration_sucess_or_failed = true;
+		}
 	}
 
 	void set_img_input_box(int input_box_id, char ch) {
@@ -5354,16 +5426,29 @@ private:
 	POINT password_input_box_15_pos = { 0 };									// 密码输入框里的第15个数或字母									
 	POINT password_input_box_16_pos = { 0 };									// 密码输入框里的第16个数或字母	
 	POINT input_position_hint_pos = { 0 };										// 输入位置提示图像的位置
+	POINT account_or_password_error_text_pos = { 0 };							// 账号或密码错误的文本提示位置
+	POINT account_and_password_length_hint_text_pos = { 0 };					// 账号和密码长度的提示文本
+	POINT is_remember_password_pos = { 0 };										// 是否记住密码的位置
+	POINT registration_sucess_text_pos = { 0 };									// 注册成功文本的位置
+	POINT registered_text_pos = { 0 };											// 账号已被注册的文本位置
 
 	Timer timer_input_position_hint_blink;										// 输入位置提示图像的闪烁定时器
+	Timer timer_display_account_or_password_error_text;							// 显示账号或密码错误的提示文本定时器
+	Timer timer_registration_sucess_or_falied_text;								// 显示注册成功或失败文本的定时器
 
 	bool is_down_login_registration_text_button = false;						// 是否按下了登录或者注册文本的按钮
-	bool is_down_eye_button = false;											// 是否按下了眼睛按钮
+	bool is_open_eye = false;													// 是否打开眼睛(是否显示密码)
 	bool current_is_login = true;												// 现在是否是登录界面
 	bool is_down_login_or_registration_button = false;							// 是否按下了登录或注册按钮 
 	bool current_is_input_account = account.size() ? true : false;				// 当前是否正在输入账号
 	bool current_is_input_password = false;										// 当前是否正在输入密码
 	bool is_display_input_position_hint = true;									// 是否显示输入位置提示图像
+	bool is_display_account_or_password_error_text = false;						// 是否显示账号或密码错误的提示文本
+	bool is_display_account_and_password_length_hint_text = false;				// 是否显示账号和密码长度的提示文本
+	bool is_down_remember_password = false;										// 是否按下了记住密码
+	bool is_remember_password = false;											// 是否记住密码
+	bool is_registration_sucess = true;											// 注册是否成功
+	bool is_display_registration_sucess_or_failed = false;						// 是否显示注册成功或失败的文本
 
 
 };
