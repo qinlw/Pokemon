@@ -209,6 +209,14 @@ Atlas atlas_selector_bulbasaur_left;				// 选择界面妙蛙种子
 Atlas atlas_selector_bulbasaur_right;				// 选择界面妙蛙种子
 
 
+// 退出场景
+IMAGE img_exit_background;							// 退出场景的背景
+IMAGE img_exit_game_idle_button;					// 退出游戏按钮空闲状态
+IMAGE img_exit_game_down_button;					// 退出游戏按钮按下状态
+IMAGE img_exit_login_idle_button;					// 退出登录按钮空闲状态
+IMAGE img_exit_login_down_button;					// 退出登录按钮按下状态
+
+
 // 游戏场景
 IMAGE img_sky;										// 天空背景
 IMAGE img_sun;										// 太阳
@@ -450,6 +458,14 @@ void load_res() {
 	loadimage(&img_background_music_underpainting, _T("res/set/background_music_underpainting.png"));
 	loadimage(&img_game_music_underpainting, _T("res/set/game_music_underpainting.png"));
 	loadimage(&img_underpainting_block, _T("res/set/underpainting_block.png"));
+
+
+	// 退出场景
+	loadimage(&img_exit_background, _T("res/exit_background.png"));
+	loadimage(&img_exit_game_idle_button, _T("res/exit_game_idle.png"));
+	loadimage(&img_exit_game_down_button, _T("res/exit_game_down.png"));
+	loadimage(&img_exit_login_idle_button, _T("res/exit_login_idle.png"));
+	loadimage(&img_exit_login_down_button, _T("res/exit_login_down.png"));
 
 
 	// 选择场景资源加载
