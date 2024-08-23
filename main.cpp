@@ -7,6 +7,7 @@
 #include "scene_menu.h"
 #include "scene_knapsack.h"
 #include "scene_set.h"
+#include "scene_exit.h"
 #include "scene_pokemon.h"
 #include "scene_game.h"
 #include "pokeman_charmander.h"
@@ -31,6 +32,7 @@ Scene* login_registration_scene = nullptr;										// 登录注册场景对象指针
 Scene* menu_scene = nullptr;						                            // 菜单场景对象指针
 Scene* knapsack_scene = nullptr;					                            // 背包场景对象指针
 Scene* set_scene = nullptr;							                            // 设置场景对象指针
+Scene* exit_scene = nullptr;													// 退出场景对象指针
 Scene* pokemon_scene = nullptr;						                            // 宝可梦场景对象指针
 Scene* game_scene = nullptr;						                            // 游戏场景对象指针
 
@@ -91,6 +93,7 @@ int main() {
 	menu_scene = new SceneMenu();
 	knapsack_scene = new SceneKnapsack();
 	set_scene = new SceneSet();
+	exit_scene = new SceneExit();
 	pokemon_scene = new ScenePokemon();
 	game_scene = new SceneGame();
 

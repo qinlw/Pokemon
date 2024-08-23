@@ -10,6 +10,7 @@ extern Scene* login_registration_scene;
 extern Scene* menu_scene;
 extern Scene* knapsack_scene;
 extern Scene* set_scene;
+extern Scene* exit_scene;
 extern Scene* pokemon_scene;
 extern Scene* game_scene;
 
@@ -23,6 +24,7 @@ public:
 		Menu,
 		Knapscack,
 		Set,
+		Exit,
 		Pokemon,
 		Game,
 	};
@@ -49,6 +51,9 @@ public:
 			break;
 		case SceneType::Set:
 			current_scene = set_scene;
+			break;
+		case SceneType::Exit:
+			current_scene = exit_scene;
 			break;
 		case SceneType::Pokemon: {
 			if (current_scene == menu_scene) {

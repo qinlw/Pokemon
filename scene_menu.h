@@ -107,7 +107,7 @@ public:
 					is_exit_btn = false;
 					if (is_open_sound_effect) mciSendString(_T("play click_sound_2_2 from 0"), NULL, 0, NULL);
 					button_bulge_animatioin(5, 300, exit_button_pos, &img_exit_button);
-					exit(0);
+					scene_manager->switch_scene(SceneManager::SceneType::Exit);
 				}
 				else {
 					if (is_start_btn) {

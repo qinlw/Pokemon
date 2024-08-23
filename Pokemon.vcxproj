@@ -153,6 +153,7 @@
     <ClInclude Include="pokemon_squirtle.h" />
     <ClInclude Include="pokemon_type.h" />
     <ClInclude Include="scene.h" />
+    <ClInclude Include="scene_exit.h" />
     <ClInclude Include="scene_game.h" />
     <ClInclude Include="scene_knapsack.h" />
     <ClInclude Include="scene_login_registration.h" />
