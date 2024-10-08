@@ -179,7 +179,7 @@ public:
 					skill_1();
 					break;
 					// 小键盘的'2'
-				case 0x62:
+				case 0x32:
 					skill_2();
 					break;
 					// 小键盘的'3'

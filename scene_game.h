@@ -279,6 +279,9 @@ public:
 
 		if (pokemon_player_1->get_hp() <= 0 || pokemon_player_2->get_hp() <= 0) {
 			is_game_over = true;
+			if (pokemon_player_1->get_hp() == pokemon_player_2->get_hp() == 0) {
+				is_come_out_even = true;
+			}
 		}
 
 		if (is_game_over) {
@@ -394,10 +397,16 @@ public:
 		if (is_game_over && !game_over_is_pop_btn) {
 			putimage_alpha(winner_bar_pos.x, winner_bar_pos.y, &img_winnner_bar);
 			
-			if (pokemon_player_2->get_hp() <= 0) {
+			if (pokemon_player_1->get_hp() == 0 && pokemon_player_2->get_hp() == 0 && is_come_out_even) {
+				putimage_alpha(winner_text_bar_pos.x, winner_text_bar_pos.y, &img_come_out_even_text_bar);
+				std::cout << "come_out_even" << std::endl;
+			}
+
+			else if (pokemon_player_2->get_hp() <= 0) {
 				switch (pokemon_player_1->get_pokemon_type()) {
 				case PokemonType::Charmander:
 					putimage_alpha(winner_text_bar_pos.x, winner_text_bar_pos.y, &img_1P_charmander_win_text_bar);
+					//putimage_alpha(winner_text_bar_pos.x, winner_text_bar_pos.y, &img_come_out_even_text_bar);
 					break;
 				case PokemonType::Squirtle:
 					putimage_alpha(winner_text_bar_pos.x, winner_text_bar_pos.y, &img_1P_squirtle_win_text_bar);
@@ -707,6 +716,7 @@ private:
 	bool is_game_over = false;						            // 游戏是否结束
 	bool is_winner_bar_slide_out = false;			            // 胜利条是否开始滑出
 	bool game_over_is_pop_btn = false;				            // 游戏结束后是否弹出按钮
+	bool is_come_out_even = false;								// 是否是平局
 
 
 };
