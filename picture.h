@@ -311,6 +311,7 @@ IMAGE img_1P_squirtle_win_text_bar;					// 1P杰尼龟胜利文本条动画
 IMAGE img_2P_squirtle_win_text_bar;					// 2P杰尼龟胜利文本条动画
 IMAGE img_1P_bulbasaur_win_text_bar;				// 1P妙蛙种子胜利文本条动画
 IMAGE img_2P_bulbasaur_win_text_bar;				// 2P妙蛙种子胜利文本条动画
+IMAGE img_come_out_even_text_bar;					// 平局文本条动画 （尚未制作图片资源）
 
 
 void load_res() {
@@ -580,6 +581,7 @@ void load_res() {
 	loadimage(&img_2P_squirtle_win_text_bar, _T("res/2P_squirtle_win_text_bar.png"));
 	loadimage(&img_1P_bulbasaur_win_text_bar, _T("res/1P_bulbasaur_win_text_bar.png"));
 	loadimage(&img_2P_bulbasaur_win_text_bar, _T("res/2P_bulbasaur_win_text_bar.png"));
+	loadimage(&img_come_out_even_text_bar, _T("res/come_out_even_text_bar.png"));
 
 
 	// 键盘音效
