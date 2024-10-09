@@ -154,6 +154,14 @@ IMAGE img_exit_button;								// 退出按钮
 Atlas atlas_mysql_unconnected;						// 数据库未连接的文本提示
 
 
+// 背包场景
+IMAGE img_knapsack_field_background;				// 背包栏位背景
+IMAGE img_player_1P;								// 1P玩家栏提示文本
+IMAGE img_player_2P;								// 2P玩家栏提示文本
+IMAGE img_knapsack;									// 背包图片
+IMAGE img_knapsack_lattice;							// 背包格子
+
+
 // 设置场景
 IMAGE img_set_background;							// 设置场景背景
 IMAGE img_set_return_to_menu_button;				// 返回按钮
@@ -428,6 +436,14 @@ void load_res() {
 	loadimage(&img_exit_button, _T("res/exit_button.png"));
 
 	atlas_mysql_unconnected.load_from_file(_T("res/mysql_unconnected_%d.png"), 21);
+
+
+	// 背包场景
+	loadimage(&img_knapsack_field_background, _T("res/knapsack/knapsack_field_background.png"));
+	loadimage(&img_player_1P, _T("res/knapsack/player_1P.png"));
+	loadimage(&img_player_2P, _T("res/knapsack/player_2P.png"));
+	loadimage(&img_knapsack, _T("res/knapsack/knapsack.png"));
+	loadimage(&img_knapsack_lattice, _T("res/knapsack/knapsack_lattice.png"));
 
 
 	//设置场景资源加载
