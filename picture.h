@@ -59,7 +59,8 @@ IMAGE img_account_input_box_16;						// 账号输入框里的第16个数或字�
 IMAGE img_password_input_box_1;						// 密码输入框里的第1个数或字母									
 IMAGE img_password_input_box_2;						// 密码输入框里的第2个数或字母									
 IMAGE img_password_input_box_3;						// 密码输入框里的第3个数或字母									
-IMAGE img_password_input_box_4;						// 密码输入框里的第4个数或字母									
+IMAGE img_password_input_box_4;						// 密码输入框里的第4个数或字母
+
 IMAGE img_password_input_box_5;						// 密码输入框里的第5个数或字母									
 IMAGE img_password_input_box_6;						// 密码输入框里的第6个数或字母									
 IMAGE img_password_input_box_7;						// 密码输入框里的第7个数或字母									
@@ -159,7 +160,11 @@ IMAGE img_knapsack_field_background;				// 背包栏位背景
 IMAGE img_player_1P;								// 1P玩家栏提示文本
 IMAGE img_player_2P;								// 2P玩家栏提示文本
 IMAGE img_knapsack;									// 背包图片
-IMAGE img_knapsack_lattice;							// 背包格子
+IMAGE img_knapsack_lattice_unselected;				// 未选择时的背包格子
+IMAGE img_knapsack_lattice_selected;				// 选择时的背包格子
+IMAGE img_healing_potion;							// 治疗药水
+IMAGE img_power_potion;								// 能量药水
+IMAGE img_invisibility_potion;						// 隐身药水
 
 
 // 设置场景
@@ -443,7 +448,11 @@ void load_res() {
 	loadimage(&img_player_1P, _T("res/knapsack/player_1P.png"));
 	loadimage(&img_player_2P, _T("res/knapsack/player_2P.png"));
 	loadimage(&img_knapsack, _T("res/knapsack/knapsack.png"));
-	loadimage(&img_knapsack_lattice, _T("res/knapsack/knapsack_lattice.png"));
+	loadimage(&img_knapsack_lattice_unselected, _T("res/knapsack/knapsack_lattice_unselected.png"));
+	loadimage(&img_knapsack_lattice_selected, _T("res/knapsack/knapsack_lattice_selected.png"));
+	loadimage(&img_healing_potion, _T("res/posion/healing_potion.png"));
+	loadimage(&img_power_potion, _T("res/posion/power_potion.png"));
+	loadimage(&img_invisibility_potion, _T("res/posion/invisibility_potion.png"));
 
 
 	//设置场景资源加载
