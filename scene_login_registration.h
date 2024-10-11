@@ -32,6 +32,10 @@ public:
 			timer_registration_sucess_or_falied_text.reset();
 			});
 
+		animation_mysql_unconnected_text.set_atlas(&atlas_mysql_unconnected);
+		animation_mysql_unconnected_text.set_interval(200);
+		animation_mysql_unconnected_text.set_is_loop(false);
+
 		if (current_is_input_account) account_insert_id = account.size();
 		if (current_is_input_password) password_insert_id = password.size();
 
@@ -76,6 +80,7 @@ public:
 
 	void on_update(int delta) {
 		timer_input_position_hint_blink.on_update(delta);
+		if (is_display_mysql_unconnected_text) animation_mysql_unconnected_text.on_update(delta);
 		if (is_display_account_or_password_error_text) timer_display_account_or_password_error_text.on_update(delta);
 		if (is_display_registration_sucess_or_failed) timer_registration_sucess_or_falied_text.on_update(delta);
 
@@ -484,6 +489,9 @@ public:
 			if (is_registration_sucess) putimage_alpha(registration_sucess_text_pos.x, registration_sucess_text_pos.y, &img_registration_sucess_text);
 			else putimage_alpha(registered_text_pos.x, registered_text_pos.y, &img_registered_text);
 		}
+
+
+		if (is_display_mysql_unconnected_text) animation_mysql_unconnected_text.on_draw(532, 200);
 	}
 
 	void on_input(const ExMessage& msg) {
@@ -5436,6 +5444,8 @@ private:
 	Timer timer_display_account_or_password_error_text;							// 显示账号或密码错误的提示文本定时器
 	Timer timer_registration_sucess_or_falied_text;								// 显示注册成功或失败文本的定时器
 
+	Animation animation_mysql_unconnected_text;									// 数据库未连接的文本
+
 	bool is_down_login_registration_text_button = false;						// 是否按下了登录或者注册文本的按钮
 	bool is_open_eye = false;													// 是否打开眼睛(是否显示密码)
 	bool current_is_login = true;												// 现在是否是登录界面
@@ -5449,6 +5459,7 @@ private:
 	bool is_remember_password = false;											// 是否记住密码
 	bool is_registration_sucess = true;											// 注册是否成功
 	bool is_display_registration_sucess_or_failed = false;						// 是否显示注册成功或失败的文本
+	bool is_display_mysql_unconnected_text = !is_mysql_connect;			   // 是否显示数据未连接的文本
 
 
 };

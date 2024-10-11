@@ -33,15 +33,11 @@ public:
 		exit_button_pos.x = start_button_pos.x;
 		exit_button_pos.y = start_button_pos.y + (img_start_button.getheight() + button_y_add) * 3;
 
-		animation_mysql_unconnected_text.set_atlas(&atlas_mysql_unconnected);
-		animation_mysql_unconnected_text.set_interval(200);
-		animation_mysql_unconnected_text.set_is_loop(false);
-
 		if (is_open_music && !is_playing_background_music) play_background_music();
 	}
 
 	void on_update(int delta) {
-		if (is_display_mysql_unconnected_text) animation_mysql_unconnected_text.on_update(delta);
+
 	}
 
 	void on_draw() {
@@ -51,7 +47,6 @@ public:
 		putimage_alpha(set_button_pos.x, set_button_pos.y, &img_set_button);
 		putimage_alpha(exit_button_pos.x, exit_button_pos.y, &img_exit_button);
 
-		if (is_display_mysql_unconnected_text) animation_mysql_unconnected_text.on_draw(532, 40);
 	}
 
 	void on_input(const ExMessage& msg) {
@@ -169,12 +164,9 @@ private:
 	POINT set_button_pos = { 0 };							               // 设置按钮位置
 	POINT exit_button_pos = { 0 };							               // 退出按钮位置
 
-	Animation animation_mysql_unconnected_text;				               // 数据库未连接的文本
-
 	bool is_start_btn = false;								               // 开始按钮是否按下
 	bool is_knapsack_btn = false;							               // 背包按钮是否按下
 	bool is_set_btn = false;								               // 设置按钮是否按下
 	bool is_exit_btn = false;								               // 退出按钮是否按下
-	bool is_display_mysql_unconnected_text = !is_mysql_connect;			   // 是否显示数据未连接的文本
 
 };
