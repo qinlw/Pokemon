@@ -198,3 +198,8 @@ int _main(int x, int y) {
 	closegraph();
 	return 0;
 }
+
+
+/////////////²âÊÔ·ÖÖ§³åÍ»/////////////
+
+static int test01 = 1;
