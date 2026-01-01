@@ -2,8 +2,25 @@
 
 #include "util.h"
 
+// Windows下先屏蔽安全警告，避免编译报错
+#ifdef _WIN32
+#define _CRT_SECURE_NO_WARNINGS
+#endif
 
+////////////////////////// 核心控制：有MySQL环境则取消下面注释，无环境则保留注释 //////////////////////////
+// !----------------------------------
+// #define MYSQL_AVAILABLE  
+// ----------------------------------!
+
+// 如果依旧报错则：
+//打开你的 VS2022 项目 → 右键项目 → 选择属性；
+//进入链接器 → 输入；
+//在附加依赖项中，删除libmysql.lib（如果有的话）；
+
+// 仅在有MySQL环境时声明相关变量/头文件
+#ifdef MYSQL_AVAILABLE
 extern MYSQL* my;
+#endif
 
 extern bool is_mysql_connect;
 extern bool is_first_game;
@@ -17,6 +34,7 @@ extern int game_music_id;
 
 // 做初始化，仅连接数据库
 void connect_mysql(const string host, const string user, const string password, const string db, const unsigned int port) {
+#ifdef MYSQL_AVAILABLE
 	my = mysql_init(nullptr);
 	if (my == nullptr)
 	{
@@ -36,431 +54,542 @@ void connect_mysql(const string host, const string user, const string password, 
 	std::cout << "mysql connect sucess" << std::endl;
 
 	mysql_set_character_set(my, "utf8");
+#endif
 }
 
 
 
 // 检查并更新is_first_game的值
 void check_and_update_is_first_game() {
-	std::string sql = "select * from game_status";
-	const int n = mysql_query(my, sql.c_str());
-	if (n == 0) std::cout << sql << " sucess:" << n << std::endl;
-	else std::cout << sql << " failed:" << n << std::endl;
+#ifndef MYSQL_AVAILABLE
+	is_first_game = false;
+	return;
+#endif
+#ifdef MYSQL_AVAILABLE
+		std::string sql = "select * from game_status";
+		const int n = mysql_query(my, sql.c_str());
+		if (n == 0) std::cout << sql << " sucess:" << n << std::endl;
+		else std::cout << sql << " failed:" << n << std::endl;
 
-	MYSQL_RES* res = mysql_store_result(my);
-	if (res == nullptr) {
-		std::cerr << "mysql_store_result error" << std::endl;
-		return;
-	}
-
-	const int rows = mysql_num_rows(res);			// 获取行数
-	const int fields = mysql_num_fields(res);		// 获取列数
-
-	for (int i = 0; i < rows; i++) {
-		MYSQL_ROW row = mysql_fetch_row(res);
-		for (int j = 0; j < fields; j++) {
-			if (strcmp(row[j], "is_first_game") != 0) break;
-			if (strcmp(row[++j], "1") == 0) is_first_game = true;
-			else is_first_game = false;
-			std::cout << "is_first_game: " << is_first_game << std::endl;			// 方便测试
+		MYSQL_RES* res = mysql_store_result(my);
+		if (res == nullptr) {
+			std::cerr << "mysql_store_result error" << std::endl;
 			return;
 		}
-	}
+
+		const int rows = mysql_num_rows(res);			// 获取行数
+		const int fields = mysql_num_fields(res);		// 获取列数
+
+		for (int i = 0; i < rows; i++) {
+			MYSQL_ROW row = mysql_fetch_row(res);
+			for (int j = 0; j < fields; j++) {
+				if (strcmp(row[j], "is_first_game") != 0) break;
+				if (strcmp(row[++j], "1") == 0) is_first_game = true;
+				else is_first_game = false;
+				std::cout << "is_first_game: " << is_first_game << std::endl;			// 方便测试
+				return;
+			}
+		}
+#endif
 }
 
 // 设置is_first_game的值
 void set_is_first_game(bool flag) {
-	std::string sql;
-	if (flag) sql = "update game_status set status = 1 where status_name = 'is_first_game'";
-	else sql = "update game_status set status = 0 where status_name = 'is_first_game'";
-
+#ifndef MYSQL_AVAILABLE
 	is_first_game = flag;
+	return;
+#endif
+#ifdef MYSQL_AVAILABLE
+		std::string sql;
+		if (flag) sql = "update game_status set status = 1 where status_name = 'is_first_game'";
+		else sql = "update game_status set status = 0 where status_name = 'is_first_game'";
 
-	const int n = mysql_query(my, sql.c_str());
-	if (n == 0) std::cout << sql << " sucess:" << n << std::endl;
-	else std::cout << sql << " failed:" << n << std::endl;
+		is_first_game = flag;
+
+		const int n = mysql_query(my, sql.c_str());
+		if (n == 0) std::cout << sql << " sucess:" << n << std::endl;
+		else std::cout << sql << " failed:" << n << std::endl;
+#endif
 }
 
 
 
 // 检查并更新is_open_music的值
 void check_and_update_is_open_music() {
-	std::string sql = "select * from game_status";
-	const int n = mysql_query(my, sql.c_str());
-	if (n == 0) std::cout << sql << " sucess:" << n << std::endl;
-	else std::cout << sql << " failed:" << n << std::endl;
+#ifndef MYSQL_AVAILABLE
+	is_open_music = true;
+	return;
+#endif
+#ifdef MYSQL_AVAILABLE
+		std::string sql = "select * from game_status";
+		const int n = mysql_query(my, sql.c_str());
+		if (n == 0) std::cout << sql << " sucess:" << n << std::endl;
+		else std::cout << sql << " failed:" << n << std::endl;
 
-	MYSQL_RES* res = mysql_store_result(my);
-	if (res == nullptr) {
-		std::cerr << "mysql_store_result error" << std::endl;
-		return;
-	}
-
-	const int rows = mysql_num_rows(res);			// 获取行数
-	const int fields = mysql_num_fields(res);		// 获取列数
-
-	for (int i = 0; i < rows; i++) {
-		MYSQL_ROW row = mysql_fetch_row(res);
-		for (int j = 0; j < fields; j++) {
-			if (strcmp(row[j], "is_open_music") != 0) break;
-			if (strcmp(row[++j], "1") == 0) is_open_music = true;
-			else is_open_music = false;
-			std::cout << "is_open_music: " << is_open_music << std::endl;			// 方便测试
+		MYSQL_RES* res = mysql_store_result(my);
+		if (res == nullptr) {
+			std::cerr << "mysql_store_result error" << std::endl;
 			return;
 		}
-	}
+
+		const int rows = mysql_num_rows(res);			// 获取行数
+		const int fields = mysql_num_fields(res);		// 获取列数
+
+		for (int i = 0; i < rows; i++) {
+			MYSQL_ROW row = mysql_fetch_row(res);
+			for (int j = 0; j < fields; j++) {
+				if (strcmp(row[j], "is_open_music") != 0) break;
+				if (strcmp(row[++j], "1") == 0) is_open_music = true;
+				else is_open_music = false;
+				std::cout << "is_open_music: " << is_open_music << std::endl;			// 方便测试
+				return;
+			}
+		}
+#endif
 }
 
 // 设置is_open_music的值
 void set_is_open_music(bool flag) {
-	std::string sql;
-	if (flag) sql = "update game_status set status = 1 where status_name = 'is_open_music'";
-	else sql = "update game_status set status = 0 where status_name = 'is_open_music'";
+#ifndef MYSQL_AVAILABLE
+	is_open_music = flag;
+	return;
+#endif
+#ifdef MYSQL_AVAILABLE
+		std::string sql;
+		if (flag) sql = "update game_status set status = 1 where status_name = 'is_open_music'";
+		else sql = "update game_status set status = 0 where status_name = 'is_open_music'";
 
-	const int n = mysql_query(my, sql.c_str());
-	if (n == 0) std::cout << sql << " sucess:" << n << std::endl;
-	else std::cout << sql << " failed:" << n << std::endl;
+		const int n = mysql_query(my, sql.c_str());
+		if (n == 0) std::cout << sql << " sucess:" << n << std::endl;
+		else std::cout << sql << " failed:" << n << std::endl;
+#endif
 }
 
 
 
 // 检查并更新is_open_sound_effect的值
 void check_and_update_is_open_sound_effect() {
-	std::string sql = "select * from game_status";
-	const int n = mysql_query(my, sql.c_str());
-	if (n == 0) std::cout << sql << " sucess:" << n << std::endl;
-	else std::cout << sql << " failed:" << n << std::endl;
+#ifndef MYSQL_AVAILABLE
+	is_open_sound_effect = true;
+	return;
+#endif
+#ifdef MYSQL_AVAILABLE
+		std::string sql = "select * from game_status";
+		const int n = mysql_query(my, sql.c_str());
+		if (n == 0) std::cout << sql << " sucess:" << n << std::endl;
+		else std::cout << sql << " failed:" << n << std::endl;
 
-	MYSQL_RES* res = mysql_store_result(my);
-	if (res == nullptr) {
-		std::cerr << "mysql_store_result error" << std::endl;
-		return;
-	}
-
-	const int rows = mysql_num_rows(res);			// 获取行数
-	const int fields = mysql_num_fields(res);		// 获取列数
-
-	for (int i = 0; i < rows; i++) {
-		MYSQL_ROW row = mysql_fetch_row(res);
-		for (int j = 0; j < fields; j++) {
-			if (strcmp(row[j], "is_open_sound_effect") != 0) break;
-			if (strcmp(row[++j], "1") == 0) is_open_sound_effect = true;
-			else is_open_sound_effect = false;
-			std::cout << "is_open_sound_effect: " << is_open_sound_effect << std::endl;			// 方便测试
+		MYSQL_RES* res = mysql_store_result(my);
+		if (res == nullptr) {
+			std::cerr << "mysql_store_result error" << std::endl;
 			return;
 		}
-	}
+
+		const int rows = mysql_num_rows(res);			// 获取行数
+		const int fields = mysql_num_fields(res);		// 获取列数
+
+		for (int i = 0; i < rows; i++) {
+			MYSQL_ROW row = mysql_fetch_row(res);
+			for (int j = 0; j < fields; j++) {
+				if (strcmp(row[j], "is_open_sound_effect") != 0) break;
+				if (strcmp(row[++j], "1") == 0) is_open_sound_effect = true;
+				else is_open_sound_effect = false;
+				std::cout << "is_open_sound_effect: " << is_open_sound_effect << std::endl;			// 方便测试
+				return;
+			}
+		}
+#endif
 }
 
 // 设置is_open_sound_effect的值
 void set_is_open_sound_effect(bool flag) {
-	std::string sql;
-	if (flag) sql = "update game_status set status = 1 where status_name = 'is_open_sound_effect'";
-	else sql = "update game_status set status = 0 where status_name = 'is_open_sound_effect'";
+#ifndef MYSQL_AVAILABLE
+	is_open_sound_effect = flag;
+	return;
+#endif
+#ifdef MYSQL_AVAILABLE
+		std::string sql;
+		if (flag) sql = "update game_status set status = 1 where status_name = 'is_open_sound_effect'";
+		else sql = "update game_status set status = 0 where status_name = 'is_open_sound_effect'";
 
-	const int n = mysql_query(my, sql.c_str());
-	if (n == 0) std::cout << sql << " sucess:" << n << std::endl;
-	else std::cout << sql << " failed:" << n << std::endl;
+		const int n = mysql_query(my, sql.c_str());
+		if (n == 0) std::cout << sql << " sucess:" << n << std::endl;
+		else std::cout << sql << " failed:" << n << std::endl;
+#endif
 }
 
 
 
 // 检查并更新background_music_id的值
 void check_update_background_music_id() {
-	std::string sql = "select * from game_status";
-	const int n = mysql_query(my, sql.c_str());
-	if (n == 0) std::cout << sql << " sucess:" << n << std::endl;
-	else std::cout << sql << " failed:" << n << std::endl;
+#ifndef MYSQL_AVAILABLE
+	background_music_id = 1;
+	return;
+#endif
+#ifdef MYSQL_AVAILABLE
+		std::string sql = "select * from game_status";
+		const int n = mysql_query(my, sql.c_str());
+		if (n == 0) std::cout << sql << " sucess:" << n << std::endl;
+		else std::cout << sql << " failed:" << n << std::endl;
 
-	MYSQL_RES* res = mysql_store_result(my);
-	if (res == nullptr) {
-		std::cerr << "mysql_store_result error" << std::endl;
-		return;
-	}
-
-	const int rows = mysql_num_rows(res);			// 获取行数
-	const int fields = mysql_num_fields(res);		// 获取列数
-
-	for (int i = 0; i < rows; i++) {
-		MYSQL_ROW row = mysql_fetch_row(res);
-		for (int j = 0; j < fields; j++) {
-			if (strcmp(row[j], "background_music_id") != 0) break;
-			if (strcmp(row[++j], "0") == 0) background_music_id = 0;
-			else if (strcmp(row[j], "1") == 0) background_music_id = 1;
-			else if (strcmp(row[j], "2") == 0) background_music_id = 2;
-			else if (strcmp(row[j], "3") == 0) background_music_id = 3;
-			else std::cout << "background_music_id error!" << std::endl;
-			std::cout << "background_music_id: " << background_music_id << std::endl;			// 方便测试
+		MYSQL_RES* res = mysql_store_result(my);
+		if (res == nullptr) {
+			std::cerr << "mysql_store_result error" << std::endl;
 			return;
 		}
-	}
+
+		const int rows = mysql_num_rows(res);			// 获取行数
+		const int fields = mysql_num_fields(res);		// 获取列数
+
+		for (int i = 0; i < rows; i++) {
+			MYSQL_ROW row = mysql_fetch_row(res);
+			for (int j = 0; j < fields; j++) {
+				if (strcmp(row[j], "background_music_id") != 0) break;
+				if (strcmp(row[++j], "0") == 0) background_music_id = 0;
+				else if (strcmp(row[j], "1") == 0) background_music_id = 1;
+				else if (strcmp(row[j], "2") == 0) background_music_id = 2;
+				else if (strcmp(row[j], "3") == 0) background_music_id = 3;
+				else std::cout << "background_music_id error!" << std::endl;
+				std::cout << "background_music_id: " << background_music_id << std::endl;			// 方便测试
+				return;
+			}
+		}
+#endif
 }
 
 // 设置background_music_id的值
 void set_background_music_id(int val) {
-	std::string sql;
-	if (val == 0) sql = "update game_status set status = 0 where status_name = 'background_music_id'";
-	if (val == 1) sql = "update game_status set status = 1 where status_name = 'background_music_id'";
-	else if (val == 2) sql = "update game_status set status = 2 where status_name = 'background_music_id'";
-	else if (val == 3) sql = "update game_status set status = 3 where status_name = 'background_music_id'";
-	else sql = "update game_status set status = 0 where status_name = 'background_music_id'";
-
+#ifndef MYSQL_AVAILABLE
 	background_music_id = val;
+	return;
+#endif
+#ifdef MYSQL_AVAILABLE
+		std::string sql;
+		if (val == 0) sql = "update game_status set status = 0 where status_name = 'background_music_id'";
+		if (val == 1) sql = "update game_status set status = 1 where status_name = 'background_music_id'";
+		else if (val == 2) sql = "update game_status set status = 2 where status_name = 'background_music_id'";
+		else if (val == 3) sql = "update game_status set status = 3 where status_name = 'background_music_id'";
+		else sql = "update game_status set status = 0 where status_name = 'background_music_id'";
 
-	const int n = mysql_query(my, sql.c_str());
-	if (n == 0) std::cout << sql << " sucess:" << n << std::endl;
-	else std::cout << sql << " failed:" << n << std::endl;
+		background_music_id = val;
+
+		const int n = mysql_query(my, sql.c_str());
+		if (n == 0) std::cout << sql << " sucess:" << n << std::endl;
+		else std::cout << sql << " failed:" << n << std::endl;
+#endif
 }
 
 
 
 // 检查并更新game_music_id的值
 void check_update_game_music_id() {
-	std::string sql = "select * from game_status";
-	const int n = mysql_query(my, sql.c_str());
-	if (n == 0) std::cout << sql << " sucess:" << n << std::endl;
-	else std::cout << sql << " failed:" << n << std::endl;
+#ifndef MYSQL_AVAILABLE
+	game_music_id = 1;
+	return;
+#endif
+#ifdef MYSQL_AVAILABLE
+		std::string sql = "select * from game_status";
+		const int n = mysql_query(my, sql.c_str());
+		if (n == 0) std::cout << sql << " sucess:" << n << std::endl;
+		else std::cout << sql << " failed:" << n << std::endl;
 
-	MYSQL_RES* res = mysql_store_result(my);
-	if (res == nullptr) {
-		std::cerr << "mysql_store_result error" << std::endl;
-		return;
-	}
-
-	const int rows = mysql_num_rows(res);			// 获取行数
-	const int fields = mysql_num_fields(res);		// 获取列数
-
-	for (int i = 0; i < rows; i++) {
-		MYSQL_ROW row = mysql_fetch_row(res);
-		for (int j = 0; j < fields; j++) {
-			if (strcmp(row[j], "game_music_id") != 0) break;
-			if (strcmp(row[++j], "0") == 0) game_music_id = 0;
-			else if (strcmp(row[j], "1") == 0) game_music_id = 1;
-			else if (strcmp(row[j], "2") == 0) game_music_id = 2;
-			else if (strcmp(row[j], "3") == 0) game_music_id = 3;
-			else if (strcmp(row[j], "4") == 0) game_music_id = 4;
-			else if (strcmp(row[j], "5") == 0) game_music_id = 5;
-			else std::cout << "game_music_id error!" << std::endl;
-			std::cout << "game_music_id: " << game_music_id << std::endl;			// 方便测试
+		MYSQL_RES* res = mysql_store_result(my);
+		if (res == nullptr) {
+			std::cerr << "mysql_store_result error" << std::endl;
 			return;
 		}
-	}
+
+		const int rows = mysql_num_rows(res);			// 获取行数
+		const int fields = mysql_num_fields(res);		// 获取列数
+
+		for (int i = 0; i < rows; i++) {
+			MYSQL_ROW row = mysql_fetch_row(res);
+			for (int j = 0; j < fields; j++) {
+				if (strcmp(row[j], "game_music_id") != 0) break;
+				if (strcmp(row[++j], "0") == 0) game_music_id = 0;
+				else if (strcmp(row[j], "1") == 0) game_music_id = 1;
+				else if (strcmp(row[j], "2") == 0) game_music_id = 2;
+				else if (strcmp(row[j], "3") == 0) game_music_id = 3;
+				else if (strcmp(row[j], "4") == 0) game_music_id = 4;
+				else if (strcmp(row[j], "5") == 0) game_music_id = 5;
+				else std::cout << "game_music_id error!" << std::endl;
+				std::cout << "game_music_id: " << game_music_id << std::endl;			// 方便测试
+				return;
+			}
+		}
+#endif
 }
 
 // 设置game_music_id的值
 void set_game_music_id(int val) {
-	std::string sql;
-	if (val == 0) sql = "update game_status set status = 0 where status_name = 'game_music_id'";
-	else if (val == 1) sql = "update game_status set status = 1 where status_name = 'game_music_id'";
-	else if (val == 2) sql = "update game_status set status = 2 where status_name = 'game_music_id'";
-	else if (val == 3) sql = "update game_status set status = 3 where status_name = 'game_music_id'";
-	else if (val == 4) sql = "update game_status set status = 4 where status_name = 'game_music_id'";
-	else if (val == 5) sql = "update game_status set status = 5 where status_name = 'game_music_id'";
-	else sql = "update game_status set status = 0 where status_name = 'game_music_id'";
-
+#ifndef MYSQL_AVAILABLE
 	game_music_id = val;
+	return;
+#endif
+#ifdef MYSQL_AVAILABLE
+		std::string sql;
+		if (val == 0) sql = "update game_status set status = 0 where status_name = 'game_music_id'";
+		else if (val == 1) sql = "update game_status set status = 1 where status_name = 'game_music_id'";
+		else if (val == 2) sql = "update game_status set status = 2 where status_name = 'game_music_id'";
+		else if (val == 3) sql = "update game_status set status = 3 where status_name = 'game_music_id'";
+		else if (val == 4) sql = "update game_status set status = 4 where status_name = 'game_music_id'";
+		else if (val == 5) sql = "update game_status set status = 5 where status_name = 'game_music_id'";
+		else sql = "update game_status set status = 0 where status_name = 'game_music_id'";
 
-	const int n = mysql_query(my, sql.c_str());
-	if (n == 0) std::cout << sql << " sucess:" << n << std::endl;
-	else std::cout << sql << " failed:" << n << std::endl;
+		game_music_id = val;
+
+		const int n = mysql_query(my, sql.c_str());
+		if (n == 0) std::cout << sql << " sucess:" << n << std::endl;
+		else std::cout << sql << " failed:" << n << std::endl;
+#endif
 }
 
 
 
 // 检查并更新是否记住密码
 bool check_update_is_remember_password() {
-	std::string sql = "select * from game_status";
-	const int n = mysql_query(my, sql.c_str());
-	if (n == 0) std::cout << sql << " sucess:" << n << std::endl;
-	else std::cout << sql << " failed:" << n << std::endl;
+#ifndef MYSQL_AVAILABLE
+	return true;
+#endif
+#ifdef MYSQL_AVAILABLE
+		std::string sql = "select * from game_status";
+		const int n = mysql_query(my, sql.c_str());
+		if (n == 0) std::cout << sql << " sucess:" << n << std::endl;
+		else std::cout << sql << " failed:" << n << std::endl;
 
-	MYSQL_RES* res = mysql_store_result(my);
-	if (res == nullptr) {
-		std::cerr << "mysql_store_result error" << std::endl;
-		return false;
-	}
-
-	const int rows = mysql_num_rows(res);			// 获取行数
-	const int fields = mysql_num_fields(res);		// 获取列数
-
-	for (int i = 0; i < rows; i++) {
-		MYSQL_ROW row = mysql_fetch_row(res);
-		for (int j = 0; j < fields; j++) {
-			if (strcmp(row[j], "is_remember_password") != 0) break;
-			if (strcmp(row[++j], "1") == 0) return true;
-			else return false;
+		MYSQL_RES* res = mysql_store_result(my);
+		if (res == nullptr) {
+			std::cerr << "mysql_store_result error" << std::endl;
+			return false;
 		}
-	}
 
-	return false;
+		const int rows = mysql_num_rows(res);			// 获取行数
+		const int fields = mysql_num_fields(res);		// 获取列数
+
+		for (int i = 0; i < rows; i++) {
+			MYSQL_ROW row = mysql_fetch_row(res);
+			for (int j = 0; j < fields; j++) {
+				if (strcmp(row[j], "is_remember_password") != 0) break;
+				if (strcmp(row[++j], "1") == 0) return true;
+				else return false;
+			}
+		}
+
+		return false;
+#endif
 }
 
 // 设置is_remember_password
 void set_is_remember_password(bool flag) {
-	std::string sql;
-	if (flag) sql = "update game_status set status = 1 where status_name = 'is_remember_password'";
-	else sql = "update game_status set status = 0 where status_name = 'is_remember_password'";
+#ifndef MYSQL_AVAILABLE
+	return;
+#endif
+#ifdef MYSQL_AVAILABLE
+		std::string sql;
+		if (flag) sql = "update game_status set status = 1 where status_name = 'is_remember_password'";
+		else sql = "update game_status set status = 0 where status_name = 'is_remember_password'";
 
-	const int n = mysql_query(my, sql.c_str());
-	if (n == 0) std::cout << sql << " sucess:" << n << std::endl;
-	else std::cout << sql << " failed:" << n << std::endl;
+		const int n = mysql_query(my, sql.c_str());
+		if (n == 0) std::cout << sql << " sucess:" << n << std::endl;
+		else std::cout << sql << " failed:" << n << std::endl;
+#endif
 }
 
 
 
 // 检查并更新是否打开眼睛(是否显示密码)
 bool check_update_is_open_eye() {
-	std::string sql = "select * from game_status";
-	const int n = mysql_query(my, sql.c_str());
-	if (n == 0) std::cout << sql << " sucess:" << n << std::endl;
-	else std::cout << sql << " failed:" << n << std::endl;
+#ifndef MYSQL_AVAILABLE
+	return true;
+#endif
+#ifdef MYSQL_AVAILABLE
+		std::string sql = "select * from game_status";
+		const int n = mysql_query(my, sql.c_str());
+		if (n == 0) std::cout << sql << " sucess:" << n << std::endl;
+		else std::cout << sql << " failed:" << n << std::endl;
 
-	MYSQL_RES* res = mysql_store_result(my);
-	if (res == nullptr) {
-		std::cerr << "mysql_store_result error" << std::endl;
-		return false;
-	}
-
-	const int rows = mysql_num_rows(res);			// 获取行数
-	const int fields = mysql_num_fields(res);		// 获取列数
-
-	for (int i = 0; i < rows; i++) {
-		MYSQL_ROW row = mysql_fetch_row(res);
-		for (int j = 0; j < fields; j++) {
-			if (strcmp(row[j], "is_open_eye") != 0) break;
-			if (strcmp(row[++j], "1") == 0) return true;
-			else return false;
+		MYSQL_RES* res = mysql_store_result(my);
+		if (res == nullptr) {
+			std::cerr << "mysql_store_result error" << std::endl;
+			return false;
 		}
-	}
 
-	return false;
+		const int rows = mysql_num_rows(res);			// 获取行数
+		const int fields = mysql_num_fields(res);		// 获取列数
+
+		for (int i = 0; i < rows; i++) {
+			MYSQL_ROW row = mysql_fetch_row(res);
+			for (int j = 0; j < fields; j++) {
+				if (strcmp(row[j], "is_open_eye") != 0) break;
+				if (strcmp(row[++j], "1") == 0) return true;
+				else return false;
+			}
+		}
+
+		return false;
+#endif
 }
 
 // 设置is_open_eye
 void set_is_open_eye(bool flag) {
-	std::string sql;
-	if (flag) sql = "update game_status set status = 1 where status_name = 'is_open_eye'";
-	else sql = "update game_status set status = 0 where status_name = 'is_open_eye'";
+#ifndef MYSQL_AVAILABLE
+	return;
+#endif
+#ifdef MYSQL_AVAILABLE
+		std::string sql;
+		if (flag) sql = "update game_status set status = 1 where status_name = 'is_open_eye'";
+		else sql = "update game_status set status = 0 where status_name = 'is_open_eye'";
 
-	const int n = mysql_query(my, sql.c_str());
-	if (n == 0) std::cout << sql << " sucess:" << n << std::endl;
-	else std::cout << sql << " failed:" << n << std::endl;
+		const int n = mysql_query(my, sql.c_str());
+		if (n == 0) std::cout << sql << " sucess:" << n << std::endl;
+		else std::cout << sql << " failed:" << n << std::endl;
+#endif
 }
 
 
 
 // 注册账号
 bool registration_account(string account, string password) {
-	std::string sql;
-	sql = "insert into accounts values('" + account + "', '" + password + "')";
+#ifndef MYSQL_AVAILABLE
+	return true;
+#endif
+#ifdef MYSQL_AVAILABLE
+		std::string sql;
+		sql = "insert into accounts values('" + account + "', '" + password + "')";
 
-	const int n = mysql_query(my, sql.c_str());
-	if (n == 0) {
-		std::cout << sql << " sucess:" << n << std::endl;
-		return true;
-	}
-	else {
-		std::cout << sql << " failed:" << n << std::endl;
-		return false;
-	}
+		const int n = mysql_query(my, sql.c_str());
+		if (n == 0) {
+			std::cout << sql << " sucess:" << n << std::endl;
+			return true;
+		}
+		else {
+			std::cout << sql << " failed:" << n << std::endl;
+			return false;
+		}
+#endif
 }
 
 // 检查是否可以登录
 bool check_is_can_login(string account, string password) {
-	std::string sql = "select * from accounts";
-	const int n = mysql_query(my, sql.c_str());
-	if (n == 0) std::cout << sql << " sucess:" << n << std::endl;
-	else std::cout << sql << " failed:" << n << std::endl;
+#ifndef MYSQL_AVAILABLE
+	return true;
+#endif
+#ifdef MYSQL_AVAILABLE
+		std::string sql = "select * from accounts";
+		const int n = mysql_query(my, sql.c_str());
+		if (n == 0) std::cout << sql << " sucess:" << n << std::endl;
+		else std::cout << sql << " failed:" << n << std::endl;
 
-	MYSQL_RES* res = mysql_store_result(my);
-	if (res == nullptr) {
-		std::cerr << "mysql_store_result error" << std::endl;
-		return false;
-	}
+		MYSQL_RES* res = mysql_store_result(my);
+		if (res == nullptr) {
+			std::cerr << "mysql_store_result error" << std::endl;
+			return false;
+		}
 
-	const int rows = mysql_num_rows(res);			// 获取行数
-	const int fields = mysql_num_fields(res);		// 获取列数
+		const int rows = mysql_num_rows(res);			// 获取行数
+		const int fields = mysql_num_fields(res);		// 获取列数
 
-	for (int i = 0; i < rows; i++) {
-		MYSQL_ROW row = mysql_fetch_row(res);
-		for (int j = 0; j < fields; j++) {
-			if (strcmp(row[j], account.c_str()) == 0 && strcmp(row[++j], password.c_str()) == 0) {
-				std::cout << "login sucess!" << std::endl;
-				return true;
+		for (int i = 0; i < rows; i++) {
+			MYSQL_ROW row = mysql_fetch_row(res);
+			for (int j = 0; j < fields; j++) {
+				if (strcmp(row[j], account.c_str()) == 0 && strcmp(row[++j], password.c_str()) == 0) {
+					std::cout << "login sucess!" << std::endl;
+					return true;
+				}
 			}
 		}
-	}
 
-	std::cout << "login failed" << std::endl;
-	return false;
+		std::cout << "login failed" << std::endl;
+		return false;
+#endif
 }
 
 // 清空被记住的账号
 void clear_remembered_accounts() {
-	std::string sql;
-	sql = "delete from remembered_accounts";
+#ifndef MYSQL_AVAILABLE
+	return;
+#endif
+#ifdef MYSQL_AVAILABLE
+		std::string sql;
+		sql = "delete from remembered_accounts";
 
-	const int n = mysql_query(my, sql.c_str());
-	if (n == 0) std::cout << sql << " sucess:" << n << std::endl;
-	else std::cout << sql << " failed:" << n << std::endl;
+		const int n = mysql_query(my, sql.c_str());
+		if (n == 0) std::cout << sql << " sucess:" << n << std::endl;
+		else std::cout << sql << " failed:" << n << std::endl;
+#endif
 }
 
 // 设置更新被记住的账号
 void set_update_remembered_accounts(string account, string password) {
-	clear_remembered_accounts();
+#ifndef MYSQL_AVAILABLE
+	return;
+#endif
+#ifdef MYSQL_AVAILABLE
+		clear_remembered_accounts();
 
-	std::string sql;
-	sql = "insert into remembered_accounts values('" + account + "', '" + password + "')";
+		std::string sql;
+		sql = "insert into remembered_accounts values('" + account + "', '" + password + "')";
 
-	const int n = mysql_query(my, sql.c_str());
-	if (n == 0) std::cout << sql << " sucess:" << n << std::endl;
-	else std::cout << sql << " failed:" << n << std::endl;
+		const int n = mysql_query(my, sql.c_str());
+		if (n == 0) std::cout << sql << " sucess:" << n << std::endl;
+		else std::cout << sql << " failed:" << n << std::endl;
+#endif
 }
 
 // 获取被记住的账号中的账号
 string get_remembered_accounts_accounts() {
-	std::string sql = "select * from remembered_accounts";
-	const int n = mysql_query(my, sql.c_str());
-	if (n == 0) std::cout << sql << " sucess:" << n << std::endl;
-	else std::cout << sql << " failed:" << n << std::endl;
-
-	MYSQL_RES* res = mysql_store_result(my);
-	if (res == nullptr) {
-		std::cerr << "mysql_store_result error" << std::endl;
-		return "";
-	}
-
-	const int rows = mysql_num_rows(res);			// 获取行数
-	const int fields = mysql_num_fields(res);		// 获取列数
-
-	for (int i = 0; i < rows; ++i) {
-		MYSQL_ROW row = mysql_fetch_row(res);
-		return row[0];
-	}
-
+#ifndef MYSQL_AVAILABLE
 	return "";
+#endif
+#ifdef MYSQL_AVAILABLE
+		std::string sql = "select * from remembered_accounts";
+		const int n = mysql_query(my, sql.c_str());
+		if (n == 0) std::cout << sql << " sucess:" << n << std::endl;
+		else std::cout << sql << " failed:" << n << std::endl;
+
+		MYSQL_RES* res = mysql_store_result(my);
+		if (res == nullptr) {
+			std::cerr << "mysql_store_result error" << std::endl;
+			return "";
+		}
+
+		const int rows = mysql_num_rows(res);			// 获取行数
+		const int fields = mysql_num_fields(res);		// 获取列数
+
+		for (int i = 0; i < rows; ++i) {
+			MYSQL_ROW row = mysql_fetch_row(res);
+			return row[0];
+		}
+
+		return "";
+#endif
 }
 
 // 获取被记住的账号中的密码
 string get_remembered_accounts_password() {
-	std::string sql = "select * from remembered_accounts";
-	const int n = mysql_query(my, sql.c_str());
-	if (n == 0) std::cout << sql << " sucess:" << n << std::endl;
-	else std::cout << sql << " failed:" << n << std::endl;
-
-	MYSQL_RES* res = mysql_store_result(my);
-	if (res == nullptr) {
-		std::cerr << "mysql_store_result error" << std::endl;
-		return "";
-	}
-
-	const int rows = mysql_num_rows(res);			// 获取行数
-	const int fields = mysql_num_fields(res);		// 获取列数
-
-	for (int i = 0; i < rows; ++i) {
-		MYSQL_ROW row = mysql_fetch_row(res);
-		return row[1];
-	}
-
+#ifndef MYSQL_AVAILABLE
 	return "";
+#endif
+#ifdef MYSQL_AVAILABLE
+		std::string sql = "select * from remembered_accounts";
+		const int n = mysql_query(my, sql.c_str());
+		if (n == 0) std::cout << sql << " sucess:" << n << std::endl;
+		else std::cout << sql << " failed:" << n << std::endl;
+
+		MYSQL_RES* res = mysql_store_result(my);
+		if (res == nullptr) {
+			std::cerr << "mysql_store_result error" << std::endl;
+			return "";
+		}
+
+		const int rows = mysql_num_rows(res);			// 获取行数
+		const int fields = mysql_num_fields(res);		// 获取列数
+
+		for (int i = 0; i < rows; ++i) {
+			MYSQL_ROW row = mysql_fetch_row(res);
+			return row[1];
+		}
+
+		return "";
+#endif
 }
